@@ -9,9 +9,15 @@ if ( $VERSION =~ m/Name: [^0-9]+(\S+)\s\$/ ) {
   $VERSION = '0_1';
 }
 
+# Change underscores into dots
+
+$VERSION =~ s/_/./go;
+
+my $TO_UNIX = ( $^O eq 'MSWin32' ? 'perl -S dos2unix.pl $(DISTVNAME)' : '' );
+
 WriteMakefile(
   'NAME'	=> 'pm',
-  'dist' => { COMPRESS => 'gzip', TO_UNIX => 'perl -S dos2unix.pl $(DISTVNAME)' },
+  'dist' => { COMPRESS => 'gzip', TO_UNIX => $TO_UNIX },
   'depend' => { manifest => FORCE },
   'VERSION' => $VERSION
 );
