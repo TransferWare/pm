@@ -28,6 +28,9 @@ REMARK
 REMARK  Description:    Create trace package of Performance Monitor.
 REMARK
 REMARK  $Log$
+REMARK  Revision 1.2  2004/12/14 17:12:08  gpaulissen
+REMARK  [ 828145 ] Unit test of trc fails
+REMARK
 REMARK  Revision 1.1  2003/08/28 14:44:48  gpaulissen
 REMARK  Release 6.0.0
 REMARK
@@ -400,14 +403,12 @@ CREATE OR REPLACE PACKAGE BODY trc IS
   SUBTYPE proc_name_t IS v_proc_name_dummy%TYPE;
   SUBTYPE nr_values_t IS v_nr_values_dummy%TYPE;
   SUBTYPE value_list_t IS v_value_list_dummy%TYPE;
-  SUBTYPE module_info_t IS INTEGER;
 
   TYPE call_info_rt IS RECORD
   (
   proc_name proc_name_t,
   nr_values nr_values_t NOT NULL  DEFAULT 0,
-  value_list value_list_t,
-  module_info module_info_t NOT NULL DEFAULT 0);
+  value_list value_list_t);
   --
   -- 
 /*  TYPE call_info_tt IS TABLE OF
@@ -426,22 +427,16 @@ CREATE OR REPLACE PACKAGE BODY trc IS
   value_list_t
   INDEX BY BINARY_INTEGER;
   --
-  TYPE module_info_tt IS TABLE OF
-  module_info_t
-  INDEX BY BINARY_INTEGER;
-  --
 /*  t_call_info call_info_tt; */
 
   v_call_info_count INTEGER := 0;
   t_proc_name proc_name_tt;
   t_nr_values nr_values_tt;
   t_value_list value_list_tt;
-  t_module_info module_info_tt;
 
   t_proc_name_empty proc_name_tt;
   t_nr_values_empty nr_values_tt;
   t_value_list_empty value_list_tt;
-  t_module_info_empty module_info_tt;
   --
   -- Current call
   r_curr_call_info call_info_rt;
@@ -482,7 +477,6 @@ CREATE OR REPLACE PACKAGE BODY trc IS
     t_proc_name( i_index ) := i_call_info.proc_name;
     t_nr_values( i_index ) := i_call_info.nr_values;
     t_value_list( i_index ) := i_call_info.value_list;
-    t_module_info( i_index ) := i_call_info.module_info;
   END;
   --
   PROCEDURE push_call_info( i_call_info IN call_info_rt )
@@ -501,7 +495,6 @@ CREATE OR REPLACE PACKAGE BODY trc IS
       t_proc_name := t_proc_name_empty;
       t_nr_values := t_nr_values_empty;
       t_value_list := t_value_list_empty; 
-      t_module_info := t_module_info_empty; 
     END IF;
   END;
   --
@@ -520,7 +513,6 @@ CREATE OR REPLACE PACKAGE BODY trc IS
     r_call_info.proc_name := t_proc_name( i_index );
     r_call_info.nr_values := t_nr_values( i_index );
     r_call_info.value_list := t_value_list( i_index );
-    r_call_info.module_info := t_module_info( i_index );
     RETURN r_call_info;
   END;
 
@@ -533,8 +525,7 @@ CREATE OR REPLACE PACKAGE BODY trc IS
         r_curr_call_info.proc_name := i_proc_name;
 
 --/*DBUG*/      dbug.enter( 
---/*DBUG*/              r_curr_call_info.proc_name, 
---/*DBUG*/              r_curr_call_info.module_info 
+--/*DBUG*/              r_curr_call_info.proc_name
 --/*DBUG*/      );
 
         IF      v_enable_call_stack = true
@@ -565,7 +556,7 @@ CREATE OR REPLACE PACKAGE BODY trc IS
   i_calls in varchar2)
   IS
   BEGIN
---/*DBUG*/      dbug.leave( r_curr_call_info.module_info );
+--/*DBUG*/      dbug.leave;
 
         if      i_error_msg is not null
         then
@@ -951,7 +942,6 @@ CREATE OR REPLACE PACKAGE BODY trc IS
         o_call_info.proc_name := NULL;
         o_call_info.nr_values := 0;
         o_call_info.value_list := NULL;
-        o_call_info.module_info := 0;
   END;
 
   PROCEDURE set_enable_call_stack( i_value IN BOOLEAN )
