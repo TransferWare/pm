@@ -9,8 +9,10 @@ This application monitors the performance of Oracle databases.
 
 NOTES
 
-The executables for Oracle Forms 5.0 and Oracle Reports 3.0 are no longer distributed. Forms 5.0 and
-Reports 3.0 executables can be delivered on demand.
+1) This release includes the Total Performance Index.
+
+2) The executables for Oracle Forms 5.0 and Oracle Reports 3.0 are no longer
+distributed. Forms 5.0 and Reports 3.0 executables can be delivered on demand.
 
 INSTALLATION
 
