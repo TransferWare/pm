@@ -13,6 +13,8 @@ install.package_body.pm_owner.gsk_refc: install.package.pm_owner.gsk_refc
 
 uninstall.package.pm_owner.gsk_refc: uninstall.package_body.pm_owner.gsk_refc
 
+install.package_body.pm_owner.pm: install.grant.epcapp.dbug
+
 install.package_body.pm_owner.pm: install.package.pm_owner.trc
 
 uninstall.package.pm_owner.trc: uninstall.package_body.pm_owner.pm
@@ -28,6 +30,8 @@ uninstall.package.pm_owner.pm_cfg: uninstall.package_body.pm_owner.pm_cfg
 install.package_body.pm_owner.trc: install.package.pm_owner.trc
 
 uninstall.package.pm_owner.trc: uninstall.package_body.pm_owner.trc
+
+install.package_body.pm_owner.pm: install.public_synonym.epcapp.dbug
 
 # CONSTRAINTS
 # FOREIGN KEY CONSTRAINTS

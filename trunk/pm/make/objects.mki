@@ -16,6 +16,9 @@
 # History
 # -------
 # $Log$
+# Revision 1.16  2002/09/10 19:53:05  gpaulissen
+# Update
+#
 # Revision 1.15  2002/05/24 15:21:20  gpaulissen
 # Update from SFS
 #
@@ -97,6 +100,8 @@ $(HTML_FILES:=-install): $(HTML_DIR)
 
 $(HTML_FILES:=-install): override INSTALL_DIR := $(HTML_DIR)
 
+DEPEND_OBJECTS_DB_FILE_MKI := $(CFGDIR)/depend.objects.db.file.mki
+
 DEPEND_OBJECTS_FILE_MKI := $(CFGDIR)/depend.objects.file.mki
 
 DEPEND_OBJECTS_DB_MKI := $(CFGDIR)/depend.objects.db.mki
@@ -132,6 +137,8 @@ gsk_meldingen.sql-run: gskdb.dat-run
 # GSK dependency files
 # ---------------------------------------------------------------------------- #
 
+DEPEND_OBJECTS_DB_FILE_MKI := $(CFGDIR)/depend.objects.db.file.gsk.mki
+
 DEPEND_OBJECTS_FILE_MKI := $(CFGDIR)/depend.objects.file.gsk.mki
 
 DEPEND_OBJECTS_DB_MKI := $(CFGDIR)/depend.objects.db.gsk.mki
@@ -143,19 +150,19 @@ endif # ifeq ($(findstring $(GSK), Y y),)
 # Build dependencies, e.g. create object X by running script Y
 # ---------------------------------------------------------------------------- #
 
-ifeq ($(findstring $(DEPEND),N n),)
-
 include $(DEPEND_OBJECTS_FILE_MKI)
 
 OBJECTS := $(OBJECTS_$(SCHEMA))
-
-endif
 
 # ---------------------------------------------------------------------------- #
 # Database object dependencies, e.g. foreign key X depends on primary key Y
 # ---------------------------------------------------------------------------- #
 
 ifeq ($(findstring $(DEPEND),N n),)
+
+include $(DEPEND_OBJECTS_DB_FILE_MKI)
+
+OBJECTS_BY_DEP := $(OBJECTS_BY_DEP_$(SCHEMA))
 
 include $(DEPEND_OBJECTS_DB_MKI)
 
