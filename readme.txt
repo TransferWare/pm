@@ -38,6 +38,12 @@ BUGS
   pm_cfg.get_memory_io_rate and pm_cfg.get_disk_io_rate will always return a
   default (not NULL).
 
+* 15-07-2003
+  Installation reviewed and enhanced:
+  - Link account should install without errors now. 
+  - Forms/Reports must be compiled at installation time.
+  - Table RELEASE_INFO added.
+
 SUPPORT
 
 Contact Transfer Solutions via e-mail: L<support@transfer-solutions.com>
