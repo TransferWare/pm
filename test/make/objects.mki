@@ -8,7 +8,8 @@ MANIFEST_OBJECTS :=
 UT_TARGETS := trc
 
 OBJECTS_SCRIPTS := \
-	$(addprefix ut_,$(addsuffix .pls,$(UT_TARGETS))) \
+	$(addprefix ut_,$(addsuffix .pks,$(UT_TARGETS))) \
+	$(addprefix ut_,$(addsuffix .pkb,$(UT_TARGETS))) \
 	$(ENDOFLIST)
 
 include $(CFGCOMMONDIR)/test_defs.mki
