@@ -1,16 +1,22 @@
 1) Create an application owner
 
-   a) change to install directory
+   a) change to admin directory
 
-   b) SQL> connect sys@<repository database>
+   b) sqlplus /nolog
+
+   c) SQL> connect sys@<repository database>
       SQL> @ creusr <application owner> <default tablespace> <temporary tablespace>
       SQL> @ pm.grt <application owner>
 
-   c) SQL> connect <application owner>@<repository database>
+   d) change to install directory
+
+   e) sqlplus /nolog
+
+   f) SQL> connect <application owner>@<repository database>
       SQL> @ pm_install.sql
       SQL> @ pm_build.sql
 
-      During this step you will be prompted for several variables:
+      During this step you might be prompted for several variables:
       i)   userid     - The connect string of the application owner
       ii)  pm_home    - The top of the PM distribution
       iii) pm_frm_bin - The directory to install forms executables into
@@ -22,8 +28,13 @@
 
 2) Installation of Total Performance Index (optional)
 
-   a) SQL> connect sys@<database to monitor>
-   b) SQL> @ pm_tpi.sql
+   a) change to admin directory
+
+   b) sqlplus /nolog
+
+   c) SQL> connect sys@<database to monitor>
+
+   d) SQL> @ pm_tpi.sql
 
 3) Installation of interface software
 
@@ -31,7 +42,11 @@
    views. The view names start with pm$. These views hide differences between
    Oracle versions.
 
-   a) Create interface account (on different database)
+   a) change to admin directory
+
+   b) sqlplus /nolog
+
+   c) Create interface account (on different database)
 
       SQL> connect sys@<database to monitor>
       SQL> @ creusr PM_LINK <default tablespace> <temporary tablespace>
@@ -39,7 +54,7 @@
       SQL> connect <interface account>@<database to monitor>
       SQL> @ pm_remote.sql
 
-   b) Create database link (monitored database)
+   d) Create database link (monitored database)
 
       SQL> connect <application owner>@<repository database>
       SQL> @ credblnk <database link> <interface account> <interface account password> <tns service>
