@@ -1,9 +1,3 @@
-INSTALL.TXT
-LICENSE.TXT
-MANIFEST
-MANIFEST.SKIP
-Makefile.PL
-VERSION
 admin/credblnk.sql
 admin/creusr.sql
 admin/pm.grt
@@ -26,6 +20,7 @@ admin/pm_sqltext_with_newlines_7_1.vw
 admin/pm_sysstat_7_1.vw
 admin/pm_system_event_7_1.vw
 admin/pm_tpi.sql
+common/doc/TS030.doc
 common/install/only_first_proj.sql
 common/install/project.sql
 common/src/perl/cmd2sql.pl
@@ -38,10 +33,7 @@ common/src/perl/sql_split.pl
 common/src/perl/textrepl.pl
 common/src/perl/unix2dos.pl
 common/src/perl/which.pl
-common/src/sql/RI_disable_enable.sql
 common/src/sql/accept.sql
-common/src/sql/alter_fk.sql
-common/src/sql/alter_trg.sql
 common/src/sql/check_sql_env.sql
 common/src/sql/check_sql_env_plsql.sql
 common/src/sql/common_sql_dir.sql
@@ -62,11 +54,10 @@ common/src/sql/recomp2.sql
 common/src/sql/release_info.sql
 common/src/sql/release_info.tab
 common/src/sql/release_info_plsql.sql
+common/src/sql/RI_disable_enable.sql
 common/src/sql/role_privs.sql
 common/src/sql/save_parameters.sql
 common/src/sql/set_common_sql_dir.sql
-common/src/sql/table_count.sql
-common/src/sql/truncate.sql
 common/src/sql/upd_seq.sql
 common/src/sql/user_privs.sql
 common/src/sql/user_tables.sql
@@ -126,12 +117,14 @@ doc/delta2.gif
 doc/pm-manual.rtf
 doc/shortcut.gif
 doc/tpi-manual.doc
+INSTALL.TXT
 install/login.sql
 install/pm_build.sql
 install/pm_install.sql
 install/pm_uninstall.sql
 install/pm_upgrade.sql
 install/project.sql
+LICENSE.TXT
 make/depend.forms.mki
 make/depend.objects.db.file.mki
 make/depend.objects.db.mki
@@ -141,8 +134,11 @@ make/forms.mki
 make/objects.mki
 make/prj_defs.mki
 make/reports.mki
+Makefile.PL
+MANIFEST
+MANIFEST.SKIP
+META.yml			Module meta-data (added by MakeMaker)
 readme.txt
-report/OFG4HPL.pll		# OFG4HPL.plx
 report/abort.gif
 report/abort.ico
 report/afclrall.gif
@@ -181,6 +177,7 @@ report/gskgen.pll		# gskgen.plx
 report/gskref.fmb		# gskref.fmb
 report/keys.gif
 report/keys.ico
+report/OFG4HPL.pll		# OFG4HPL.plx
 report/pm001.rdf		# pm001.rep
 report/pm001.sql
 report/pm001q1.sql
@@ -247,4 +244,4 @@ test/unit/pm/pm001.sql
 test/unit/pm/ut_trc.pls
 utility/pm_clean.sql
 utility/pm_run.sql
-META.yml                                Module meta-data (added by MakeMaker)
+VERSION
