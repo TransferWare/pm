@@ -1,3 +1,4 @@
+# -*-fundamental-*- (Emacs)
 # ---------------------------------------------------------------------------- #
 #
 # File:         $RCSfile$
@@ -18,6 +19,14 @@
 # History
 # -------
 # $Log$
+# Revision 1.8  2002/01/17 10:57:14  gpaulissen
+# - make install enhanced.
+# - make depend added (makedepend_oracle.pl, makedepend.sql, makestate.sql).
+# - reports user text field widened (from 10 to 30) due to report 4.5 bug.
+# - removed in install scripts:
+#   whenever sqlerror exit failure
+#   whenever oserror exit failure
+#
 # Revision 1.7  2000/03/07 16:26:41  gpaulissen
 # TPI toegevoegd
 #
@@ -45,113 +54,83 @@
 #
 # ---------------------------------------------------------------------------- #
  
-CONSTRAINTS = \
-	pm_config.con-run \
-	pm_run.con-run \
-	pm_sql_id.con-run \
-	pm_sql.con-run \
-	pm_session.con-run \
-	pm_session_tmp.con-run \
-	pm_sql_current.con-run \
-	pm_sysstat.con-run \
-	pm_sysstat_tmp.con-run \
-	pm_system_event.con-run \
-	pm_system_event_tmp.con-run \
-	pm_sqlarea.con-run \
-	$(ENDOFLIST)
-
 # ---------------------------------------------------------------------------- #
-# Constraints must be made in the right dependency order.
-# This can be assured by using output of tabdepend.sql 
+# Build dependencies, e.g. create object X by running script Y
 # ---------------------------------------------------------------------------- #
 
-# Constraint dependencies
+# Do not include pm_mpi.pkb since only specification is important
+# Do not include pm_dpi.pkb since only specification is important
 
-pm_session.con-run:		       pm_run.con-run
+# Files pm_system_event.ind, pm_sysstat.ind and pm_sqlarea.ind have
+# no SQL DDL statements to execute.
 
-pm_session.con-run:		       pm_sql.con-run
+OBJECT_FILES = \
+	     pm_config.tab \
+	     pm_run.tab \
+	     pm_session.tab \
+	     pm_session_tmp.tab \
+	     pm_sql.tab \
+	     pm_sqlarea.tab \
+	     pm_sqlarea_tmp.tab \
+	     pm_sql_current.tab \
+	     pm_sql_id.tab \
+	     pm_sysstat.tab \
+	     pm_sysstat_tmp.tab \
+	     pm_system_event.tab \
+	     pm_system_event_tmp.tab \
+	     pm_vw_sqlarea.vw \
+	     pm_run_seq.seq \
+	     pm_sql_seq.seq \
+	     trc.pck \
+	     pm.pck \
+	     pm_cfg.pck \
+	     pm_mpi.pks \
+	     pm_dpi.pks \
+	     pm_config.con \
+	     pm_run.con \
+	     pm_sql_id.con \
+	     pm_sql.con \
+	     pm_session.con \
+	     pm_session_tmp.con \
+	     pm_sql_current.con \
+	     pm_sysstat.con \
+	     pm_sysstat_tmp.con \
+	     pm_system_event.con \
+	     pm_system_event_tmp.con \
+	     pm_sqlarea.con \
+	     pm_sqlarea_tmp.ind \
+	     pm_run.ind \
+	     pm_session.ind \
+	     pm_sql.ind \
+	     $(ENDOFLIST)
 
-pm_sql.con-run:			       pm_sql_id.con-run
+DEPEND_OBJECTS_FILE_MKI := $(CFGDIR)/depend.objects.file.mki
+DEPEND_OBJECTS_DB_MKI := $(CFGDIR)/depend.objects.db.mki
 
-pm_sqlarea.con-run:		       pm_run.con-run
+depend.objects.file: override SCHEMA := pm_owner
 
-pm_sqlarea.con-run:		       pm_sql.con-run
+depend.objects.makefile: override MAKEDEPEND_INCLUDE_FILE := $(DEPEND_OBJECTS_FILE_MKI)
+depend.objects.makefile: override MAKEDEPEND_SPOOL_TYPE := >>
 
-pm_sysstat.con-run:		       pm_run.con-run
+depend.objects.file: makedepend_oracle.pl $(OBJECT_FILES)
+	$(depend-objects-file)
 
-pm_system_event.con-run: 	       pm_run.con-run
+include $(DEPEND_OBJECTS_FILE_MKI)
 
-FUNCTIONS = \
-	$(ENDOFLIST)
+OBJECTS := $(OBJECTS_PM_OWNER)
 
-PACKAGES = \
-	trc.pck-run \
-	pm.pck-run \
-	pm_cfg.pck-run \
-	pm_mpi.pks-run \
-	pm_dpi.pks-run \
-	$(ENDOFLIST)
-
-PROCEDURES = \
-	$(ENDOFLIST)
+# No insert
+DATA = 
 
 # ---------------------------------------------------------------------------- #
-# Stored procedure dependencies
-# This can be constructed by running spdepend.sql
+# Database object dependencies, e.g. foreign key X depends on primary key Y
 # ---------------------------------------------------------------------------- #
 
-pm.pck-run: trc.pck-run
+include $(DEPEND_OBJECTS_DB_MKI)
 
 # ---------------------------------------------------------------------------- #
-# End of stored procedure dependencies
+# Gsk
 # ---------------------------------------------------------------------------- #
-
-INDEXES = \
-	pm_sqlarea.ind-run \
-	pm_sqlarea_tmp.ind-run \
-	pm_run.ind-run \
-	pm_session.ind-run \
-	pm_system_event.ind-run \
-	pm_sql.ind-run \
-	pm_sysstat.ind-run \
-	$(ENDOFLIST)
-
-SEQUENCES = \
-	pm_run_seq.seq-run \
-	pm_sql_seq.seq-run \
-	$(ENDOFLIST)
-
-DATA = \
-	$(ENDOFLIST)
-
-SYNONYMS = \
-	$(ENDOFLIST)
-
-TABLES = \
-	pm_config.tab-run \
-	pm_run.tab-run \
-	pm_session.tab-run \
-	pm_session_tmp.tab-run \
-	pm_sql.tab-run \
-	pm_sqlarea.tab-run \
-	pm_sqlarea_tmp.tab-run \
-	pm_sql_current.tab-run \
-	pm_sql_id.tab-run \
-	pm_sysstat.tab-run \
-	pm_sysstat_tmp.tab-run \
-	pm_system_event.tab-run \
-	pm_system_event_tmp.tab-run \
-	$(ENDOFLIST)
-
-TRIGGERS = \
-	$(ENDOFLIST)
-
-UPGRADES = \
-	$(ENDOFLIST)
-
-VIEWS = \
-      	pm_vw_sqlarea.vw-run \
-      	$(ENDOFLIST)
 
 install.gsk:	\
 	cgrefcod.tab-run \
@@ -175,4 +154,4 @@ uninstall.gsk: \
 	gsk_refc.pck-drop \
 	gsk_msg.pck-drop \
 	$(ENDOFLIST)
-	
+

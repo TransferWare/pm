@@ -30,6 +30,16 @@ Upgrade from a prior version:
 
 BUGS
 
+* 02-01-2002 
+  Report pm0041 is now ordered by the number of executions descending: it makes
+  more sense to show the most executed statements first.
+
+* 02-01-2002
+  pm_cfg.get_memory_io_rate and pm_cfg.get_disk_io_rate will always return a
+  default (not NULL).
+
+SUPPORT
+
 Contact Transfer Solutions via e-mail: L<support@transfer-solutions.com>
 Supply the version number, the platform, the versions of Oracle tools used and
 a description of the problem.
