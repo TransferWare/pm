@@ -21,6 +21,6 @@ FROM	(
 ,	pm_sql_id	sqltext
 WHERE	sqlarea.sql_id = sqltext.sql_id
 ORDER BY 
-	sqlarea.value
+	sqlarea.value	DESC
 ,	sqlarea.sql_id
 

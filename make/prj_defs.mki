@@ -23,6 +23,14 @@
 # History
 # -------
 # $Log$
+# Revision 1.13  2002/01/17 10:57:14  gpaulissen
+# - make install enhanced.
+# - make depend added (makedepend_oracle.pl, makedepend.sql, makestate.sql).
+# - reports user text field widened (from 10 to 30) due to report 4.5 bug.
+# - removed in install scripts:
+#   whenever sqlerror exit failure
+#   whenever oserror exit failure
+#
 # Revision 1.12  2000/03/07 16:26:41  gpaulissen
 # TPI toegevoegd
 #
@@ -90,3 +98,4 @@ src_rex-subdir  := report
 src_ogd-subdir  := report
 src_pcx-subdir  := report
 src_bmp-subdir  := report
+src_perl-subdir := common/src/perl
