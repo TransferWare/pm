@@ -16,6 +16,9 @@
 # History
 # -------
 # $Log$
+# Revision 1.20  2004/12/14 15:04:44  gpaulissen
+# Upgrading to latest TW version
+#
 # Revision 1.19  2003/07/15 21:17:49  gpaulissen
 # Release 4.2.0
 #
@@ -38,11 +41,7 @@
 
 SCHEMA := pm_owner
 
-USERID := &&userid
-
-post.install.objects: install.release_info
-
-post.uninstall.objects: uninstall.release_info
+install.check_sql_env.grant: check_sql_env.grant.select.sys.v_$statname
 
 # Do not include pm_mpi.pkb since only specification is important
 # Do not include pm_dpi.pkb since only specification is important
@@ -126,28 +125,5 @@ $(HTML_FILES:=-install): $(HTML_DIR)
 
 $(HTML_FILES:=-install): override INSTALL_DIR := $(HTML_DIR)
 
-DEPEND_OBJECTS_DB_FILE_MKI := $(CFGDIR)/depend.objects.db.file.mki
+include $(CFGCOMMONDIR)/objects.mki
 
-DEPEND_OBJECTS_FILE_MKI := $(CFGDIR)/depend.objects.file.mki
-
-DEPEND_OBJECTS_DB_MKI := $(CFGDIR)/depend.objects.db.mki
-
-# ---------------------------------------------------------------------------- #
-# Build dependencies, e.g. create object X by running script Y
-# ---------------------------------------------------------------------------- #
-
-include $(DEPEND_OBJECTS_FILE_MKI)
-
-OBJECTS := $(OBJECTS_$(SCHEMA))
-
-# ---------------------------------------------------------------------------- #
-# Database object dependencies, e.g. foreign key X depends on primary key Y
-# ---------------------------------------------------------------------------- #
-
-ifeq ($(findstring $(DEPEND),N n),)
-
-  include $(DEPEND_OBJECTS_DB_FILE_MKI)
-
-  include $(DEPEND_OBJECTS_DB_MKI)
-
-endif
