@@ -18,6 +18,9 @@
 # History
 # -------
 # $Log$
+# Revision 1.11  2002/01/25 14:52:26  gpaulissen
+# Dependency update.
+#
 # Revision 1.10  2002/01/24 17:15:29  gpaulissen
 # Added dependency build for GSK.
 #
@@ -109,32 +112,6 @@ OBJECTS_SCRIPTS = \
 DATA = 
 
 # ---------------------------------------------------------------------------- #
-# Build dependencies, e.g. create object X by running script Y
-# ---------------------------------------------------------------------------- #
-
-DEPEND_OBJECTS += depend.objects
-
-DEPEND_OBJECTS_FILE += depend.objects.file
-
-LIST_FILES += depend.objects.file.list
-
-DEPEND_OBJECTS_DB += depend.objects.db
-
-DEPEND_OBJECTS_CHECK += depend.objects.check
-
-depend.objects.file: override SCHEMA := pm_owner
-
-include $(CFGDIR)/depend.objects.file.mki
-
-OBJECTS := $(OBJECTS_PM_OWNER)
-
-# ---------------------------------------------------------------------------- #
-# Database object dependencies, e.g. foreign key X depends on primary key Y
-# ---------------------------------------------------------------------------- #
-
-include $(CFGDIR)/depend.objects.db.mki
-
-# ---------------------------------------------------------------------------- #
 # Gsk
 # ---------------------------------------------------------------------------- #
 
@@ -157,13 +134,15 @@ gskdbfill.sql:: gskdb.dat
 
 .INTERMEDIATE: gskdbfill.sql
 
-# dependencies
+# ---------------------------------------------------------------------------- #
+# GSK dependencies
+# ---------------------------------------------------------------------------- #
 
 DEPEND_OBJECTS_FILE_GSK_MKI := $(CFGDIR)/depend.objects.file.gsk.mki
 
 DEPEND_OBJECTS_DB_GSK_MKI := $(CFGDIR)/depend.objects.db.gsk.mki
 
-DEPEND_OBJECTS += depend.objects.gsk
+depend.objects.gsk: depend.objects.file.gsk
 
 DEPEND_OBJECTS_FILE += depend.objects.file.gsk
 
@@ -173,24 +152,47 @@ depend.objects.file.gsk.list: override LIST_FILE := depend.objects.file.gsk.list
 
 depend.objects.file.gsk.list: $(addsuffix -list, $(OBJECTS_SCRIPTS_GSK))
 
-DEPEND_OBJECTS_CHECK += depend.objects.check.gsk
-
 depend.objects.file.gsk: override SCHEMA := pm_owner
 
 depend.objects.file.gsk: override DEPEND_OBJECTS_FILE_MKI := $(DEPEND_OBJECTS_FILE_GSK_MKI)
 
+depend.objects.check: $(DEPEND_OBJECTS_FILE_GSK_MKI)
+
 include $(DEPEND_OBJECTS_FILE_GSK_MKI)
 
-OBJECTS := $(OBJECTS_PM_OWNER)
+OBJECTS_GSK := $(OBJECTS_PM_OWNER)
 
-DEPEND_OBJECTS_DB += depend.objects.db.gsk
+install.objects.gsk: $(addprefix install., $(OBJECTS_GSK))
 
-depend.objects.db.gsk: override DEPEND_OBJECTS_FILE_MKI := $(DEPEND_OBJECTS_DB_GSK_MKI)
-
-include $(DEPEND_OBJECTS_DB_GSK_MKI)
+uninstall.objects.gsk: $(addprefix uninstall., $(OBJECTS_GSK))
 
 endif
 
 # ---------------------------------------------------------------------------- #
 # End of gsk
 # ---------------------------------------------------------------------------- #
+
+# ---------------------------------------------------------------------------- #
+# Build dependencies, e.g. create object X by running script Y
+# ---------------------------------------------------------------------------- #
+
+DEPEND_OBJECTS_FILE += depend.objects.file
+
+LIST_FILES += depend.objects.file.list
+
+DEPEND_OBJECTS_DB += depend.objects.db
+
+DEPEND_OBJECTS_CHECK += depend.objects.check
+
+depend.objects.file: override SCHEMA := pm_owner
+
+include $(CFGDIR)/depend.objects.file.mki
+
+OBJECTS := $(OBJECTS_PM_OWNER)
+
+# ---------------------------------------------------------------------------- #
+# Database object dependencies, e.g. foreign key X depends on primary key Y
+# ---------------------------------------------------------------------------- #
+
+include $(CFGDIR)/depend.objects.db.mki
+
