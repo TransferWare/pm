@@ -21,6 +21,8 @@
 # 
 # ---------------------------------------------------------------------------- #
 
+SRC_DEVELOPER := text
+
 bmp-subdirs := report
 con-subdirs := install
 dat-subdirs := install
