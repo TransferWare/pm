@@ -4,7 +4,7 @@
 # files      : OFG4HPL.pld gskgen.pld gskref.fmt pm_about.fmt pm_params.fmt 
 # files      : pm_start.fmt pm_mnu.mmt 
 
-gskgen.pll: ofg4hpl.pll
+gskgen.pll: OFG4HPL.pll
 
 gskref.fmb: afsave.ico
 
@@ -38,11 +38,11 @@ gskref.fmb: afhelp.ico
 
 gskref.fmb: gskgen.pll
 
-gskref.fmb: ofg4hpl.pll
+gskref.fmb: OFG4HPL.pll
 
 pm_about.fmb: gskgen.pll
 
-pm_about.fmb: ofg4hpl.pll
+pm_about.fmb: OFG4HPL.pll
 
 pm_about.fmb: gskref.fmb
 
@@ -50,11 +50,11 @@ pm_start.fmb: pm_mnu.mmb
 
 pm_start.fmb: gskgen.pll
 
-pm_start.fmb: ofg4hpl.pll
+pm_start.fmb: OFG4HPL.pll
 
 pm_start.fmb: gskref.fmb
 
 pm_mnu.mmb: gskgen.pll
 
-pm_mnu.mmb: ofg4hpl.pll
+pm_mnu.mmb: OFG4HPL.pll
 
