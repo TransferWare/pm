@@ -1,15 +1,18 @@
 PROMPT
-PROMPT	$RCSfile$
+PROMPT  $RCSfile$
 REMARK 
-REMARK	$Date$
+REMARK  $Date$
 REMARK
-REMARK	$Author$
+REMARK  $Author$
 REMARK
 REMARK  $Revision$
 REMARK
-PROMPT	Description:	Identify high load sql.
+PROMPT  Description:    Identify high load sql.
 REMARK
 REMARK  $Log$
+REMARK  Revision 1.14  2004/12/03 14:57:29  gpaulissen
+REMARK  empty define needs trimming in to_number()
+REMARK
 REMARK  Revision 1.13  2004/02/06 09:50:57  gpaulissen
 REMARK  Release 6.4.0
 REMARK
@@ -51,15 +54,15 @@ REMARK  Initial revision
 REMARK
 REMARK
 REMARK
-PROMPT	Parameters:	
-PROMPT 			1 - Database
-PROMPT			&&1
-PROMPT 			2 - Start time inclusive (Oracle YYYYMMDDHH24MISS format)
-PROMPT			&&2
-PROMPT 			3 - End time exclusive (Oracle YYYYMMDDHH24MISS format)
-PROMPT			&&3
+PROMPT  Parameters:     
+PROMPT                  1 - Database
+PROMPT                  &&1
+PROMPT                  2 - Start time inclusive (Oracle YYYYMMDDHH24MISS format)
+PROMPT                  &&2
+PROMPT                  3 - End time exclusive (Oracle YYYYMMDDHH24MISS format)
+PROMPT                  &&3
 PROMPT                  4 - Show SQL at least this percentage (max 100) of estimated time
-PROMPT			&&4
+PROMPT                  &&4
 PROMPT
 
 @@ pmbrpt.sql
@@ -69,41 +72,40 @@ define start_time = '&&2'
 define end_time = '&&3'
 define perc = &&4
 
-VAR	perc number;
-VAR	cost_memory number;
-VAR	cost_disk_io number;
-VAR	tot_io number;
+VAR     perc number;
+VAR     cost_memory number;
+VAR     cost_disk_io number;
+VAR     tot_io number;
 
 BEGIN
-	:date_format := '&&date_format';
-	:db := UPPER('&&db');
-	:start_time := '&&start_time';
-	:end_time := '&&end_time';
-	:perc := greatest( least( &&perc, 100 ), 0 );
-	:cost_memory := pm_cfg.get_memory_io_rate( :db );
-	:cost_disk_io := pm_cfg.get_disk_io_rate( :db );
+        :date_format := '&&date_format';
+        :db := UPPER('&&db');
+        :start_time := '&&start_time';
+        :end_time := '&&end_time';
+        :perc := greatest( least( &&perc, 100 ), 0 );
+        :cost_memory := pm_cfg.get_memory_io_rate( :db );
+        :cost_disk_io := pm_cfg.get_disk_io_rate( :db );
 END;
 /
 
 BEGIN
-	pm.get_run_range
-	( 
-		:db
-	,	to_date( :start_time, :date_format )
-	,	to_date( :end_time, :date_format )
-	,	:lwb_run_id
-	,	:upb_run_id 
-	);
+        pm.get_run_range
+        ( 
+                :db
+        ,       to_date( :start_time, :date_format )
+        ,       to_date( :end_time, :date_format )
+        ,       :lwb_run_id
+        ,       :upb_run_id 
+        );
 END;
 /
 
 REM Save result in define tot_io
-
 REM Ensure no data will result in an empty tot_io define
 set null ''
 set heading off
 
-column	tot_io format 999999999999999999 new_value tot_io 
+column  tot_io format 999999999999999999 new_value tot_io 
 
 set termout off
 
@@ -116,11 +118,12 @@ set termout on
 set heading on
 
 BEGIN
-	/* 
-	|| &&tot_io may be empty, hence a 
-	|| conversion with to_number will result in NULL
-	*/
-	:tot_io := nvl(to_number('&&tot_io'), 0);
+        /* 
+        || &&tot_io may be empty, hence a 
+        || conversion with to_number will result in NULL
+        || GJP &&tot_io may be white space to, hence ltrim it.
+        */
+        :tot_io := nvl(to_number(ltrim('&&tot_io')), 0);
 END;
 /
 
@@ -130,8 +133,8 @@ set linesize 200
 
 REM PR-580 Service time instead of estimated time
 
-column	total		heading 'Service|time (sec)'	format 999,999,999,999
-column	percentage      heading '%'		format 999.99
+column  total           heading 'Service|time (sec)'    format 999,999,999,999
+column  percentage      heading '%'             format 999.99
 
 @@ pm001q2.sql
 
