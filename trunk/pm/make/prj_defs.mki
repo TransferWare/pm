@@ -23,6 +23,9 @@
 # History
 # -------
 # $Log$
+# Revision 1.12  2000/03/07 16:26:41  gpaulissen
+# TPI toegevoegd
+#
 # Revision 1.11  1999/09/28 15:14:39  gpaulissen
 # Project specific settings
 #
@@ -66,6 +69,8 @@ sql_fill-subdir := install
 sql_fnc-subdir  := install
 sql_ind-subdir  := install
 sql_pck-subdir  := install
+sql_pks-subdir  := install
+sql_pkb-subdir  := install
 sql_prc-subdir  := install
 sql_seq-subdir  := install
 sql_syn-subdir  := install

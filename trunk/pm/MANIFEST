@@ -161,8 +161,14 @@ install/gskdb.drp
 install/gskdb.pck
 install/gskdb.sql
 install/gskdb.tab
+install/pm_dpi.html
+install/pm_dpi.pkb
+install/pm_dpi.pks
 install/pm_instance_7_1.vw
 install/pm_instance_8_0.vw
+install/pm_mpi.html
+install/pm_mpi.pkb
+install/pm_dpi.pks
 install/pm_remote.sql
 install/pm_remote.grt
 install/pm_remote.prc
