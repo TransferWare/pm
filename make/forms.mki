@@ -13,6 +13,9 @@
 # History
 # -------
 # $Log$
+# Revision 1.13  2002/03/08 12:26:33  gpaulissen
+# PM 4.0.0
+#
 # Revision 1.12  2002/03/08 11:47:39  gpaulissen
 # PM 4.0.0
 #
@@ -113,15 +116,18 @@ ifeq ($(subst .,,$(VER_DEVELOPER)),45)
 pm_start.fmb: pm_start-45.fmt
 	$(FMBGENCMD)
 
+pm_start.fmt: pm_start-45.fmt
+	$(CP) $(subst /,$(PATHSEP),$?) $@
+
 else
 
 pm_start.fmb: pm_start-50.fmt
 	$(FMBGENCMD)
 
-endif
-
-pm_start.fmt: pm_start-$(subst .,,$(VER_DEVELOPER)).fmt
+pm_start.fmt: pm_start-50.fmt
 	$(CP) $(subst /,$(PATHSEP),$?) $@
+
+endif
 
 # ---------------------------------------------------------------------------- #
 # Menus. Case sensitive! See MANIFEST
