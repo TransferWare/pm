@@ -121,10 +121,10 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/set_common_sql_dir.sql "&&pm_HOME\common/src/sql/"
+PROMPT Command: START &&pm_HOME/common/src/sql/set_common_sql_dir.sql "&&pm_HOME/common/src/sql/"
 SET VERIFY ON DEFINE ON
 PROMPT &&pm_HOME
-START &&pm_HOME\common/src/sql/set_common_sql_dir.sql "&&pm_HOME\common/src/sql/"
+START &&pm_HOME/common/src/sql/set_common_sql_dir.sql "&&pm_HOME/common/src/sql/"
 SET DEFINE '&'
 COMMIT
 /
@@ -134,9 +134,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/check_sql_env.sql PRIVILEGE create_procedure
+PROMPT Command: START &&pm_HOME/common/src/sql/check_sql_env.sql PRIVILEGE create_procedure
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/check_sql_env.sql PRIVILEGE create_procedure
+START &&pm_HOME/common/src/sql/check_sql_env.sql PRIVILEGE create_procedure
 SET DEFINE '&'
 COMMIT
 /
@@ -226,9 +226,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/check_sql_env.sql PRIVILEGE create_view
+PROMPT Command: START &&pm_HOME/common/src/sql/check_sql_env.sql PRIVILEGE create_view
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/check_sql_env.sql PRIVILEGE create_view
+START &&pm_HOME/common/src/sql/check_sql_env.sql PRIVILEGE create_view
 SET DEFINE '&'
 COMMIT
 /
@@ -254,9 +254,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/recomp.sql 
+PROMPT Command: START &&pm_HOME/common/src/sql/recomp.sql 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/recomp.sql 
+START &&pm_HOME/common/src/sql/recomp.sql 
 SET DEFINE '&'
 COMMIT
 /
