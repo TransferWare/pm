@@ -1,0 +1,65 @@
+1) Create an application owner
+
+   a) change to install directory
+
+   b) SQL> connect sys@<repository database>
+      SQL> @ creusr <application owner> <default tablespace> <temporary tablespace>
+      SQL> @ pm.grt <application owner>
+
+   c) SQL> connect <application owner>@<repository database>
+      SQL> @ pm.sql
+
+2) Install the GUI reports (optional)
+
+   a) Create a shortcut to the Oracle Forms 6.0 binary pm_start.fmx. 
+
+   b) SQL> connect <application owner>@<repository database>
+      SQL> @ cgrefcod.tab
+      SQL> @ gsk_refc.dat
+      SQL> @ gskdb.sql
+
+3) Installation of Total Performance Index (optional)
+
+   a) SQL> connect sys@<database to monitor>
+   b) SQL> @ pm_tpi.sql
+
+4) Installation of interface software
+
+   The Performance Monitor creates interface views based on Oracle dictionary
+   views. The view names start with pm$. These views hide differences between
+   Oracle versions.
+
+   a) Create interface account (on different database)
+
+      SQL> connect sys@<database to monitor>
+      SQL> @ creusr PM_LINK <default tablespace> <temporary tablespace>
+      SQL> @ pm_remote.grt <interface account>
+      SQL> connect <interface account>@<database to monitor>
+      SQL> @ pm_remote.sql
+
+   b) Create database link (monitored database)
+
+      SQL> connect <application owner>@<repository database>
+      SQL> @ credblnk <database link> <interface account> <interface account password> <tns service>
+
+      Test the link by:
+
+      SQL> select * from user_views@<database link> where view_name like ' pm$%';
+
+5) Collect information
+
+   SQL> execute pm.collect('MYDB')
+
+   or
+
+   SQL> execute pm.collect(NULL)
+
+6) Cleanup
+
+   Clean up 14 days of history for database MYDB.
+
+   SQL> execute pm.cleanup('MYDB', 14)
+
+   or
+
+   SQL> execute pm.cleanup(NULL, 14)
