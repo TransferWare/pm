@@ -17,6 +17,9 @@ PROMPT			    with the same subtring length
 PROMPT			&&2
 PROMPT
 REMARK  $Log$
+REMARK  Revision 1.4  2003/08/08 21:01:20  gpaulissen
+REMARK  Release 4.2.1
+REMARK
 REMARK  Revision 1.3  1999/05/26 15:57:01  gpaulissen
 REMARK  Added pmbrpt.sql and pmerpt.sql
 REMARK

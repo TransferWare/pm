@@ -21,6 +21,9 @@ REMARK
 REMARK  Precondition:	SQL statements must be in pm_sql_id.
 REMARK
 REMARK  $Log$
+REMARK  Revision 1.4  2003/08/08 21:01:19  gpaulissen
+REMARK  Release 4.2.1
+REMARK
 REMARK  Revision 1.3  1999/05/31 15:19:43  gpaulissen
 REMARK  *** empty log message ***
 REMARK

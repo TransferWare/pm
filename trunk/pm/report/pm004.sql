@@ -10,6 +10,9 @@ REMARK
 PROMPT	Description:	List statistics about sql area.
 REMARK
 REMARK  $Log$
+REMARK  Revision 1.4  2003/08/08 21:01:19  gpaulissen
+REMARK  Release 4.2.1
+REMARK
 REMARK  Revision 1.3  1999/05/26 14:14:17  gpaulissen
 REMARK  pmbrpt.sql and pmerpt.sql used.
 REMARK

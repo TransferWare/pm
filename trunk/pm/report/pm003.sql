@@ -15,6 +15,9 @@ PROMPT 			1 - Statement id
 PROMPT			&&1
 REMARK
 REMARK  $Log$
+REMARK  Revision 1.5  2003/08/08 21:01:19  gpaulissen
+REMARK  Release 4.2.1
+REMARK
 REMARK  Revision 1.4  1999/05/31 15:19:47  gpaulissen
 REMARK  *** empty log message ***
 REMARK

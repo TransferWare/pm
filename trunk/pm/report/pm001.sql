@@ -10,6 +10,9 @@ REMARK
 PROMPT	Description:	Identify high load sql.
 REMARK
 REMARK  $Log$
+REMARK  Revision 1.12  2003/08/08 21:01:19  gpaulissen
+REMARK  Release 4.2.1
+REMARK
 REMARK  Revision 1.11  1999/10/06 09:49:23  gpaulissen
 REMARK  Output modified
 REMARK

@@ -13,10 +13,10 @@ if ( $VERSION =~ m/Name: [^0-9]+(\S+)\s\$/ ) {
 
 $VERSION =~ s/_/./go;
 
-my $TO_UNIX = ( $^O eq 'MSWin32' ? 'perl -S dos2unix.pl $(DISTVNAME)' : '' );
+my $TO_UNIX = ( $^O =~ m/^(mswin32|cygwin)$/i ? 'perl -S dos2unix.pl -f $(DISTVNAME)' : '' );
 
 WriteMakefile(
-  'NAME'	=> 'pm',
+  'NAME'        => 'pm',
   'dist' => { COMPRESS => 'gzip', TO_UNIX => $TO_UNIX },
   'depend' => { manifest => FORCE },
   'VERSION' => $VERSION

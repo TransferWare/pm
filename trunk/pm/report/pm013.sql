@@ -16,6 +16,9 @@ PROMPT			2 - Sql id as stored in pm_sql
 PROMPT			&&2
 PROMPT
 REMARK  $Log$
+REMARK  Revision 1.3  2003/08/08 21:01:20  gpaulissen
+REMARK  Release 4.2.1
+REMARK
 REMARK  Revision 1.2  1999/05/25 14:45:02  gpaulissen
 REMARK  Released
 REMARK

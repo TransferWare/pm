@@ -20,6 +20,9 @@ PROMPT 			4 - Minimum of disk reads and buffer gets
 PROMPT			&&4
 REMARK
 REMARK  $Log$
+REMARK  Revision 1.5  2003/08/08 21:01:20  gpaulissen
+REMARK  Release 4.2.1
+REMARK
 REMARK  Revision 1.4  1999/10/07 15:08:26  gpaulissen
 REMARK  pm_sess_io is replaced by pm_sqlarea
 REMARK
