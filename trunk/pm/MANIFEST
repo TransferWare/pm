@@ -1,4 +1,3 @@
-	$Header$
 COPYING.TXT
 MANIFEST
 MANIFEST.SKIP
@@ -167,7 +166,6 @@ install/pm_instance_8_0.vw
 install/pm_remote.sql
 install/pm_remote.grt
 install/pm_remote.prc
-install/pm_sess_io_7_1.vw
 install/pm_session_7_1.vw
 install/pm_sesstat_7_1.vw
 install/pm_sqlarea_7_1.vw
@@ -191,12 +189,11 @@ install/pm_run.con
 install/pm_run.ind
 install/pm_run.tab
 install/pm_run_seq.seq
-install/pm_sess_io.con
-install/pm_sess_io.ind
-install/pm_sess_io.tab
 install/pm_session.con
 install/pm_session.ind
 install/pm_session.tab
+install/pm_session_tmp.con
+install/pm_session_tmp.tab
 install/pm_sql.con
 install/pm_sql.ind
 install/pm_sql.tab
