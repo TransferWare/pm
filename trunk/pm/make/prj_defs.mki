@@ -1,0 +1,87 @@
+# ---------------------------------------------------------------------------- #
+#
+# File:         $RCSfile$
+#
+# Author:       $Author$
+#
+# Date:         $Date$
+#
+# Revision:     $Revision$
+#
+# Purpose:      Contains project specific definitions:
+#		* location of files
+#
+# Parameters:	WKTOP	 - Top directory for work environment
+#
+# Notes:	1) This file defines the following MAKE variables:
+#		   * FRM_BIN - location for forms binaries
+#		   * RPT_BIN - location for reports binaries
+#
+#		2) This file defines the following MAKE rules:
+#		   * rules to get files from their archives
+# 
+# History
+# -------
+# $Log$
+# Revision 1.11  1999/09/28 15:14:39  gpaulissen
+# Project specific settings
+#
+# Revision 1.1  1999/09/16 12:20:04  gpaulissen
+# Support files.
+#
+# Revision 1.9  1999/08/30 12:55:34  gpaulissen
+# Added bin50 and bin60
+#
+# Revision 1.8  1999/08/26 14:09:07  gpaulissen
+# Added pm_logo.bmp and removed gsk_log.pcx
+#
+# Revision 1.7  1999/08/10 09:39:50  gpaulissen
+# Added Developer/2000 45, 50 and 60
+#
+# Revision 1.6  1999/05/25 14:45:14  gpaulissen
+# Released
+#
+# Revision 1.5  1999/04/29 09:32:29  gpaulissen
+# Toegevoegd: ASCII-bestanden van Developer/2000 binaries.
+#
+# Revision 1.4  1999/04/23 12:16:15  gpaulissen
+# Forms and reports output directory is now bin.
+#
+# Revision 1.3  1999/04/23 10:41:27  gpaulissen
+# Toegevoegd: plaats om SQL bestanden te vinden.
+#
+# Revision 1.2  1999/04/23 09:00:59  gpaulissen
+# *** empty log message ***
+#
+# Revision 1.1  1999/04/21 15:04:31  gpaulissen
+# Initial revision
+#
+#
+# 
+# ---------------------------------------------------------------------------- #
+
+ico-subdir      := report
+sql_cons-subdir := install
+sql_fill-subdir := install
+sql_fnc-subdir  := install
+sql_ind-subdir  := install
+sql_pck-subdir  := install
+sql_prc-subdir  := install
+sql_seq-subdir  := install
+sql_syn-subdir  := install
+sql_tab-subdir  := install
+sql_trg-subdir  := install
+sql_utl-subdir  := common/src/sql
+sql_rpt-subdir  := report
+sql_vw-subdir   := install
+src_fmb-subdir  := report
+src_fmt-subdir  := report
+src_mmb-subdir  := report
+src_mmt-subdir  := report
+src_pll-subdir  := report
+src_pld-subdir  := report
+src_rdf-subdir  := report
+src_rex-subdir  := report
+src_ogd-subdir  := report
+src_pcx-subdir  := report
+src_bmp-subdir  := report
