@@ -11,8 +11,7 @@ NOTES
 
 1) This release includes the Total Performance Index.
 
-2) The executables for Oracle Forms 5.0 and Oracle Reports 3.0 are no longer
-distributed. Forms 5.0 and Reports 3.0 executables can be delivered on demand.
+2) Third party software: Oracle Forms 6i or higher, Oracle Reports 6i of higher.
 
 INSTALLATION
 
@@ -20,13 +19,7 @@ INSTALLATION
 
 Upgrade from a prior version:
 
-1) Only installation from scratch is supported.
-   This means that the following items must be dropped:
-   a) the (Performance Monitor objects of the) repository owner
-   b) all interface accounts
-   c) all database links pointing to the interface accounts
-
-2) Install from scratch.
+Use TransVersion (http://www.sourceforge.net/projects/transferware) to upgrade.
 
 BUGS
 
@@ -43,6 +36,9 @@ BUGS
   - Link account should install without errors now. 
   - Forms/Reports must be compiled at installation time.
   - Table RELEASE_INFO added.
+
+* 28-08-2003
+  Web enabled.
 
 SUPPORT
 
