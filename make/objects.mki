@@ -18,6 +18,9 @@
 # History
 # -------
 # $Log$
+# Revision 1.7  2000/03/07 16:26:41  gpaulissen
+# TPI toegevoegd
+#
 # Revision 1.6  1999/10/07 14:19:33  gpaulissen
 # PR-777. Added pm_session_tmp
 #
@@ -85,6 +88,8 @@ PACKAGES = \
 	trc.pck-run \
 	pm.pck-run \
 	pm_cfg.pck-run \
+	pm_mpi.pks-run \
+	pm_dpi.pks-run \
 	$(ENDOFLIST)
 
 PROCEDURES = \
