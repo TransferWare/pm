@@ -28,6 +28,9 @@ REMARK
 REMARK  Description:    Create trace package of Performance Monitor.
 REMARK
 REMARK  $Log$
+REMARK  Revision 1.3  2004/12/15 11:22:05  gpaulissen
+REMARK  New release
+REMARK
 REMARK  Revision 1.2  2004/12/14 17:12:08  gpaulissen
 REMARK  [ 828145 ] Unit test of trc fails
 REMARK
@@ -823,7 +826,7 @@ CREATE OR REPLACE PACKAGE BODY trc IS
                 add_value( i_descr, 'FALSE' );
         END IF;
     
---/*DBUG*/      dbug.print( 'input', i_descr || ': ' || i_value );
+--/*DBUG*/      dbug.print( 'input', i_descr || ': %s', i_value );
     EXCEPTION
         WHEN    OTHERS
         THEN
@@ -923,6 +926,10 @@ CREATE OR REPLACE PACKAGE BODY trc IS
   IS
   BEGIN
     v_call_info_count := 0;
+    v_first_error_msg := NULL;
+    v_first_format_call_stack := NULL;
+    v_first_calls := NULL;
+
     t_proc_name := t_proc_name_empty;
     t_nr_values := t_nr_values_empty;
     t_value_list := t_value_list_empty; 

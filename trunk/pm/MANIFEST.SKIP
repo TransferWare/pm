@@ -38,3 +38,4 @@ common/src/perl/regconv\.pl
 common/src/perl/setenv_dev\.pl
 common/src/sql/ut_run_testcase\.sql
 common/src/sql/ut_save_results\.sql
+^test

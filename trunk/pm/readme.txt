@@ -1,8 +1,9 @@
+Performance Monitor
 
-		     Performance Monitor, Version $Name$
+Version: see VERSION
+Copyright: see LICENSE.TXT
 
-			  Copyright: see LICENSE.TXT
-			    All rights reserved.
+All rights reserved.
 
 
 This application monitors the performance of Oracle databases.
@@ -15,13 +16,28 @@ NOTES
 
 INSTALLATION
 
-1) Detailed instructions are in doc/pm-manual.rtf
+1) See doc/pm-manual.rtf
 
 Upgrade from a prior version:
 
 Use TransVersion (http://www.sourceforge.net/projects/transferware) to upgrade.
 
 BUGS
+
+* 15-12-2004
+  Sourceforge issue [ 828145 ] Unit test of trc fails  
+
+* 01-09-2003
+  Bugs solved due to Web enabling.
+
+* 28-08-2003
+  Web enabled.
+
+* 15-07-2003
+  Installation reviewed and enhanced:
+  - Link account should install without errors now. 
+  - Forms/Reports must be compiled at installation time.
+  - Table RELEASE_INFO added.
 
 * 02-01-2002 
   Report pm0041 is now ordered by the number of executions descending: it makes
@@ -30,18 +46,6 @@ BUGS
 * 02-01-2002
   pm_cfg.get_memory_io_rate and pm_cfg.get_disk_io_rate will always return a
   default (not NULL).
-
-* 15-07-2003
-  Installation reviewed and enhanced:
-  - Link account should install without errors now. 
-  - Forms/Reports must be compiled at installation time.
-  - Table RELEASE_INFO added.
-
-* 28-08-2003
-  Web enabled.
-
-* 01-09-2003
-  Bugs solved due to Web enabling.
 
 SUPPORT
 

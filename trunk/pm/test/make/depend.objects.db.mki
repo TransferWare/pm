@@ -117,6 +117,18 @@ install.package_body.pm_owner.trc: install.package.pm_owner.trc
 
 uninstall.package.pm_owner.trc: uninstall.package_body.pm_owner.trc
 
+install.package_body.pm_owner.ut_trc: install.package.pm_owner.trc
+
+uninstall.package.pm_owner.trc: uninstall.package_body.pm_owner.ut_trc
+
+install.package_body.pm_owner.ut_trc: install.package.pm_owner.ut_trc
+
+uninstall.package.pm_owner.ut_trc: uninstall.package_body.pm_owner.ut_trc
+
+install.package_body.pm_owner.ut_trc: install.grant.utplsql.utassert
+
+install.package_body.pm_owner.ut_trc: install.public_synonym.utplsql.utassert
+
 install.view.pm_owner.pm_vw_sqlarea: install.table.pm_owner.pm_sql
 
 uninstall.table.pm_owner.pm_sql: uninstall.view.pm_owner.pm_vw_sqlarea

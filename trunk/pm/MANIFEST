@@ -45,8 +45,11 @@ common/src/sql/delete_object.sql
 common/src/sql/dict_check.sql
 common/src/sql/diff.sql
 common/src/sql/drop_object.sql
+common/src/sql/dropjava.sql
+common/src/sql/fkey_search.sql
 common/src/sql/initialize_variable.sql
 common/src/sql/list_table.sql
+common/src/sql/loadjava.sql
 common/src/sql/makedepend.sql
 common/src/sql/makestate.sql
 common/src/sql/recomp.sql
@@ -58,6 +61,7 @@ common/src/sql/RI_disable_enable.sql
 common/src/sql/role_privs.sql
 common/src/sql/save_parameters.sql
 common/src/sql/set_common_sql_dir.sql
+common/src/sql/set_version.sql
 common/src/sql/upd_seq.sql
 common/src/sql/user_privs.sql
 common/src/sql/user_tables.sql
@@ -224,24 +228,6 @@ report/pm_params.fmb		# pm_params.fmx
 report/pm_start.fmb		# pm_start.fmx
 report/pmbrpt.sql
 report/pmerpt.sql
-test/factory/data/role_privs.ref
-test/factory/data/table_count.ref
-test/factory/data/user_constraints.ref
-test/factory/data/user_db_links.ref
-test/factory/data/user_indexes.ref
-test/factory/data/user_objects.ref
-test/factory/data/user_privs.ref
-test/factory/data/user_sequences.ref
-test/factory/data/user_source.ref
-test/factory/data/user_synonyms.ref
-test/factory/data/user_tab_columns.ref
-test/factory/data/user_tables.ref
-test/factory/data/user_triggers.ref
-test/factory/data/user_users.ref
-test/factory/data/user_views.ref
-test/factory/make/makefile.mak
-test/unit/pm/pm001.sql
-test/unit/pm/ut_trc.pls
 utility/pm_clean.sql
 utility/pm_run.sql
 VERSION

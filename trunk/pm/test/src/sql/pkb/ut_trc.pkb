@@ -327,27 +327,52 @@ divide(10,0);';
   PROCEDURE ut_INIT
   IS
   BEGIN
-    -- Define "control" operation
-    -- Execute test code
-    TRC.INIT;
-    -- Assert success
-    utAssert.this (
-      'Test of INIT',
-      FALSE /*'<boolean expression>'*/
-    );
-    -- End of test
+    ut_FIRST;
+  EXCEPTION
+    WHEN OTHERS
+    THEN
+      trc.leave_on_error;
+
+      -- Execute test code
+      TRC.INIT; /* clear stack */
+
+      utAssert.eq (
+        'Test of INIT (GET_FIRST_CALLS)',
+        TRC.GET_FIRST_CALLS,
+        NULL,
+        TRUE
+      );
+      utAssert.eq (
+        'Test of INIT (GET_FIRST_ERROR_MSG)',
+        TRC.GET_FIRST_ERROR_MSG,
+        NULL,
+        TRUE
+      );
+      utAssert.eq (
+        'Test of INIT (GET_FIRST_FORMAT_CALL_STACK)',
+        TRC.GET_FIRST_FORMAT_CALL_STACK,
+        NULL,
+        TRUE
+      );
+      -- End of test
   END ut_INIT;
 
   PROCEDURE ut_LEAVE
   IS
   BEGIN
-    -- Define "control" operation
+
     -- Execute test code
+    TRC.INIT;
+    TRC.SET_ENABLE_CALL_STACK(TRUE);
+    TRC.ENTER (
+      I_PROC_NAME => 'ut_test.ut_ENTER'
+    );
     TRC.LEAVE;
-    -- Assert success
-    utAssert.this (
+    utAssert.eq(
       'Test of LEAVE',
-      FALSE /*'<boolean expression>'*/
+      TRC.GET_CALLS,
+      null,
+      true
     );
     -- End of test
   END ut_LEAVE;
@@ -357,17 +382,21 @@ divide(10,0);';
   BEGIN
     -- Define "control" operation
     -- Execute test code
+    TRC.INIT;
+    TRC.SET_ENABLE_CALL_STACK(TRUE);
+    TRC.ENTER (
+      I_PROC_NAME => 'ut_test.ut_LEAVE_ON_ERROR'
+    );
     TRC.LEAVE_ON_ERROR (
-    I_ERROR_MSG => ''
-    ,
-    I_FORMAT_CALL_STACK => ''
-    ,
+    I_ERROR_MSG => 'Hello',
+    I_FORMAT_CALL_STACK => '',
     I_CALLS => ''
     );
     -- Assert success
-    utAssert.this (
+    utAssert.eq (
       'Test of LEAVE_ON_ERROR',
-      FALSE /*'<boolean expression>'*/
+      TRC.GET_FIRST_ERROR_MSG,
+      'Hello'
     );
     -- End of test
   END ut_LEAVE_ON_ERROR;
