@@ -35,3 +35,4 @@ report/.*\.ogd$
 ^common/
 ^test/
 pod2html
+^bin
