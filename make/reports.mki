@@ -15,20 +15,21 @@
 #
 # ---------------------------------------------------------------------------- #
 
-REPORTS = \
-	pm001.rep \
-	pm0041.rep \
-	pm0042.rep \
-	pm0043.rep \
-	pm005.rep \
-	pm007.rep \
-	pm008.rep \
-	pm009.rep \
-	pm010.rep \
-	pm011.rep \
-	pm012.rep \
-	pm013.rep \
-	$(ENDOFLIST)
+# REPORTS determined from MANIFEST
+#REPORTS = \
+#	pm001.rep \
+#	pm0041.rep \
+#	pm0042.rep \
+#	pm0043.rep \
+#	pm005.rep \
+#	pm007.rep \
+#	pm008.rep \
+#	pm009.rep \
+#	pm010.rep \
+#	pm011.rep \
+#	pm012.rep \
+#	pm013.rep \
+#	$(ENDOFLIST)
 
 # install the dependency files too (external queries will stay in report)
 install.reports: \
