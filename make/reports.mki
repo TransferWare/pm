@@ -1,12 +1,8 @@
 # ---------------------------------------------------------------------------- #
 #
-# File:         $RCSfile$
+# $Header$
 #
-# Author:       $Author$
-#
-# Date:         $Date$
-#
-# Revision:     $Revision$
+# Author:       Gert-Jan Paulissen
 #
 # Purpose:      Definition file for Oracle reports in Performance Monitor project.
 #
@@ -16,39 +12,6 @@
 #
 # History
 # -------
-# $Log$
-# Revision 1.9  2002/01/25 14:52:26  gpaulissen
-# Dependency update.
-#
-# Revision 1.8  2002/01/24 12:22:56  gpaulissen
-# Dependencies added
-#
-# Revision 1.7  2002/01/17 10:57:14  gpaulissen
-# - make install enhanced.
-# - make depend added (makedepend_oracle.pl, makedepend.sql, makestate.sql).
-# - reports user text field widened (from 10 to 30) due to report 4.5 bug.
-# - removed in install scripts:
-#   whenever sqlerror exit failure
-#   whenever oserror exit failure
-#
-# Revision 1.6  1999/08/26 14:09:08  gpaulissen
-# Added pm_logo.bmp and removed gsk_log.pcx
-#
-# Revision 1.5  1999/05/25 14:45:15  gpaulissen
-# Released
-#
-# Revision 1.4  1999/05/12 12:18:29  gpaulissen
-# Reports added: pm010, pm011, pm013
-#
-# Revision 1.3  1999/05/05 12:29:50  gpaulissen
-# Alles gespecificeerd.
-#
-# Revision 1.2  1999/04/23 10:40:43  gpaulissen
-# Toegevoegd: installatie van benodigde files voor rapporten.
-#
-# Revision 1.1  1999/04/23 09:00:59  gpaulissen
-# Initial revision
-#
 #
 # ---------------------------------------------------------------------------- #
 
@@ -69,15 +32,23 @@ REPORTS = \
 
 # install the dependency files too (external queries will stay in report)
 install.reports: \
-		 pm_logo.bmp-install \
-		 pm012.ogd-install \
-		 $(ENDOFLIST)
+	pm_logo.bmp-install \
+	pm012.ogd-install \
+	$(ENDOFLIST)
+
+pm012.ogd-install pm_logo.bmp-install: $(RPT_BIN)
+
+pm012.ogd-install pm_logo.bmp-install: override INSTALL_DIR := $(RPT_BIN)
 
 # ---------------------------------------------------------------------------- #
 # Dependency build.
 # ---------------------------------------------------------------------------- #
 
+ifeq ($(findstring $(DEPEND),N n),)
+
 include $(CFGDIR)/depend.reports.mki
+
+endif
 
 # ---------------------------------------------------------------------------- #
 # End of dependency build section.

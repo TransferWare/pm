@@ -1,12 +1,8 @@
 # ---------------------------------------------------------------------------- #
 #
-# File:         $RCSfile$
+# $Header$
 #
-# Author:       $Author$
-#
-# Date:         $Date$
-#
-# Revision:     $Revision$
+# Author:       Gert-Jan Paulissen
 #
 # Purpose:      Definition file for Oracle forms in Performance Monitor project.
 #
@@ -17,6 +13,9 @@
 # History
 # -------
 # $Log$
+# Revision 1.11  2002/02/01 10:59:56  gpaulissen
+# New make environment
+#
 # Revision 1.10  2002/01/25 14:52:26  gpaulissen
 # Dependency update.
 #
@@ -106,21 +105,20 @@ FORMS = \
 	pm_start.fmx \
 	$(ENDOFLIST)
 
-pm_start.fmb: pm_start.fmt
+ifeq ($(subst .,,$(VER_DEVELOPER)),45)
+
+pm_start.fmb: pm_start-45.fmt
 	$(FMBGENCMD)
+
+else
+
+pm_start.fmb: pm_start-50.fmt
+	$(FMBGENCMD)
+
+endif
 
 pm_start.fmt: pm_start-$(subst .,,$(VER_DEVELOPER)).fmt
 	$(CP) $(subst /,$(PATHSEP),$?) $@
-
-# $? might be report/pm_start-50.fmt hence use the OS PATHSEP to convert to 
-# report\...
-
-pm_start-60.fmt: pm_start-50.fmt
-	$(CP) $(subst /,$(PATHSEP),$?) $@
-
-# Remove pm_start-60.fmt and pm_start.fmt
-
-.INTERMEDIATE: pm_start-60.fmt pm_start.fmt
 
 # ---------------------------------------------------------------------------- #
 # Menus. Case sensitive!
@@ -134,7 +132,11 @@ MENUS = \
 # Dependency build.
 # ---------------------------------------------------------------------------- #
 
+ifeq ($(findstring $(DEPEND),N n),)
+
 include $(CFGDIR)/depend.forms.mki
+
+endif
 
 # ---------------------------------------------------------------------------- #
 # End of dependency build section.
