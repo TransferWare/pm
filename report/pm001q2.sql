@@ -1,13 +1,13 @@
 SELECT	/* $Header$ */ 
         /*+ ORDERED */
-	sqlarea.executions 
-,       sqlarea.loads
+	sqltext.sql_id
+,	sqlarea.executions 
 ,       sqlarea.rows_processed
+,       sqlarea.loads
 ,	sqlarea.buffer_gets
 ,	sqlarea.disk_reads
 ,	sqlarea.sql_io	total
 ,	( 100 * sqlarea.sql_io ) / sqlarea.total_io percentage
-,       sqltext.sql_id
 ,	sqltext.sql_text
 FROM	(	SELECT	/*+ ORDERED */
 			( sum(pm_sqlarea.buffer_gets) / :cost_memory 
