@@ -16,10 +16,13 @@ PROMPT 			2 - Start time inclusive (Oracle YYYYMMDDHH24MISS format)
 PROMPT			&&2
 PROMPT 			3 - End time exclusive (Oracle YYYYMMDDHH24MISS format)
 PROMPT			&&3
-PROMPT 			4 - Minimum of block gets and changes
+PROMPT 			4 - Minimum of disk reads and buffer gets
 PROMPT			&&4
 REMARK
 REMARK  $Log$
+REMARK  Revision 1.4  1999/10/07 15:08:26  gpaulissen
+REMARK  pm_sess_io is replaced by pm_sqlarea
+REMARK
 REMARK  Revision 1.3  1999/05/26 15:06:08  gpaulissen
 REMARK  pmbrpt.sql and pmerpt.sql added.
 REMARK
