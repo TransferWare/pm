@@ -21,7 +21,7 @@
 # 
 # ---------------------------------------------------------------------------- #
 
-SRC_DEVELOPER := text
+SRC_DEVELOPER := binary
 
 bmp-subdirs := report
 con-subdirs := db
