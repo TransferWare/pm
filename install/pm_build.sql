@@ -121,10 +121,10 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/set_common_sql_dir.sql "&&pm_HOME\common/src/sql/"
+PROMPT Command: START &&pm_HOME/common/src/sql/set_common_sql_dir.sql "&&pm_HOME/common/src/sql/"
 SET VERIFY ON DEFINE ON
 PROMPT &&pm_HOME
-START &&pm_HOME\common/src/sql/set_common_sql_dir.sql "&&pm_HOME\common/src/sql/"
+START &&pm_HOME/common/src/sql/set_common_sql_dir.sql "&&pm_HOME/common/src/sql/"
 SET DEFINE '&'
 COMMIT
 /
@@ -140,7 +140,7 @@ SPOOL &&host_bat
 PROMPT &&begin_cmd
 PROMPT &&create_file_cmd &&log_file
 PROMPT &&set_file_readonly_cmd &&log_file
-PROMPT copy "&&pm_HOME\report\" .
+PROMPT copy "p:\dev\pm\report\" .
 PROMPT &&on_error_exit_cmd
 PROMPT echo *** Installing menus: START ***
 PROMPT &&on_error_exit_cmd
@@ -228,17 +228,17 @@ PROMPT echo @exit 1 1>> run_ora_prog.bat
 PROMPT &&on_error_exit_cmd
 PROMPT echo :end>> run_ora_prog.bat
 PROMPT &&on_error_exit_cmd
-PROMPT attrib -R "&&pm_HOME\report\OFG4HPL.pld"
+PROMPT attrib -R "p:\dev\pm\report\OFG4HPL.pld"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" &&pm_HOME\report\OFG4HPL.err MODULE="&&pm_HOME\report\OFG4HPL.pld" OUTPUT_FILE="OFG4HPL.pll" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=LIBRARY PARSE=YES
+PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" p:\dev\pm\report\OFG4HPL.err MODULE="p:\dev\pm\report\OFG4HPL.pld" OUTPUT_FILE="OFG4HPL.pll" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=LIBRARY PARSE=YES
 PROMPT &&on_error_exit_cmd
-PROMPT attrib -R "&&pm_HOME\report\gskgen.pld"
+PROMPT attrib -R "p:\dev\pm\report\gskgen.pld"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" &&pm_HOME\report\gskgen.err MODULE="&&pm_HOME\report\gskgen.pld" OUTPUT_FILE="gskgen.pll" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=LIBRARY PARSE=YES
+PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" p:\dev\pm\report\gskgen.err MODULE="p:\dev\pm\report\gskgen.pld" OUTPUT_FILE="gskgen.pll" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=LIBRARY PARSE=YES
 PROMPT &&on_error_exit_cmd
-PROMPT attrib -R "&&pm_HOME\report\pm_mnu.mmt"
+PROMPT attrib -R "p:\dev\pm\report\pm_mnu.mmt"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" &&pm_HOME\report\pm_mnu.err MODULE="&&pm_HOME\report\pm_mnu.mmt" OUTPUT_FILE="pm_mnu.mmb" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=MENU PARSE=YES
+PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" p:\dev\pm\report\pm_mnu.err MODULE="p:\dev\pm\report\pm_mnu.mmt" OUTPUT_FILE="pm_mnu.mmb" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=MENU PARSE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT attrib -R "pm_mnu.mmb"
 PROMPT &&on_error_exit_cmd
@@ -268,57 +268,93 @@ PROMPT echo *** Installing forms_libs: OK ***
 PROMPT &&on_error_exit_cmd
 PROMPT echo *** Installing icons: START ***
 PROMPT &&on_error_exit_cmd
-PROMPT copy "&&pm_HOME\report\abort.ico" "&&pm_FRM_BIN"
+PROMPT copy "p:\dev\pm\report\abort.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "&&pm_HOME\report\afclrall.ico" "&&pm_FRM_BIN"
+PROMPT copy "p:\dev\pm\report\abort.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "&&pm_HOME\report\afclrrw.ico" "&&pm_FRM_BIN"
+PROMPT copy "p:\dev\pm\report\afclrall.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "&&pm_HOME\report\afdelrw.ico" "&&pm_FRM_BIN"
+PROMPT copy "p:\dev\pm\report\afclrall.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "&&pm_HOME\report\afedit.ico" "&&pm_FRM_BIN"
+PROMPT copy "p:\dev\pm\report\afclrrw.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "&&pm_HOME\report\affind.ico" "&&pm_FRM_BIN"
+PROMPT copy "p:\dev\pm\report\afclrrw.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "&&pm_HOME\report\afflddwn.ico" "&&pm_FRM_BIN"
+PROMPT copy "p:\dev\pm\report\afdelrw.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "&&pm_HOME\report\affldlft.ico" "&&pm_FRM_BIN"
+PROMPT copy "p:\dev\pm\report\afdelrw.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "&&pm_HOME\report\affldrt.ico" "&&pm_FRM_BIN"
+PROMPT copy "p:\dev\pm\report\afedit.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "&&pm_HOME\report\affldup.ico" "&&pm_FRM_BIN"
+PROMPT copy "p:\dev\pm\report\afedit.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "&&pm_HOME\report\afhelp.ico" "&&pm_FRM_BIN"
+PROMPT copy "p:\dev\pm\report\affind.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "&&pm_HOME\report\afinsrw.ico" "&&pm_FRM_BIN"
+PROMPT copy "p:\dev\pm\report\affind.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "&&pm_HOME\report\aflist.ico" "&&pm_FRM_BIN"
+PROMPT copy "p:\dev\pm\report\afflddwn.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "&&pm_HOME\report\afprint.ico" "&&pm_FRM_BIN"
+PROMPT copy "p:\dev\pm\report\afflddwn.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "&&pm_HOME\report\afquery.ico" "&&pm_FRM_BIN"
+PROMPT copy "p:\dev\pm\report\affldlft.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "&&pm_HOME\report\afsave.ico" "&&pm_FRM_BIN"
+PROMPT copy "p:\dev\pm\report\affldlft.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "&&pm_HOME\report\entqry.ico" "&&pm_FRM_BIN"
+PROMPT copy "p:\dev\pm\report\affldrt.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "&&pm_HOME\report\keys.ico" "&&pm_FRM_BIN"
+PROMPT copy "p:\dev\pm\report\affldrt.ico" "&&pm_FRM_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "p:\dev\pm\report\affldup.gif" "&&pm_FRM_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "p:\dev\pm\report\affldup.ico" "&&pm_FRM_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "p:\dev\pm\report\afhelp.gif" "&&pm_FRM_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "p:\dev\pm\report\afhelp.ico" "&&pm_FRM_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "p:\dev\pm\report\afinsrw.gif" "&&pm_FRM_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "p:\dev\pm\report\afinsrw.ico" "&&pm_FRM_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "p:\dev\pm\report\aflist.gif" "&&pm_FRM_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "p:\dev\pm\report\aflist.ico" "&&pm_FRM_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "p:\dev\pm\report\afprint.gif" "&&pm_FRM_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "p:\dev\pm\report\afprint.ico" "&&pm_FRM_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "p:\dev\pm\report\afquery.gif" "&&pm_FRM_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "p:\dev\pm\report\afquery.ico" "&&pm_FRM_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "p:\dev\pm\report\afsave.gif" "&&pm_FRM_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "p:\dev\pm\report\afsave.ico" "&&pm_FRM_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "p:\dev\pm\report\entqry.gif" "&&pm_FRM_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "p:\dev\pm\report\entqry.ico" "&&pm_FRM_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "p:\dev\pm\report\keys.gif" "&&pm_FRM_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "p:\dev\pm\report\keys.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
 PROMPT if not exist "&&pm_RPT_BIN" mkdir "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "&&pm_HOME\report\pm_logo.bmp" "&&pm_RPT_BIN"
+PROMPT copy "p:\dev\pm\report\pm_logo.gif" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
 PROMPT echo *** Installing icons: OK ***
 PROMPT &&on_error_exit_cmd
 PROMPT echo *** Installing forms: START ***
 PROMPT &&on_error_exit_cmd
-PROMPT attrib -R "&&pm_HOME\report\gskref.fmt"
+PROMPT attrib -R "p:\dev\pm\report\gskref.fmt"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" &&pm_HOME\report\gskref.err MODULE="&&pm_HOME\report\gskref.fmt" OUTPUT_FILE="gskref.fmb" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=FORM PARSE=YES
+PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" p:\dev\pm\report\gskref.err MODULE="p:\dev\pm\report\gskref.fmt" OUTPUT_FILE="gskref.fmb" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=FORM PARSE=YES
 PROMPT &&on_error_exit_cmd
-PROMPT attrib -R "&&pm_HOME\report\pm_about.fmt"
+PROMPT attrib -R "p:\dev\pm\report\pm_about.fmt"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" &&pm_HOME\report\pm_about.err MODULE="&&pm_HOME\report\pm_about.fmt" OUTPUT_FILE="pm_about.fmb" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=FORM PARSE=YES
+PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" p:\dev\pm\report\pm_about.err MODULE="p:\dev\pm\report\pm_about.fmt" OUTPUT_FILE="pm_about.fmb" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=FORM PARSE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT attrib -R "pm_about.fmb"
 PROMPT &&on_error_exit_cmd
@@ -326,11 +362,19 @@ PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" pm_about.err MODULE="pm_abo
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm_about.fmx" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "&&pm_HOME\report\pm_start-50.fmt" "pm_start.fmt"
+PROMPT attrib -R "p:\dev\pm\report\pm_params.fmt"
 PROMPT &&on_error_exit_cmd
-PROMPT attrib -R "pm_start.fmt"
+PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" p:\dev\pm\report\pm_params.err MODULE="p:\dev\pm\report\pm_params.fmt" OUTPUT_FILE="pm_params.fmb" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=FORM PARSE=YES
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" pm_start.err MODULE="pm_start.fmt" OUTPUT_FILE="pm_start.fmb" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=FORM PARSE=YES
+PROMPT attrib -R "pm_params.fmb"
+PROMPT &&on_error_exit_cmd
+PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" pm_params.err MODULE="pm_params.fmb" OUTPUT_FILE="pm_params.fmx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=FORM COMPILE_ALL=YES
+PROMPT &&on_error_exit_cmd
+PROMPT copy "pm_params.fmx" "&&pm_FRM_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT attrib -R "p:\dev\pm\report\pm_start.fmt"
+PROMPT &&on_error_exit_cmd
+PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" p:\dev\pm\report\pm_start.err MODULE="p:\dev\pm\report\pm_start.fmt" OUTPUT_FILE="pm_start.fmb" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=FORM PARSE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT attrib -R "pm_start.fmb"
 PROMPT &&on_error_exit_cmd
@@ -346,73 +390,73 @@ PROMPT echo *** Installing reports_libs: OK ***
 PROMPT &&on_error_exit_cmd
 PROMPT echo *** Installing reports: START ***
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="&&pm_HOME\report\pm001.rex" DEST="pm001.rdf" BATCH=YES STYPE=REXFILE DTYPE=RDFFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="p:\dev\pm\report\pm001.rex" DEST="pm001.rdf" BATCH=YES STYPE=REXFILE DTYPE=RDFFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="pm001.rdf" DEST="pm001.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm001.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="&&pm_HOME\report\pm0041.rex" DEST="pm0041.rdf" BATCH=YES STYPE=REXFILE DTYPE=RDFFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="p:\dev\pm\report\pm0041.rex" DEST="pm0041.rdf" BATCH=YES STYPE=REXFILE DTYPE=RDFFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="pm0041.rdf" DEST="pm0041.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm0041.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="&&pm_HOME\report\pm0042.rex" DEST="pm0042.rdf" BATCH=YES STYPE=REXFILE DTYPE=RDFFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="p:\dev\pm\report\pm0042.rex" DEST="pm0042.rdf" BATCH=YES STYPE=REXFILE DTYPE=RDFFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="pm0042.rdf" DEST="pm0042.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm0042.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="&&pm_HOME\report\pm0043.rex" DEST="pm0043.rdf" BATCH=YES STYPE=REXFILE DTYPE=RDFFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="p:\dev\pm\report\pm0043.rex" DEST="pm0043.rdf" BATCH=YES STYPE=REXFILE DTYPE=RDFFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="pm0043.rdf" DEST="pm0043.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm0043.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="&&pm_HOME\report\pm005.rex" DEST="pm005.rdf" BATCH=YES STYPE=REXFILE DTYPE=RDFFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="p:\dev\pm\report\pm005.rex" DEST="pm005.rdf" BATCH=YES STYPE=REXFILE DTYPE=RDFFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="pm005.rdf" DEST="pm005.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm005.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="&&pm_HOME\report\pm007.rex" DEST="pm007.rdf" BATCH=YES STYPE=REXFILE DTYPE=RDFFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="p:\dev\pm\report\pm007.rex" DEST="pm007.rdf" BATCH=YES STYPE=REXFILE DTYPE=RDFFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="pm007.rdf" DEST="pm007.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm007.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="&&pm_HOME\report\pm008.rex" DEST="pm008.rdf" BATCH=YES STYPE=REXFILE DTYPE=RDFFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="p:\dev\pm\report\pm008.rex" DEST="pm008.rdf" BATCH=YES STYPE=REXFILE DTYPE=RDFFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="pm008.rdf" DEST="pm008.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm008.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="&&pm_HOME\report\pm009.rex" DEST="pm009.rdf" BATCH=YES STYPE=REXFILE DTYPE=RDFFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="p:\dev\pm\report\pm009.rex" DEST="pm009.rdf" BATCH=YES STYPE=REXFILE DTYPE=RDFFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="pm009.rdf" DEST="pm009.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm009.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="&&pm_HOME\report\pm010.rex" DEST="pm010.rdf" BATCH=YES STYPE=REXFILE DTYPE=RDFFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="p:\dev\pm\report\pm010.rex" DEST="pm010.rdf" BATCH=YES STYPE=REXFILE DTYPE=RDFFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="pm010.rdf" DEST="pm010.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm010.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="&&pm_HOME\report\pm011.rex" DEST="pm011.rdf" BATCH=YES STYPE=REXFILE DTYPE=RDFFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="p:\dev\pm\report\pm011.rex" DEST="pm011.rdf" BATCH=YES STYPE=REXFILE DTYPE=RDFFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="pm011.rdf" DEST="pm011.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm011.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="&&pm_HOME\report\pm012.rex" DEST="pm012.rdf" BATCH=YES STYPE=REXFILE DTYPE=RDFFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="p:\dev\pm\report\pm012.rex" DEST="pm012.rdf" BATCH=YES STYPE=REXFILE DTYPE=RDFFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="pm012.rdf" DEST="pm012.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm012.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="&&pm_HOME\report\pm013.rex" DEST="pm013.rdf" BATCH=YES STYPE=REXFILE DTYPE=RDFFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="p:\dev\pm\report\pm013.rex" DEST="pm013.rdf" BATCH=YES STYPE=REXFILE DTYPE=RDFFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="pm013.rdf" DEST="pm013.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
@@ -420,9 +464,9 @@ PROMPT copy "pm013.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
 PROMPT echo *** Installing reports: OK ***
 PROMPT &&on_error_exit_cmd
-PROMPT copy "&&pm_HOME\report\pm012.ogd" "&&pm_RPT_BIN"
+PROMPT copy "p:\dev\pm\report\pm012.ogd" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "&&pm_HOME\VERSION" "&&pm_FRM_BIN"
+PROMPT copy "p:\dev\pm\VERSION" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
 PROMPT &&set_file_writable_cmd &&log_file
 PROMPT &&end_cmd
