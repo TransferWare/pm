@@ -45,13 +45,11 @@ common/src/sql/truncate.sql
 common/src/sql/upd_seq.sql
 common/src/sql/user_privs.sql
 common/src/sql/user_tables.sql
+doc/architecture.gif
+doc/delta1.gif
+doc/delta2.gif
 doc/pm-manual.rtf
-doc/pm-manual_rtf_11149050.png
-doc/pm-manual_rtf_5ad37dac.png
-doc/pm-manual_rtf_60b4c20f.png
-doc/pm-manual_rtf_m1c5d0dc7.png
-doc/pm-manual_rtf_m2d6e67f9.png
-doc/pm-manual_rtf_m7497cb68.png
+doc/shortcut.gif
 doc/tpi-manual.doc
 install/cgrefcod.tab
 install/credblnk.sql
@@ -132,9 +130,7 @@ install/pm_vw_sqlarea.vw
 install/trc.pck
 make/depend.forms.mki
 make/depend.objects.db.file.mki
-make/depend.objects.db.gsk.mki
 make/depend.objects.db.mki
-make/depend.objects.file.gsk.mki
 make/depend.objects.file.mki
 make/depend.reports.mki
 make/forms.mki
@@ -142,71 +138,90 @@ make/objects.mki
 make/prj_defs.mki
 make/reports.mki
 readme.txt
-report/OFG4HPL.pld
+report/OFG4HPL.pld		# OFG4HPL.plx
+report/abort.gif
 report/abort.ico
+report/afclrall.gif
 report/afclrall.ico
+report/afclrrw.gif
 report/afclrrw.ico
+report/afdelrw.gif
 report/afdelrw.ico
+report/afedit.gif
 report/afedit.ico
+report/affind.gif
 report/affind.ico
+report/afflddwn.gif
 report/afflddwn.ico
+report/affldlft.gif
 report/affldlft.ico
+report/affldrt.gif
 report/affldrt.ico
+report/affldup.gif
 report/affldup.ico
+report/afhelp.gif
 report/afhelp.ico
+report/afinsrw.gif
 report/afinsrw.ico
+report/aflist.gif
 report/aflist.ico
+report/afprint.gif
 report/afprint.ico
+report/afquery.gif
 report/afquery.ico
+report/afsave.gif
 report/afsave.ico
+report/entqry.gif
 report/entqry.ico
-report/gskgen.pld
+report/gskgen.pld               # gskgen.plx
 report/gskref.fmt
+report/keys.gif
 report/keys.ico
-report/pm001.rex
+report/pm001.rex		# pm001.rep
 report/pm001.sql
 report/pm001q1.sql
 report/pm001q2.sql
 report/pm002.sql
 report/pm003.sql
 report/pm004.sql
-report/pm0041.rex
+report/pm0041.rex		# pm0041.rep
 report/pm0041q1.sql
-report/pm0042.rex
+report/pm0042.rex		# pm0042.rep
 report/pm0042q1.sql
-report/pm0043.rex
+report/pm0043.rex		# pm0043.rep
 report/pm0043q1.sql
-report/pm005.rex
+report/pm005.rex		# pm005.rep
 report/pm005.sql
 report/pm005q1.sql
 report/pm006.sql
-report/pm007.rex
+report/pm007.rex		# pm007.rep
 report/pm007.sql
 report/pm007q1.sql
-report/pm008.rex
+report/pm008.rex		# pm008.rep
 report/pm008.sql
 report/pm008q1.sql
-report/pm009.rex
+report/pm009.rex		# pm009.rep
 report/pm009.sql
 report/pm009q1.sql
-report/pm010.rex
+report/pm010.rex		# pm010.rep
 report/pm010.sql
 report/pm010q1.sql
-report/pm011.rex
+report/pm011.rex		# pm011.rep
 report/pm011.sql
 report/pm011q1.sql
 report/pm012.ogd
-report/pm012.rex
+report/pm012.rex		# pm012.rep
 report/pm012.sql
 report/pm012q1.sql
-report/pm013.rex
+report/pm013.rex		# pm013.rep
 report/pm013.sql
 report/pm013q1.sql
-report/pm_about.fmt
+report/pm_about.fmt		# pm_about.fmx
 report/pm_logo.bmp
-report/pm_mnu.mmt
-report/pm_start-45.fmt
-report/pm_start-50.fmt
+report/pm_logo.gif
+report/pm_mnu.mmt		# pm_mnu.mmx
+report/pm_start.fmt		# pm_start.fmx
+report/pm_params.fmt		# pm_params.fmx
 report/pmbrpt.sql
 report/pmerpt.sql
 test/factory/data/role_privs.ref
