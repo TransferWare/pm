@@ -1,8 +1,8 @@
 SELECT	/* $Header$ */
         /*+ ORDERED */
-	sqlarea.value
+	sqltext.sql_text
 ,	sqlarea.sql_id
-,	sqltext.sql_text
+,	sqlarea.value
 FROM	(
 		SELECT	/*+ ORDERED */
 			pm_sql.sql_id

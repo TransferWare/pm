@@ -1,14 +1,14 @@
 SELECT  /* $Header$ */
         /*+ ORDERED */
 	sql_id.sql_id
+,	sqlarea.avg_disk_reads / sqlarea.max_disk_reads_per_second
+	+ sqlarea.avg_buffer_gets / sqlarea.max_buffer_gets_per_second
+	"Response"
 ,	sqlarea.executions 
 ,	sqlarea.disk_reads 
 ,	sqlarea.avg_disk_reads 
 ,	sqlarea.buffer_gets
 ,	sqlarea.avg_buffer_gets
-,	sqlarea.avg_disk_reads / sqlarea.max_disk_reads_per_second
-	+ sqlarea.avg_buffer_gets / sqlarea.max_buffer_gets_per_second
-	"Response"
 ,	sql_id.sql_text
 FROM	(
 		SELECT	/*+ ORDERED */
