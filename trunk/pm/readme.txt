@@ -1,7 +1,7 @@
 
 		     Performance Monitor, Version $Name$
 
-			  Copyright: see COPYING.TXT
+			  Copyright: see LICENSE.TXT
 			    All rights reserved.
 
 

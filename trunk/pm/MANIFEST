@@ -1,4 +1,4 @@
-COPYING.TXT
+LICENSE.TXT
 MANIFEST
 MANIFEST.SKIP
 Makefile.PL
@@ -47,12 +47,14 @@ common/make/vc_defs.mki
 common/src/perl/cmd2sql.pl
 common/src/perl/dos2unix.pl
 common/src/perl/makedepend_oracle.pl
+common/src/perl/sql_parse.pl
 common/src/perl/sql_split.pl
 common/src/perl/textrepl.pl
 common/src/perl/unix2dos.pl
 common/src/perl/which.pl
 common/src/sql/alter_fk.sql
 common/src/sql/alter_trg.sql
+common/src/sql/cre_control.sql
 common/src/sql/dict_check.sql
 common/src/sql/diff.sql
 common/src/sql/drop_object.sql
