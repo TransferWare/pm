@@ -113,25 +113,22 @@ REMARK Start of section 2
 REMARK This section may be edited.
 REMARK *************************************************************************
 
-COMMIT
-/
 
 DEFINE log_file = 'output00001.&&sessionid..log'
 PROMPT Log file: &&log_file
 SPOOL &&log_file
-START &&restore_sql
+START &&connect_sql pm_owner/pm_owner@ibm
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/common/src/sql/set_common_sql_dir.sql "&&pm_HOME/common/src/sql/"
+PROMPT Command: START &&pm_HOME\common/src/sql/set_common_sql_dir.sql "&&pm_HOME\common/src/sql/"
 SET VERIFY ON DEFINE ON
 PROMPT &&pm_HOME
-START &&pm_HOME/common/src/sql/set_common_sql_dir.sql "&&pm_HOME/common/src/sql/"
+START &&pm_HOME\common/src/sql/set_common_sql_dir.sql "&&pm_HOME\common/src/sql/"
 SET DEFINE '&'
 COMMIT
 /
 
 DEFINE log_file = 'output00002.&&sessionid..log'
 PROMPT &&FRMGEN
-PROMPT &&userid
 PROMPT &&pm_FRM_BIN
 PROMPT &&pm_RPT_BIN
 PROMPT &&RPTGEN
@@ -140,7 +137,7 @@ SPOOL &&host_bat
 PROMPT &&begin_cmd
 PROMPT &&create_file_cmd &&log_file
 PROMPT &&set_file_readonly_cmd &&log_file
-PROMPT if exist "p:\ontw\tools\pm\report\" copy "p:\ontw\tools\pm\report\" "."
+PROMPT if exist "&&pm_HOME\report\" copy "&&pm_HOME\report\" "."
 PROMPT &&on_error_exit_cmd
 PROMPT echo *** Installing menus: START ***
 PROMPT &&on_error_exit_cmd
@@ -230,9 +227,9 @@ PROMPT echo :end>> run_ora_prog.bat
 PROMPT &&on_error_exit_cmd
 PROMPT if exist "pm_mnu_tmp.mmb" del "pm_mnu_tmp.mmb"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\pm_mnu.mmb" "pm_mnu_tmp.mmb"
+PROMPT copy "&&pm_HOME\report\pm_mnu.mmb" "pm_mnu_tmp.mmb"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" pm_mnu_tmp.err MODULE="pm_mnu_tmp.mmb" OUTPUT_FILE="pm_mnu.mmx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=MENU COMPILE_ALL=YES
+PROMPT call "run_ora_prog.bat" "&&FRMGEN" "pm_owner/pm_owner@ibm" pm_mnu_tmp.err MODULE="pm_mnu_tmp.mmb" OUTPUT_FILE="pm_mnu.mmx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=MENU COMPILE_ALL=YES
 PROMPT &&on_error_exit_cmd
 PROMPT del "pm_mnu_tmp.mmb"
 PROMPT &&on_error_exit_cmd
@@ -246,9 +243,9 @@ PROMPT echo *** Installing forms_libs: START ***
 PROMPT &&on_error_exit_cmd
 PROMPT if exist "OFG4HPL_tmp.pll" del "OFG4HPL_tmp.pll"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\OFG4HPL.pll" "OFG4HPL_tmp.pll"
+PROMPT copy "&&pm_HOME\report\OFG4HPL.pll" "OFG4HPL_tmp.pll"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" OFG4HPL_tmp.err MODULE="OFG4HPL_tmp.pll" OUTPUT_FILE="OFG4HPL.plx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=LIBRARY STRIP_SOURCE=YES COMPILE_ALL=YES
+PROMPT call "run_ora_prog.bat" "&&FRMGEN" "pm_owner/pm_owner@ibm" OFG4HPL_tmp.err MODULE="OFG4HPL_tmp.pll" OUTPUT_FILE="OFG4HPL.plx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=LIBRARY STRIP_SOURCE=YES COMPILE_ALL=YES
 PROMPT &&on_error_exit_cmd
 PROMPT del "OFG4HPL_tmp.pll"
 PROMPT &&on_error_exit_cmd
@@ -256,9 +253,9 @@ PROMPT copy "OFG4HPL.plx" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
 PROMPT if exist "gskgen_tmp.pll" del "gskgen_tmp.pll"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\gskgen.pll" "gskgen_tmp.pll"
+PROMPT copy "&&pm_HOME\report\gskgen.pll" "gskgen_tmp.pll"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" gskgen_tmp.err MODULE="gskgen_tmp.pll" OUTPUT_FILE="gskgen.plx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=LIBRARY STRIP_SOURCE=YES COMPILE_ALL=YES
+PROMPT call "run_ora_prog.bat" "&&FRMGEN" "pm_owner/pm_owner@ibm" gskgen_tmp.err MODULE="gskgen_tmp.pll" OUTPUT_FILE="gskgen.plx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=LIBRARY STRIP_SOURCE=YES COMPILE_ALL=YES
 PROMPT &&on_error_exit_cmd
 PROMPT del "gskgen_tmp.pll"
 PROMPT &&on_error_exit_cmd
@@ -268,81 +265,81 @@ PROMPT echo *** Installing forms_libs: OK ***
 PROMPT &&on_error_exit_cmd
 PROMPT echo *** Installing icons: START ***
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\abort.gif" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\abort.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\abort.ico" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\abort.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\afclrall.gif" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\afclrall.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\afclrall.ico" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\afclrall.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\afclrrw.gif" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\afclrrw.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\afclrrw.ico" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\afclrrw.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\afdelrw.gif" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\afdelrw.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\afdelrw.ico" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\afdelrw.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\afedit.gif" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\afedit.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\afedit.ico" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\afedit.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\affind.gif" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\affind.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\affind.ico" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\affind.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\afflddwn.gif" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\afflddwn.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\afflddwn.ico" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\afflddwn.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\affldlft.gif" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\affldlft.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\affldlft.ico" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\affldlft.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\affldrt.gif" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\affldrt.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\affldrt.ico" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\affldrt.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\affldup.gif" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\affldup.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\affldup.ico" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\affldup.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\afhelp.gif" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\afhelp.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\afhelp.ico" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\afhelp.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\afinsrw.gif" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\afinsrw.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\afinsrw.ico" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\afinsrw.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\aflist.gif" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\aflist.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\aflist.ico" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\aflist.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\afprint.gif" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\afprint.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\afprint.ico" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\afprint.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\afquery.gif" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\afquery.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\afquery.ico" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\afquery.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\afsave.gif" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\afsave.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\afsave.ico" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\afsave.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\entqry.gif" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\entqry.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\entqry.ico" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\entqry.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\keys.gif" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\keys.gif" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\keys.ico" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\report\keys.ico" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
 PROMPT if not exist "&&pm_RPT_BIN" mkdir "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\pm_logo.gif" "&&pm_RPT_BIN"
+PROMPT copy "&&pm_HOME\report\pm_logo.gif" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
 PROMPT echo *** Installing icons: OK ***
 PROMPT &&on_error_exit_cmd
@@ -350,9 +347,9 @@ PROMPT echo *** Installing forms: START ***
 PROMPT &&on_error_exit_cmd
 PROMPT if exist "pm_about_tmp.fmb" del "pm_about_tmp.fmb"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\pm_about.fmb" "pm_about_tmp.fmb"
+PROMPT copy "&&pm_HOME\report\pm_about.fmb" "pm_about_tmp.fmb"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" pm_about_tmp.err MODULE="pm_about_tmp.fmb" OUTPUT_FILE="pm_about.fmx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=FORM COMPILE_ALL=YES
+PROMPT call "run_ora_prog.bat" "&&FRMGEN" "pm_owner/pm_owner@ibm" pm_about_tmp.err MODULE="pm_about_tmp.fmb" OUTPUT_FILE="pm_about.fmx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=FORM COMPILE_ALL=YES
 PROMPT &&on_error_exit_cmd
 PROMPT del "pm_about_tmp.fmb"
 PROMPT &&on_error_exit_cmd
@@ -360,9 +357,9 @@ PROMPT copy "pm_about.fmx" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
 PROMPT if exist "pm_params_tmp.fmb" del "pm_params_tmp.fmb"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\pm_params.fmb" "pm_params_tmp.fmb"
+PROMPT copy "&&pm_HOME\report\pm_params.fmb" "pm_params_tmp.fmb"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" pm_params_tmp.err MODULE="pm_params_tmp.fmb" OUTPUT_FILE="pm_params.fmx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=FORM COMPILE_ALL=YES
+PROMPT call "run_ora_prog.bat" "&&FRMGEN" "pm_owner/pm_owner@ibm" pm_params_tmp.err MODULE="pm_params_tmp.fmb" OUTPUT_FILE="pm_params.fmx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=FORM COMPILE_ALL=YES
 PROMPT &&on_error_exit_cmd
 PROMPT del "pm_params_tmp.fmb"
 PROMPT &&on_error_exit_cmd
@@ -370,9 +367,9 @@ PROMPT copy "pm_params.fmx" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
 PROMPT if exist "pm_start_tmp.fmb" del "pm_start_tmp.fmb"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\pm_start.fmb" "pm_start_tmp.fmb"
+PROMPT copy "&&pm_HOME\report\pm_start.fmb" "pm_start_tmp.fmb"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" pm_start_tmp.err MODULE="pm_start_tmp.fmb" OUTPUT_FILE="pm_start.fmx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=FORM COMPILE_ALL=YES
+PROMPT call "run_ora_prog.bat" "&&FRMGEN" "pm_owner/pm_owner@ibm" pm_start_tmp.err MODULE="pm_start_tmp.fmb" OUTPUT_FILE="pm_start.fmx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=FORM COMPILE_ALL=YES
 PROMPT &&on_error_exit_cmd
 PROMPT del "pm_start_tmp.fmb"
 PROMPT &&on_error_exit_cmd
@@ -386,85 +383,85 @@ PROMPT echo *** Installing reports_libs: OK ***
 PROMPT &&on_error_exit_cmd
 PROMPT echo *** Installing reports: START ***
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="p:\ontw\tools\pm\report\pm001.rdf" DEST="pm001.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "pm_owner/pm_owner@ibm" reports.log SOURCE="&&pm_HOME\report\pm001.rdf" DEST="pm001.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm001.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="p:\ontw\tools\pm\report\pm0041.rdf" DEST="pm0041.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "pm_owner/pm_owner@ibm" reports.log SOURCE="&&pm_HOME\report\pm0041.rdf" DEST="pm0041.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm0041.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="p:\ontw\tools\pm\report\pm0042.rdf" DEST="pm0042.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "pm_owner/pm_owner@ibm" reports.log SOURCE="&&pm_HOME\report\pm0042.rdf" DEST="pm0042.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm0042.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="p:\ontw\tools\pm\report\pm0043.rdf" DEST="pm0043.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "pm_owner/pm_owner@ibm" reports.log SOURCE="&&pm_HOME\report\pm0043.rdf" DEST="pm0043.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm0043.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="p:\ontw\tools\pm\report\pm005.rdf" DEST="pm005.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "pm_owner/pm_owner@ibm" reports.log SOURCE="&&pm_HOME\report\pm005.rdf" DEST="pm005.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm005.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="p:\ontw\tools\pm\report\pm007.rdf" DEST="pm007.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "pm_owner/pm_owner@ibm" reports.log SOURCE="&&pm_HOME\report\pm007.rdf" DEST="pm007.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm007.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="p:\ontw\tools\pm\report\pm008.rdf" DEST="pm008.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "pm_owner/pm_owner@ibm" reports.log SOURCE="&&pm_HOME\report\pm008.rdf" DEST="pm008.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm008.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="p:\ontw\tools\pm\report\pm009.rdf" DEST="pm009.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "pm_owner/pm_owner@ibm" reports.log SOURCE="&&pm_HOME\report\pm009.rdf" DEST="pm009.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm009.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="p:\ontw\tools\pm\report\pm010.rdf" DEST="pm010.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "pm_owner/pm_owner@ibm" reports.log SOURCE="&&pm_HOME\report\pm010.rdf" DEST="pm010.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm010.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="p:\ontw\tools\pm\report\pm011.rdf" DEST="pm011.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "pm_owner/pm_owner@ibm" reports.log SOURCE="&&pm_HOME\report\pm011.rdf" DEST="pm011.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm011.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="p:\ontw\tools\pm\report\pm012.rdf" DEST="pm012.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "pm_owner/pm_owner@ibm" reports.log SOURCE="&&pm_HOME\report\pm012.rdf" DEST="pm012.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm012.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="p:\ontw\tools\pm\report\pm013.rdf" DEST="pm013.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "pm_owner/pm_owner@ibm" reports.log SOURCE="&&pm_HOME\report\pm013.rdf" DEST="pm013.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm013.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
 PROMPT echo *** Installing reports: OK ***
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\pm012.ogd" "&&pm_RPT_BIN"
+PROMPT copy "&&pm_HOME\report\pm012.ogd" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\pm001q2.sql" "&&pm_RPT_BIN"
+PROMPT copy "&&pm_HOME\report\pm001q2.sql" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\pm0041q1.sql" "&&pm_RPT_BIN"
+PROMPT copy "&&pm_HOME\report\pm0041q1.sql" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\pm0042q1.sql" "&&pm_RPT_BIN"
+PROMPT copy "&&pm_HOME\report\pm0042q1.sql" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\pm0043q1.sql" "&&pm_RPT_BIN"
+PROMPT copy "&&pm_HOME\report\pm0043q1.sql" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\pm005q1.sql" "&&pm_RPT_BIN"
+PROMPT copy "&&pm_HOME\report\pm005q1.sql" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\pm007q1.sql" "&&pm_RPT_BIN"
+PROMPT copy "&&pm_HOME\report\pm007q1.sql" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\pm008q1.sql" "&&pm_RPT_BIN"
+PROMPT copy "&&pm_HOME\report\pm008q1.sql" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\pm009q1.sql" "&&pm_RPT_BIN"
+PROMPT copy "&&pm_HOME\report\pm009q1.sql" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\pm010q1.sql" "&&pm_RPT_BIN"
+PROMPT copy "&&pm_HOME\report\pm010q1.sql" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\pm011q1.sql" "&&pm_RPT_BIN"
+PROMPT copy "&&pm_HOME\report\pm011q1.sql" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\pm012q1.sql" "&&pm_RPT_BIN"
+PROMPT copy "&&pm_HOME\report\pm012q1.sql" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\report\pm013q1.sql" "&&pm_RPT_BIN"
+PROMPT copy "&&pm_HOME\report\pm013q1.sql" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT if not exist "p:\ontw\tools\pm\html" mkdir "p:\ontw\tools\pm\html"
+PROMPT if not exist "&&pm_HOME\html" mkdir "&&pm_HOME\html"
 PROMPT &&on_error_exit_cmd
-PROMPT copy "p:\ontw\tools\pm\VERSION" "&&pm_FRM_BIN"
+PROMPT copy "&&pm_HOME\VERSION" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
 PROMPT &&set_file_writable_cmd &&log_file
 PROMPT &&end_cmd

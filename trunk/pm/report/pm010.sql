@@ -22,6 +22,9 @@ PROMPT			4 - Minimum estimated time (default 4)
 PROMPT			&&4
 PROMPT
 REMARK  $Log$
+REMARK  Revision 1.7  2004/02/06 09:50:57  gpaulissen
+REMARK  Release 6.4.0
+REMARK
 REMARK  Revision 1.6  2003/08/08 21:01:20  gpaulissen
 REMARK  Release 4.2.1
 REMARK
