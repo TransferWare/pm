@@ -46,7 +46,10 @@ SPOOL get_dir.bat
 PROMPT @echo off
 PROMPT echo set define '~'> get_dir.sql
 PROMPT echo define dir = ->> get_dir.sql
-PROMPT dir/b/a:d &&wkbase\%1*>> get_dir.sql
+
+REM directories gesorteerd op nieuwste eerst
+
+PROMPT dir/b/a:d/o:-d &&wkbase\%1*>> get_dir.sql
 PROMPT echo define %1_home = '..\..\~~dir'>> get_dir.sql
 PROMPT echo undefine dir>> get_dir.sql
 PROMPT echo set define on>> get_dir.sql

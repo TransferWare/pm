@@ -1,0 +1,16 @@
+$(PROJECTNAME)_VERSION = $(call file_contents,$(WKTOP)/../VERSION)
+
+SCHEMA := pm_owner
+
+MANIFEST_OBJECTS :=
+
+# All ut_<packages>
+UT_TARGETS := trc
+
+OBJECTS_SCRIPTS := \
+	$(addprefix ut_,$(addsuffix .pls,$(UT_TARGETS))) \
+	$(ENDOFLIST)
+
+include $(CFGCOMMONDIR)/test_defs.mki
+
+include $(CFGCOMMONDIR)/objects.mki
