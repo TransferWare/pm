@@ -17,6 +17,9 @@
 # History
 # -------
 # $Log$
+# Revision 1.9  2002/01/25 14:52:26  gpaulissen
+# Dependency update.
+#
 # Revision 1.8  2002/01/24 12:22:56  gpaulissen
 # Dependencies added
 #
@@ -64,22 +67,10 @@ REPORTS = \
 	pm013.rep \
 	$(ENDOFLIST)
 
-# install the dependency files too
+# install the dependency files too (external queries will stay in report)
 install.reports: \
 		 pm_logo.bmp-install \
-		 pm001q2.sql-install \
-		 pm0041q1.sql-install \
-		 pm0042q1.sql-install \
-		 pm0043q1.sql-install \
-		 pm005q1.sql-install \
-		 pm007q1.sql-install \
-		 pm008q1.sql-install \
-		 pm009q1.sql-install \
-		 pm010q1.sql-install \
-		 pm011q1.sql-install \
 		 pm012.ogd-install \
-		 pm012q1.sql-install \
-		 pm013q1.sql-install \
 		 $(ENDOFLIST)
 
 # ---------------------------------------------------------------------------- #

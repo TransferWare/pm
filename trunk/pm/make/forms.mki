@@ -17,6 +17,9 @@
 # History
 # -------
 # $Log$
+# Revision 1.10  2002/01/25 14:52:26  gpaulissen
+# Dependency update.
+#
 # Revision 1.9  2002/01/24 12:22:56  gpaulissen
 # Dependencies added
 #
@@ -115,9 +118,9 @@ pm_start.fmt: pm_start-$(subst .,,$(VER_DEVELOPER)).fmt
 pm_start-60.fmt: pm_start-50.fmt
 	$(CP) $(subst /,$(PATHSEP),$?) $@
 
-# Remove pm_start-60.fmt
+# Remove pm_start-60.fmt and pm_start.fmt
 
-.INTERMEDIATE: pm_start-60.fmt
+.INTERMEDIATE: pm_start-60.fmt pm_start.fmt
 
 # ---------------------------------------------------------------------------- #
 # Menus. Case sensitive!
