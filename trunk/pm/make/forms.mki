@@ -13,6 +13,9 @@
 # History
 # -------
 # $Log$
+# Revision 1.16  2003/01/28 21:42:52  gpaulissen
+# Update common
+#
 # Revision 1.15  2002/09/10 19:53:05  gpaulissen
 # Update
 #
@@ -66,74 +69,26 @@
 #
 # ---------------------------------------------------------------------------- #
 
-MANIFEST_FORMS := $(MANIFEST)
+# 
+# Bug in conversion for pm_start.fmt to a .fmb in Forms 5.0
+# Hence have two .fmt files.
+#
 
-# ---------------------------------------------------------------------------- #
-# Libraries from MANIFEST
-# ---------------------------------------------------------------------------- #
+ifneq "$(call find_executable, f45gen32)" ""
 
-#FORMS_LIBS = \
-#	gskgen.plx \
-#	OFG4HPL.plx \
-#	$(ENDOFLIST)
-
-# ---------------------------------------------------------------------------- #
-# Reference forms
-# ---------------------------------------------------------------------------- #
-
-REF_FORMS = \
-	gskref.fmb \
-	$(ENDOFLIST)
-
-# ---------------------------------------------------------------------------- #
-# Icons from MANIFEST
-# ---------------------------------------------------------------------------- #
-
-#ICONS = \
-#	abort.ico \
-#	afclrall.ico \
-#	afclrrw.ico \
-#	afdelrw.ico \
-#	afedit.ico \
-#	affind.ico \
-#	afflddwn.ico \
-#	affldlft.ico \
-#	affldrt.ico \
-#	affldup.ico \
-#	afhelp.ico \
-#	afinsrw.ico \
-#	aflist.ico \
-#	afprint.ico \
-#	afquery.ico \
-#	afsave.ico \
-#	entqry.ico \
-#	keys.ico \
-#	$(ENDOFLIST)
-
-# ---------------------------------------------------------------------------- #
-# Forms. Case sensitive! See MANIFEST
-# ---------------------------------------------------------------------------- #
-
-#FORMS = \
-#	pm_about.fmx \
-#	pm_start.fmx \
-#	$(ENDOFLIST)
-
-ifeq ($(subst .,,$(VER_DEVELOPER)),45)
-
-pm_start.fmb: pm_start-45.fmt
-	$(FMBGENCMD)
+#pm_start.fmb: pm_start-45.fmt
+#	$(FMBGENCMD)
 
 pm_start.fmt: pm_start-45.fmt
-	$(CP) $(subst /,$(PATHSEP),$?) $@
+	$(call cp,$?,$@)
 
 else
 
-pm_start.fmb: pm_start-50.fmt
-	$(FMBGENCMD)
+#pm_start.fmb: pm_start-50.fmt
+#	$(FMBGENCMD)
 
 pm_start.fmt: pm_start-50.fmt
-	$(CP) $(subst /,$(PATHSEP),$?) $@
+	$(call cp,$?,$@)
 
 endif
 

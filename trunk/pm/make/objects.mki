@@ -16,6 +16,9 @@
 # History
 # -------
 # $Log$
+# Revision 1.17  2003/01/28 21:42:52  gpaulissen
+# Update common
+#
 # Revision 1.16  2002/09/10 19:53:05  gpaulissen
 # Update
 #
@@ -29,62 +32,71 @@
 
 SCHEMA := pm_owner
 
-GSK := N
-
-ifeq ($(findstring $(GSK), Y y),)
-
 # Do not include pm_mpi.pkb since only specification is important
 # Do not include pm_dpi.pkb since only specification is important
 
 # Files pm_system_event.ind, pm_sysstat.ind and pm_sqlarea.ind have
 # no SQL DDL statements to execute.
 
-OBJECTS_SCRIPTS = \
-	     pm_config.tab \
-	     pm_run.tab \
-	     pm_session.tab \
-	     pm_session_tmp.tab \
-	     pm_sql.tab \
-	     pm_sqlarea.tab \
-	     pm_sqlarea_tmp.tab \
-	     pm_sql_current.tab \
-	     pm_sql_id.tab \
-	     pm_sysstat.tab \
-	     pm_sysstat_tmp.tab \
-	     pm_system_event.tab \
-	     pm_system_event_tmp.tab \
-	     pm_vw_sqlarea.vw \
-	     pm_run_seq.seq \
-	     pm_sql_seq.seq \
-	     trc.pck \
-	     pm.pck \
-	     pm_cfg.pck \
-	     pm_mpi.pks \
-	     pm_dpi.pks \
-	     pm_config.con \
-	     pm_run.con \
-	     pm_sql_id.con \
-	     pm_sql.con \
-	     pm_session.con \
-	     pm_session_tmp.con \
-	     pm_sql_current.con \
-	     pm_sysstat.con \
-	     pm_sysstat_tmp.con \
-	     pm_system_event.con \
-	     pm_system_event_tmp.con \
-	     pm_sqlarea.con \
-	     pm_sqlarea_tmp.ind \
-	     pm_run.ind \
-	     pm_session.ind \
-	     pm_sql.ind \
-	     $(ENDOFLIST)
+OBJECTS_SCRIPTS := \
+	pm_config.tab \
+	pm_run.tab \
+	pm_session.tab \
+	pm_session_tmp.tab \
+	pm_sql.tab \
+	pm_sqlarea.tab \
+	pm_sqlarea_tmp.tab \
+	pm_sql_current.tab \
+	pm_sql_id.tab \
+	pm_sysstat.tab \
+	pm_sysstat_tmp.tab \
+	pm_system_event.tab \
+	pm_system_event_tmp.tab \
+	pm_vw_sqlarea.vw \
+	pm_run_seq.seq \
+	pm_sql_seq.seq \
+	trc.pck \
+	pm.pck \
+	pm_cfg.pck \
+	pm_mpi.pks \
+	pm_dpi.pks \
+	pm_config.con \
+	pm_run.con \
+	pm_sql_id.con \
+	pm_sql.con \
+	pm_session.con \
+	pm_session_tmp.con \
+	pm_sql_current.con \
+	pm_sysstat.con \
+	pm_sysstat_tmp.con \
+	pm_system_event.con \
+	pm_system_event_tmp.con \
+	pm_sqlarea.con \
+	pm_sqlarea_tmp.ind \
+	pm_run.ind \
+	pm_session.ind \
+	pm_sql.ind \
+	cgrefcod.tab \
+	gskdb.tab \
+	gskdb.con \
+	gskdb.pck \
+	$(ENDOFLIST)
 
 # No insert for PM
-DATA_TABLES_SQLLOADER = 
+DATA_TABLES_SQLLOADER := 
 
-DATA_TABLES_SQLPLUS =
+DATA_TABLES_SQLPLUS := \
+	cg_ref_codes \
+	gsk_meldingen \
+	$(ENDOFLIST)
 
-HTML_FILES = \
+# cg_ref_codes.sql-run is a dummy
+cg_ref_codes.sql-run: gsk_refc.dat-run
+
+# gsk_meldingen.sql-run is a dummy
+gsk_meldingen.sql-run: gskdb.dat-run
+
+HTML_FILES := \
 	trc.html \
 	pm.html \
 	pm_cfg.html \
@@ -106,46 +118,6 @@ DEPEND_OBJECTS_FILE_MKI := $(CFGDIR)/depend.objects.file.mki
 
 DEPEND_OBJECTS_DB_MKI := $(CFGDIR)/depend.objects.db.mki
 
-else
-
-# ---------------------------------------------------------------------------- #
-# Gsk
-# ---------------------------------------------------------------------------- #
-
-OBJECTS_SCRIPTS = \
-	cgrefcod.tab \
-	gskdb.tab \
-	gskdb.con \
-	gskdb.pck \
-	$(ENDOFLIST)
-
-DATA_TABLES_SQLLOADER = \
-	$(ENDOFLIST)
-
-DATA_TABLES_SQLPLUS = \
-	cg_ref_codes \
-	gsk_meldingen \
-	$(ENDOFLIST)
-
-# cg_ref_codes.sql-run is a dummy
-cg_ref_codes.sql-run: gsk_refc.dat-run
-
-# gsk_meldingen.sql-run is a dummy
-gsk_meldingen.sql-run: gskdb.dat-run
-
-# ---------------------------------------------------------------------------- #
-# GSK dependency files
-# ---------------------------------------------------------------------------- #
-
-DEPEND_OBJECTS_DB_FILE_MKI := $(CFGDIR)/depend.objects.db.file.gsk.mki
-
-DEPEND_OBJECTS_FILE_MKI := $(CFGDIR)/depend.objects.file.gsk.mki
-
-DEPEND_OBJECTS_DB_MKI := $(CFGDIR)/depend.objects.db.gsk.mki
-
-endif # ifeq ($(findstring $(GSK), Y y),)
-
-
 # ---------------------------------------------------------------------------- #
 # Build dependencies, e.g. create object X by running script Y
 # ---------------------------------------------------------------------------- #
@@ -160,10 +132,8 @@ OBJECTS := $(OBJECTS_$(SCHEMA))
 
 ifeq ($(findstring $(DEPEND),N n),)
 
-include $(DEPEND_OBJECTS_DB_FILE_MKI)
+  include $(DEPEND_OBJECTS_DB_FILE_MKI)
 
-OBJECTS_BY_DEP := $(OBJECTS_BY_DEP_$(SCHEMA))
-
-include $(DEPEND_OBJECTS_DB_MKI)
+  include $(DEPEND_OBJECTS_DB_MKI)
 
 endif
