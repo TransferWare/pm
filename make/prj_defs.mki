@@ -29,6 +29,7 @@ dat-subdirs := install
 fmb-subdirs := report
 fmt-subdirs := report
 fnc-subdirs := install
+gif-subdirs := report
 ico-subdirs := report
 ind-subdirs := install
 mmb-subdirs := report

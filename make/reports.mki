@@ -33,13 +33,13 @@
 
 # install the dependency files too (external queries will stay in report)
 install.reports: \
-	pm_logo.bmp-install \
+	pm_logo.gif-install \
 	pm012.ogd-install \
 	$(ENDOFLIST)
 
-pm012.ogd-install pm_logo.bmp-install: mkdir.rpt_bin
+pm012.ogd-install pm_logo.gif-install: mkdir.rpt_bin
 
-pm012.ogd-install pm_logo.bmp-install: override INSTALL_DIR := $(RPT_BIN)
+pm012.ogd-install pm_logo.gif-install: override INSTALL_DIR := $(RPT_BIN)
 
 # ---------------------------------------------------------------------------- #
 # Dependency build.
