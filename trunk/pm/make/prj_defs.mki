@@ -1,12 +1,8 @@
 # ---------------------------------------------------------------------------- #
 #
-# File:         $RCSfile$
+# $Header$
 #
-# Author:       $Author$
-#
-# Date:         $Date$
-#
-# Revision:     $Revision$
+# Author:       Gert-Jan Paulissen
 #
 # Purpose:      Contains project specific definitions:
 #		* location of files
@@ -22,52 +18,6 @@
 # 
 # History
 # -------
-# $Log$
-# Revision 1.13  2002/01/17 10:57:14  gpaulissen
-# - make install enhanced.
-# - make depend added (makedepend_oracle.pl, makedepend.sql, makestate.sql).
-# - reports user text field widened (from 10 to 30) due to report 4.5 bug.
-# - removed in install scripts:
-#   whenever sqlerror exit failure
-#   whenever oserror exit failure
-#
-# Revision 1.12  2000/03/07 16:26:41  gpaulissen
-# TPI toegevoegd
-#
-# Revision 1.11  1999/09/28 15:14:39  gpaulissen
-# Project specific settings
-#
-# Revision 1.1  1999/09/16 12:20:04  gpaulissen
-# Support files.
-#
-# Revision 1.9  1999/08/30 12:55:34  gpaulissen
-# Added bin50 and bin60
-#
-# Revision 1.8  1999/08/26 14:09:07  gpaulissen
-# Added pm_logo.bmp and removed gsk_log.pcx
-#
-# Revision 1.7  1999/08/10 09:39:50  gpaulissen
-# Added Developer/2000 45, 50 and 60
-#
-# Revision 1.6  1999/05/25 14:45:14  gpaulissen
-# Released
-#
-# Revision 1.5  1999/04/29 09:32:29  gpaulissen
-# Toegevoegd: ASCII-bestanden van Developer/2000 binaries.
-#
-# Revision 1.4  1999/04/23 12:16:15  gpaulissen
-# Forms and reports output directory is now bin.
-#
-# Revision 1.3  1999/04/23 10:41:27  gpaulissen
-# Toegevoegd: plaats om SQL bestanden te vinden.
-#
-# Revision 1.2  1999/04/23 09:00:59  gpaulissen
-# *** empty log message ***
-#
-# Revision 1.1  1999/04/21 15:04:31  gpaulissen
-# Initial revision
-#
-#
 # 
 # ---------------------------------------------------------------------------- #
 

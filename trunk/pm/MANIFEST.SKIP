@@ -7,10 +7,7 @@ reports.log$
 Makefile$
 bin../idx
 bin../dat
-doc/.*\.doc$
-doc/.*\.tmp$
-doc/.*\.wbk$
-doc/.*\.rtf$
+^doc/
 install/.*\.lst$
 ^make/
 \.plg$
