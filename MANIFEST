@@ -142,7 +142,7 @@ make/objects.mki
 make/prj_defs.mki
 make/reports.mki
 readme.txt
-report/OFG4HPL.pld		# OFG4HPL.plx
+report/OFG4HPL.pll		# OFG4HPL.plx
 report/abort.gif
 report/abort.ico
 report/afclrall.gif
@@ -177,54 +177,54 @@ report/afsave.gif
 report/afsave.ico
 report/entqry.gif
 report/entqry.ico
-report/gskgen.pld		# gskgen.plx
-report/gskref.fmt		# gskref.fmb
+report/gskgen.pll		# gskgen.plx
+report/gskref.fmb		# gskref.fmb
 report/keys.gif
 report/keys.ico
-report/pm001.rex		# pm001.rep
+report/pm001.rdf		# pm001.rep
 report/pm001.sql
 report/pm001q1.sql
 report/pm001q2.sql
 report/pm002.sql
 report/pm003.sql
 report/pm004.sql
-report/pm0041.rex		# pm0041.rep
+report/pm0041.rdf		# pm0041.rep
 report/pm0041q1.sql
-report/pm0042.rex		# pm0042.rep
+report/pm0042.rdf		# pm0042.rep
 report/pm0042q1.sql
-report/pm0043.rex		# pm0043.rep
+report/pm0043.rdf		# pm0043.rep
 report/pm0043q1.sql
-report/pm005.rex		# pm005.rep
+report/pm005.rdf		# pm005.rep
 report/pm005.sql
 report/pm005q1.sql
 report/pm006.sql
-report/pm007.rex		# pm007.rep
+report/pm007.rdf		# pm007.rep
 report/pm007.sql
 report/pm007q1.sql
-report/pm008.rex		# pm008.rep
+report/pm008.rdf		# pm008.rep
 report/pm008.sql
 report/pm008q1.sql
-report/pm009.rex		# pm009.rep
+report/pm009.rdf		# pm009.rep
 report/pm009.sql
 report/pm009q1.sql
-report/pm010.rex		# pm010.rep
+report/pm010.rdf		# pm010.rep
 report/pm010.sql
 report/pm010q1.sql
-report/pm011.rex		# pm011.rep
+report/pm011.rdf		# pm011.rep
 report/pm011.sql
 report/pm011q1.sql
 report/pm012.ogd
-report/pm012.rex		# pm012.rep
+report/pm012.rdf		# pm012.rep
 report/pm012.sql
 report/pm012q1.sql
-report/pm013.rex		# pm013.rep
+report/pm013.rdf		# pm013.rep
 report/pm013.sql
 report/pm013q1.sql
-report/pm_about.fmt		# pm_about.fmx
+report/pm_about.fmb		# pm_about.fmx
 report/pm_logo.gif
-report/pm_mnu.mmt		# pm_mnu.mmx
-report/pm_params.fmt		# pm_params.fmx
-report/pm_start.fmt		# pm_start.fmx
+report/pm_mnu.mmb		# pm_mnu.mmx
+report/pm_params.fmb		# pm_params.fmx
+report/pm_start.fmb		# pm_start.fmx
 report/pmbrpt.sql
 report/pmerpt.sql
 test/factory/data/role_privs.ref

@@ -17,6 +17,8 @@ WHENEVER OSERROR EXIT FAILURE
 
 REM Standard defines
 
+
+define pm_schema = PM_OWNER
 DEFINE dblink = 'X'
 DEFINE app = 'PM'
 DEFINE WKBASE = ..\..
