@@ -113,11 +113,13 @@ REMARK Start of section 2
 REMARK This section may be edited.
 REMARK *************************************************************************
 
+COMMIT
+/
 
 DEFINE log_file = 'output00001.&&sessionid..log'
 PROMPT Log file: &&log_file
 SPOOL &&log_file
-START &&connect_sql pm_owner/pm_owner@ibm
+START &&restore_sql
 SET VERIFY OFF DEFINE OFF
 PROMPT Command: START &&pm_HOME\common/src/sql/set_common_sql_dir.sql "&&pm_HOME\common/src/sql/"
 SET VERIFY ON DEFINE ON
@@ -752,9 +754,10 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/check_sql_env.sql CONNECT "pm_owner/pm_owner@ibm"
+PROMPT Command: START &&pm_HOME\common/src/sql/check_sql_env.sql CONNECT "&&userid"
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/check_sql_env.sql CONNECT "pm_owner/pm_owner@ibm"
+PROMPT &&userid
+START &&pm_HOME\common/src/sql/check_sql_env.sql CONNECT "&&userid"
 SET DEFINE '&'
 COMMIT
 /

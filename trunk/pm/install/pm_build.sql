@@ -113,11 +113,13 @@ REMARK Start of section 2
 REMARK This section may be edited.
 REMARK *************************************************************************
 
+COMMIT
+/
 
 DEFINE log_file = 'output00001.&&sessionid..log'
 PROMPT Log file: &&log_file
 SPOOL &&log_file
-START &&connect_sql pm_owner/pm_owner@ibm
+START &&restore_sql
 SET VERIFY OFF DEFINE OFF
 PROMPT Command: START &&pm_HOME\common/src/sql/set_common_sql_dir.sql "&&pm_HOME\common/src/sql/"
 SET VERIFY ON DEFINE ON
@@ -129,6 +131,7 @@ COMMIT
 
 DEFINE log_file = 'output00002.&&sessionid..log'
 PROMPT &&FRMGEN
+PROMPT &&userid
 PROMPT &&pm_FRM_BIN
 PROMPT &&pm_RPT_BIN
 PROMPT &&RPTGEN
@@ -229,7 +232,7 @@ PROMPT if exist "pm_mnu_tmp.mmb" del "pm_mnu_tmp.mmb"
 PROMPT &&on_error_exit_cmd
 PROMPT copy "&&pm_HOME\report\pm_mnu.mmb" "pm_mnu_tmp.mmb"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&FRMGEN" "pm_owner/pm_owner@ibm" pm_mnu_tmp.err MODULE="pm_mnu_tmp.mmb" OUTPUT_FILE="pm_mnu.mmx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=MENU COMPILE_ALL=YES
+PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" pm_mnu_tmp.err MODULE="pm_mnu_tmp.mmb" OUTPUT_FILE="pm_mnu.mmx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=MENU COMPILE_ALL=YES
 PROMPT &&on_error_exit_cmd
 PROMPT del "pm_mnu_tmp.mmb"
 PROMPT &&on_error_exit_cmd
@@ -245,7 +248,7 @@ PROMPT if exist "OFG4HPL_tmp.pll" del "OFG4HPL_tmp.pll"
 PROMPT &&on_error_exit_cmd
 PROMPT copy "&&pm_HOME\report\OFG4HPL.pll" "OFG4HPL_tmp.pll"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&FRMGEN" "pm_owner/pm_owner@ibm" OFG4HPL_tmp.err MODULE="OFG4HPL_tmp.pll" OUTPUT_FILE="OFG4HPL.plx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=LIBRARY STRIP_SOURCE=YES COMPILE_ALL=YES
+PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" OFG4HPL_tmp.err MODULE="OFG4HPL_tmp.pll" OUTPUT_FILE="OFG4HPL.plx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=LIBRARY STRIP_SOURCE=YES COMPILE_ALL=YES
 PROMPT &&on_error_exit_cmd
 PROMPT del "OFG4HPL_tmp.pll"
 PROMPT &&on_error_exit_cmd
@@ -255,7 +258,7 @@ PROMPT if exist "gskgen_tmp.pll" del "gskgen_tmp.pll"
 PROMPT &&on_error_exit_cmd
 PROMPT copy "&&pm_HOME\report\gskgen.pll" "gskgen_tmp.pll"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&FRMGEN" "pm_owner/pm_owner@ibm" gskgen_tmp.err MODULE="gskgen_tmp.pll" OUTPUT_FILE="gskgen.plx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=LIBRARY STRIP_SOURCE=YES COMPILE_ALL=YES
+PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" gskgen_tmp.err MODULE="gskgen_tmp.pll" OUTPUT_FILE="gskgen.plx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=LIBRARY STRIP_SOURCE=YES COMPILE_ALL=YES
 PROMPT &&on_error_exit_cmd
 PROMPT del "gskgen_tmp.pll"
 PROMPT &&on_error_exit_cmd
@@ -349,7 +352,7 @@ PROMPT if exist "pm_about_tmp.fmb" del "pm_about_tmp.fmb"
 PROMPT &&on_error_exit_cmd
 PROMPT copy "&&pm_HOME\report\pm_about.fmb" "pm_about_tmp.fmb"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&FRMGEN" "pm_owner/pm_owner@ibm" pm_about_tmp.err MODULE="pm_about_tmp.fmb" OUTPUT_FILE="pm_about.fmx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=FORM COMPILE_ALL=YES
+PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" pm_about_tmp.err MODULE="pm_about_tmp.fmb" OUTPUT_FILE="pm_about.fmx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=FORM COMPILE_ALL=YES
 PROMPT &&on_error_exit_cmd
 PROMPT del "pm_about_tmp.fmb"
 PROMPT &&on_error_exit_cmd
@@ -359,7 +362,7 @@ PROMPT if exist "pm_params_tmp.fmb" del "pm_params_tmp.fmb"
 PROMPT &&on_error_exit_cmd
 PROMPT copy "&&pm_HOME\report\pm_params.fmb" "pm_params_tmp.fmb"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&FRMGEN" "pm_owner/pm_owner@ibm" pm_params_tmp.err MODULE="pm_params_tmp.fmb" OUTPUT_FILE="pm_params.fmx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=FORM COMPILE_ALL=YES
+PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" pm_params_tmp.err MODULE="pm_params_tmp.fmb" OUTPUT_FILE="pm_params.fmx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=FORM COMPILE_ALL=YES
 PROMPT &&on_error_exit_cmd
 PROMPT del "pm_params_tmp.fmb"
 PROMPT &&on_error_exit_cmd
@@ -369,7 +372,7 @@ PROMPT if exist "pm_start_tmp.fmb" del "pm_start_tmp.fmb"
 PROMPT &&on_error_exit_cmd
 PROMPT copy "&&pm_HOME\report\pm_start.fmb" "pm_start_tmp.fmb"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&FRMGEN" "pm_owner/pm_owner@ibm" pm_start_tmp.err MODULE="pm_start_tmp.fmb" OUTPUT_FILE="pm_start.fmx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=FORM COMPILE_ALL=YES
+PROMPT call "run_ora_prog.bat" "&&FRMGEN" "&&userid" pm_start_tmp.err MODULE="pm_start_tmp.fmb" OUTPUT_FILE="pm_start.fmx" BATCH=YES WINDOW_STATE=minimize MODULE_TYPE=FORM COMPILE_ALL=YES
 PROMPT &&on_error_exit_cmd
 PROMPT del "pm_start_tmp.fmb"
 PROMPT &&on_error_exit_cmd
@@ -383,51 +386,51 @@ PROMPT echo *** Installing reports_libs: OK ***
 PROMPT &&on_error_exit_cmd
 PROMPT echo *** Installing reports: START ***
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "pm_owner/pm_owner@ibm" reports.log SOURCE="&&pm_HOME\report\pm001.rdf" DEST="pm001.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="&&pm_HOME\report\pm001.rdf" DEST="pm001.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm001.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "pm_owner/pm_owner@ibm" reports.log SOURCE="&&pm_HOME\report\pm0041.rdf" DEST="pm0041.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="&&pm_HOME\report\pm0041.rdf" DEST="pm0041.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm0041.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "pm_owner/pm_owner@ibm" reports.log SOURCE="&&pm_HOME\report\pm0042.rdf" DEST="pm0042.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="&&pm_HOME\report\pm0042.rdf" DEST="pm0042.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm0042.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "pm_owner/pm_owner@ibm" reports.log SOURCE="&&pm_HOME\report\pm0043.rdf" DEST="pm0043.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="&&pm_HOME\report\pm0043.rdf" DEST="pm0043.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm0043.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "pm_owner/pm_owner@ibm" reports.log SOURCE="&&pm_HOME\report\pm005.rdf" DEST="pm005.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="&&pm_HOME\report\pm005.rdf" DEST="pm005.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm005.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "pm_owner/pm_owner@ibm" reports.log SOURCE="&&pm_HOME\report\pm007.rdf" DEST="pm007.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="&&pm_HOME\report\pm007.rdf" DEST="pm007.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm007.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "pm_owner/pm_owner@ibm" reports.log SOURCE="&&pm_HOME\report\pm008.rdf" DEST="pm008.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="&&pm_HOME\report\pm008.rdf" DEST="pm008.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm008.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "pm_owner/pm_owner@ibm" reports.log SOURCE="&&pm_HOME\report\pm009.rdf" DEST="pm009.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="&&pm_HOME\report\pm009.rdf" DEST="pm009.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm009.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "pm_owner/pm_owner@ibm" reports.log SOURCE="&&pm_HOME\report\pm010.rdf" DEST="pm010.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="&&pm_HOME\report\pm010.rdf" DEST="pm010.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm010.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "pm_owner/pm_owner@ibm" reports.log SOURCE="&&pm_HOME\report\pm011.rdf" DEST="pm011.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="&&pm_HOME\report\pm011.rdf" DEST="pm011.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm011.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "pm_owner/pm_owner@ibm" reports.log SOURCE="&&pm_HOME\report\pm012.rdf" DEST="pm012.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="&&pm_HOME\report\pm012.rdf" DEST="pm012.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm012.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
-PROMPT call "run_ora_prog.bat" "&&RPTGEN" "pm_owner/pm_owner@ibm" reports.log SOURCE="&&pm_HOME\report\pm013.rdf" DEST="pm013.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
+PROMPT call "run_ora_prog.bat" "&&RPTGEN" "&&userid" reports.log SOURCE="&&pm_HOME\report\pm013.rdf" DEST="pm013.rep" BATCH=YES STYPE=RDFFILE DTYPE=REPFILE OVERWRITE=YES
 PROMPT &&on_error_exit_cmd
 PROMPT copy "pm013.rep" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
