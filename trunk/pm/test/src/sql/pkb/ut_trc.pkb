@@ -222,6 +222,7 @@ IS
     against_this VARCHAR2(2000);
     check_this VARCHAR2(2000);
   BEGIN
+    trc.set_enable_call_stack(true);
     ut_FIRST;
   EXCEPTION
     WHEN OTHERS
@@ -231,7 +232,7 @@ IS
       -- Define "control" operation
       against_this := 
   'main;
-  divide(10,5);';
+divide(10,0);';
       -- Execute test code
       check_this := TRC.GET_FIRST_CALLS;
       -- Assert success
@@ -278,8 +279,6 @@ IS
 
   PROCEDURE ut_GET_FIRST_FORMAT_CALL_STACK
   IS
-    -- Verify and complete data types.
-    against_this VARCHAR2(2000);
     check_this VARCHAR2(2000);
   BEGIN
     ut_FIRST;
@@ -288,16 +287,13 @@ IS
     THEN
       trc.leave_on_error;
 
-      -- Define "control" operation
-      against_this := NULL;
       -- Execute test code
       check_this := TRC.GET_FIRST_FORMAT_CALL_STACK;
       -- Assert success
       -- Compare the two values.
-      utAssert.eq (
+      utAssert.isnotnull (
         'Test of GET_FIRST_FORMAT_CALL_STACK',
-        check_this,
-        against_this
+        check_this
       );
       -- End of test
   END ut_GET_FIRST_FORMAT_CALL_STACK;
@@ -322,7 +318,8 @@ IS
     utAssert.eq (
     'Test of GET_MODULES',
     check_this,
-    against_this
+    against_this,
+    true
     );
     -- End of test
   END ut_GET_MODULES;
