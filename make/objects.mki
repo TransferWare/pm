@@ -18,6 +18,9 @@
 # History
 # -------
 # $Log$
+# Revision 1.6  1999/10/07 14:19:33  gpaulissen
+# PR-777. Added pm_session_tmp
+#
 # Revision 1.5  1999/10/07 11:34:08  gpaulissen
 # Removed pm_sess_io
 #
@@ -45,6 +48,7 @@ CONSTRAINTS = \
 	pm_sql_id.con-run \
 	pm_sql.con-run \
 	pm_session.con-run \
+	pm_session_tmp.con-run \
 	pm_sql_current.con-run \
 	pm_sysstat.con-run \
 	pm_sysstat_tmp.con-run \
@@ -122,6 +126,7 @@ TABLES = \
 	pm_config.tab-run \
 	pm_run.tab-run \
 	pm_session.tab-run \
+	pm_session_tmp.tab-run \
 	pm_sql.tab-run \
 	pm_sqlarea.tab-run \
 	pm_sqlarea_tmp.tab-run \
