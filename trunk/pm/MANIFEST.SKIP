@@ -18,7 +18,7 @@ html/pm_cfg.html
 html/pm_dpi.html
 html/pm_mpi.html
 html/trc.html
-install/pm.sql
+^install/pm.sql
 doc/PM-ontwikkeling.doc
 doc/PM-richtlijnen.doc
 doc/pm-beschrijving.doc
@@ -30,4 +30,4 @@ doc/pm-versiebeheer.doc
 doc/scm-plan.doc
 ^bin
 ~$
-install/pm_check.sql
+^install/pm_check.sql
