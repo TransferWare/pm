@@ -4,3 +4,15 @@
 # schema     : pm_owner 
 # files      : depend.objects.file.mki depend.objects.db.mki 
 
+# install.package_body.pm_owner.ut_trc depends on install.grant.utplsql.utassert
+ut_trc.pkb-run: install.grant.utplsql.utassert
+
+# install.package_body.pm_owner.ut_trc depends on install.package.pm_owner.trc
+ut_trc.pkb-run: install.package.pm_owner.trc
+
+# install.package_body.pm_owner.ut_trc depends on install.package.pm_owner.ut_trc
+ut_trc.pkb-run: install.package.pm_owner.ut_trc
+
+# install.package_body.pm_owner.ut_trc depends on install.public_synonym.utplsql.utassert
+ut_trc.pkb-run: install.public_synonym.utplsql.utassert
+
