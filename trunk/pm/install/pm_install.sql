@@ -742,9 +742,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/common/src/sql/release_info.sql NEW pm 6.0.0
+PROMPT Command: START &&pm_HOME/common/src/sql/release_info.sql NEW pm 6.1.0
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/common/src/sql/release_info.sql NEW pm 6.0.0
+START &&pm_HOME/common/src/sql/release_info.sql NEW pm 6.1.0
 SET DEFINE '&'
 COMMIT
 /
