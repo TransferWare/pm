@@ -16,6 +16,9 @@
 # History
 # -------
 # $Log$
+# Revision 1.19  2003/07/15 21:17:49  gpaulissen
+# Release 4.2.0
+#
 # Revision 1.18  2003/01/28 21:52:08  gpaulissen
 # Update common
 #
@@ -34,6 +37,12 @@
 # ---------------------------------------------------------------------------- #
 
 SCHEMA := pm_owner
+
+USERID := &&userid
+
+post.install.objects: install.release_info
+
+post.uninstall.objects: uninstall.release_info
 
 # Do not include pm_mpi.pkb since only specification is important
 # Do not include pm_dpi.pkb since only specification is important
@@ -85,7 +94,7 @@ OBJECTS_SCRIPTS := \
 	gskdb.pck \
 	$(ENDOFLIST)
 
-# No insert for PM
+# No SQL*Loader insert for PM
 DATA_TABLES_SQLLOADER := 
 
 DATA_TABLES_SQLPLUS_SUFFIX := .sql
