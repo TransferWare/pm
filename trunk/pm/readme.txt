@@ -40,6 +40,9 @@ BUGS
 * 28-08-2003
   Web enabled.
 
+* 01-09-2003
+  Bugs solved due to Web enabling.
+
 SUPPORT
 
 Contact Transfer Solutions via e-mail: L<support@transfer-solutions.com>
