@@ -126,10 +126,12 @@ doc/delta2.gif
 doc/pm-manual.rtf
 doc/shortcut.gif
 doc/tpi-manual.doc
+install/login.sql
 install/pm_build.sql
 install/pm_install.sql
 install/pm_uninstall.sql
 install/pm_upgrade.sql
+install/project.sql
 make/depend.forms.mki
 make/depend.objects.db.file.mki
 make/depend.objects.db.mki
