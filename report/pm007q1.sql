@@ -1,13 +1,13 @@
 select	/* $Header$ */
-        pm_sess_io.username
-,	sum(pm_sess_io.block_gets)	block_gets
-,	sum(pm_sess_io.block_changes)	block_changes
-from	pm_sess_io
-where	pm_sess_io.db = :db
-and	pm_sess_io.run_id between :lwb_run_id and :upb_run_id
+        are.parsing_user_name	username
+,	sum(are.disk_reads)	disk_reads
+,	sum(are.buffer_gets)	buffer_gets
+from	pm_sqlarea are
+where	are.db = :db
+and	are.run_id between :lwb_run_id and :upb_run_id
 group by
-	pm_sess_io.username
-having 	sum(pm_sess_io.block_gets) + sum(pm_sess_io.block_changes) >= :minimum
+	are.parsing_user_name
+having 	sum(are.disk_reads) + sum(are.buffer_gets) >= :minimum
 order by 
-	sum(pm_sess_io.block_gets) desc
-,	sum(pm_sess_io.block_changes) desc
+	sum(are.disk_reads) desc
+,	sum(are.buffer_gets) desc
