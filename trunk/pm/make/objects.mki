@@ -1,4 +1,3 @@
-# -*-fundamental-*- (Emacs)
 # ---------------------------------------------------------------------------- #
 #
 # File:         $RCSfile$
@@ -19,6 +18,9 @@
 # History
 # -------
 # $Log$
+# Revision 1.9  2002/01/24 12:22:56  gpaulissen
+# Dependencies added
+#
 # Revision 1.8  2002/01/17 10:57:14  gpaulissen
 # - make install enhanced.
 # - make depend added (makedepend_oracle.pl, makedepend.sql, makestate.sql).
@@ -54,17 +56,13 @@
 #
 # ---------------------------------------------------------------------------- #
  
-# ---------------------------------------------------------------------------- #
-# Build dependencies, e.g. create object X by running script Y
-# ---------------------------------------------------------------------------- #
-
 # Do not include pm_mpi.pkb since only specification is important
 # Do not include pm_dpi.pkb since only specification is important
 
 # Files pm_system_event.ind, pm_sysstat.ind and pm_sqlarea.ind have
 # no SQL DDL statements to execute.
 
-OBJECT_FILES = \
+OBJECTS_SCRIPTS = \
 	     pm_config.tab \
 	     pm_run.tab \
 	     pm_session.tab \
@@ -104,42 +102,23 @@ OBJECT_FILES = \
 	     pm_sql.ind \
 	     $(ENDOFLIST)
 
-DEPEND_OBJECTS_FILE_MKI := $(CFGDIR)/depend.objects.file.mki
-DEPEND_OBJECTS_DB_MKI := $(CFGDIR)/depend.objects.db.mki
-
-depend.objects.file: override SCHEMA := pm_owner
-
-depend.objects.makefile: override MAKEDEPEND_INCLUDE_FILE := $(DEPEND_OBJECTS_FILE_MKI)
-depend.objects.makefile: override MAKEDEPEND_SPOOL_TYPE := >>
-
-depend.objects.file: makedepend_oracle.pl $(OBJECT_FILES)
-	$(depend-objects-file)
-
-include $(DEPEND_OBJECTS_FILE_MKI)
-
-OBJECTS := $(OBJECTS_PM_OWNER)
-
-# No insert
+# No insert for PM
 DATA = 
-
-# ---------------------------------------------------------------------------- #
-# Database object dependencies, e.g. foreign key X depends on primary key Y
-# ---------------------------------------------------------------------------- #
-
-include $(DEPEND_OBJECTS_DB_MKI)
 
 # ---------------------------------------------------------------------------- #
 # Gsk
 # ---------------------------------------------------------------------------- #
 
-install.gsk:	\
-	cgrefcod.tab-run \
-	gskdb.tab-run \
-	gskdb.con-run \
-	gskdbfill.sql-run \
-	gskdbfill.sql-remove \
-	gskdb.pck-run \
+ifneq ($(findstring $(GSK), Y y),)
+
+OBJECTS_SCRIPTS += \
+	cgrefcod.tab \
+	gskdb.tab \
+	gskdb.con \
+	gskdb.pck \
 	$(ENDOFLIST)
+
+DATA += gskdbfill.sql-run
 
 gskdbfill.sql:: gsk_refc.dat
 	$(ECHO) @@ $? > $@
@@ -147,11 +126,27 @@ gskdbfill.sql:: gsk_refc.dat
 gskdbfill.sql:: gskdb.dat
 	$(ECHO) @@ $? >> $@
 
-uninstall.gsk: \
-	cg_ref_codes.tab-drop \
-	gsk_meldingen.tab-drop \
-	gsk_mctp.pck-drop \
-	gsk_refc.pck-drop \
-	gsk_msg.pck-drop \
-	$(ENDOFLIST)
+.INTERMEDIATE: gskdbfill.sql
+
+endif
+
+# ---------------------------------------------------------------------------- #
+# End of gsk
+# ---------------------------------------------------------------------------- #
+
+# ---------------------------------------------------------------------------- #
+# Build dependencies, e.g. create object X by running script Y
+# ---------------------------------------------------------------------------- #
+
+depend.objects.file: override SCHEMA := pm_owner
+
+include $(CFGDIR)/depend.objects.file.mki
+
+OBJECTS := $(OBJECTS_PM_OWNER)
+
+# ---------------------------------------------------------------------------- #
+# Database object dependencies, e.g. foreign key X depends on primary key Y
+# ---------------------------------------------------------------------------- #
+
+include $(CFGDIR)/depend.objects.db.mki
 
