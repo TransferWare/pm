@@ -6,3 +6,7 @@
 ^Makefile$
 \.wbk$
 \bpm_remote_tmp.sql$
+\.gz$
+\.log$
+temp
+tmp

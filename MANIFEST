@@ -39,6 +39,7 @@ bin60/pm_about.fmx
 bin60/pm_logo.bmp
 bin60/pm_mnu.mmx
 bin60/pm_start.fmx
+common/make/Makefile.mak
 common/make/ora_defs.mki
 common/make/os_defs.mki
 common/make/prj_defs.mki
@@ -156,9 +157,9 @@ install/pm_system_event_tmp.tab
 install/pm_tpi.sql
 install/pm_vw_sqlarea.vw
 install/trc.pck
-make/Makefile.mak
 make/depend.forms.mki
 make/depend.objects.db.gsk.mki
+make/depend.objects.db.file.mki
 make/depend.objects.db.mki
 make/depend.objects.file.gsk.mki
 make/depend.objects.file.mki

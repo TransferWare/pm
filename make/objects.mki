@@ -16,12 +16,15 @@
 # History
 # -------
 # $Log$
+# Revision 1.15  2002/05/24 15:21:20  gpaulissen
+# Update from SFS
+#
 # Revision 1.14  2002/05/24 14:22:52  gpaulissen
 # New release 4.1.0
 #
 # ---------------------------------------------------------------------------- #
 
-SCHEMA := PM_OWNER
+SCHEMA := pm_owner
 
 GSK := N
 
@@ -91,9 +94,6 @@ install.html: $(HTML_FILES:=-install)
 HTML_DIR := $(WKTOP)/html
 
 $(HTML_FILES:=-install): $(HTML_DIR)
-
-$(HTML_DIR):
-	@$(MKDIR) $(subst /,$(PATHSEP),$@)
 
 $(HTML_FILES:=-install): override INSTALL_DIR := $(HTML_DIR)
 

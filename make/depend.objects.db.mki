@@ -13,13 +13,13 @@ install.package_body.pm_owner.gsk_refc: install.package.pm_owner.gsk_refc
 
 uninstall.package.pm_owner.gsk_refc: uninstall.package_body.pm_owner.gsk_refc
 
-install.package_body.pm_owner.pm: install.package.pm_owner.pm
-
-uninstall.package.pm_owner.pm: uninstall.package_body.pm_owner.pm
-
 install.package_body.pm_owner.pm: install.package.pm_owner.trc
 
 uninstall.package.pm_owner.trc: uninstall.package_body.pm_owner.pm
+
+install.package_body.pm_owner.pm: install.package.pm_owner.pm
+
+uninstall.package.pm_owner.pm: uninstall.package_body.pm_owner.pm
 
 install.package_body.pm_owner.pm_cfg: install.package.pm_owner.pm_cfg
 
