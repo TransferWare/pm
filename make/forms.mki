@@ -1,0 +1,124 @@
+# ---------------------------------------------------------------------------- #
+#
+# File:         $RCSfile$
+#
+# Author:       $Author$
+#
+# Date:         $Date$
+#
+# Revision:     $Revision$
+#
+# Purpose:      Definition file for Oracle forms in Performance Monitor project.
+#
+# Parameters:   
+#		
+# Notes:	
+#
+# History
+# -------
+# $Log$
+# Revision 1.6  1999/08/30 12:55:34  gpaulissen
+# Added bin50 and bin60
+#
+# Revision 1.5  1999/05/26 15:57:33  gpaulissen
+# OFG4HPL.plx added to libraries.
+#
+# Revision 1.4  1999/05/25 14:45:15  gpaulissen
+# Released
+#
+# Revision 1.3  1999/04/23 10:42:13  gpaulissen
+# FORMS hangen af van pll's.
+#
+# Revision 1.2  1999/04/23 09:11:45  gpaulissen
+# All files lowercase.
+#
+# Revision 1.1  1999/04/23 09:00:59  gpaulissen
+# Initial revision
+#
+#
+# ---------------------------------------------------------------------------- #
+
+# ---------------------------------------------------------------------------- #
+# Libraries
+# ---------------------------------------------------------------------------- #
+
+FORMS_LIBS = \
+	gskgen.plx \
+	OFG4HPL.plx \
+	$(ENDOFLIST)
+
+# ---------------------------------------------------------------------------- #
+# Reference forms
+# ---------------------------------------------------------------------------- #
+
+REF_FORMS = \
+	gskref.fmb \
+	$(ENDOFLIST)
+
+# ---------------------------------------------------------------------------- #
+# Icons
+# ---------------------------------------------------------------------------- #
+
+ICONS = \
+	abort.ico \
+	afclrall.ico \
+	afclrrw.ico \
+	afdelrw.ico \
+	afedit.ico \
+	affind.ico \
+	afflddwn.ico \
+	affldlft.ico \
+	affldrt.ico \
+	affldup.ico \
+	afhelp.ico \
+	afinsrw.ico \
+	aflist.ico \
+	afprint.ico \
+	afquery.ico \
+	afsave.ico \
+	entqry.ico \
+	keys.ico \
+	$(ENDOFLIST)
+
+# ---------------------------------------------------------------------------- #
+# Forms. Case sensitive!
+# ---------------------------------------------------------------------------- #
+
+FORMS = \
+	pm_about.fmx \
+	pm_start.fmx \
+	$(ENDOFLIST)
+
+pm_start.fmb: pm_start-$(VER_DEV2000).fmt
+	$(FMBGENCMD)
+
+pm_start-60.fmt: pm_start-50.fmt
+	$(CP) $? $@
+
+# Remove pm_start-60.fmt
+
+.INTERMEDIATE: pm_start-60.fmt
+
+# ---------------------------------------------------------------------------- #
+# Menus. Case sensitive!
+# ---------------------------------------------------------------------------- #
+
+MENUS = \
+	pm_mnu.mmx \
+	$(ENDOFLIST)
+
+# ---------------------------------------------------------------------------- #
+# Dependencies
+# ---------------------------------------------------------------------------- #
+
+gskgen.pll: OFG4HPL.pll
+
+gskref.fmb: gskgen.pll
+
+$(MENUS:.mmx=.mmb) $(FORMS:.fmx=.fmb): $(FORMS_LIBS:.plx=.pll)
+
+$(FORMS:.fmx=.fmb): $(REF_FORMS)
+
+# ---------------------------------------------------------------------------- #
+# End of dependencies
+# ---------------------------------------------------------------------------- #
