@@ -7,6 +7,7 @@ Makefile.PL
 VERSION
 common/src/perl/cmd2sql.pl
 common/src/perl/dos2unix.pl
+common/src/perl/file2std.pl
 common/src/perl/makedepend_oracle.pl
 common/src/perl/sql_parse.pl
 common/src/perl/sql_split.pl
@@ -173,8 +174,8 @@ report/afsave.gif
 report/afsave.ico
 report/entqry.gif
 report/entqry.ico
-report/gskgen.pld               # gskgen.plx
-report/gskref.fmt
+report/gskgen.pld		# gskgen.plx
+report/gskref.fmt               # gskref.fmb
 report/keys.gif
 report/keys.ico
 report/pm001.rex		# pm001.rep
@@ -217,11 +218,10 @@ report/pm013.rex		# pm013.rep
 report/pm013.sql
 report/pm013q1.sql
 report/pm_about.fmt		# pm_about.fmx
-report/pm_logo.bmp
 report/pm_logo.gif
 report/pm_mnu.mmt		# pm_mnu.mmx
-report/pm_start.fmt		# pm_start.fmx
 report/pm_params.fmt		# pm_params.fmx
+report/pm_start.fmt		# pm_start.fmx
 report/pmbrpt.sql
 report/pmerpt.sql
 test/factory/data/role_privs.ref
