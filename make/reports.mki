@@ -17,6 +17,9 @@
 # History
 # -------
 # $Log$
+# Revision 1.8  2002/01/24 12:22:56  gpaulissen
+# Dependencies added
+#
 # Revision 1.7  2002/01/17 10:57:14  gpaulissen
 # - make install enhanced.
 # - make depend added (makedepend_oracle.pl, makedepend.sql, makestate.sql).
@@ -79,13 +82,12 @@ install.reports: \
 		 pm013q1.sql-install \
 		 $(ENDOFLIST)
 
-pm012.rep: pm012.ogd
-
-DEPEND_REPORTS ?= \
-	$(REPORTS:.rep=.rex) \
-	$(ENDOFLIST)
-
-depend.reports: makedepend_oracle.pl $(DEPEND_REPORTS)
-	$(depend-forms)		
+# ---------------------------------------------------------------------------- #
+# Dependency build.
+# ---------------------------------------------------------------------------- #
 
 include $(CFGDIR)/depend.reports.mki
+
+# ---------------------------------------------------------------------------- #
+# End of dependency build section.
+# ---------------------------------------------------------------------------- #
