@@ -73,16 +73,16 @@ HTML_FILES = \
 	pm_dpi.html \
 	$(ENDOFLIST)
 
-install.html: $(HTML_FILES:html=html-install)
+install.html: $(HTML_FILES:=-install)
 
 HTML_DIR := $(WKTOP)/html
 
-$(HTML_FILES:html=html-install): $(HTML_DIR)
+$(HTML_FILES:=-install): $(HTML_DIR)
 
 $(HTML_DIR):
 	@$(MKDIR) $(subst /,$(PATHSEP),$@)
 
-$(HTML_FILES:html=html-install): override INSTALL_DIR := $(HTML_DIR)
+$(HTML_FILES:=-install): override INSTALL_DIR := $(HTML_DIR)
 
 # ---------------------------------------------------------------------------- #
 # Gsk
@@ -182,4 +182,3 @@ ifeq ($(findstring $(DEPEND),N n),)
 include $(CFGDIR)/depend.objects.db.mki
 
 endif
-

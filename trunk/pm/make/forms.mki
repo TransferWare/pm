@@ -13,6 +13,9 @@
 # History
 # -------
 # $Log$
+# Revision 1.12  2002/03/08 11:47:39  gpaulissen
+# PM 4.0.0
+#
 # Revision 1.11  2002/02/01 10:59:56  gpaulissen
 # New make environment
 #
@@ -55,13 +58,13 @@
 # ---------------------------------------------------------------------------- #
 
 # ---------------------------------------------------------------------------- #
-# Libraries
+# Libraries from MANIFEST
 # ---------------------------------------------------------------------------- #
 
-FORMS_LIBS = \
-	gskgen.plx \
-	OFG4HPL.plx \
-	$(ENDOFLIST)
+#FORMS_LIBS = \
+#	gskgen.plx \
+#	OFG4HPL.plx \
+#	$(ENDOFLIST)
 
 # ---------------------------------------------------------------------------- #
 # Reference forms
@@ -72,38 +75,38 @@ REF_FORMS = \
 	$(ENDOFLIST)
 
 # ---------------------------------------------------------------------------- #
-# Icons
+# Icons from MANIFEST
 # ---------------------------------------------------------------------------- #
 
-ICONS = \
-	abort.ico \
-	afclrall.ico \
-	afclrrw.ico \
-	afdelrw.ico \
-	afedit.ico \
-	affind.ico \
-	afflddwn.ico \
-	affldlft.ico \
-	affldrt.ico \
-	affldup.ico \
-	afhelp.ico \
-	afinsrw.ico \
-	aflist.ico \
-	afprint.ico \
-	afquery.ico \
-	afsave.ico \
-	entqry.ico \
-	keys.ico \
-	$(ENDOFLIST)
+#ICONS = \
+#	abort.ico \
+#	afclrall.ico \
+#	afclrrw.ico \
+#	afdelrw.ico \
+#	afedit.ico \
+#	affind.ico \
+#	afflddwn.ico \
+#	affldlft.ico \
+#	affldrt.ico \
+#	affldup.ico \
+#	afhelp.ico \
+#	afinsrw.ico \
+#	aflist.ico \
+#	afprint.ico \
+#	afquery.ico \
+#	afsave.ico \
+#	entqry.ico \
+#	keys.ico \
+#	$(ENDOFLIST)
 
 # ---------------------------------------------------------------------------- #
-# Forms. Case sensitive!
+# Forms. Case sensitive! See MANIFEST
 # ---------------------------------------------------------------------------- #
 
-FORMS = \
-	pm_about.fmx \
-	pm_start.fmx \
-	$(ENDOFLIST)
+#FORMS = \
+#	pm_about.fmx \
+#	pm_start.fmx \
+#	$(ENDOFLIST)
 
 ifeq ($(subst .,,$(VER_DEVELOPER)),45)
 
@@ -121,12 +124,12 @@ pm_start.fmt: pm_start-$(subst .,,$(VER_DEVELOPER)).fmt
 	$(CP) $(subst /,$(PATHSEP),$?) $@
 
 # ---------------------------------------------------------------------------- #
-# Menus. Case sensitive!
+# Menus. Case sensitive! See MANIFEST
 # ---------------------------------------------------------------------------- #
 
-MENUS = \
-	pm_mnu.mmx \
-	$(ENDOFLIST)
+#MENUS = \
+#	pm_mnu.mmx \
+#	$(ENDOFLIST)
 
 # ---------------------------------------------------------------------------- #
 # Dependency build.
