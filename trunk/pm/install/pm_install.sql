@@ -147,9 +147,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_run_seq.seq 
+PROMPT Command: START &&pm_HOME/db/pm_run_seq.seq 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_run_seq.seq 
+START &&pm_HOME/db/pm_run_seq.seq 
 SET DEFINE '&'
 COMMIT
 /
@@ -159,9 +159,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_sql_seq.seq 
+PROMPT Command: START &&pm_HOME/db/pm_sql_seq.seq 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_sql_seq.seq 
+START &&pm_HOME/db/pm_sql_seq.seq 
 SET DEFINE '&'
 COMMIT
 /
@@ -185,9 +185,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/cgrefcod.tab 
+PROMPT Command: START &&pm_HOME/db/cgrefcod.tab 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/cgrefcod.tab 
+START &&pm_HOME/db/cgrefcod.tab 
 SET DEFINE '&'
 COMMIT
 /
@@ -197,9 +197,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/gskdb.tab 
+PROMPT Command: START &&pm_HOME/db/gskdb.tab 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/gskdb.tab 
+START &&pm_HOME/db/gskdb.tab 
 SET DEFINE '&'
 COMMIT
 /
@@ -209,9 +209,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_config.tab 
+PROMPT Command: START &&pm_HOME/db/pm_config.tab 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_config.tab 
+START &&pm_HOME/db/pm_config.tab 
 SET DEFINE '&'
 COMMIT
 /
@@ -221,9 +221,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_run.tab 
+PROMPT Command: START &&pm_HOME/db/pm_run.tab 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_run.tab 
+START &&pm_HOME/db/pm_run.tab 
 SET DEFINE '&'
 COMMIT
 /
@@ -233,9 +233,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_session.tab 
+PROMPT Command: START &&pm_HOME/db/pm_session.tab 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_session.tab 
+START &&pm_HOME/db/pm_session.tab 
 SET DEFINE '&'
 COMMIT
 /
@@ -245,9 +245,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_session_tmp.tab 
+PROMPT Command: START &&pm_HOME/db/pm_session_tmp.tab 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_session_tmp.tab 
+START &&pm_HOME/db/pm_session_tmp.tab 
 SET DEFINE '&'
 COMMIT
 /
@@ -257,9 +257,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_sql.tab 
+PROMPT Command: START &&pm_HOME/db/pm_sql.tab 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_sql.tab 
+START &&pm_HOME/db/pm_sql.tab 
 SET DEFINE '&'
 COMMIT
 /
@@ -269,9 +269,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_sql_current.tab 
+PROMPT Command: START &&pm_HOME/db/pm_sql_current.tab 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_sql_current.tab 
+START &&pm_HOME/db/pm_sql_current.tab 
 SET DEFINE '&'
 COMMIT
 /
@@ -281,9 +281,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_sql_id.tab 
+PROMPT Command: START &&pm_HOME/db/pm_sql_id.tab 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_sql_id.tab 
+START &&pm_HOME/db/pm_sql_id.tab 
 SET DEFINE '&'
 COMMIT
 /
@@ -293,9 +293,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_sqlarea.tab 
+PROMPT Command: START &&pm_HOME/db/pm_sqlarea.tab 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_sqlarea.tab 
+START &&pm_HOME/db/pm_sqlarea.tab 
 SET DEFINE '&'
 COMMIT
 /
@@ -305,9 +305,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_sqlarea_tmp.tab 
+PROMPT Command: START &&pm_HOME/db/pm_sqlarea_tmp.tab 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_sqlarea_tmp.tab 
+START &&pm_HOME/db/pm_sqlarea_tmp.tab 
 SET DEFINE '&'
 COMMIT
 /
@@ -317,9 +317,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_sysstat.tab 
+PROMPT Command: START &&pm_HOME/db/pm_sysstat.tab 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_sysstat.tab 
+START &&pm_HOME/db/pm_sysstat.tab 
 SET DEFINE '&'
 COMMIT
 /
@@ -329,9 +329,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_sysstat_tmp.tab 
+PROMPT Command: START &&pm_HOME/db/pm_sysstat_tmp.tab 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_sysstat_tmp.tab 
+START &&pm_HOME/db/pm_sysstat_tmp.tab 
 SET DEFINE '&'
 COMMIT
 /
@@ -341,9 +341,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_system_event.tab 
+PROMPT Command: START &&pm_HOME/db/pm_system_event.tab 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_system_event.tab 
+START &&pm_HOME/db/pm_system_event.tab 
 SET DEFINE '&'
 COMMIT
 /
@@ -353,9 +353,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_system_event_tmp.tab 
+PROMPT Command: START &&pm_HOME/db/pm_system_event_tmp.tab 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_system_event_tmp.tab 
+START &&pm_HOME/db/pm_system_event_tmp.tab 
 SET DEFINE '&'
 COMMIT
 /
@@ -367,9 +367,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/gsk_refc.dat 
+PROMPT Command: START &&pm_HOME/db/gsk_refc.dat 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/gsk_refc.dat 
+START &&pm_HOME/db/gsk_refc.dat 
 SET DEFINE '&'
 COMMIT
 /
@@ -379,9 +379,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/gskdb.dat 
+PROMPT Command: START &&pm_HOME/db/gskdb.dat 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/gskdb.dat 
+START &&pm_HOME/db/gskdb.dat 
 SET DEFINE '&'
 COMMIT
 /
@@ -405,9 +405,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/gskdb.pck 
+PROMPT Command: START &&pm_HOME/db/gskdb.pck 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/gskdb.pck 
+START &&pm_HOME/db/gskdb.pck 
 SET DEFINE '&'
 COMMIT
 /
@@ -417,9 +417,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/trc.pck 
+PROMPT Command: START &&pm_HOME/db/trc.pck 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/trc.pck 
+START &&pm_HOME/db/trc.pck 
 SET DEFINE '&'
 COMMIT
 /
@@ -429,9 +429,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm.pck 
+PROMPT Command: START &&pm_HOME/db/pm.pck 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm.pck 
+START &&pm_HOME/db/pm.pck 
 SET DEFINE '&'
 COMMIT
 /
@@ -441,9 +441,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_cfg.pck 
+PROMPT Command: START &&pm_HOME/db/pm_cfg.pck 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_cfg.pck 
+START &&pm_HOME/db/pm_cfg.pck 
 SET DEFINE '&'
 COMMIT
 /
@@ -453,9 +453,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_dpi.pks 
+PROMPT Command: START &&pm_HOME/db/pm_dpi.pks 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_dpi.pks 
+START &&pm_HOME/db/pm_dpi.pks 
 SET DEFINE '&'
 COMMIT
 /
@@ -465,9 +465,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_mpi.pks 
+PROMPT Command: START &&pm_HOME/db/pm_mpi.pks 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_mpi.pks 
+START &&pm_HOME/db/pm_mpi.pks 
 SET DEFINE '&'
 COMMIT
 /
@@ -497,9 +497,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_vw_sqlarea.vw 
+PROMPT Command: START &&pm_HOME/db/pm_vw_sqlarea.vw 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_vw_sqlarea.vw 
+START &&pm_HOME/db/pm_vw_sqlarea.vw 
 SET DEFINE '&'
 COMMIT
 /
@@ -519,9 +519,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/gskdb.con 
+PROMPT Command: START &&pm_HOME/db/gskdb.con 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/gskdb.con 
+START &&pm_HOME/db/gskdb.con 
 SET DEFINE '&'
 COMMIT
 /
@@ -531,9 +531,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_run.con 
+PROMPT Command: START &&pm_HOME/db/pm_run.con 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_run.con 
+START &&pm_HOME/db/pm_run.con 
 SET DEFINE '&'
 COMMIT
 /
@@ -543,9 +543,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_sql_id.con 
+PROMPT Command: START &&pm_HOME/db/pm_sql_id.con 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_sql_id.con 
+START &&pm_HOME/db/pm_sql_id.con 
 SET DEFINE '&'
 COMMIT
 /
@@ -555,9 +555,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_sql.con 
+PROMPT Command: START &&pm_HOME/db/pm_sql.con 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_sql.con 
+START &&pm_HOME/db/pm_sql.con 
 SET DEFINE '&'
 COMMIT
 /
@@ -567,9 +567,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_sqlarea.con 
+PROMPT Command: START &&pm_HOME/db/pm_sqlarea.con 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_sqlarea.con 
+START &&pm_HOME/db/pm_sqlarea.con 
 SET DEFINE '&'
 COMMIT
 /
@@ -579,9 +579,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_config.con 
+PROMPT Command: START &&pm_HOME/db/pm_config.con 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_config.con 
+START &&pm_HOME/db/pm_config.con 
 SET DEFINE '&'
 COMMIT
 /
@@ -591,9 +591,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_sql_current.con 
+PROMPT Command: START &&pm_HOME/db/pm_sql_current.con 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_sql_current.con 
+START &&pm_HOME/db/pm_sql_current.con 
 SET DEFINE '&'
 COMMIT
 /
@@ -603,9 +603,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_session.con 
+PROMPT Command: START &&pm_HOME/db/pm_session.con 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_session.con 
+START &&pm_HOME/db/pm_session.con 
 SET DEFINE '&'
 COMMIT
 /
@@ -615,9 +615,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_system_event_tmp.con 
+PROMPT Command: START &&pm_HOME/db/pm_system_event_tmp.con 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_system_event_tmp.con 
+START &&pm_HOME/db/pm_system_event_tmp.con 
 SET DEFINE '&'
 COMMIT
 /
@@ -627,9 +627,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_system_event.con 
+PROMPT Command: START &&pm_HOME/db/pm_system_event.con 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_system_event.con 
+START &&pm_HOME/db/pm_system_event.con 
 SET DEFINE '&'
 COMMIT
 /
@@ -639,9 +639,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_session_tmp.con 
+PROMPT Command: START &&pm_HOME/db/pm_session_tmp.con 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_session_tmp.con 
+START &&pm_HOME/db/pm_session_tmp.con 
 SET DEFINE '&'
 COMMIT
 /
@@ -651,9 +651,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_sysstat.con 
+PROMPT Command: START &&pm_HOME/db/pm_sysstat.con 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_sysstat.con 
+START &&pm_HOME/db/pm_sysstat.con 
 SET DEFINE '&'
 COMMIT
 /
@@ -663,9 +663,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_sysstat_tmp.con 
+PROMPT Command: START &&pm_HOME/db/pm_sysstat_tmp.con 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_sysstat_tmp.con 
+START &&pm_HOME/db/pm_sysstat_tmp.con 
 SET DEFINE '&'
 COMMIT
 /
@@ -677,9 +677,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_sqlarea_tmp.ind 
+PROMPT Command: START &&pm_HOME/db/pm_sqlarea_tmp.ind 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_sqlarea_tmp.ind 
+START &&pm_HOME/db/pm_sqlarea_tmp.ind 
 SET DEFINE '&'
 COMMIT
 /
@@ -689,9 +689,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_run.ind 
+PROMPT Command: START &&pm_HOME/db/pm_run.ind 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_run.ind 
+START &&pm_HOME/db/pm_run.ind 
 SET DEFINE '&'
 COMMIT
 /
@@ -701,9 +701,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_session.ind 
+PROMPT Command: START &&pm_HOME/db/pm_session.ind 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_session.ind 
+START &&pm_HOME/db/pm_session.ind 
 SET DEFINE '&'
 COMMIT
 /
@@ -713,9 +713,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_sql.ind 
+PROMPT Command: START &&pm_HOME/db/pm_sql.ind 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_sql.ind 
+START &&pm_HOME/db/pm_sql.ind 
 SET DEFINE '&'
 COMMIT
 /
@@ -742,9 +742,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/common/src/sql/release_info.sql NEW pm 4.2.0
+PROMPT Command: START &&pm_HOME/common/src/sql/release_info.sql NEW pm 6.0.0
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/common/src/sql/release_info.sql NEW pm 4.2.0
+START &&pm_HOME/common/src/sql/release_info.sql NEW pm 6.0.0
 SET DEFINE '&'
 COMMIT
 /

@@ -4,7 +4,7 @@
 # schema     : pm_owner 
 # files      : depend.objects.file.mki depend.objects.db.mki 
 
-# install.constraint.pm_owner.gsk_mld_ck1 depends on install.table.pm_owner.gsk_meldingen
+# install.constraint.pm_owner.gsk_mld_pk depends on install.table.pm_owner.gsk_meldingen
 gskdb.con-run: install.table.pm_owner.gsk_meldingen
 
 # install.package_body.pm_owner.gsk_refc depends on install.table.pm_owner.cg_ref_codes
@@ -61,13 +61,13 @@ pm.pck-run: install.table.pm_owner.pm_system_event_tmp
 # install.package_body.pm_owner.pm_cfg depends on install.table.pm_owner.pm_config
 pm_cfg.pck-run: install.table.pm_owner.pm_config
 
-# install.package_body.pm_owner.pm_cfg depends on install.table.pm_owner.pm_run
+# install.package.pm_owner.pm_cfg depends on install.table.pm_owner.pm_run
 pm_cfg.pck-run: install.table.pm_owner.pm_run
 
-# install.constraint.pm_owner.pm_cfg_ck1 depends on install.table.pm_owner.pm_config
+# install.constraint.pm_owner.pm_cfg_pk depends on install.table.pm_owner.pm_config
 pm_config.con-run: install.table.pm_owner.pm_config
 
-# install.constraint.pm_owner.pm_run_pk depends on install.table.pm_owner.pm_run
+# install.constraint.pm_owner.pm_run_ck1 depends on install.table.pm_owner.pm_run
 pm_run.con-run: install.table.pm_owner.pm_run
 
 # install.constraint.pm_owner.pm_ses_run_fk1 depends on install.constraint.pm_owner.pm_run_pk
@@ -76,7 +76,7 @@ pm_session.con-run: install.constraint.pm_owner.pm_run_pk
 # install.constraint.pm_owner.pm_ses_sql_fk1 depends on install.constraint.pm_owner.pm_sql_pk
 pm_session.con-run: install.constraint.pm_owner.pm_sql_pk
 
-# install.constraint.pm_owner.pm_ses_sql_fk1 depends on install.table.pm_owner.pm_session
+# install.constraint.pm_owner.pm_ses_run_fk1 depends on install.table.pm_owner.pm_session
 pm_session.con-run: install.table.pm_owner.pm_session
 
 # install.constraint.pm_owner.pm_stp_pk depends on install.table.pm_owner.pm_session_tmp
@@ -100,13 +100,13 @@ pm_sqlarea.con-run: install.constraint.pm_owner.pm_run_pk
 # install.constraint.pm_owner.pm_are_sql_fk1 depends on install.constraint.pm_owner.pm_sql_pk
 pm_sqlarea.con-run: install.constraint.pm_owner.pm_sql_pk
 
-# install.constraint.pm_owner.pm_are_run_fk1 depends on install.table.pm_owner.pm_sqlarea
+# install.constraint.pm_owner.pm_are_pk depends on install.table.pm_owner.pm_sqlarea
 pm_sqlarea.con-run: install.table.pm_owner.pm_sqlarea
 
 # install.constraint.pm_owner.pm_sys_run_fk1 depends on install.constraint.pm_owner.pm_run_pk
 pm_sysstat.con-run: install.constraint.pm_owner.pm_run_pk
 
-# install.constraint.pm_owner.pm_sys_ck1 depends on install.table.pm_owner.pm_sysstat
+# install.constraint.pm_owner.pm_sys_run_fk1 depends on install.table.pm_owner.pm_sysstat
 pm_sysstat.con-run: install.table.pm_owner.pm_sysstat
 
 # install.constraint.pm_owner.pm_syt_pk depends on install.table.pm_owner.pm_sysstat_tmp
@@ -115,7 +115,7 @@ pm_sysstat_tmp.con-run: install.table.pm_owner.pm_sysstat_tmp
 # install.constraint.pm_owner.pm_sev_run_fk1 depends on install.constraint.pm_owner.pm_run_pk
 pm_system_event.con-run: install.constraint.pm_owner.pm_run_pk
 
-# install.constraint.pm_owner.pm_sev_pk depends on install.table.pm_owner.pm_system_event
+# install.constraint.pm_owner.pm_sev_run_fk1 depends on install.table.pm_owner.pm_system_event
 pm_system_event.con-run: install.table.pm_owner.pm_system_event
 
 # install.constraint.pm_owner.pm_set_pk depends on install.table.pm_owner.pm_system_event_tmp

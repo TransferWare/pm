@@ -147,9 +147,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/gskdb.pck 
+PROMPT Command: START &&pm_HOME/db/gskdb.pck 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/gskdb.pck 
+START &&pm_HOME/db/gskdb.pck 
 SET DEFINE '&'
 COMMIT
 /
@@ -159,9 +159,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm.pck 
+PROMPT Command: START &&pm_HOME/db/pm.pck 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm.pck 
+START &&pm_HOME/db/pm.pck 
 SET DEFINE '&'
 COMMIT
 /
@@ -171,9 +171,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_cfg.pck 
+PROMPT Command: START &&pm_HOME/db/pm_cfg.pck 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_cfg.pck 
+START &&pm_HOME/db/pm_cfg.pck 
 SET DEFINE '&'
 COMMIT
 /
@@ -183,9 +183,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_dpi.pks 
+PROMPT Command: START &&pm_HOME/db/pm_dpi.pks 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_dpi.pks 
+START &&pm_HOME/db/pm_dpi.pks 
 SET DEFINE '&'
 COMMIT
 /
@@ -195,9 +195,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_mpi.pks 
+PROMPT Command: START &&pm_HOME/db/pm_mpi.pks 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_mpi.pks 
+START &&pm_HOME/db/pm_mpi.pks 
 SET DEFINE '&'
 COMMIT
 /
@@ -207,9 +207,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/trc.pck 
+PROMPT Command: START &&pm_HOME/db/trc.pck 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/trc.pck 
+START &&pm_HOME/db/trc.pck 
 SET DEFINE '&'
 COMMIT
 /
@@ -239,9 +239,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/Install/pm_vw_sqlarea.vw 
+PROMPT Command: START &&pm_HOME/db/pm_vw_sqlarea.vw 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/Install/pm_vw_sqlarea.vw 
+START &&pm_HOME/db/pm_vw_sqlarea.vw 
 SET DEFINE '&'
 COMMIT
 /

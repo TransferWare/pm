@@ -566,9 +566,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/common/src/sql/release_info.sql REMOVE pm 4.2.0 TRUE
+PROMPT Command: START &&pm_HOME/common/src/sql/release_info.sql REMOVE pm 6.0.0 TRUE
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/common/src/sql/release_info.sql REMOVE pm 4.2.0 TRUE
+START &&pm_HOME/common/src/sql/release_info.sql REMOVE pm 6.0.0 TRUE
 SET DEFINE '&'
 COMMIT
 /

@@ -1,0 +1,33 @@
+/*
+    The Performance Monitor monitors your Oracle databases.
+    Copyright (C) 2002  G.J. Paulissen, Transfer Solutions b.v., Leerdam, Netherlands
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
+REM $Header$
+REM
+REM  This ORACLE7 command file was created manually
+REM  on 01-12-1997
+REM
+REM For application GSK version 1.3 database GSK
+REM
+
+drop package gsk_mctp;
+drop package gsk_refc;
+drop package gsk_msg;
+
+drop table gsk_meldingen cascade constraints;
+
+
