@@ -1,0 +1,163 @@
+# ---------------------------------------------------------------------------- #
+#
+# File:         $RCSfile$
+#
+# Author:       $Author$
+#
+# Date:         $Date$
+#
+# Revision:     $Revision$
+#
+# Purpose:      Definition file for Oracle database objects in 
+#		Performance Monitor project.
+#
+# Parameters:   
+#		
+# Notes:	
+#
+# History
+# -------
+# $Log$
+# Revision 1.4  1999/08/09 08:35:00  gpaulissen
+# Changes:
+# 1) Help updated
+# 2) chmod for forms, etc. removed (not needed)
+# 3) GSK cg_ref_codes table added to installation procedures.
+#
+# Revision 1.3  1999/06/03 14:05:16  gpaulissen
+# Added GSK
+#
+# Revision 1.2  1999/05/25 14:45:15  gpaulissen
+# Released
+#
+# Revision 1.1  1999/04/23 09:00:59  gpaulissen
+# Initial revision
+#
+#
+# ---------------------------------------------------------------------------- #
+ 
+CONSTRAINTS = \
+	pm_config.con-run \
+	pm_run.con-run \
+	pm_sess_io.con-run \
+	pm_sql_id.con-run \
+	pm_sql.con-run \
+	pm_session.con-run \
+	pm_sql_current.con-run \
+	pm_sysstat.con-run \
+	pm_sysstat_tmp.con-run \
+	pm_system_event.con-run \
+	pm_system_event_tmp.con-run \
+	pm_sqlarea.con-run \
+	$(ENDOFLIST)
+
+# ---------------------------------------------------------------------------- #
+# Constraints must be made in the right dependency order.
+# This can be assured by using output of tabdepend.sql 
+# ---------------------------------------------------------------------------- #
+
+# Constraint dependencies
+
+pm_session.con-run:		       pm_run.con-run
+pm_session.con-run:		       pm_sql.con-run
+pm_sess_io.con-run:		       pm_run.con-run
+pm_sql.con-run:			       pm_sql_id.con-run
+pm_sqlarea.con-run:		       pm_run.con-run
+pm_sqlarea.con-run:		       pm_sql.con-run
+pm_sysstat.con-run:		       pm_run.con-run
+pm_system_event.con-run: 	       pm_run.con-run
+
+FUNCTIONS = \
+	$(ENDOFLIST)
+
+PACKAGES = \
+	trc.pck-run \
+	pm.pck-run \
+	pm_cfg.pck-run \
+	$(ENDOFLIST)
+
+PROCEDURES = \
+	$(ENDOFLIST)
+
+# ---------------------------------------------------------------------------- #
+# Stored procedure dependencies
+# This can be constructed by running spdepend.sql
+# ---------------------------------------------------------------------------- #
+
+pm.pck-run: trc.pck-run
+
+# ---------------------------------------------------------------------------- #
+# End of stored procedure dependencies
+# ---------------------------------------------------------------------------- #
+
+INDEXES = \
+	pm_sqlarea.ind-run \
+	pm_sqlarea_tmp.ind-run \
+	pm_run.ind-run \
+	pm_session.ind-run \
+	pm_system_event.ind-run \
+	pm_sess_io.ind-run \
+	pm_sql.ind-run \
+	pm_sysstat.ind-run \
+	$(ENDOFLIST)
+
+SEQUENCES = \
+	pm_run_seq.seq-run \
+	pm_sql_seq.seq-run \
+	$(ENDOFLIST)
+
+DATA = \
+	$(ENDOFLIST)
+
+SYNONYMS = \
+	$(ENDOFLIST)
+
+TABLES = \
+   	pm_config.tab-run \
+       	pm_run.tab-run \
+       	pm_session.tab-run \
+       	pm_sess_io.tab-run \
+       	pm_sql.tab-run \
+       	pm_sqlarea.tab-run \
+       	pm_sqlarea_tmp.tab-run \
+       	pm_sql_current.tab-run \
+       	pm_sql_id.tab-run \
+       	pm_sysstat.tab-run \
+       	pm_sysstat_tmp.tab-run \
+       	pm_system_event.tab-run \
+       	pm_system_event_tmp.tab-run \
+       	$(ENDOFLIST)
+
+TRIGGERS = \
+	$(ENDOFLIST)
+
+UPGRADES = \
+	$(ENDOFLIST)
+
+VIEWS = \
+      	pm_vw_sqlarea.vw-run \
+      	$(ENDOFLIST)
+
+install.gsk:	\
+	cgrefcod.tab-run \
+	gskdb.tab-run \
+	gskdb.con-run \
+	gskdbfill.sql-run \
+	gskdbfill.sql-remove \
+	gskdb.pck-run \
+	$(ENDOFLIST)
+
+gskdbfill.sql:: gsk_refc.dat
+	$(ECHO) @@ $? > $@
+
+gskdbfill.sql:: gskdb.dat
+	$(ECHO) @@ $? >> $@
+
+uninstall.gsk: \
+	cg_ref_codes.tab-drop \
+	gsk_meldingen.tab-drop \
+	gsk_mctp.pck-drop \
+	gsk_refc.pck-drop \
+	gsk_msg.pck-drop \
+	$(ENDOFLIST)
+	
