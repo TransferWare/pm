@@ -37,6 +37,25 @@ install.reports: \
 	pm012.ogd-install \
 	$(ENDOFLIST)
 
+EXT_QUERIES = \
+	pm001q2.sql \
+	pm0041q1.sql \
+	pm0042q1.sql \
+	pm0043q1.sql \
+	pm005q1.sql \
+	pm007q1.sql \
+	pm008q1.sql \
+	pm009q1.sql \
+	pm010q1.sql \
+	pm011q1.sql \
+	pm012q1.sql \
+	pm013q1.sql \
+	$(ENDOFLIST)
+
+install.reports: $(EXT_QUERIES:=-install)
+
+$(EXT_QUERIES:=-install): INSTALL_DIR = $(RPT_BIN)
+
 pm012.ogd-install pm_logo.gif-install: mkdir.rpt_bin
 
 pm012.ogd-install pm_logo.gif-install: override INSTALL_DIR := $(RPT_BIN)

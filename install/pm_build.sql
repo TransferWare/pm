@@ -466,6 +466,30 @@ PROMPT echo *** Installing reports: OK ***
 PROMPT &&on_error_exit_cmd
 PROMPT copy "&&pm_HOME\report\pm012.ogd" "&&pm_RPT_BIN"
 PROMPT &&on_error_exit_cmd
+PROMPT copy "&&pm_HOME\report\pm001q2.sql" "&&pm_RPT_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "&&pm_HOME\report\pm0041q1.sql" "&&pm_RPT_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "&&pm_HOME\report\pm0042q1.sql" "&&pm_RPT_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "&&pm_HOME\report\pm0043q1.sql" "&&pm_RPT_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "&&pm_HOME\report\pm005q1.sql" "&&pm_RPT_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "&&pm_HOME\report\pm007q1.sql" "&&pm_RPT_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "&&pm_HOME\report\pm008q1.sql" "&&pm_RPT_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "&&pm_HOME\report\pm009q1.sql" "&&pm_RPT_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "&&pm_HOME\report\pm010q1.sql" "&&pm_RPT_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "&&pm_HOME\report\pm011q1.sql" "&&pm_RPT_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "&&pm_HOME\report\pm012q1.sql" "&&pm_RPT_BIN"
+PROMPT &&on_error_exit_cmd
+PROMPT copy "&&pm_HOME\report\pm013q1.sql" "&&pm_RPT_BIN"
+PROMPT &&on_error_exit_cmd
 PROMPT copy "&&pm_HOME\VERSION" "&&pm_FRM_BIN"
 PROMPT &&on_error_exit_cmd
 PROMPT &&set_file_writable_cmd &&log_file
