@@ -16,6 +16,9 @@
 # History
 # -------
 # $Log$
+# Revision 1.18  2003/01/28 21:52:08  gpaulissen
+# Update common
+#
 # Revision 1.17  2003/01/28 21:42:52  gpaulissen
 # Update common
 #
@@ -85,16 +88,18 @@ OBJECTS_SCRIPTS := \
 # No insert for PM
 DATA_TABLES_SQLLOADER := 
 
+DATA_TABLES_SQLPLUS_SUFFIX := .sql
+
 DATA_TABLES_SQLPLUS := \
 	cg_ref_codes \
 	gsk_meldingen \
 	$(ENDOFLIST)
 
 # cg_ref_codes.sql-run is a dummy
-cg_ref_codes.sql-run: gsk_refc.dat-run
+insert.table.$(SCHEMA).cg_ref_codes: gsk_refc.dat-run
 
 # gsk_meldingen.sql-run is a dummy
-gsk_meldingen.sql-run: gskdb.dat-run
+insert.table.$(SCHEMA).gsk_meldingen: gskdb.dat-run
 
 HTML_FILES := \
 	trc.html \
