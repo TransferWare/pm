@@ -113,18 +113,16 @@ REMARK Start of section 2
 REMARK This section may be edited.
 REMARK *************************************************************************
 
-COMMIT
-/
 
 DEFINE log_file = 'output00001.&&sessionid..log'
 PROMPT Log file: &&log_file
 SPOOL &&log_file
-START &&restore_sql
+START &&connect_sql pm_owner/pm_owner@ibm
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/common/src/sql/set_common_sql_dir.sql "&&pm_HOME/common/src/sql/"
+PROMPT Command: START &&pm_HOME\common/src/sql/set_common_sql_dir.sql "&&pm_HOME\common/src/sql/"
 SET VERIFY ON DEFINE ON
 PROMPT &&pm_HOME
-START &&pm_HOME/common/src/sql/set_common_sql_dir.sql "&&pm_HOME/common/src/sql/"
+START &&pm_HOME\common/src/sql/set_common_sql_dir.sql "&&pm_HOME\common/src/sql/"
 SET DEFINE '&'
 COMMIT
 /
@@ -134,9 +132,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/common/src/sql/dict_check.sql pm_owner
+PROMPT Command: START &&pm_HOME\common/src/sql/dict_check.sql pm_owner
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/common/src/sql/dict_check.sql pm_owner
+START &&pm_HOME\common/src/sql/dict_check.sql pm_owner
 SET DEFINE '&'
 COMMIT
 /
@@ -148,55 +146,55 @@ SPOOL &&host_bat
 PROMPT &&begin_cmd
 PROMPT &&create_file_cmd &&log_file
 PROMPT &&set_file_readonly_cmd &&log_file
-PROMPT fc user_objects.lis "p:\ontw\tools\pm\\user_objects.lis"
+PROMPT fc user_objects.lis "&&pm_HOME\\user_objects.lis"
 PROMPT &&on_error_exit_cmd
 PROMPT echo Checking user_constraints.lis
 PROMPT &&on_error_exit_cmd
-PROMPT fc user_constraints.lis "p:\ontw\tools\pm\\user_constraints.lis"
+PROMPT fc user_constraints.lis "&&pm_HOME\\user_constraints.lis"
 PROMPT &&on_error_exit_cmd
 PROMPT echo Checking user_indexes.lis
 PROMPT &&on_error_exit_cmd
-PROMPT fc user_indexes.lis "p:\ontw\tools\pm\\user_indexes.lis"
+PROMPT fc user_indexes.lis "&&pm_HOME\\user_indexes.lis"
 PROMPT &&on_error_exit_cmd
 PROMPT echo Checking user_source.lis
 PROMPT &&on_error_exit_cmd
-PROMPT fc user_source.lis "p:\ontw\tools\pm\\user_source.lis"
+PROMPT fc user_source.lis "&&pm_HOME\\user_source.lis"
 PROMPT &&on_error_exit_cmd
 PROMPT echo Checking user_sequences.lis
 PROMPT &&on_error_exit_cmd
-PROMPT fc user_sequences.lis "p:\ontw\tools\pm\\user_sequences.lis"
+PROMPT fc user_sequences.lis "&&pm_HOME\\user_sequences.lis"
 PROMPT &&on_error_exit_cmd
 PROMPT echo Checking user_tables.lis
 PROMPT &&on_error_exit_cmd
-PROMPT fc user_tables.lis "p:\ontw\tools\pm\\user_tables.lis"
+PROMPT fc user_tables.lis "&&pm_HOME\\user_tables.lis"
 PROMPT &&on_error_exit_cmd
 PROMPT echo Checking user_triggers.lis
 PROMPT &&on_error_exit_cmd
-PROMPT fc user_triggers.lis "p:\ontw\tools\pm\\user_triggers.lis"
+PROMPT fc user_triggers.lis "&&pm_HOME\\user_triggers.lis"
 PROMPT &&on_error_exit_cmd
 PROMPT echo Checking user_views.lis
 PROMPT &&on_error_exit_cmd
-PROMPT fc user_views.lis "p:\ontw\tools\pm\\user_views.lis"
+PROMPT fc user_views.lis "&&pm_HOME\\user_views.lis"
 PROMPT &&on_error_exit_cmd
 PROMPT echo Checking user_synonyms.lis
 PROMPT &&on_error_exit_cmd
-PROMPT fc user_synonyms.lis "p:\ontw\tools\pm\\user_synonyms.lis"
+PROMPT fc user_synonyms.lis "&&pm_HOME\\user_synonyms.lis"
 PROMPT &&on_error_exit_cmd
 PROMPT echo Checking user_db_links.lis
 PROMPT &&on_error_exit_cmd
-PROMPT fc user_db_links.lis "p:\ontw\tools\pm\\user_db_links.lis"
+PROMPT fc user_db_links.lis "&&pm_HOME\\user_db_links.lis"
 PROMPT &&on_error_exit_cmd
 PROMPT echo Checking user_tab_columns.lis
 PROMPT &&on_error_exit_cmd
-PROMPT fc user_tab_columns.lis "p:\ontw\tools\pm\\user_tab_columns.lis"
+PROMPT fc user_tab_columns.lis "&&pm_HOME\\user_tab_columns.lis"
 PROMPT &&on_error_exit_cmd
 PROMPT echo Checking user_users.lis
 PROMPT &&on_error_exit_cmd
-PROMPT fc user_users.lis "p:\ontw\tools\pm\\user_users.lis"
+PROMPT fc user_users.lis "&&pm_HOME\\user_users.lis"
 PROMPT &&on_error_exit_cmd
 PROMPT echo Checking user_grants.lis
 PROMPT &&on_error_exit_cmd
-PROMPT fc user_grants.lis "p:\ontw\tools\pm\\user_grants.lis"
+PROMPT fc user_grants.lis "&&pm_HOME\\user_grants.lis"
 PROMPT &&on_error_exit_cmd
 PROMPT &&set_file_writable_cmd &&log_file
 PROMPT &&end_cmd
@@ -208,9 +206,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/common/src/sql/user_tables.sql pm_owner.cg_ref_codes """1=1""" > pm_owner.cg_ref_codes.lis
+PROMPT Command: START &&pm_HOME\common/src/sql/user_tables.sql pm_owner.cg_ref_codes """1=1""" > pm_owner.cg_ref_codes.lis
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/common/src/sql/user_tables.sql pm_owner.cg_ref_codes """1=1""" > pm_owner.cg_ref_codes.lis
+START &&pm_HOME\common/src/sql/user_tables.sql pm_owner.cg_ref_codes """1=1""" > pm_owner.cg_ref_codes.lis
 SET DEFINE '&'
 COMMIT
 /
@@ -222,7 +220,7 @@ SPOOL &&host_bat
 PROMPT &&begin_cmd
 PROMPT &&create_file_cmd &&log_file
 PROMPT &&set_file_readonly_cmd &&log_file
-PROMPT fc pm_owner.cg_ref_codes.lis "p:\ontw\tools\pm\\pm_owner.cg_ref_codes.lis"
+PROMPT fc pm_owner.cg_ref_codes.lis "&&pm_HOME\\pm_owner.cg_ref_codes.lis"
 PROMPT &&on_error_exit_cmd
 PROMPT &&set_file_writable_cmd &&log_file
 PROMPT &&end_cmd
@@ -234,9 +232,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/common/src/sql/user_tables.sql pm_owner.gsk_meldingen """1=1""" > pm_owner.gsk_meldingen.lis
+PROMPT Command: START &&pm_HOME\common/src/sql/user_tables.sql pm_owner.gsk_meldingen """1=1""" > pm_owner.gsk_meldingen.lis
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/common/src/sql/user_tables.sql pm_owner.gsk_meldingen """1=1""" > pm_owner.gsk_meldingen.lis
+START &&pm_HOME\common/src/sql/user_tables.sql pm_owner.gsk_meldingen """1=1""" > pm_owner.gsk_meldingen.lis
 SET DEFINE '&'
 COMMIT
 /
@@ -248,7 +246,7 @@ SPOOL &&host_bat
 PROMPT &&begin_cmd
 PROMPT &&create_file_cmd &&log_file
 PROMPT &&set_file_readonly_cmd &&log_file
-PROMPT fc pm_owner.gsk_meldingen.lis "p:\ontw\tools\pm\\pm_owner.gsk_meldingen.lis"
+PROMPT fc pm_owner.gsk_meldingen.lis "&&pm_HOME\\pm_owner.gsk_meldingen.lis"
 PROMPT &&on_error_exit_cmd
 PROMPT &&set_file_writable_cmd &&log_file
 PROMPT &&end_cmd

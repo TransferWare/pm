@@ -35,6 +35,9 @@ PROMPT                  1 - account to grant to
 PROMPT                  &&1
 PROMPT
 REMARK  $Log$
+REMARK  Revision 1.2  2004/02/06 09:50:56  gpaulissen
+REMARK  Release 6.4.0
+REMARK
 REMARK  Revision 1.1  2003/08/28 14:44:48  gpaulissen
 REMARK  Release 6.0.0
 REMARK

@@ -113,18 +113,16 @@ REMARK Start of section 2
 REMARK This section may be edited.
 REMARK *************************************************************************
 
-COMMIT
-/
 
 DEFINE log_file = 'output00001.&&sessionid..log'
 PROMPT Log file: &&log_file
 SPOOL &&log_file
-START &&restore_sql
+START &&connect_sql pm_owner/pm_owner@ibm
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/common/src/sql/set_common_sql_dir.sql "&&pm_HOME/common/src/sql/"
+PROMPT Command: START &&pm_HOME\common/src/sql/set_common_sql_dir.sql "&&pm_HOME\common/src/sql/"
 SET VERIFY ON DEFINE ON
 PROMPT &&pm_HOME
-START &&pm_HOME/common/src/sql/set_common_sql_dir.sql "&&pm_HOME/common/src/sql/"
+START &&pm_HOME\common/src/sql/set_common_sql_dir.sql "&&pm_HOME\common/src/sql/"
 SET DEFINE '&'
 COMMIT
 /
@@ -134,9 +132,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/common/src/sql/check_sql_env.sql PRIVILEGE create_procedure
+PROMPT Command: START &&pm_HOME\common/src/sql/check_sql_env.sql PRIVILEGE create_procedure
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/common/src/sql/check_sql_env.sql PRIVILEGE create_procedure
+START &&pm_HOME\common/src/sql/check_sql_env.sql PRIVILEGE create_procedure
 SET DEFINE '&'
 COMMIT
 /
@@ -226,9 +224,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/common/src/sql/check_sql_env.sql PRIVILEGE create_view
+PROMPT Command: START &&pm_HOME\common/src/sql/check_sql_env.sql PRIVILEGE create_view
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/common/src/sql/check_sql_env.sql PRIVILEGE create_view
+START &&pm_HOME\common/src/sql/check_sql_env.sql PRIVILEGE create_view
 SET DEFINE '&'
 COMMIT
 /
@@ -254,9 +252,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/common/src/sql/recomp.sql 
+PROMPT Command: START &&pm_HOME\common/src/sql/recomp.sql 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME/common/src/sql/recomp.sql 
+START &&pm_HOME\common/src/sql/recomp.sql 
 SET DEFINE '&'
 COMMIT
 /
@@ -268,10 +266,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/common/src/sql/check_sql_env.sql CONNECT "&&userid"
+PROMPT Command: START &&pm_HOME\common/src/sql/check_sql_env.sql CONNECT "pm_owner/pm_owner@ibm"
 SET VERIFY ON DEFINE ON
-PROMPT &&userid
-START &&pm_HOME/common/src/sql/check_sql_env.sql CONNECT "&&userid"
+START &&pm_HOME\common/src/sql/check_sql_env.sql CONNECT "pm_owner/pm_owner@ibm"
 SET DEFINE '&'
 COMMIT
 /

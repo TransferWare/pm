@@ -18,6 +18,9 @@ PROMPT 			3 - End time exclusive (Oracle YYYYMMDDHH24MISS format)
 PROMPT			&&3
 REMARK
 REMARK  $Log$
+REMARK  Revision 1.6  2004/02/06 09:50:57  gpaulissen
+REMARK  Release 6.4.0
+REMARK
 REMARK  Revision 1.5  2003/08/08 21:01:20  gpaulissen
 REMARK  Release 4.2.1
 REMARK
