@@ -16,7 +16,7 @@ distributed. Forms 5.0 and Reports 3.0 executables can be delivered on demand.
 
 INSTALLATION
 
-1) Detailed instructions are in doc/pm-manual.doc
+1) Detailed instructions are in doc/pm-manual.rtf
 
 Upgrade from a prior version:
 
