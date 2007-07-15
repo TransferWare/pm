@@ -126,10 +126,10 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/set_common_sql_dir.sql "&&pm_HOME\common/src/sql/"
+PROMPT Command: START &&tw_home/common/src/sql/set_common_sql_dir.sql "&&tw_home/common/src/sql/"
 SET VERIFY ON DEFINE ON
 PROMPT &&pm_HOME
-START &&pm_HOME\common/src/sql/set_common_sql_dir.sql "&&pm_HOME\common/src/sql/"
+START &&tw_home/common/src/sql/set_common_sql_dir.sql "&&tw_home/common/src/sql/"
 SET DEFINE '&'
 COMMIT
 /
@@ -139,9 +139,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/check_sql_env.sql DIRECTORY "&&pm_HOME"
+PROMPT Command: START &&tw_home/common/src/sql/check_sql_env.sql DIRECTORY "&&pm_HOME"
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/check_sql_env.sql DIRECTORY "&&pm_HOME"
+START &&tw_home/common/src/sql/check_sql_env.sql DIRECTORY "&&pm_HOME"
 SET DEFINE '&'
 COMMIT
 /
@@ -151,9 +151,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/check_sql_env.sql GRANT select sys v_$statname
+PROMPT Command: START &&tw_home/common/src/sql/check_sql_env.sql GRANT select sys v_$statname
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/check_sql_env.sql GRANT select sys v_$statname
+START &&tw_home/common/src/sql/check_sql_env.sql GRANT select sys v_$statname
 SET DEFINE '&'
 COMMIT
 /
@@ -163,10 +163,10 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/check_sql_env.sql CONNECT "&&userid"
+PROMPT Command: START &&tw_home/common/src/sql/check_sql_env.sql CONNECT "&&userid"
 SET VERIFY ON DEFINE ON
 PROMPT &&userid
-START &&pm_HOME\common/src/sql/check_sql_env.sql CONNECT "&&userid"
+START &&tw_home/common/src/sql/check_sql_env.sql CONNECT "&&userid"
 SET DEFINE '&'
 COMMIT
 /
@@ -176,10 +176,10 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/check_sql_env.sql RELEASE pm "<" &&pm_VERSION ""
+PROMPT Command: START &&tw_home/common/src/sql/check_sql_env.sql RELEASE pm "<" &&pm_VERSION ""
 SET VERIFY ON DEFINE ON
 PROMPT &&pm_VERSION
-START &&pm_HOME\common/src/sql/check_sql_env.sql RELEASE pm "<" &&pm_VERSION ""
+START &&tw_home/common/src/sql/check_sql_env.sql RELEASE pm "<" &&pm_VERSION ""
 SET DEFINE '&'
 COMMIT
 /
@@ -189,9 +189,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/check_sql_env.sql CONTINUE "EXIT FAILURE"
+PROMPT Command: START &&tw_home/common/src/sql/check_sql_env.sql CONTINUE "EXIT FAILURE"
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/check_sql_env.sql CONTINUE "EXIT FAILURE"
+START &&tw_home/common/src/sql/check_sql_env.sql CONTINUE "EXIT FAILURE"
 SET DEFINE '&'
 COMMIT
 /
@@ -201,9 +201,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/check_sql_env.sql PRIVILEGE create_sequence
+PROMPT Command: START &&tw_home/common/src/sql/check_sql_env.sql PRIVILEGE create_sequence
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/check_sql_env.sql PRIVILEGE create_sequence
+START &&tw_home/common/src/sql/check_sql_env.sql PRIVILEGE create_sequence
 SET DEFINE '&'
 COMMIT
 /
@@ -239,9 +239,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/check_sql_env.sql PRIVILEGE create_table
+PROMPT Command: START &&tw_home/common/src/sql/check_sql_env.sql PRIVILEGE create_table
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/check_sql_env.sql PRIVILEGE create_table
+START &&tw_home/common/src/sql/check_sql_env.sql PRIVILEGE create_table
 SET DEFINE '&'
 COMMIT
 /
@@ -459,9 +459,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/check_sql_env.sql PRIVILEGE create_procedure
+PROMPT Command: START &&tw_home/common/src/sql/check_sql_env.sql PRIVILEGE create_procedure
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/check_sql_env.sql PRIVILEGE create_procedure
+START &&tw_home/common/src/sql/check_sql_env.sql PRIVILEGE create_procedure
 SET DEFINE '&'
 COMMIT
 /
@@ -555,9 +555,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/check_sql_env.sql PRIVILEGE create_view
+PROMPT Command: START &&tw_home/common/src/sql/check_sql_env.sql PRIVILEGE create_view
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/check_sql_env.sql PRIVILEGE create_view
+START &&tw_home/common/src/sql/check_sql_env.sql PRIVILEGE create_view
 SET DEFINE '&'
 COMMIT
 /
@@ -799,9 +799,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/recomp.sql 
+PROMPT Command: START &&tw_home/common/src/sql/recomp.sql 
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/recomp.sql 
+START &&tw_home/common/src/sql/recomp.sql 
 SET DEFINE '&'
 COMMIT
 /
@@ -813,9 +813,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/release_info.sql NEW pm &&pm_VERSION
+PROMPT Command: START &&tw_home/common/src/sql/release_info.sql NEW pm &&pm_VERSION
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/release_info.sql NEW pm &&pm_VERSION
+START &&tw_home/common/src/sql/release_info.sql NEW pm &&pm_VERSION
 SET DEFINE '&'
 COMMIT
 /
@@ -825,9 +825,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/check_sql_env.sql CONNECT "&&userid"
+PROMPT Command: START &&tw_home/common/src/sql/check_sql_env.sql CONNECT "&&userid"
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/check_sql_env.sql CONNECT "&&userid"
+START &&tw_home/common/src/sql/check_sql_env.sql CONNECT "&&userid"
 SET DEFINE '&'
 COMMIT
 /
