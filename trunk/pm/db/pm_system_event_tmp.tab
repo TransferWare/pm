@@ -30,7 +30,8 @@ REM      PM_SYSTEM_EVENT_TMP
 REM
 PROMPT 
 PROMPT Creating Table PM_SYSTEM_EVENT_TMP 
-CREATE TABLE pm_system_event_tmp(
+CREATE GLOBAL TEMPORARY TABLE pm_system_event_tmp
+(
  db                              VARCHAR2(40)               NOT NULL,
  run_id                          NUMBER                     NOT NULL,
  event                           VARCHAR2(64)               NOT NULL,
@@ -39,17 +40,7 @@ CREATE TABLE pm_system_event_tmp(
  time_waited                     NUMBER                     NULL,
  average_wait                    NUMBER                     NULL
 )
-PCTFREE  10
-PCTUSED  40
-INITRANS 1
-MAXTRANS 255
-STORAGE  (
-  INITIAL   262144
-  NEXT   262144
-  MINEXTENTS  1
-  MAXEXTENTS  100
-  PCTINCREASE  0
-  )
+ON COMMIT PRESERVE ROWS 
 ;
 
 

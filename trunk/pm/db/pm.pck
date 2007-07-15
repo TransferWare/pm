@@ -1114,15 +1114,21 @@ CREATE OR REPLACE PACKAGE BODY pm IS
     trc.add_arg( 'i_action', i_action );
 
     /* i_db_link may be NULL bit still needs to be replaced */
-    IF i_db IS NOT NULL OR i_run_id IS NOT NULL
-    THEN
-      v_command := replace( v_command, '<db>', '''' || i_db || '''' );
-      v_command := replace( v_command, '<db_link>', i_db_link );
-      v_command := replace( v_command, '<run_id>', i_run_id );
-    END IF;
+    v_command := replace( v_command, '<db_link>', i_db_link );
 
     v_last_command := v_command;
     dbms_sql.parse( i_cursor, v_command, dbms_sql.native );
+
+    IF i_db IS NOT NULL
+    THEN
+      dbms_sql.bind_variable( i_cursor, ':db', i_db );
+    END IF;
+
+    IF i_run_id IS NOT NULL
+    THEN
+      dbms_sql.bind_variable( i_cursor, ':run_id', i_run_id );
+    END IF;
+   
     v_nr_rows := dbms_sql.execute( i_cursor );
 
 --/*DBUG*/    IF i_action = 'I'
@@ -1417,8 +1423,8 @@ CREATE OR REPLACE PACKAGE BODY pm IS
       , time_waited
       , average_wait
       )
-        SELECT  <db>
-        ,       <run_id>
+        SELECT  :db
+        ,       :run_id
         ,       s.event
         ,       s.total_waits
         ,       s.total_timeouts
@@ -1461,8 +1467,8 @@ CREATE OR REPLACE PACKAGE BODY pm IS
       ,       statistic#
       ,       value
       )
-        SELECT  <db>
-        ,       <run_id>
+        SELECT  :db
+        ,       :run_id
         ,       sysstat.statistic#
         ,       sysstat.value
         FROM    v$sysstat<db_link> sysstat';
@@ -1519,7 +1525,7 @@ CREATE OR REPLACE PACKAGE BODY pm IS
       ,       sql_text
       ,       command_type
       )
-        SELECT  <db>
+        SELECT  :db
         ,       to_date
                 ( s.first_load_time
                 , ''YYYY-MM-DD/HH24:MI:SS''
@@ -1528,7 +1534,7 @@ CREATE OR REPLACE PACKAGE BODY pm IS
         ,       rawtohex(s.address) as address
         ,       usr.username as parsing_user_name
         ,       sch.username as parsing_schema_name
-        ,       <run_id>
+        ,       :run_id
         ,       s.executions
         ,       s.buffer_gets
         ,       s.disk_reads
@@ -1586,8 +1592,8 @@ CREATE OR REPLACE PACKAGE BODY pm IS
       , sql_hash_value
       , sql_address
       )
-        SELECT  <db>
-        ,       <run_id>
+        SELECT  :db
+        ,       :run_id
         ,       s.sid
         ,       CASE WHEN s.username IS NULL THEN ''ORACLE'' ELSE s.username END
         ,       s.program

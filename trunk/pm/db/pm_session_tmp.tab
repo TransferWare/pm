@@ -30,7 +30,8 @@ REM      PM_SESSION_TMP
 REM
 PROMPT 
 PROMPT Creating Table PM_SESSION_TMP 
-CREATE TABLE pm_session_tmp(
+CREATE GLOBAL TEMPORARY TABLE pm_session_tmp
+(
  db                              VARCHAR2(40)               NOT NULL,
  run_id                          NUMBER                     NOT NULL,
  sid                             NUMBER                     NOT NULL,
@@ -39,17 +40,7 @@ CREATE TABLE pm_session_tmp(
  sql_hash_value                  NUMBER                     NULL,
  sql_address                     VARCHAR2(32)               NULL
 )
-PCTFREE  10
-PCTUSED  40
-INITRANS 1
-MAXTRANS 255
-STORAGE  (
-  INITIAL   262144
-  NEXT   262144
-  MINEXTENTS  1
-  MAXEXTENTS  100
-  PCTINCREASE  0
-  )
+ON COMMIT PRESERVE ROWS 
 ;
 
 

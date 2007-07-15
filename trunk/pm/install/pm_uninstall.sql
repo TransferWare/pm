@@ -126,10 +126,10 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/set_common_sql_dir.sql "&&pm_HOME\common/src/sql/"
+PROMPT Command: START &&tw_home/common/src/sql/set_common_sql_dir.sql "&&tw_home/common/src/sql/"
 SET VERIFY ON DEFINE ON
 PROMPT &&pm_HOME
-START &&pm_HOME\common/src/sql/set_common_sql_dir.sql "&&pm_HOME\common/src/sql/"
+START &&tw_home/common/src/sql/set_common_sql_dir.sql "&&tw_home/common/src/sql/"
 SET DEFINE '&'
 COMMIT
 /
@@ -139,9 +139,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/check_sql_env.sql DIRECTORY "&&pm_HOME"
+PROMPT Command: START &&tw_home/common/src/sql/check_sql_env.sql DIRECTORY "&&pm_HOME"
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/check_sql_env.sql DIRECTORY "&&pm_HOME"
+START &&tw_home/common/src/sql/check_sql_env.sql DIRECTORY "&&pm_HOME"
 SET DEFINE '&'
 COMMIT
 /
@@ -151,10 +151,10 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/check_sql_env.sql CONNECT "&&userid"
+PROMPT Command: START &&tw_home/common/src/sql/check_sql_env.sql CONNECT "&&userid"
 SET VERIFY ON DEFINE ON
 PROMPT &&userid
-START &&pm_HOME\common/src/sql/check_sql_env.sql CONNECT "&&userid"
+START &&tw_home/common/src/sql/check_sql_env.sql CONNECT "&&userid"
 SET DEFINE '&'
 COMMIT
 /
@@ -164,10 +164,10 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/check_sql_env.sql RELEASE pm "<=" &&pm_VERSION ""
+PROMPT Command: START &&tw_home/common/src/sql/check_sql_env.sql RELEASE pm "<=" &&pm_VERSION ""
 SET VERIFY ON DEFINE ON
 PROMPT &&pm_VERSION
-START &&pm_HOME\common/src/sql/check_sql_env.sql RELEASE pm "<=" &&pm_VERSION ""
+START &&tw_home/common/src/sql/check_sql_env.sql RELEASE pm "<=" &&pm_VERSION ""
 SET DEFINE '&'
 COMMIT
 /
@@ -177,9 +177,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/check_sql_env.sql CONTINUE "EXIT FAILURE"
+PROMPT Command: START &&tw_home/common/src/sql/check_sql_env.sql CONTINUE "EXIT FAILURE"
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/check_sql_env.sql CONTINUE "EXIT FAILURE"
+START &&tw_home/common/src/sql/check_sql_env.sql CONTINUE "EXIT FAILURE"
 SET DEFINE '&'
 COMMIT
 /
@@ -189,9 +189,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql sequence pm_owner.pm_run_seq ""
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql sequence pm_owner.pm_run_seq ""
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql sequence pm_owner.pm_run_seq ""
+START &&tw_home/common/src/sql/drop_object.sql sequence pm_owner.pm_run_seq ""
 SET DEFINE '&'
 COMMIT
 /
@@ -201,9 +201,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql sequence pm_owner.pm_sql_seq ""
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql sequence pm_owner.pm_sql_seq ""
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql sequence pm_owner.pm_sql_seq ""
+START &&tw_home/common/src/sql/drop_object.sql sequence pm_owner.pm_sql_seq ""
 SET DEFINE '&'
 COMMIT
 /
@@ -213,9 +213,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.cg_ref_codes 'cascade'
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql table pm_owner.cg_ref_codes 'cascade'
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.cg_ref_codes 'cascade'
+START &&tw_home/common/src/sql/drop_object.sql table pm_owner.cg_ref_codes 'cascade'
 SET DEFINE '&'
 COMMIT
 /
@@ -225,9 +225,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.gsk_meldingen 'cascade'
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql table pm_owner.gsk_meldingen 'cascade'
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.gsk_meldingen 'cascade'
+START &&tw_home/common/src/sql/drop_object.sql table pm_owner.gsk_meldingen 'cascade'
 SET DEFINE '&'
 COMMIT
 /
@@ -237,9 +237,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_config 'cascade'
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_config 'cascade'
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_config 'cascade'
+START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_config 'cascade'
 SET DEFINE '&'
 COMMIT
 /
@@ -249,9 +249,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_run 'cascade'
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_run 'cascade'
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_run 'cascade'
+START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_run 'cascade'
 SET DEFINE '&'
 COMMIT
 /
@@ -261,9 +261,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_session 'cascade'
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_session 'cascade'
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_session 'cascade'
+START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_session 'cascade'
 SET DEFINE '&'
 COMMIT
 /
@@ -273,9 +273,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_session_tmp 'cascade'
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_session_tmp 'cascade'
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_session_tmp 'cascade'
+START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_session_tmp 'cascade'
 SET DEFINE '&'
 COMMIT
 /
@@ -285,9 +285,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_sql 'cascade'
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_sql 'cascade'
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_sql 'cascade'
+START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_sql 'cascade'
 SET DEFINE '&'
 COMMIT
 /
@@ -297,9 +297,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_sql_current 'cascade'
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_sql_current 'cascade'
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_sql_current 'cascade'
+START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_sql_current 'cascade'
 SET DEFINE '&'
 COMMIT
 /
@@ -309,9 +309,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_sql_id 'cascade'
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_sql_id 'cascade'
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_sql_id 'cascade'
+START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_sql_id 'cascade'
 SET DEFINE '&'
 COMMIT
 /
@@ -321,9 +321,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_sqlarea 'cascade'
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_sqlarea 'cascade'
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_sqlarea 'cascade'
+START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_sqlarea 'cascade'
 SET DEFINE '&'
 COMMIT
 /
@@ -333,9 +333,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_sqlarea_tmp 'cascade'
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_sqlarea_tmp 'cascade'
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_sqlarea_tmp 'cascade'
+START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_sqlarea_tmp 'cascade'
 SET DEFINE '&'
 COMMIT
 /
@@ -345,9 +345,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_sysstat 'cascade'
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_sysstat 'cascade'
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_sysstat 'cascade'
+START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_sysstat 'cascade'
 SET DEFINE '&'
 COMMIT
 /
@@ -357,9 +357,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_sysstat_tmp 'cascade'
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_sysstat_tmp 'cascade'
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_sysstat_tmp 'cascade'
+START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_sysstat_tmp 'cascade'
 SET DEFINE '&'
 COMMIT
 /
@@ -369,9 +369,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_system_event 'cascade'
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_system_event 'cascade'
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_system_event 'cascade'
+START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_system_event 'cascade'
 SET DEFINE '&'
 COMMIT
 /
@@ -381,9 +381,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_system_event_tmp 'cascade'
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_system_event_tmp 'cascade'
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql table pm_owner.pm_system_event_tmp 'cascade'
+START &&tw_home/common/src/sql/drop_object.sql table pm_owner.pm_system_event_tmp 'cascade'
 SET DEFINE '&'
 COMMIT
 /
@@ -393,9 +393,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql package pm_owner.gsk_mctp ""
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql package pm_owner.gsk_mctp ""
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql package pm_owner.gsk_mctp ""
+START &&tw_home/common/src/sql/drop_object.sql package pm_owner.gsk_mctp ""
 SET DEFINE '&'
 COMMIT
 /
@@ -405,9 +405,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql package pm_owner.gsk_msg ""
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql package pm_owner.gsk_msg ""
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql package pm_owner.gsk_msg ""
+START &&tw_home/common/src/sql/drop_object.sql package pm_owner.gsk_msg ""
 SET DEFINE '&'
 COMMIT
 /
@@ -417,9 +417,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql package pm_owner.gsk_refc ""
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql package pm_owner.gsk_refc ""
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql package pm_owner.gsk_refc ""
+START &&tw_home/common/src/sql/drop_object.sql package pm_owner.gsk_refc ""
 SET DEFINE '&'
 COMMIT
 /
@@ -429,9 +429,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql package pm_owner.pm ""
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql package pm_owner.pm ""
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql package pm_owner.pm ""
+START &&tw_home/common/src/sql/drop_object.sql package pm_owner.pm ""
 SET DEFINE '&'
 COMMIT
 /
@@ -441,9 +441,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql package pm_owner.pm_cfg ""
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql package pm_owner.pm_cfg ""
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql package pm_owner.pm_cfg ""
+START &&tw_home/common/src/sql/drop_object.sql package pm_owner.pm_cfg ""
 SET DEFINE '&'
 COMMIT
 /
@@ -453,9 +453,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql package pm_owner.pm_dpi ""
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql package pm_owner.pm_dpi ""
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql package pm_owner.pm_dpi ""
+START &&tw_home/common/src/sql/drop_object.sql package pm_owner.pm_dpi ""
 SET DEFINE '&'
 COMMIT
 /
@@ -465,9 +465,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql package pm_owner.pm_mpi ""
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql package pm_owner.pm_mpi ""
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql package pm_owner.pm_mpi ""
+START &&tw_home/common/src/sql/drop_object.sql package pm_owner.pm_mpi ""
 SET DEFINE '&'
 COMMIT
 /
@@ -477,9 +477,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql package pm_owner.trc ""
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql package pm_owner.trc ""
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql package pm_owner.trc ""
+START &&tw_home/common/src/sql/drop_object.sql package pm_owner.trc ""
 SET DEFINE '&'
 COMMIT
 /
@@ -489,9 +489,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql package_body pm_owner.gsk_mctp ""
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql package_body pm_owner.gsk_mctp ""
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql package_body pm_owner.gsk_mctp ""
+START &&tw_home/common/src/sql/drop_object.sql package_body pm_owner.gsk_mctp ""
 SET DEFINE '&'
 COMMIT
 /
@@ -501,9 +501,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql package_body pm_owner.gsk_msg ""
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql package_body pm_owner.gsk_msg ""
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql package_body pm_owner.gsk_msg ""
+START &&tw_home/common/src/sql/drop_object.sql package_body pm_owner.gsk_msg ""
 SET DEFINE '&'
 COMMIT
 /
@@ -513,9 +513,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql package_body pm_owner.gsk_refc ""
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql package_body pm_owner.gsk_refc ""
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql package_body pm_owner.gsk_refc ""
+START &&tw_home/common/src/sql/drop_object.sql package_body pm_owner.gsk_refc ""
 SET DEFINE '&'
 COMMIT
 /
@@ -525,9 +525,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql package_body pm_owner.pm ""
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql package_body pm_owner.pm ""
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql package_body pm_owner.pm ""
+START &&tw_home/common/src/sql/drop_object.sql package_body pm_owner.pm ""
 SET DEFINE '&'
 COMMIT
 /
@@ -537,9 +537,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql package_body pm_owner.pm_cfg ""
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql package_body pm_owner.pm_cfg ""
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql package_body pm_owner.pm_cfg ""
+START &&tw_home/common/src/sql/drop_object.sql package_body pm_owner.pm_cfg ""
 SET DEFINE '&'
 COMMIT
 /
@@ -549,9 +549,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql package_body pm_owner.trc ""
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql package_body pm_owner.trc ""
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql package_body pm_owner.trc ""
+START &&tw_home/common/src/sql/drop_object.sql package_body pm_owner.trc ""
 SET DEFINE '&'
 COMMIT
 /
@@ -561,9 +561,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql view pm_owner.pm_vw_sqlarea ""
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql view pm_owner.pm_vw_sqlarea ""
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql view pm_owner.pm_vw_sqlarea ""
+START &&tw_home/common/src/sql/drop_object.sql view pm_owner.pm_vw_sqlarea ""
 SET DEFINE '&'
 COMMIT
 /
@@ -573,9 +573,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql index pm_owner.pm_art_1 ""
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql index pm_owner.pm_art_1 ""
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql index pm_owner.pm_art_1 ""
+START &&tw_home/common/src/sql/drop_object.sql index pm_owner.pm_art_1 ""
 SET DEFINE '&'
 COMMIT
 /
@@ -585,9 +585,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql index pm_owner.pm_run_1 ""
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql index pm_owner.pm_run_1 ""
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql index pm_owner.pm_run_1 ""
+START &&tw_home/common/src/sql/drop_object.sql index pm_owner.pm_run_1 ""
 SET DEFINE '&'
 COMMIT
 /
@@ -597,9 +597,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql index pm_owner.pm_ses_sql_fk1_frgn ""
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql index pm_owner.pm_ses_sql_fk1_frgn ""
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql index pm_owner.pm_ses_sql_fk1_frgn ""
+START &&tw_home/common/src/sql/drop_object.sql index pm_owner.pm_ses_sql_fk1_frgn ""
 SET DEFINE '&'
 COMMIT
 /
@@ -609,9 +609,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/drop_object.sql index pm_owner.pm_sql_sid_fk1_frgn ""
+PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql index pm_owner.pm_sql_sid_fk1_frgn ""
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/drop_object.sql index pm_owner.pm_sql_sid_fk1_frgn ""
+START &&tw_home/common/src/sql/drop_object.sql index pm_owner.pm_sql_sid_fk1_frgn ""
 SET DEFINE '&'
 COMMIT
 /
@@ -621,9 +621,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/release_info.sql REMOVE pm &&pm_VERSION TRUE
+PROMPT Command: START &&tw_home/common/src/sql/release_info.sql REMOVE pm &&pm_VERSION TRUE
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/release_info.sql REMOVE pm &&pm_VERSION TRUE
+START &&tw_home/common/src/sql/release_info.sql REMOVE pm &&pm_VERSION TRUE
 SET DEFINE '&'
 COMMIT
 /
