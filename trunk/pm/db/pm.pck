@@ -182,7 +182,7 @@ pm - Performance Monitor tasks
 
 -- =pod
 
-CREATE OR REPLACE PACKAGE pm IS
+CREATE OR REPLACE PACKAGE pm AUTHID CURRENT_USER IS
 
   --
   -- Return global_name if i_db is null 
@@ -594,7 +594,7 @@ CREATE OR REPLACE PACKAGE BODY pm IS
   IS
     c_command CONSTANT command_t := '
   SELECT  inst.startup_time
-  FROM    pm$instance<db_link> inst';
+  FROM    v$instance<db_link> inst';
 
     v_error_position INTEGER;
     v_sql_function_code INTEGER;
@@ -1149,7 +1149,7 @@ CREATE OR REPLACE PACKAGE BODY pm IS
 --/*DBUG*/      v_sql_function_code := dbms_sql.last_sql_function_code;
 --/*DBUG*/      dbug.print( 'error', 'Error at position: ' || to_char(v_error_position) );
 --/*DBUG*/      dbug.print( 'error', 'SQL function code: ' || to_char(v_sql_function_code) );
-                RAISE;
+      RAISE;
   END parse_and_execute;
   --
   -- Cleanup pm_session info
@@ -1424,7 +1424,7 @@ CREATE OR REPLACE PACKAGE BODY pm IS
         ,       s.total_timeouts
         ,       s.time_waited
         ,       s.average_wait
-        FROM    pm$system_event<db_link> s';
+        FROM    v$system_event<db_link> s';
 
     c_module_name CONSTANT module_name_t := 'PM.COLLECT_SYSTEM_EVENT';
   BEGIN
@@ -1465,7 +1465,7 @@ CREATE OR REPLACE PACKAGE BODY pm IS
         ,       <run_id>
         ,       sysstat.statistic#
         ,       sysstat.value
-        FROM    pm$sysstat<db_link> sysstat';
+        FROM    v$sysstat<db_link> sysstat';
 
     c_module_name CONSTANT module_name_t := 'PM.COLLECT_SYSSTAT';
   BEGIN
@@ -1520,11 +1520,14 @@ CREATE OR REPLACE PACKAGE BODY pm IS
       ,       command_type
       )
         SELECT  <db>
-        ,       s.first_load_time
+        ,       to_date
+                ( s.first_load_time
+                , ''YYYY-MM-DD/HH24:MI:SS''
+                ) as first_load_time
         ,       s.hash_value
-        ,       s.address
-        ,       s.parsing_user_name
-        ,       s.parsing_schema_name
+        ,       rawtohex(s.address) as address
+        ,       usr.username as parsing_user_name
+        ,       sch.username as parsing_schema_name
         ,       <run_id>
         ,       s.executions
         ,       s.buffer_gets
@@ -1539,7 +1542,11 @@ CREATE OR REPLACE PACKAGE BODY pm IS
         ,       s.action
         ,       s.sql_text
         ,       s.command_type
-        FROM    pm$sqlarea<db_link> s';
+        FROM    v$sqlarea<db_link> s
+        ,       all_users usr
+        ,       all_users sch
+        where   usr.user_id = s.parsing_user_id
+        and     sch.user_id = s.parsing_schema_id';
  
     c_module_name CONSTANT module_name_t := 'PM.COLLECT_SQLAREA';
   BEGIN
@@ -1582,11 +1589,11 @@ CREATE OR REPLACE PACKAGE BODY pm IS
         SELECT  <db>
         ,       <run_id>
         ,       s.sid
-        ,       s.username
+        ,       CASE WHEN s.username IS NULL THEN ''ORACLE'' ELSE s.username END
         ,       s.program
-        ,       s.sql_hash_value
-        ,       s.sql_address
-        FROM    pm$session<db_link> s';
+        ,       CASE WHEN s.sql_hash_value = 0 THEN NULL ELSE s.sql_hash_value END
+        ,       CASE WHEN rawtohex(s.sql_address) = ''00'' THEN NULL ELSE rawtohex(s.sql_address) END
+        FROM    v$session<db_link> s';
     c_module_name CONSTANT module_name_t := 'PM.COLLECT_SESSION';
   BEGIN
     trc.enter( c_module_name );

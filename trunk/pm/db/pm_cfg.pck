@@ -99,7 +99,7 @@ pm_cfg - Performance Monitor configuration tasks
 
 -- =pod
 
-CREATE OR REPLACE PACKAGE pm_cfg IS
+CREATE OR REPLACE PACKAGE pm_cfg AUTHID CURRENT_USER IS
 
   -- pragma for package
   pragma restrict_references( pm_cfg, rnds, wnds, rnps, wnps );  
@@ -205,8 +205,10 @@ c_disk_io_rate_cfg_nr constant pm_config.cfg_nr%type := 2;
 v_memory_io_rate number := null;
 v_disk_io_rate number := null;
 
-v_last_statistic# v$statname.statistic#%type := null;
-v_last_name v$statname.name%type := null;
+-- v$statname.statistic#
+v_last_statistic# number := null;
+-- v$statname.name
+v_last_name varchar2(64) := null;
 
 /*
 || Local procedures
@@ -373,12 +375,7 @@ end	get_disk_io_rate;
 function get_statistic#( i_name in varchar2 ) 
 return number
 is
-	cursor	c_get_statistic#
-	is
-		select	statistic#
-		from	v$statname sta
-		where	sta.name = i_name;
-
+        v_cursor sys_refcursor;
 	v_value number;
 begin
 	if	v_last_name = i_name
@@ -387,16 +384,21 @@ begin
 	else
 		v_last_name := i_name;
 
-		open	c_get_statistic#;
-		fetch	c_get_statistic#
+		open 	v_cursor for '
+			select	statistic#
+			from	v$statname sta
+			where	sta.name = :1'
+          	using i_name;
+
+		fetch	v_cursor
 		into	v_last_statistic#;
 
-		if	c_get_statistic#%notfound
+		if	v_cursor%notfound
 		then
 			v_last_statistic# := null;
-			close	c_get_statistic#;
+			close	v_cursor;
 		else
-			close	c_get_statistic#;
+			close	v_cursor;
 		end if;
 	end if;
 
@@ -404,9 +406,9 @@ begin
 exception
 	when	others
 	then
-		if	c_get_statistic#%isopen
+		if	v_cursor%isopen
 		then
-			close	c_get_statistic#;
+			close	v_cursor;
 		end if;
 		return	null;
 end	get_statistic#;
