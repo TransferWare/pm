@@ -30,7 +30,8 @@ REM      PM_SQLAREA_TMP
 REM
 PROMPT 
 PROMPT Creating Table PM_SQLAREA_TMP 
-CREATE TABLE pm_sqlarea_tmp(
+CREATE GLOBAL TEMPORARY TABLE pm_sqlarea_tmp
+(
  db                              VARCHAR2(40)               NOT NULL,
  first_load_time                 DATE                       NOT NULL,
  hash_value                      NUMBER                     NOT NULL,
@@ -52,17 +53,7 @@ CREATE TABLE pm_sqlarea_tmp(
  sql_text                        VARCHAR2(1984)             NULL,
  command_type                    NUMBER                     NULL
 )
-PCTFREE  10
-PCTUSED  40
-INITRANS 1
-MAXTRANS 255
-STORAGE  (
-  INITIAL   262144
-  NEXT   262144
-  MINEXTENTS  1
-  MAXEXTENTS  100
-  PCTINCREASE  0
-  )
+ON COMMIT PRESERVE ROWS 
 ;
 
 

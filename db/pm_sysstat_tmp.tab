@@ -30,23 +30,14 @@ REM      PM_SYSSTAT_TMP
 REM
 PROMPT 
 PROMPT Creating Table PM_SYSSTAT_TMP 
-CREATE TABLE pm_sysstat_tmp(
+CREATE GLOBAL TEMPORARY TABLE pm_sysstat_tmp
+(
  db                              VARCHAR2(40)               NOT NULL,
  run_id                          NUMBER                     NOT NULL,
  statistic#                      NUMBER                     NOT NULL,
  value                           NUMBER                     NULL
 )
-PCTFREE  10
-PCTUSED  40
-INITRANS 1
-MAXTRANS 255
-STORAGE  (
-  INITIAL   262144
-  NEXT   262144
-  MINEXTENTS  1
-  MAXEXTENTS  100
-  PCTINCREASE  0
-  )
+ON COMMIT PRESERVE ROWS 
 ;
 
 

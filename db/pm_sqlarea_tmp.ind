@@ -41,16 +41,6 @@ CREATE INDEX PM_ART_1 ON PM_SQLAREA_TMP
       hash_value ,
       parsing_user_name ,
       parsing_schema_name )
-PCTFREE  0
-INITRANS 2
-MAXTRANS 255
-STORAGE  (
-  INITIAL   262144
-  NEXT   262144
-  MINEXTENTS  1
-  MAXEXTENTS  100
-  PCTINCREASE  0
-  )
 ;
 
 
