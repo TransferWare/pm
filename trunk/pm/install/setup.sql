@@ -28,7 +28,6 @@ REM DEFINE debug = ON
 SET SQLPROMPT 'SQL> ' TIME ON TERMOUT ON
 
 define pm_home = ..
-define tw_home = &&pm_home/../tw
 
 REM ====================
 REM Run project settings

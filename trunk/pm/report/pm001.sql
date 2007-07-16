@@ -1,5 +1,5 @@
 PROMPT
-PROMPT  $RCSfile$
+PROMPT  $Id$
 REMARK 
 REMARK  $Date$
 REMARK
