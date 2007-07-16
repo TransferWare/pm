@@ -126,10 +126,10 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/set_common_sql_dir.sql "&&pm_HOME\common/src/sql/"
+PROMPT Command: START &&tw_HOME/common/src/sql/set_common_sql_dir.sql "&&tw_HOME/common/src/sql/"
 SET VERIFY ON DEFINE ON
 PROMPT &&pm_HOME
-START &&pm_HOME\common/src/sql/set_common_sql_dir.sql "&&pm_HOME\common/src/sql/"
+START &&tw_HOME/common/src/sql/set_common_sql_dir.sql "&&tw_HOME/common/src/sql/"
 SET DEFINE '&'
 COMMIT
 /
@@ -139,9 +139,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/dict_check.sql pm_owner
+PROMPT Command: START &&tw_HOME/common/src/sql/dict_check.sql pm_owner
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/dict_check.sql pm_owner
+START &&tw_HOME/common/src/sql/dict_check.sql pm_owner
 SET DEFINE '&'
 COMMIT
 /
@@ -213,9 +213,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/user_tables.sql pm_owner.cg_ref_codes "1=1" > pm_owner.cg_ref_codes.lis
+PROMPT Command: START &&tw_HOME/common/src/sql/user_tables.sql pm_owner.cg_ref_codes "1=1" > pm_owner.cg_ref_codes.lis
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/user_tables.sql pm_owner.cg_ref_codes "1=1" > pm_owner.cg_ref_codes.lis
+START &&tw_HOME/common/src/sql/user_tables.sql pm_owner.cg_ref_codes "1=1" > pm_owner.cg_ref_codes.lis
 SET DEFINE '&'
 COMMIT
 /
@@ -239,9 +239,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME\common/src/sql/user_tables.sql pm_owner.gsk_meldingen "1=1" > pm_owner.gsk_meldingen.lis
+PROMPT Command: START &&tw_HOME/common/src/sql/user_tables.sql pm_owner.gsk_meldingen "1=1" > pm_owner.gsk_meldingen.lis
 SET VERIFY ON DEFINE ON
-START &&pm_HOME\common/src/sql/user_tables.sql pm_owner.gsk_meldingen "1=1" > pm_owner.gsk_meldingen.lis
+START &&tw_HOME/common/src/sql/user_tables.sql pm_owner.gsk_meldingen "1=1" > pm_owner.gsk_meldingen.lis
 SET DEFINE '&'
 COMMIT
 /

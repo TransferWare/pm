@@ -1,3 +1,9 @@
+0) Prerequisites
+
+   This application depends on module transferware (abbreviated as tw) which
+   can be found on http://www.sourceforge.net/projects/transferware. Go to
+   download section and pick the latest tw distribution. Unpack it to a directory.
+
 1) Create an application owner
 
    a) change to admin directory
@@ -13,18 +19,21 @@
    e) sqlplus /nolog
 
    f) SQL> connect <application owner>@<repository database>
+      SQL> @ setup.sql
       SQL> @ pm_install.sql
+      SQL> rem build forms and reports
       SQL> @ pm_build.sql
 
       During this step you might be prompted for several variables:
       i)   userid     - The connect string of the application owner
-      ii)  pm_home    - The top of the PM distribution
-      iii) pm_frm_bin - The directory to install forms executables into
+      ii)  tw_home    - The top of the transferware (tw) distribution
+      iii) pm_home    - The top of the Performance Monitor distribution
+      iv)  pm_frm_bin - The directory to install forms executables into
                         Should be a subdirectory to &&pm_home.
-      iv)  pm_rpt_bin - The directory to install reports executables into.
+      v)   pm_rpt_bin - The directory to install reports executables into.
                         Should be equal to &&pm_frm_bin.
-      v)   frmgen     - The forms compiler (ifcmp60/ifcmp90)
-      vi)  rptgen     - The reports compiler (rwcon60/rwconverter)
+      vi)  frmgen     - The forms compiler (ifcmp60/ifcmp90)
+      vii) rptgen     - The reports compiler (rwcon60/rwconverter)
 
 2) Installation of Total Performance Index (optional)
 
@@ -36,32 +45,30 @@
 
    d) SQL> @ pm_tpi.sql
 
-3) Installation of interface software
+3) Installation of database links
 
-   The Performance Monitor creates interface views based on Oracle dictionary
-   views. The view names start with pm$. These views hide differences between
-   Oracle versions.
+   The Performance Monitor can monitor remote databases using database links.
 
    a) change to admin directory
 
    b) sqlplus /nolog
 
-   c) Create interface account (on different database)
+   c) Create database link account (on a remote database)
 
       SQL> connect sys@<database to monitor>
       SQL> @ creusr PM_LINK <default tablespace> <temporary tablespace>
-      SQL> @ pm_remote.grt <interface account>
-      SQL> connect <interface account>@<database to monitor>
+      SQL> @ pm_remote.grt <database link account>
+      SQL> connect <database link account>@<database to monitor>
       SQL> @ pm_remote.sql
 
-   d) Create database link (monitored database)
+   d) Create database link (on the repository database)
 
       SQL> connect <application owner>@<repository database>
-      SQL> @ credblnk <database link> <interface account> <interface account password> <tns service>
+      SQL> @ credblnk <database link> <database link account> <database link account password> <tns service>
 
       Test the link by:
 
-      SQL> select * from user_views@<database link> where view_name like 'pm$%';
+      SQL> select * from global_name@<database link>;
 
 4) Collect information
 
@@ -72,6 +79,10 @@
    or collect information about the current database by:
 
    SQL> execute pm.collect(NULL)
+
+   or even shorter
+
+   SQL> execute pm.collect
 
 5) Cleanup
 
