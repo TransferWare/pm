@@ -17,7 +17,7 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 PROMPT
-PROMPT  $RCSfile$
+PROMPT  $Id$
 REMARK 
 REMARK  $Date$
 REMARK
@@ -25,9 +25,9 @@ REMARK  $Author$
 REMARK
 REMARK  $Name$
 REMARK
-REMARK  Description:    Create software for interfacing
+REMARK  Description:    Create access to TPI software for database links
 REMARK
-PROMPT  Notes:          This must be run as the interface account
+PROMPT  Notes:          This must be run as the database link account
 PROMPT
 REMARK
 REMARK

@@ -17,7 +17,7 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 PROMPT
-PROMPT  $RCSfile$
+PROMPT  $Id$
 REMARK 
 REMARK  $Date$
 REMARK
@@ -99,10 +99,6 @@ undefine 1
 
 grant create session to &&account
 /
-grant create procedure to &&account
-/
-grant create view to &&account
-/
 grant create synonym to &&account
 /
 
@@ -115,23 +111,8 @@ begin
 
   for r_grant in
   (
-    select  'grant select on ' || view_name || ' to &&account' command
-    from    user_views
-    where   view_name in 
-            ( 
-              'V$INSTANCE',
-              'V_$INSTANCE',
-              'V$SYSTEM_EVENT', 
-              'V_$SYSTEM_EVENT', 
-              'V$SQLAREA', 
-              'V_$SQLAREA', 
-              'V$SESSION',
-              'V_$SESSION',
-              'V$SYSSTAT', 
-              'V_$SYSSTAT', 
-              'V$SQLTEXT_WITH_NEWLINES',
-              'V_$SQLTEXT_WITH_NEWLINES'
-            )
+    select  'grant select_catalog_role to &&account' command
+    from    dual
     union   /* pm_dpi / pm_mpi */
     select  'grant execute on ' || object_name || ' to &&account' command
     from    user_objects

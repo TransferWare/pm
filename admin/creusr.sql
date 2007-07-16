@@ -17,28 +17,28 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 PROMPT
-PROMPT	$RCSfile$
+PROMPT  $Id$
 REMARK 
-REMARK	$Date$
+REMARK  $Date$
 REMARK
-REMARK	$Author$
+REMARK  $Author$
 REMARK
 REMARK  $Revision$
 REMARK
-REMARK  Description:	Create an Oracle account.
+REMARK  Description:    Create an Oracle account.
 REMARK
-REMARK  Notes:		1) Must use SYS to run this script.
-REMARK			2) Password is the same as account name. This can be changed by a DBA.
-REMARK			3) No quota on tablespace SYSTEM. Might be changed by a DBA.
-PROMPT	Parameters:
-PROMPT			1 - account to create
-PROMPT			&&1
+REMARK  Notes:          1) Must use SYS to run this script.
+REMARK                  2) Password is the same as account name. This can be changed by a DBA.
+REMARK                  3) No quota on tablespace SYSTEM. Might be changed by a DBA.
+PROMPT  Parameters:
+PROMPT                  1 - account to create
+PROMPT                  &&1
 REMARK
-PROMPT			2 - default tablespace 
-PROMPT			&&2
+PROMPT                  2 - default tablespace 
+PROMPT                  &&2
 REMARK
-PROMPT			3 - temporary tablespace 
-PROMPT			&&3
+PROMPT                  3 - temporary tablespace 
+PROMPT                  &&3
 REMARK
 REMARK  $Log$
 REMARK  Revision 1.1  2003/08/28 14:44:48  gpaulissen
@@ -88,7 +88,7 @@ REMARK
 REMARK  Revision 1.2  1998/11/26 13:33:45  gpaulissen
 REMARK  Added standard header.
 REMARK
-PROMPT	
+PROMPT  
 REMARK
 
 define account = &&1

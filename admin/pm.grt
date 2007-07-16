@@ -17,21 +17,21 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 PROMPT
-PROMPT	$RCSfile$
+PROMPT  $Id$
 REMARK 
-REMARK	$Date$
+REMARK  $Date$
 REMARK
-REMARK	$Author$
+REMARK  $Author$
 REMARK
 REMARK  $Revision$
 REMARK
-REMARK  Description:	Grants for Performance Monitor owner.
+REMARK  Description:    Grants for Performance Monitor owner.
 REMARK
-PROMPT	Notes:		This must be run as SYS
+PROMPT  Notes:          This must be run as SYS
 PROMPT
-PROMPT	Parameters:
-PROMPT			1 - account to grant to
-PROMPT			&&1
+PROMPT  Parameters:
+PROMPT                  1 - account to grant to
+PROMPT                  &&1
 PROMPT
 REMARK  $Log$
 REMARK  Revision 1.1  2003/08/28 14:44:48  gpaulissen
