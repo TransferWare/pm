@@ -54,7 +54,6 @@ db/pm_system_event.tab
 db/pm_system_event_tmp.con
 db/pm_system_event_tmp.tab
 db/pm_vw_sqlarea.vw
-db/trc.pck
 doc/architecture.gif
 doc/delta1.gif
 doc/delta2.gif

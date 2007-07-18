@@ -472,18 +472,6 @@ SET DEFINE '&'
 COMMIT
 /
 
-DEFINE log_file = 'output00030.&&sessionid..log'
-PROMPT Log file: &&log_file
-SPOOL &&log_file
-START &&restore_sql
-SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql package pm_owner.trc ""
-SET VERIFY ON DEFINE ON
-START &&tw_home/common/src/sql/drop_object.sql package pm_owner.trc ""
-SET DEFINE '&'
-COMMIT
-/
-
 DEFINE log_file = 'output00031.&&sessionid..log'
 PROMPT Log file: &&log_file
 SPOOL &&log_file
@@ -540,18 +528,6 @@ SET VERIFY OFF DEFINE OFF
 PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql package_body pm_owner.pm_cfg ""
 SET VERIFY ON DEFINE ON
 START &&tw_home/common/src/sql/drop_object.sql package_body pm_owner.pm_cfg ""
-SET DEFINE '&'
-COMMIT
-/
-
-DEFINE log_file = 'output00036.&&sessionid..log'
-PROMPT Log file: &&log_file
-SPOOL &&log_file
-START &&restore_sql
-SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&tw_home/common/src/sql/drop_object.sql package_body pm_owner.trc ""
-SET VERIFY ON DEFINE ON
-START &&tw_home/common/src/sql/drop_object.sql package_body pm_owner.trc ""
 SET DEFINE '&'
 COMMIT
 /

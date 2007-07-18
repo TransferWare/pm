@@ -10,7 +10,7 @@
 # files      : pm_sql_id.tab pm_sql_seq.seq pm_sqlarea.con pm_sqlarea.tab pm_sqlarea_tmp.ind 
 # files      : pm_sqlarea_tmp.tab pm_sysstat.con pm_sysstat.tab pm_sysstat_tmp.con 
 # files      : pm_sysstat_tmp.tab pm_system_event.con pm_system_event.tab pm_system_event_tmp.con 
-# files      : pm_system_event_tmp.tab pm_vw_sqlarea.vw trc.pck 
+# files      : pm_system_event_tmp.tab pm_vw_sqlarea.vw
 
 # cgrefcod.tab modification date: Wed Apr  7 17:06:27 2004 (1081350387)
 install.table.pm_owner.cg_ref_codes: cgrefcod.tab-run
@@ -188,11 +188,6 @@ install.table.pm_owner.pm_system_event_tmp: pm_system_event_tmp.tab-run
 # pm_vw_sqlarea.vw modification date: Wed Apr  7 17:06:28 2004 (1081350388)
 install.view.pm_owner.pm_vw_sqlarea: pm_vw_sqlarea.vw-run
 
-# trc.pck modification date: Wed Dec 15 12:04:42 2004 (1103108682)
-install.package.pm_owner.trc: trc.pck-run
-
-install.package_body.pm_owner.trc: trc.pck-run
-
 OBJECTS_pm_owner = \
 	constraint.pm_owner.gsk_mld_ck1 \
 	constraint.pm_owner.gsk_mld_pk \
@@ -239,13 +234,11 @@ OBJECTS_pm_owner = \
 	package.pm_owner.pm_cfg \
 	package.pm_owner.pm_dpi \
 	package.pm_owner.pm_mpi \
-	package.pm_owner.trc \
 	package_body.pm_owner.gsk_mctp \
 	package_body.pm_owner.gsk_msg \
 	package_body.pm_owner.gsk_refc \
 	package_body.pm_owner.pm \
 	package_body.pm_owner.pm_cfg \
-	package_body.pm_owner.trc \
 	sequence.pm_owner.pm_run_seq \
 	sequence.pm_owner.pm_sql_seq \
 	table.pm_owner.cg_ref_codes \

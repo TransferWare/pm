@@ -554,7 +554,9 @@ PROMPT Creating Package Body pm
 CREATE OR REPLACE PACKAGE BODY pm IS
   --
   --
---/*DBUG*/  v_count INTEGER DEFAULT 0;
+/*DBUG
+  v_count INTEGER DEFAULT 0;
+/*DBUG*/
   --
   -- Maximum number of record to delete before a commit
   c_max_count CONSTANT INTEGER DEFAULT 10000;
@@ -602,10 +604,12 @@ CREATE OR REPLACE PACKAGE BODY pm IS
 
     c_module_name CONSTANT module_name_t := 'PM.GET_DB_STARTUP_TIME';
   BEGIN
-    trc.enter( c_module_name );
-    trc.add_arg( 'i_cursor', i_cursor );
-    trc.add_arg( 'i_db', i_db );
-    trc.add_arg( 'i_db_link', i_db_link );
+/*DBUG
+    dbug.enter( c_module_name );
+    dbug.add_arg( 'input', 'i_cursor: %s', i_cursor );
+    dbug.print( 'input', 'i_db: %s', i_db );
+    dbug.print( 'input', 'i_db_link: %s', i_db_link );
+/*DBUG*/
 
     /*
       Retrieve the startup time of the remote database.
@@ -625,22 +629,23 @@ CREATE OR REPLACE PACKAGE BODY pm IS
         RAISE no_data_found;
     END IF;
 
---/*DBUG*/    dbug.print( 'info', 'Last database startup: %s', 
---/*DBUG*/      to_char( o_db_startup_time, 'DD-MM-YYYY HH24:MI:SS' ) 
---/*DBUG*/    );
-
-    trc.leave;
+/*DBUG
+    dbug.print( 'info', 'Last database startup: %s', 
+      to_char( o_db_startup_time, 'DD-MM-YYYY HH24:MI:SS' ) 
+    );
+    dbug.leave;
   EXCEPTION
     WHEN OTHERS
     THEN
-      trc.leave_on_error;
---/*DBUG*/      dbug.print( 'error', 'SQLERRM: %s', SQLERRM );
---/*DBUG*/      v_error_position := dbms_sql.last_error_position;
---/*DBUG*/      v_sql_function_code := dbms_sql.last_sql_function_code;
---/*DBUG*/      dbug.print( 'error', 'Command: %s', c_command );
---/*DBUG*/      dbug.print( 'error', 'Error at position: %s', v_error_position );
---/*DBUG*/      dbug.print( 'error', 'SQL function code: %s', v_sql_function_code );
+      dbug.leave_on_error;
+      v_error_position := dbms_sql.last_error_position;
+      v_sql_function_code := dbms_sql.last_sql_function_code;
+      dbug.print( 'error', 'Command: %s', c_command );
+      dbug.print( 'error', 'Error at position: %s', v_error_position );
+      dbug.print( 'error', 'SQL function code: %s', v_sql_function_code );
+
       RAISE;
+/*DBUG*/
   END get_db_startup_time_l;
   --
   -- Start a new run (local variant)
@@ -673,10 +678,12 @@ CREATE OR REPLACE PACKAGE BODY pm IS
       AND     db_startup_time = i_db_startup_time;
 
   BEGIN
-    trc.enter( c_module_name );
-    trc.add_arg( 'i_cursor', i_cursor );
-    trc.add_arg( 'i_db', i_db );
-    trc.add_arg( 'i_db_link', i_db_link );
+/*DBUG
+    dbug.enter( c_module_name );
+    dbug.print( 'input', 'i_cursor: %s', i_cursor );
+    dbug.print( 'input', 'i_db: %s', i_db );
+    dbug.print( 'input', 'i_db_link: %s', i_db_link );
+/*DBUG*/
 
     get_db_startup_time_l( i_cursor, i_db, i_db_link, v_db_startup_time );
 
@@ -705,9 +712,6 @@ CREATE OR REPLACE PACKAGE BODY pm IS
       WHEN dup_val_on_index
       THEN
         NULL;
-      WHEN OTHERS
-      THEN
-        RAISE;
     END;
     END LOOP;
 
@@ -717,15 +721,21 @@ CREATE OR REPLACE PACKAGE BODY pm IS
     INTO o_db_startup_run_id;
     CLOSE c_db_startup_run_id;
 
---/*DBUG*/    dbug.print( 'info', 'new run id: %s', v_run_id );
+/*DBUG
+    dbug.print( 'info', 'new run id: %s', v_run_id );
+/*DBUG*/
 
     COMMIT; /* pm_run modified */
 
-    trc.leave;
+/*DBUG
+    dbug.leave;
+/*DBUG*/
   EXCEPTION
     WHEN OTHERS
     THEN
-      trc.leave_on_error;
+/*DBUG
+      dbug.leave_on_error;
+/*DBUG*/
       IF c_next_run_id%ISOPEN
       THEN
         CLOSE c_next_run_id;
@@ -906,10 +916,12 @@ CREATE OR REPLACE PACKAGE BODY pm IS
           || will ignore a violation of the primary key constraint
           || here.
           */
---/*DBUG*/        dbug.print( 'info', 'db: ' || i_db );
---/*DBUG*/        dbug.print( 'info', 'hash_value: ' || to_char(i_hash_value) );
---/*DBUG*/        dbug.print( 'info', 'address: ' || i_address );
---/*DBUG*/        dbug.print( 'info', 'sql_id: ' || to_char(i_sql_id) );
+/*DBUG
+        dbug.print( 'info', 'db: ' || i_db );
+        dbug.print( 'info', 'hash_value: ' || to_char(i_hash_value) );
+        dbug.print( 'info', 'address: ' || i_address );
+        dbug.print( 'info', 'sql_id: ' || to_char(i_sql_id) );
+/*DBUG*/
         NULL;
     END ins_pm_sql;
 
@@ -952,9 +964,6 @@ CREATE OR REPLACE PACKAGE BODY pm IS
         WHEN dup_val_on_index
         THEN    
           NULL;
-        WHEN OTHERS
-        THEN
-          RAISE;
       END;
       END LOOP;
     EXCEPTION
@@ -967,11 +976,13 @@ CREATE OR REPLACE PACKAGE BODY pm IS
         RAISE;
     END ins_pm_sql_id;
   BEGIN
-    trc.enter( c_module_name );
-    trc.add_arg( 'i_db', i_db );
-    trc.add_arg( 'i_hash_value', i_hash_value );
-    trc.add_arg( 'i_address', i_address );
-    trc.add_arg( 'i_command_type', i_command_type );
+/*DBUG
+    dbug.enter( c_module_name );
+    dbug.print( 'input', 'i_db: %s', i_db );
+    dbug.print( 'input', 'i_hash_value: %s', i_hash_value );
+    dbug.print( 'input', 'i_address: %s', i_address );
+    dbug.print( 'input', 'i_command_type: %s', i_command_type );
+/*DBUG*/
 
     SAVEPOINT spt_sql;
             /*
@@ -988,7 +999,9 @@ CREATE OR REPLACE PACKAGE BODY pm IS
       , i_sql_text
       );
 
---/*DBUG*/    dbug.print( 'info', 'sql id found: ' || v_sql_id );
+/*DBUG
+    dbug.print( 'info', 'sql id found: ' || v_sql_id );
+/*DBUG*/
 
     IF v_sql_id IS NOT NULL
     THEN
@@ -1012,16 +1025,22 @@ CREATE OR REPLACE PACKAGE BODY pm IS
       );
     END IF;
 
---/*DBUG*/    dbug.print( 'info', 'sql id: ' || v_sql_id );
+/*DBUG
+    dbug.print( 'info', 'sql id: ' || v_sql_id );
+/*DBUG*/
         
     COMMIT;
 
-    trc.leave;
+/*DBUG
+    dbug.leave;
+/*DBUG*/
   EXCEPTION
     WHEN OTHERS
     THEN
-      trc.leave_on_error;
---/*DBUG*/      dbug.print( 'error', 'error; sql id: ' || v_sql_id );
+/*DBUG
+      dbug.leave_on_error;
+      dbug.print( 'error', 'error; sql id: ' || v_sql_id );
+/*DBUG*/
       ROLLBACK TO spt_sql;
       RAISE;
   END ins_pm_sql_l;
@@ -1081,37 +1100,41 @@ CREATE OR REPLACE PACKAGE BODY pm IS
     v_sql_function_code INTEGER;
     c_module_name CONSTANT module_name_t := 'PM.PARSE_AND_EXECUTE';
 
---/*DBUG*/    -- print a command with embedded new lines.
---/*DBUG*/    PROCEDURE print( i_command IN command_t )
---/*DBUG*/    IS
---/*DBUG*/      -- New line
---/*DBUG*/      c_nl CONSTANT CHAR(1) := CHR(10);
---/*DBUG*/      v_pos INTEGER := 1;
---/*DBUG*/      v_old_pos INTEGER := 0;
---/*DBUG*/    BEGIN
---/*DBUG*/      WHILE v_pos <> 0 
---/*DBUG*/      LOOP
---/*DBUG*/        v_pos := instr( i_command, c_nl, v_old_pos + 1 );
---/*DBUG*/        IF ( v_pos = 0 ) /* unsuccessful search */
---/*DBUG*/        THEN
---/*DBUG*/          dbug.print( 'info', 
---/*DBUG*/                      to_char( v_old_pos + 1, '0000' ) || ': ' ||
---/*DBUG*/                      substr( i_command, v_old_pos + 1 ) 
---/*DBUG*/          );
---/*DBUG*/        ELSE
---/*DBUG*/          dbug.print( 
---/*DBUG*/                      'info', 
---/*DBUG*/                      to_char( v_old_pos + 1, '0000' ) || ': ' ||
---/*DBUG*/                      substr( i_command, v_old_pos + 1, v_pos - v_old_pos - 1 ) 
---/*DBUG*/          );
---/*DBUG*/        END IF;
---/*DBUG*/        v_old_pos := v_pos;
---/*DBUG*/      END LOOP;
---/*DBUG*/    END print;
+/*DBUG
+    -- print a command with embedded new lines.
+    PROCEDURE print( i_command IN command_t )
+    IS
+      -- New line
+      c_nl CONSTANT CHAR(1) := CHR(10);
+      v_pos INTEGER := 1;
+      v_old_pos INTEGER := 0;
+    BEGIN
+      WHILE v_pos <> 0 
+      LOOP
+        v_pos := instr( i_command, c_nl, v_old_pos + 1 );
+        IF ( v_pos = 0 ) -- unsuccessful search
+        THEN
+          dbug.print( 'info', 
+                      to_char( v_old_pos + 1, '0000' ) || ': ' ||
+                      substr( i_command, v_old_pos + 1 ) 
+          );
+        ELSE
+          dbug.print( 
+                      'info', 
+                      to_char( v_old_pos + 1, '0000' ) || ': ' ||
+                      substr( i_command, v_old_pos + 1, v_pos - v_old_pos - 1 ) 
+          );
+        END IF;
+        v_old_pos := v_pos;
+      END LOOP;
+    END print;
+/*DBUG*/
   BEGIN
-    trc.enter( c_module_name );
-    trc.add_arg( 'i_command', i_command );
-    trc.add_arg( 'i_action', i_action );
+/*DBUG
+    dbug.enter( c_module_name );
+    dbug.print( 'input', 'i_command: %s', i_command );
+    dbug.print( 'input', 'i_action: %s', i_action );
+/*DBUG*/
 
     /* i_db_link may be NULL bit still needs to be replaced */
     v_command := replace( v_command, '<db_link>', i_db_link );
@@ -1131,31 +1154,33 @@ CREATE OR REPLACE PACKAGE BODY pm IS
    
     v_nr_rows := dbms_sql.execute( i_cursor );
 
---/*DBUG*/    IF i_action = 'I'
---/*DBUG*/    THEN
---/*DBUG*/            dbug.print( 'info', 'Number of rows inserted: %s', v_nr_rows );
---/*DBUG*/    ELSIF i_action = 'U'
---/*DBUG*/    THEN
---/*DBUG*/            dbug.print( 'info', 'Number of rows updated: %s', v_nr_rows );
---/*DBUG*/    ELSIF i_action = 'D'
---/*DBUG*/    THEN
---/*DBUG*/            dbug.print( 'info', 'Number of rows deleted: %s', v_nr_rows );
---/*DBUG*/    ELSE /* ?? */
---/*DBUG*/            dbug.print( 'info', 'Number of rows processed: %s', v_nr_rows );
---/*DBUG*/    END IF;
+/*DBUG
+    IF i_action = 'I'
+    THEN
+      dbug.print( 'info', 'Number of rows inserted: %s', v_nr_rows );
+    ELSIF i_action = 'U'
+    THEN
+      dbug.print( 'info', 'Number of rows updated: %s', v_nr_rows );
+    ELSIF i_action = 'D'
+    THEN
+      dbug.print( 'info', 'Number of rows deleted: %s', v_nr_rows );
+    ELSE -- ??
+      dbug.print( 'info', 'Number of rows processed: %s', v_nr_rows );
+    END IF;
 
-    trc.leave;
+    dbug.leave;
   EXCEPTION
     WHEN    OTHERS
     THEN
-      trc.leave_on_error;
---/*DBUG*/      dbug.print( 'error', 'SQLERRM: ' || SQLERRM );
---/*DBUG*/      print( v_command );
---/*DBUG*/      v_error_position := dbms_sql.last_error_position;
---/*DBUG*/      v_sql_function_code := dbms_sql.last_sql_function_code;
---/*DBUG*/      dbug.print( 'error', 'Error at position: ' || to_char(v_error_position) );
---/*DBUG*/      dbug.print( 'error', 'SQL function code: ' || to_char(v_sql_function_code) );
+      dbug.leave_on_error;
+      print( v_command );
+      v_error_position := dbms_sql.last_error_position;
+      v_sql_function_code := dbms_sql.last_sql_function_code;
+      dbug.print( 'error', 'Error at position: ' || to_char(v_error_position) );
+      dbug.print( 'error', 'SQL function code: ' || to_char(v_sql_function_code) );
+
       RAISE;
+/*DBUG*/
   END parse_and_execute;
   --
   -- Cleanup pm_session info
@@ -1166,26 +1191,27 @@ CREATE OR REPLACE PACKAGE BODY pm IS
   IS
     c_module_name CONSTANT module_name_t := 'PM.CLEANUP_SESSION';
   BEGIN
-    trc.enter( c_module_name );
-    trc.add_arg( 'i_db', i_db );
-    trc.add_arg( 'i_lwb_run_id', i_lwb_run_id );
-    trc.add_arg( 'i_upb_run_id', i_upb_run_id );
+/*DBUG
+    dbug.enter( c_module_name );
+    dbug.print( 'input', 'i_db: %s', i_db );
+    dbug.print( 'input', 'i_lwb_run_id: %s', i_lwb_run_id );
+    dbug.print( 'input', 'i_upb_run_id: %s', i_upb_run_id );
+/*DBUG*/
 
     DELETE
     FROM    pm_session
     WHERE   db = i_db
     AND     run_id BETWEEN i_lwb_run_id AND i_upb_run_id;
 
---/*DBUG*/    dbug.print( 'info', 'Rows deleted from pm_session: %s', sql%ROWCOUNT );
+/*DBUG
+    dbug.print( 'info', 'Rows deleted from pm_session: %s', sql%ROWCOUNT );
+/*DBUG*/
 
     COMMIT;
 
-    trc.leave;
-  EXCEPTION
-    WHEN OTHERS
-    THEN
-      trc.leave_on_error;
-      RAISE;
+/*DBUG
+    dbug.leave;
+/*DBUG*/
   END cleanup_session_l;
   --
   -- Cleanup pm_sqlarea info
@@ -1196,12 +1222,16 @@ CREATE OR REPLACE PACKAGE BODY pm IS
   IS
     c_module_name CONSTANT module_name_t := 'PM.CLEANUP_SQLAREA';
   BEGIN
-    trc.enter( c_module_name );
-    trc.add_arg( 'i_db', i_db );
-    trc.add_arg( 'i_lwb_run_id', i_lwb_run_id );
-    trc.add_arg( 'i_upb_run_id', i_upb_run_id );
+/*DBUG
+    dbug.enter( c_module_name );
+    dbug.print( 'input', 'i_db: %s', i_db );
+    dbug.print( 'input', 'i_lwb_run_id: %s', i_lwb_run_id );
+    dbug.print( 'input', 'i_upb_run_id: %s', i_upb_run_id );
+/*DBUG*/
 
---/*DBUG*/    v_count := 0;
+/*DBUG
+    v_count := 0;
+/*DBUG*/
     LOOP
       DELETE
       FROM    pm_sqlarea are
@@ -1213,19 +1243,17 @@ CREATE OR REPLACE PACKAGE BODY pm IS
 
       EXIT WHEN sql%ROWCOUNT < c_max_count;
 
---/*DBUG*/      v_count := v_count + sql%ROWCOUNT;
+/*DBUG
+      v_count := v_count + sql%ROWCOUNT;
+/*DBUG*/
     END LOOP;
 
     COMMIT;
 
---/*DBUG*/    dbug.print( 'info', 'Rows deleted from pm_sqlarea: %s', v_count );
-
-    trc.leave;
-  EXCEPTION
-    WHEN OTHERS
-    THEN
-      trc.leave_on_error;
-      RAISE;
+/*DBUG
+    dbug.print( 'info', 'Rows deleted from pm_sqlarea: %s', v_count );
+    dbug.leave;
+/*DBUG*/
   END cleanup_sqlarea_l;
   --
   -- Cleanup pm_sql info (local variant)
@@ -1237,10 +1265,12 @@ CREATE OR REPLACE PACKAGE BODY pm IS
   IS
     c_module_name CONSTANT module_name_t := 'PM.CLEANUP_SQL';
   BEGIN
-    trc.enter( c_module_name );
-    trc.add_arg( 'i_db', i_db );
-    trc.add_arg( 'i_lwb_run_id', i_lwb_run_id );
-    trc.add_arg( 'i_upb_run_id', i_upb_run_id );
+/*DBUG
+    dbug.enter( c_module_name );
+    dbug.print( 'input', 'i_db: %s', i_db );
+    dbug.print( 'input', 'i_lwb_run_id: %s', i_lwb_run_id );
+    dbug.print( 'input', 'i_upb_run_id: %s', i_upb_run_id );
+/*DBUG*/
 
     parse_and_execute( 'truncate table pm_sql_current', i_cursor );
 
@@ -1269,14 +1299,10 @@ CREATE OR REPLACE PACKAGE BODY pm IS
             );
     COMMIT;
 
---/*DBUG*/      dbug.print( 'info', 'Rows deleted from pm_sql: %s', sql%ROWCOUNT );
-
-    trc.leave;
-  EXCEPTION
-    WHEN OTHERS
-    THEN
-      trc.leave_on_error;
-      RAISE;
+/*DBUG
+    dbug.print( 'info', 'Rows deleted from pm_sql: %s', sql%ROWCOUNT );
+    dbug.leave;
+/*DBUG*/
   END cleanup_sql_l;
   --
   -- Cleanup pm_system_event info
@@ -1287,10 +1313,12 @@ CREATE OR REPLACE PACKAGE BODY pm IS
   IS
     c_module_name CONSTANT module_name_t := 'PM.CLEANUP_SYSTEM_EVENT';
   BEGIN
-    trc.enter( c_module_name );
-    trc.add_arg( 'i_db', i_db );
-    trc.add_arg( 'i_lwb_run_id', i_lwb_run_id );
-    trc.add_arg( 'i_upb_run_id', i_upb_run_id );
+/*DBUG
+    dbug.enter( c_module_name );
+    dbug.print( 'input', 'i_db: %s', i_db );
+    dbug.print( 'input', 'i_lwb_run_id: %s', i_lwb_run_id );
+    dbug.print( 'input', 'i_upb_run_id: %s', i_upb_run_id );
+/*DBUG*/
 
     DELETE
     FROM    pm_system_event
@@ -1299,14 +1327,10 @@ CREATE OR REPLACE PACKAGE BODY pm IS
 
     COMMIT;
 
---/*DBUG*/    dbug.print( 'info', 'Rows deleted from pm_system_event: %s', sql%ROWCOUNT );
-
-    trc.leave;
-  EXCEPTION
-    WHEN    OTHERS
-    THEN
-      trc.leave_on_error;
-      RAISE;
+/*DBUG
+    dbug.print( 'info', 'Rows deleted from pm_system_event: %s', sql%ROWCOUNT );
+    dbug.leave;
+/*DBUG*/
   END cleanup_system_event_l;
   --
   -- Cleanup pm_sysstat info
@@ -1317,10 +1341,12 @@ CREATE OR REPLACE PACKAGE BODY pm IS
   IS
     c_module_name CONSTANT module_name_t := 'PM.CLEANUP_SYSSTAT';
   BEGIN
-    trc.enter( c_module_name );
-    trc.add_arg( 'i_db', i_db );
-    trc.add_arg( 'i_lwb_run_id', i_lwb_run_id );
-    trc.add_arg( 'i_upb_run_id', i_upb_run_id );
+/*DBUG
+    dbug.enter( c_module_name );
+    dbug.print( 'input', 'i_db: %s', i_db );
+    dbug.print( 'input', 'i_lwb_run_id: %s', i_lwb_run_id );
+    dbug.print( 'input', 'i_upb_run_id: %s', i_upb_run_id );
+/*DBUG*/
 
     DELETE
     FROM    pm_sysstat
@@ -1329,14 +1355,10 @@ CREATE OR REPLACE PACKAGE BODY pm IS
 
     COMMIT;
 
---/*DBUG*/    dbug.print( 'info', 'Rows deleted from pm_sysstat: %s', sql%ROWCOUNT );
-
-    trc.leave;
-  EXCEPTION
-    WHEN    OTHERS
-    THEN
-      trc.leave_on_error;
-      RAISE;
+/*DBUG
+    dbug.print( 'info', 'Rows deleted from pm_sysstat: %s', sql%ROWCOUNT );
+    dbug.leave;
+/*DBUG*/
   END  cleanup_sysstat_l;
   --
   -- Cleanup pm_run info
@@ -1347,23 +1369,22 @@ CREATE OR REPLACE PACKAGE BODY pm IS
   IS
     c_module_name CONSTANT module_name_t := 'PM.CLEANUP_RUN';
   BEGIN
-    trc.enter( c_module_name );
-    trc.add_arg( 'i_db', i_db );
-    trc.add_arg( 'i_lwb_run_id', i_lwb_run_id );
-    trc.add_arg( 'i_upb_run_id', i_upb_run_id );
+/*DBUG
+    dbug.enter( c_module_name );
+    dbug.print( 'input', 'i_db: %s', i_db );
+    dbug.print( 'input', 'i_lwb_run_id: %s', i_lwb_run_id );
+    dbug.print( 'input', 'i_upb_run_id: %s', i_upb_run_id );
+/*DBUG*/
 
     DELETE
     FROM    pm_run
     WHERE   db = i_db
     AND     run_id BETWEEN i_lwb_run_id AND i_upb_run_id;
 
---/*DBUG*/      dbug.print( 'info', 'Rows deleted from pm_run: %s', sql%ROWCOUNT );
-    trc.leave;
-  EXCEPTION
-    WHEN OTHERS
-    THEN
-      trc.leave_on_error;
-      RAISE;
+/*DBUG
+    dbug.print( 'info', 'Rows deleted from pm_run: %s', sql%ROWCOUNT );
+    dbug.leave;
+/*DBUG*/
   END cleanup_run_l;
   --
   -- Cleanup info for a database instance
@@ -1376,14 +1397,18 @@ CREATE OR REPLACE PACKAGE BODY pm IS
   IS
     c_module_name CONSTANT module_name_t := 'PM.CLEANUP';
   BEGIN
-    trc.enter( c_module_name );
-    trc.add_arg( 'i_db', i_db );
-    trc.add_arg( 'i_lwb_run_id', i_lwb_run_id );
-    trc.add_arg( 'i_upb_run_id', i_upb_run_id );
-    trc.add_arg( 'i_cleanup_run', i_cleanup_run );
+/*DBUG
+    dbug.enter( c_module_name );
+    dbug.print( 'input', 'i_db: %s', i_db );
+    dbug.print( 'input', 'i_lwb_run_id: %s', i_lwb_run_id );
+    dbug.print( 'input', 'i_upb_run_id: %s', i_upb_run_id );
+    dbug.print( 'input', 'i_cleanup_run: %s', i_cleanup_run );
+/*DBUG*/
 
---/*DBUG*/    dbug.print( 'info', 'Lower bound run id: %s', i_lwb_run_id );
---/*DBUG*/    dbug.print( 'info', 'Upper bound run id: %s', i_upb_run_id );
+/*DBUG
+    dbug.print( 'info', 'Lower bound run id: %s', i_lwb_run_id );
+    dbug.print( 'info', 'Upper bound run id: %s', i_upb_run_id );
+/*DBUG*/
 
     cleanup_session_l( i_db, i_lwb_run_id, i_upb_run_id );
     cleanup_sqlarea_l( i_db, i_lwb_run_id, i_upb_run_id );
@@ -1396,12 +1421,9 @@ CREATE OR REPLACE PACKAGE BODY pm IS
     END IF;
 
     COMMIT;
-    trc.leave;
-  EXCEPTION
-    WHEN OTHERS
-    THEN
-      trc.leave_on_error;
-      RAISE;
+/*DBUG
+    dbug.leave;
+/*DBUG*/
   END cleanup_l;
   --
   -- Collect v$system_event info from a remote database
@@ -1434,21 +1456,22 @@ CREATE OR REPLACE PACKAGE BODY pm IS
 
     c_module_name CONSTANT module_name_t := 'PM.COLLECT_SYSTEM_EVENT';
   BEGIN
-    trc.enter( c_module_name );
-    trc.add_arg( 'i_db', i_db );
-    trc.add_arg( 'i_run_id', i_run_id );
-    trc.add_arg( 'i_db_startup_run_id', i_db_startup_run_id );
+/*DBUG
+    dbug.enter( c_module_name );
+    dbug.print( 'input', 'i_db: %s', i_db );
+    dbug.print( 'input', 'i_run_id: %s', i_run_id );
+    dbug.print( 'input', 'i_db_startup_run_id: %s', i_db_startup_run_id );
+/*DBUG*/
 
---/*DBUG*/    dbug.print( 'info', 'Adding v$system_event info' );
+/*DBUG
+    dbug.print( 'info', 'Adding v$system_event info' );
+/*DBUG*/
     parse_and_execute( c_command, i_cursor, 'I', i_db, i_db_link, i_run_id );
     COMMIT;
 
-    trc.leave;
-  EXCEPTION
-    WHEN OTHERS
-    THEN
-      trc.leave_on_error;
-      RAISE;
+/*DBUG
+    dbug.leave;
+/*DBUG*/
   END collect_system_event_l;
   --
   -- Collect v$sysstat info from a remote database
@@ -1475,22 +1498,21 @@ CREATE OR REPLACE PACKAGE BODY pm IS
 
     c_module_name CONSTANT module_name_t := 'PM.COLLECT_SYSSTAT';
   BEGIN
-    trc.enter( c_module_name );
-    trc.add_arg( 'i_db', i_db );
-    trc.add_arg( 'i_run_id', i_run_id );
-    trc.add_arg( 'i_db_startup_run_id', i_db_startup_run_id );
+/*DBUG
+    dbug.enter( c_module_name );
+    dbug.print( 'input', 'i_db: %s', i_db );
+    dbug.print( 'input', 'i_run_id: %s', i_run_id );
+    dbug.print( 'input', 'i_db_startup_run_id: %s', i_db_startup_run_id );
 
---/*DBUG*/    dbug.print( 'info', 'Adding v$sysstat info' );
+    dbug.print( 'info', 'Adding v$sysstat info' );
+/*DBUG*/
     parse_and_execute( c_command, i_cursor, 'I', i_db, i_db_link, i_run_id );
 
     COMMIT;
 
-    trc.leave;
-  EXCEPTION
-    WHEN OTHERS
-    THEN
-      trc.leave_on_error;
-      RAISE;
+/*DBUG
+    dbug.leave;
+/*DBUG*/
   END collect_sysstat_l;
   --
   -- Collect v$sqlarea info from a remote database
@@ -1556,22 +1578,22 @@ CREATE OR REPLACE PACKAGE BODY pm IS
  
     c_module_name CONSTANT module_name_t := 'PM.COLLECT_SQLAREA';
   BEGIN
-    trc.enter( c_module_name );
-    trc.add_arg( 'i_db', i_db );
-    trc.add_arg( 'i_run_id', i_run_id );
-    trc.add_arg( 'i_db_startup_run_id', i_db_startup_run_id );
+/*DBUG
+    dbug.enter( c_module_name );
+    dbug.print( 'input', 'i_db: %s', i_db );
+    dbug.print( 'input', 'i_run_id: %s', i_run_id );
+    dbug.print( 'input', 'i_db_startup_run_id: %s', i_db_startup_run_id );
 
---/*DBUG*/    dbug.print( 'info', 'Adding v$sqlarea info' );
+    dbug.print( 'info', 'Adding v$sqlarea info' );
+/*DBUG*/
+
     parse_and_execute( c_command, i_cursor, 'I', i_db, i_db_link, i_run_id );
 
     COMMIT;
 
-    trc.leave;
-  EXCEPTION
-    WHEN OTHERS
-    THEN
-      trc.leave_on_error;
-      RAISE;
+/*DBUG
+    dbug.leave;
+/*DBUG*/
   END collect_sqlarea_l;
   --
   -- Collect v$session info from a remote database
@@ -1602,27 +1624,28 @@ CREATE OR REPLACE PACKAGE BODY pm IS
         FROM    v$session<db_link> s';
     c_module_name CONSTANT module_name_t := 'PM.COLLECT_SESSION';
   BEGIN
-    trc.enter( c_module_name );
-    trc.add_arg( 'i_db', i_db );
-    trc.add_arg( 'i_run_id', i_run_id );
-    trc.add_arg( 'i_db_startup_run_id', i_db_startup_run_id );
+/*DBUG
+    dbug.enter( c_module_name );
+    dbug.print( 'input', 'i_db: %s', i_db );
+    dbug.print( 'input', 'i_run_id: %s', i_run_id );
+    dbug.print( 'input', 'i_db_startup_run_id: %s', i_db_startup_run_id );
+/*DBUG*/
 
     parse_and_execute
     (
             'alter table pm_session disable constraint pm_ses_sql_fk1'
     ,       i_cursor
     );
---/*DBUG*/    dbug.print( 'info', 'Adding v$session info' );
+/*DBUG
+    dbug.print( 'info', 'Adding v$session info' );
+/*DBUG*/
     parse_and_execute( c_command, i_cursor, 'I', i_db, i_db_link, i_run_id );
 
     COMMIT;
 
-    trc.leave;
-  EXCEPTION
-    WHEN OTHERS
-    THEN
-      trc.leave_on_error;
-      RAISE;
+/*DBUG
+    dbug.leave;
+/*DBUG*/
   END collect_session_l;
   --
   -- Process v$sqlarea info from a remote database
@@ -1691,18 +1714,22 @@ CREATE OR REPLACE PACKAGE BODY pm IS
 
     r_sqlarea_tot   c_sqlarea_tot%ROWTYPE;
   BEGIN
-    trc.enter( c_module_name );
-    trc.add_arg( 'i_db', i_db );
-    trc.add_arg( 'i_run_id', i_run_id );
-    trc.add_arg( 'i_db_startup_run_id', i_db_startup_run_id );
+/*DBUG
+    dbug.enter( c_module_name );
+    dbug.print( 'input', 'i_db: %s', i_db );
+    dbug.print( 'input', 'i_run_id: %s', i_run_id );
+    dbug.print( 'input', 'i_db_startup_run_id: %s', i_db_startup_run_id );
+/*DBUG*/
 
-            /*
-            || Before inserting into pm_sqlarea we have to update pm_sql
-            || in order to keep the foreign key constraint 
-            || from pm_sqlarea to pm_sql valid.
-            */
+    /*
+    || Before inserting into pm_sqlarea we have to update pm_sql
+    || in order to keep the foreign key constraint 
+    || from pm_sqlarea to pm_sql valid.
+    */
 
---/*DBUG*/      dbug.print( 'info', 'Processing pm_sql' );
+/*DBUG
+    dbug.print( 'info', 'Processing pm_sql' );
+/*DBUG*/
 
     FOR r_new_sql IN c_new_sql
     LOOP
@@ -1718,24 +1745,30 @@ CREATE OR REPLACE PACKAGE BODY pm IS
     EXCEPTION
       WHEN OTHERS
       THEN
---/*DBUG*/        dbug.print( 'error', 'db: %s; hash_value: %s; address: %s; command_type: %s',
---/*DBUG*/                    r_new_sql.db,
---/*DBUG*/                    r_new_sql.hash_value,
---/*DBUG*/                    r_new_sql.address,
---/*DBUG*/                    r_new_sql.command_type );
---/*DBUG*/        dbug.print( 'error', r_new_sql.sql_text );
+/*DBUG
+        dbug.print( 'error', 'db: %s; hash_value: %s; address: %s; command_type: %s',
+                    r_new_sql.db,
+                    r_new_sql.hash_value,
+                    r_new_sql.address,
+                    r_new_sql.command_type );
+        dbug.print( 'error', r_new_sql.sql_text );
+/*DBUG*/
         RAISE;
     END;
     END LOOP;
 
---/*DBUG*/    dbug.print( 'info', 'Processing pm_sqlarea' );
+/*DBUG
+    dbug.print( 'info', 'Processing pm_sqlarea' );
+/*DBUG*/
 
-      /* 
-      || Calculate delta values for pm_sqlarea_tmp.
-      || Do not insert records which do not contain any
-      || info: executions, sorts, buffer_gets, etc. all 0.
-      */
---/*DBUG*/        v_count := 0;
+    /* 
+    || Calculate delta values for pm_sqlarea_tmp.
+    || Do not insert records which do not contain any
+    || info: executions, sorts, buffer_gets, etc. all 0.
+    */
+/*DBUG
+    v_count := 0;
+/*DBUG*/
 
     FOR r_sqlarea_tmp IN
     (
@@ -1870,30 +1903,33 @@ CREATE OR REPLACE PACKAGE BODY pm IS
         , r_sqlarea_tmp.module
         , r_sqlarea_tmp.action
         );
---/*DBUG*/        v_count := v_count + 1;
+/*DBUG
+        v_count := v_count + 1;
+/*DBUG*/
       EXCEPTION
         WHEN    OTHERS
         THEN
---/*DBUG*/          dbug.print( 'error', 'hash_value: ' || r_sqlarea_tmp.hash_value );
---/*DBUG*/          dbug.print( 'error', 'address: ' || r_sqlarea_tmp.address );
---/*DBUG*/          dbug.print( 'error', 'first_load_time: ' || r_sqlarea_tmp.first_load_time );
---/*DBUG*/          dbug.print( 'error', 'parsing_user_name: ' || r_sqlarea_tmp.parsing_user_name );
---/*DBUG*/          dbug.print( 'error', 'parsing_schema_name: ' || r_sqlarea_tmp.parsing_schema_name );
-        NULL;
+/*DBUG
+          dbug.print( 'error', 'hash_value: ' || r_sqlarea_tmp.hash_value );
+          dbug.print( 'error', 'address: ' || r_sqlarea_tmp.address );
+          dbug.print( 'error', 'first_load_time: ' || r_sqlarea_tmp.first_load_time );
+          dbug.print( 'error', 'parsing_user_name: ' || r_sqlarea_tmp.parsing_user_name );
+          dbug.print( 'error', 'parsing_schema_name: ' || r_sqlarea_tmp.parsing_schema_name );
+/*DBUG*/
+          NULL;
       END;
       END IF;       
     END LOOP;
 
---/*DBUG*/    dbug.print( 'info', 'Rows added to pm_sqlarea: %s', v_count );
+/*DBUG
+    dbug.print( 'info', 'Rows added to pm_sqlarea: %s', v_count );
+/*DBUG*/
 
     COMMIT;
 
-    trc.leave;
-  EXCEPTION
-    WHEN    OTHERS
-    THEN
-      trc.leave_on_error;
-      RAISE;
+/*DBUG
+    dbug.leave;
+/*DBUG*/
   END process_sqlarea_l;
   --
   -- Process v$sysstat info from a remote database
@@ -1922,14 +1958,17 @@ CREATE OR REPLACE PACKAGE BODY pm IS
 
     r_sysstat_tot c_sysstat_tot%ROWTYPE;
   BEGIN
-    trc.enter( c_module_name );
-    trc.add_arg( 'i_db', i_db );
-    trc.add_arg( 'i_run_id', i_run_id );
-    trc.add_arg( 'i_db_startup_run_id', i_db_startup_run_id );
+/*DBUG
+    dbug.enter( c_module_name );
+    dbug.print( 'input', 'i_db: %s', i_db );
+    dbug.print( 'input', 'i_run_id: %s', i_run_id );
+    dbug.print( 'input', 'i_db_startup_run_id: %s', i_db_startup_run_id );
 
---/*DBUG*/    dbug.print( 'info', 'Processing pm_sysstat' );
-                        /* subtract old values */
---/*DBUG*/    v_count := 0;
+    dbug.print( 'info', 'Processing pm_sysstat' );
+    v_count := 0;
+/*DBUG*/
+
+    /* subtract old values */
     FOR r_sysstat_tmp IN
     (
       SELECT  db
@@ -1970,29 +2009,29 @@ CREATE OR REPLACE PACKAGE BODY pm IS
         , r_sysstat_tmp.statistic#
         , r_sysstat_tmp.value
         );
---/*DBUG*/        v_count := v_count + 1;
+/*DBUG
+        v_count := v_count + 1;
+/*DBUG*/
       EXCEPTION
         WHEN OTHERS
         THEN
---/*DBUG*/          dbug.print( 'error', 'db: %s; run_id: %s; statistic#: %s; value: %s',
---/*DBUG*/                      r_sysstat_tmp.db,
---/*DBUG*/                      r_sysstat_tmp.run_id,
---/*DBUG*/                      r_sysstat_tmp.statistic#,
---/*DBUG*/                      r_sysstat_tmp.value );
+/*DBUG
+          dbug.print( 'error', 'db: %s; run_id: %s; statistic#: %s; value: %s',
+                      r_sysstat_tmp.db,
+                      r_sysstat_tmp.run_id,
+                      r_sysstat_tmp.statistic#,
+                      r_sysstat_tmp.value );
+/*DBUG*/
           NULL;
       END;
       END IF;
     END LOOP;
     COMMIT;
 
---/*DBUG*/    dbug.print( 'info', 'Rows added to pm_sysstat: %s', v_count );
-
-    trc.leave;
-  EXCEPTION
-    WHEN OTHERS
-    THEN
-      trc.leave_on_error;
-      RAISE;
+/*DBUG
+    dbug.print( 'info', 'Rows added to pm_sysstat: %s', v_count );
+    dbug.leave;
+/*DBUG*/
   END process_sysstat_l;
   --
   -- Process v$session info for a run
@@ -2025,12 +2064,14 @@ CREATE OR REPLACE PACKAGE BODY pm IS
       ,       sql_address;
 
     BEGIN
-      trc.enter( c_module_name );
-      trc.add_arg( 'i_db', i_db );
-      trc.add_arg( 'i_run_id', i_run_id );
-      trc.add_arg( 'i_db_startup_run_id', i_db_startup_run_id );
+/*DBUG
+      dbug.enter( c_module_name );
+      dbug.print( 'input', 'i_db: %s', i_db );
+      dbug.print( 'input', 'i_run_id: %s', i_run_id );
+      dbug.print( 'input', 'i_db_startup_run_id: %s', i_db_startup_run_id );
 
---/*DBUG*/    dbug.print( 'info', 'Processing pm_session' );
+      dbug.print( 'info', 'Processing pm_session' );
+/*DBUG*/
 
       FOR r_session_tmp IN
       ( 
@@ -2068,13 +2109,15 @@ CREATE OR REPLACE PACKAGE BODY pm IS
       EXCEPTION
         WHEN OTHERS
         THEN
---/*DBUG*/          dbug.print( 'error', 'db: ' || r_session_tmp.db );
---/*DBUG*/          dbug.print( 'error', 'run_id: ' || r_session_tmp.run_id );
---/*DBUG*/          dbug.print( 'error', 'sid: ' || r_session_tmp.sid );
---/*DBUG*/          dbug.print( 'error', 'username: ' || r_session_tmp.username );
---/*DBUG*/          dbug.print( 'error', 'program: ' || r_session_tmp.program );
---/*DBUG*/          dbug.print( 'error', 'sql_hash_value: ' || r_session_tmp.sql_hash_value );
---/*DBUG*/          dbug.print( 'error', 'sql_address: ' || r_session_tmp.sql_address );
+/*DBUG
+          dbug.print( 'error', 'db: ' || r_session_tmp.db );
+          dbug.print( 'error', 'run_id: ' || r_session_tmp.run_id );
+          dbug.print( 'error', 'sid: ' || r_session_tmp.sid );
+          dbug.print( 'error', 'username: ' || r_session_tmp.username );
+          dbug.print( 'error', 'program: ' || r_session_tmp.program );
+          dbug.print( 'error', 'sql_hash_value: ' || r_session_tmp.sql_hash_value );
+          dbug.print( 'error', 'sql_address: ' || r_session_tmp.sql_address );
+/*DBUG*/
           NULL;
       END;
       END LOOP;
@@ -2084,17 +2127,23 @@ CREATE OR REPLACE PACKAGE BODY pm IS
         || Keep the foreign key constraint PM_SESSION - PM_SQL valid.
         ||
         */
---/*DBUG*/      v_count := 0;
+/*DBUG
+      v_count := 0;
+/*DBUG*/
       FOR r_session IN c_session
       LOOP
         UPDATE  pm_session
         SET     sql_hash_value = NULL
         ,       sql_address = NULL
         WHERE current OF c_session;
---/*DBUG*/        v_count := v_count + 1;
+/*DBUG
+        v_count := v_count + 1;
+/*DBUG*/
       END LOOP;
 
---/*DBUG*/      dbug.print( 'info', 'Rows updated of pm_session: %s', v_count );
+/*DBUG
+      dbug.print( 'info', 'Rows updated of pm_session: %s', v_count );
+/*DBUG*/
 
       parse_and_execute
       (
@@ -2102,12 +2151,9 @@ CREATE OR REPLACE PACKAGE BODY pm IS
       , i_cursor
       );
 
-      trc.leave;
-    EXCEPTION
-      WHEN OTHERS
-      THEN
-        trc.leave_on_error;
-        RAISE;
+/*DBUG
+      dbug.leave;
+/*DBUG*/
   END process_session_l;
   --
   -- Process v$system_event info from a remote database
@@ -2138,16 +2184,19 @@ CREATE OR REPLACE PACKAGE BODY pm IS
 
     r_system_event_tot c_system_event_tot%ROWTYPE;
   BEGIN
-    trc.enter( c_module_name );
-    trc.add_arg( 'i_db', i_db );
-    trc.add_arg( 'i_run_id', i_run_id );
-    trc.add_arg( 'i_db_startup_run_id', i_db_startup_run_id );
+/*DBUG
+    dbug.enter( c_module_name );
+    dbug.print( 'input', 'i_db: %s', i_db );
+    dbug.print( 'input', 'i_run_id: %s', i_run_id );
+    dbug.print( 'input', 'i_db_startup_run_id: %s', i_db_startup_run_id );
 
---/*DBUG*/    dbug.print( 'info', 'Processing pm_system_event' );
+    dbug.print( 'info', 'Processing pm_system_event' );
 
---/*DBUG*/    dbug.print( 'info', 'inserting into pm_system_event' );
+    dbug.print( 'info', 'inserting into pm_system_event' );
 
---/*DBUG*/    v_count := 0;
+    v_count := 0;
+/*DBUG*/
+
     FOR r_system_event_tmp IN
     (
       SELECT  db
@@ -2212,14 +2261,18 @@ CREATE OR REPLACE PACKAGE BODY pm IS
           )
         );
 
---/*DBUG*/        v_count := v_count + 1;
+/*DBUG
+        v_count := v_count + 1;
+/*DBUG*/
       EXCEPTION
         WHEN OTHERS
         THEN
---/*DBUG*/          dbug.print( 'error', 'db: %s; run_id: %s; event: %s',
---/*DBUG*/                      r_system_event_tmp.db,
---/*DBUG*/                      r_system_event_tmp.run_id,
---/*DBUG*/                      r_system_event_tmp.event );
+/*DBUG
+          dbug.print( 'error', 'db: %s; run_id: %s; event: %s',
+                      r_system_event_tmp.db,
+                      r_system_event_tmp.run_id,
+                      r_system_event_tmp.event );
+/*DBUG*/
           NULL;
       END;
       END IF;
@@ -2227,15 +2280,10 @@ CREATE OR REPLACE PACKAGE BODY pm IS
 
     COMMIT;
 
---/*DBUG*/    dbug.print( 'info', 'Rows added to pm_system_event: %s', v_count );
-
-    trc.leave;
-  EXCEPTION
-    WHEN OTHERS
-    THEN
---/*DBUG*/      dbug.print( 'error', 'error in process_system_event' );
-      trc.leave_on_error;
-      RAISE;
+/*DBUG
+    dbug.print( 'info', 'Rows added to pm_system_event: %s', v_count );
+    dbug.leave;
+/*DBUG*/
   END process_system_event_l;
   --
   -- Collect info for a specific database instance. (local variant)
@@ -2247,9 +2295,6 @@ CREATE OR REPLACE PACKAGE BODY pm IS
     v_run_id                pm_run.run_id%TYPE;
     v_db_startup_run_id     pm_run.run_id%TYPE;
     c_module_name           CONSTANT module_name_t := 'PM.COLLECT';
-    v_error_msg             pm_run.error_msg%TYPE;
-    v_calls                 VARCHAR2(32767);
-    v_format_call_stack     VARCHAR2(32767);
 
     PROCEDURE truncate_temp_tables
     IS
@@ -2265,8 +2310,10 @@ CREATE OR REPLACE PACKAGE BODY pm IS
       END LOOP;
     END truncate_temp_tables;
   BEGIN
-    trc.enter( c_module_name );
-    trc.add_arg( 'i_db', i_db );
+/*DBUG
+    dbug.enter( c_module_name );
+    dbug.print( 'input', 'i_db: %s', i_db );
+/*DBUG*/
 
       /*
       || prevent errors with database links
@@ -2294,28 +2341,21 @@ CREATE OR REPLACE PACKAGE BODY pm IS
 
     COMMIT;
 
-    trc.leave;
+/*DBUG
+    dbug.leave;
+/*DBUG*/
   EXCEPTION
     WHEN OTHERS
     THEN
-      trc.leave_on_error;
-      v_error_msg := trc.get_first_error_msg;
-      v_calls := trc.get_first_calls;
-      v_format_call_stack := trc.get_first_format_call_stack;
-
+/*DBUG
+      dbug.leave_on_error;
+/*DBUG*/
               /* remove all children of this run but not the run and error itself */
       pm.cleanup_l( i_cursor, i_db, v_run_id, v_run_id, false ); 
 
       UPDATE  pm_run
-      SET     error_msg = v_error_msg
+      SET     error_msg = SUBSTR(sqlerrm, 1, 2000)
       WHERE   run_id = v_run_id;
-
-
-      /* Use DBMS_OUTPUT here */
-      dbms_output.put_line( '*** dbms_utility.format_call_stack ***' );
-      dbms_output.put_line( substr( v_format_call_stack, 1, 255 ) );
-      dbms_output.put_line( '*** call stack ***' );
-      dbms_output.put_line( substr( v_calls, 1, 255 ) );
 
       RAISE;
   END collect_l;
@@ -2335,8 +2375,10 @@ CREATE OR REPLACE PACKAGE BODY pm IS
       FROM    pm_run run
       WHERE   run.db = i_db;
   BEGIN
-    trc.enter( c_module_name );
-    trc.add_arg( 'i_db', i_db );
+/*DBUG
+    dbug.enter( c_module_name );
+    dbug.print( 'input', 'i_db: %s', i_db );
+/*DBUG*/
 
     OPEN c_last_run( i_db );
     FETCH c_last_run
@@ -2359,12 +2401,14 @@ CREATE OR REPLACE PACKAGE BODY pm IS
     /*truncate_temp_tables;*/
     COMMIT;
 
-    trc.leave;
+/*DBUG
+    dbug.leave;
   EXCEPTION
-    WHEN    OTHERS
+    WHEN OTHERS
     THEN
-      trc.leave_on_error;
-      RAISE;
+      dbug.leave_on_error;
+      RAISE; 
+/*DBUG*/
   END process_l;
 
   /* GLOBAL MODULES */
