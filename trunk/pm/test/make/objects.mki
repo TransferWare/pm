@@ -5,7 +5,7 @@ SCHEMA := pm_owner
 MANIFEST_OBJECTS :=
 
 # All ut_<packages>
-UT_TARGETS := trc
+UT_TARGETS := 
 
 OBJECTS_SCRIPTS := \
 	$(addprefix ut_,$(addsuffix .pks,$(UT_TARGETS))) \

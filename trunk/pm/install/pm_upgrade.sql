@@ -269,18 +269,6 @@ SET DEFINE '&'
 COMMIT
 /
 
-DEFINE log_file = 'output00013.&&sessionid..log'
-PROMPT Log file: &&log_file
-SPOOL &&log_file
-START &&restore_sql
-SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&pm_HOME/db/trc.pck 
-SET VERIFY ON DEFINE ON
-START &&pm_HOME/db/trc.pck 
-SET DEFINE '&'
-COMMIT
-/
-
 DEFINE log_file = 'output00014.&&sessionid..log'
 PROMPT *** Installing packages: OK ***
 PROMPT *** Installing package_bodies: START ***

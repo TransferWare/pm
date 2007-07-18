@@ -19,7 +19,6 @@ html/pm.html
 html/pm_cfg.html
 html/pm_dpi.html
 html/pm_mpi.html
-html/trc.html
 ^install/pm\.sql
 ^doc/PM-ontwikkeling\.doc
 ^doc/PM-richtlijnen\.doc

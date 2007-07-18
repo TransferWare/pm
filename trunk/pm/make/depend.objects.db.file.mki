@@ -13,9 +13,6 @@ gskdb.pck-run: install.table.pm_owner.cg_ref_codes
 # install.package_body.pm_owner.gsk_msg depends on install.table.pm_owner.gsk_meldingen
 gskdb.pck-run: install.table.pm_owner.gsk_meldingen
 
-# install.package_body.pm_owner.pm depends on install.package.pm_owner.trc
-pm.pck-run: install.package.pm_owner.trc
-
 # install.package_body.pm_owner.pm depends on install.sequence.pm_owner.pm_run_seq
 pm.pck-run: install.sequence.pm_owner.pm_run_seq
 
