@@ -8,11 +8,22 @@ All rights reserved.
 
 This application monitors the performance of Oracle databases.
 
+RELEASES
+
+6.6.0)
+
+* Oracle 7 and 8 desupported.
+* Installation just needs SELECT_CATALOG_ROLE to access V$ views. 
+  Direct grants to V$ views are not needed anymore.
+* PM$ views removed because now just the V$ tables are used for all Oracle versions.
+
+6.5.0)
+
+* This release includes the Total Performance Index.
+
 NOTES
 
-1) This release includes the Total Performance Index.
-
-2) Third party software: Oracle Forms 6i or higher, Oracle Reports 6i of higher.
+1) Third party software: Oracle Forms 6i or higher, Oracle Reports 6i of higher.
 
 INSTALLATION
 
