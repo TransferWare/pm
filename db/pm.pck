@@ -2353,9 +2353,13 @@ CREATE OR REPLACE PACKAGE BODY pm IS
               /* remove all children of this run but not the run and error itself */
       pm.cleanup_l( i_cursor, i_db, v_run_id, v_run_id, false ); 
 
-      UPDATE  pm_run
-      SET     error_msg = SUBSTR(sqlerrm, 1, 2000)
-      WHERE   run_id = v_run_id;
+      DECLARE
+        v_error_msg CONSTANT pm_run.error_msg%type := SUBSTR(sqlerrm, 1, 2000);
+      BEGIN
+        UPDATE  pm_run
+        SET     error_msg = v_error_msg
+        WHERE   run_id = v_run_id;
+      END;
 
       RAISE;
   END collect_l;

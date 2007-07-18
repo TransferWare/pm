@@ -151,9 +151,9 @@ PROMPT Log file: &&log_file
 SPOOL &&log_file
 START &&restore_sql
 SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&tw_HOME/common/src/sql/check_sql_env.sql GRANT select sys v_$statname
+PROMPT Command: START &&tw_HOME/common/src/sql/check_sql_env.sql ROLE SELECT_CATALOG_ROLE
 SET VERIFY ON DEFINE ON
-START &&tw_HOME/common/src/sql/check_sql_env.sql GRANT select sys v_$statname
+START &&tw_HOME/common/src/sql/check_sql_env.sql ROLE SELECT_CATALOG_ROLE
 SET DEFINE '&'
 COMMIT
 /
@@ -167,19 +167,6 @@ PROMPT Command: START &&tw_HOME/common/src/sql/check_sql_env.sql CONNECT "&&user
 SET VERIFY ON DEFINE ON
 PROMPT &&userid
 START &&tw_HOME/common/src/sql/check_sql_env.sql CONNECT "&&userid"
-SET DEFINE '&'
-COMMIT
-/
-
-DEFINE log_file = 'output00005.&&sessionid..log'
-PROMPT Log file: &&log_file
-SPOOL &&log_file
-START &&restore_sql
-SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&tw_HOME/common/src/sql/check_sql_env.sql RELEASE pm "<=" &&pm_VERSION ""
-SET VERIFY ON DEFINE ON
-PROMPT &&pm_VERSION
-START &&tw_HOME/common/src/sql/check_sql_env.sql RELEASE pm "<=" &&pm_VERSION ""
 SET DEFINE '&'
 COMMIT
 /
@@ -316,20 +303,6 @@ SET VERIFY OFF DEFINE OFF
 PROMPT Command: START &&tw_HOME/common/src/sql/recomp.sql 
 SET VERIFY ON DEFINE ON
 START &&tw_HOME/common/src/sql/recomp.sql 
-SET DEFINE '&'
-COMMIT
-/
-
-DEFINE log_file = 'output00017.&&sessionid..log'
-PROMPT *** Installing grants: START ***
-PROMPT *** Installing grants: OK ***
-PROMPT Log file: &&log_file
-SPOOL &&log_file
-START &&restore_sql
-SET VERIFY OFF DEFINE OFF
-PROMPT Command: START &&tw_HOME/common/src/sql/release_info.sql NEW pm &&pm_VERSION TRUE
-SET VERIFY ON DEFINE ON
-START &&tw_HOME/common/src/sql/release_info.sql NEW pm &&pm_VERSION TRUE
 SET DEFINE '&'
 COMMIT
 /

@@ -41,7 +41,7 @@
 
 SCHEMA := pm_owner
 
-install.check_sql_env.grant: check_sql_env.grant.select.sys.v_$statname
+install.check_sql_env.grant: check_sql_env.role.select_catalog_role
 
 # Do not include pm_mpi.pkb since only specification is important
 # Do not include pm_dpi.pkb since only specification is important
