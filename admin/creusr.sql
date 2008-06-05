@@ -103,6 +103,9 @@ quota 0 on system
 quota unlimited on &&default_tablespace
 /
 
+grant select_catalog_role to &&account
+/
+
 undefine 1
 undefine account
 undefine 2
