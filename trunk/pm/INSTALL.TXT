@@ -1,67 +1,131 @@
+Performance Monitor
+
+Version: see VERSION
+Copyright: see LICENSE.TXT
+
+All rights reserved.
+
+
+Full installation instructions can be found in doc/pm-manual.rtf. This
+is just a quick start guide.
+
+The command line is used for all commands. Commands start with a prompt
+("$" for the shell command line and "SQL>" for SQL*Plus).  Variables
+are between "<" and ">".
+
 0) Prerequisites
 
    This application depends on module transferware (abbreviated as tw) which
    can be found on http://www.sourceforge.net/projects/transferware. Go to
-   download section and pick the latest tw distribution. Unpack it to a directory.
+   the download section and pick the latest tw distribution. 
+
+   Just unpack the tw distribution to a directory. No additional actions needed.
+
+   Example 1: unpack TW-7.5.0.tar.gz to directory C:\temp. 
+   A directory C:\temp\TW-7.5.0 will be created which will be named tw home in this document.
+
+   The pm distribution also needs to be unpacked to the same base directory (C:\temp in the example).
+
+   Example 2: unpack PM-6.7.0.tar.gz to directory C:\temp. 
+   A directory C:\temp\PM-6.7.0 will be created which will be named pm home in this document.
 
 1) Create an application owner
 
-   a) change to admin directory
+   The preferred application owner name is PM_OWNER. When Oracle
+   Application Express (Apex) is used for reporting, one must use the
+   Apex database as the Performance Monoitor repository database.
 
-   b) sqlplus /nolog
+   a) Change to the admin directory below pm home:
 
-   c) SQL> connect sys@<repository database>
+      $ cd <pm home>/admin
+
+   b) Start SQL*Plus without logging on:
+
+      $ sqlplus /nolog
+
+   c) Enter the following SQL*Plus commands:
+
+      SQL> connect sys@<repository database> as sysdba
       SQL> @ creusr <application owner> <default tablespace> <temporary tablespace>
       SQL> @ pm.grt <application owner>
+      SQL> exit
 
-   d) change to install directory
+   d) Change to the install directory below pm home:
 
-   e) sqlplus /nolog
+      $ cd <pm home>/install
 
-   f) SQL> connect <application owner>@<repository database>
+   e) Start SQL*Plus as the application owner:
+
+       $ sqlplus <application owner>@<repository database>
+
+   f) Enter the following SQL*Plus commands (defaults between "[" and "]"):
+
       SQL> @ setup.sql
       SQL> @ pm_install.sql
-      SQL> rem build forms and reports
-      SQL> @ pm_build.sql
+      SQL> exit
 
       During this step you might be prompted for several variables:
       i)   userid     - The connect string of the application owner
-      ii)  tw_home    - The top of the transferware (tw) distribution
-      iii) pm_home    - The top of the Performance Monitor distribution
-      iv)  pm_frm_bin - The directory to install forms executables into
-                        Should be a subdirectory to &&pm_home.
-      v)   pm_rpt_bin - The directory to install reports executables into.
+      ii)  tw_home    - The top of the transferware (tw) distribution, i.e. tw home
+      iii) pm_home    - The top of the Performance Monitor distribution, i.e. pm home
+
+      The application owner needs quota on the data and index tablespaces asked for.
+
+      There should be no (Oracle) errors.
+
+   g) When you want to use Oracle Reports for reporting, enter the following SQL*Plus commands:
+
+      SQL> @ setup.sql
+      SQL> @ pm_build.sql
+      SQL> exit
+
+      During this step you might be prompted for several variables:
+      i)   pm_frm_bin - The directory to install forms executables into
+                        Should be a subdirectory below &&pm_home.
+      ii)  pm_rpt_bin - The directory to install reports executables into.
                         Should be equal to &&pm_frm_bin.
-      vi)  frmgen     - The forms compiler (ifcmp60/ifcmp90)
-      vii) rptgen     - The reports compiler (rwcon60/rwconverter)
+      iii) frmgen     - The forms compiler (ifcmp60/ifcmp90)
+      iv)  rptgen     - The reports compiler (rwcon60/rwconverter)
 
 2) Installation of Total Performance Index (optional)
 
-   a) change to admin directory
+   a) Change to the admin directory:
 
-   b) sqlplus /nolog
+      $ cd <pm home>/admin
 
-   c) SQL> connect sys@<database to monitor>
+   b) Start SQL*Plus without logging on:
 
-   d) SQL> @ pm_tpi.sql
+      $ sqlplus /nolog
+
+   c) Enter the following SQL*Plus commands:
+
+      SQL> connect sys@<database to monitor> as sysdba
+      SQL> @ pm_tpi.sql
+      SQL> exit
 
 3) Installation of database links
 
    The Performance Monitor can monitor remote databases using database links.
 
-   a) change to admin directory
+   a) Change to the admin directory:
 
-   b) sqlplus /nolog
+      $ cd <pm home>/admin
 
-   c) Create database link account (on a remote database)
+   b) start SQL*Plus without logging on:
 
-      SQL> connect sys@<database to monitor>
-      SQL> @ creusr PM_LINK <default tablespace> <temporary tablespace>
+      $ sqlplus /nolog
+
+   c) Create a database link account (on a remote database):
+
+      The preferred database link account name is PM_LINK.
+
+      SQL> connect sys@<database to monitor> as sysdba
+      SQL> @ creusr <database link account> <default tablespace> <temporary tablespace>
       SQL> @ pm_remote.grt <database link account>
       SQL> connect <database link account>@<database to monitor>
       SQL> @ pm_remote.sql
 
-   d) Create database link (on the repository database)
+   d) Create a database link (on the repository database)
 
       SQL> connect <application owner>@<repository database>
       SQL> @ credblnk <database link> <database link account> <database link account password> <tns service>
@@ -80,7 +144,7 @@
 
    SQL> execute pm.collect(NULL)
 
-   or even shorter
+   or even shorter:
 
    SQL> execute pm.collect
 

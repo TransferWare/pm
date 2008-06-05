@@ -10,6 +10,11 @@ This application monitors the performance of Oracle databases.
 
 RELEASES
 
+6.7.0)
+
+* Installation instructions enhanced.
+* Oracle Application Express reports added.
+
 6.6.0)
 
 * Oracle 7 and 8 desupported.
@@ -27,7 +32,7 @@ NOTES
 
 INSTALLATION
 
-1) See doc/pm-manual.rtf
+1) See doc/pm-manual.rtf and ./INSTALL.TXT
 
 Upgrade from a prior version:
 
