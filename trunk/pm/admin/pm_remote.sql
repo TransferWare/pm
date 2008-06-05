@@ -32,7 +32,6 @@ PROMPT
 REMARK
 REMARK
 
-@@ pm_fixed.vw
 @@ pm_remote.prc
 
 set serveroutput on size 1000000

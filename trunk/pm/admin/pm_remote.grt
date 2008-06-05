@@ -113,6 +113,12 @@ begin
   (
     select  'grant select_catalog_role to &&account' command
     from    dual
+    union
+    select  'grant select on v_$sqlarea to &&account' command
+    from    dual
+    union
+    select  'grant create procedure to &&account' command
+    from    dual
     union   /* pm_dpi / pm_mpi */
     select  'grant execute on ' || object_name || ' to &&account' command
     from    user_objects
