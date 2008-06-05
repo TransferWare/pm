@@ -43,3 +43,4 @@ install/connect
 install/env
 install/restore
 install/nul
+\.DS_Store
