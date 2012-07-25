@@ -37,7 +37,7 @@ CREATE TABLE pm_sql_id(
  creation_date                   DATE                       NOT NULL,
  modified_by                     VARCHAR2(30)               NULL,
  modification_date               DATE                       NULL,
- sql_text                        VARCHAR2(1984)            DEFAULT 'dummy'  NOT NULL
+ sql_text                        CLOB                       NOT NULL
 )
 PCTFREE  10
 PCTUSED  40

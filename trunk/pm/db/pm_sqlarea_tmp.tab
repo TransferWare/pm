@@ -50,7 +50,7 @@ CREATE GLOBAL TEMPORARY TABLE pm_sqlarea_tmp
  invalidations                   NUMBER                     NULL,
  module                          VARCHAR2(48)               NULL,
  action                          VARCHAR2(32)               NULL,
- sql_text                        VARCHAR2(1984)             NULL,
+ sql_text                        CLOB                       NULL,
  command_type                    NUMBER                     NULL
 )
 ON COMMIT PRESERVE ROWS 

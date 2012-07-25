@@ -13,6 +13,7 @@ REMARK
 define date_format = 'YYYYMMDDHH24MISS'
 
 set feedback off termout on verify off trimspool on heading on pagesize 66
+set long 1000000 longchunksize 1000
 
 VAR	date_format varchar2(25);
 VAR	start_time varchar2(25);
