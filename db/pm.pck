@@ -242,9 +242,10 @@ CREATE OR REPLACE PACKAGE pm AUTHID CURRENT_USER IS
     i_db IN pm_sql.db%TYPE ,
     i_sql_hash_value IN pm_sql.hash_value%TYPE ,
     i_sql_address IN pm_sql.address%TYPE )
-  RETURN VARCHAR2;
+  RETURN pm_sql_id.sql_text%TYPE;
 
   PRAGMA RESTRICT_REFERENCES( get_statement, WNDS );
+/* GJP 25-07-2012 sql_text is now a CLOB
   --
   -- Build a statement line
   PROCEDURE build_statement_line(
@@ -253,11 +254,12 @@ CREATE OR REPLACE PACKAGE pm AUTHID CURRENT_USER IS
     io_sql_text IN OUT pm_sql_id.sql_text%TYPE );
 
   PRAGMA RESTRICT_REFERENCES( build_statement_line, RNDS, WNDS, RNPS, WNPS );
+*/
   --
   -- Get the statement by text lookup
   FUNCTION get_statement(
     i_sql_id IN pm_sql_id.sql_id%TYPE )
-  RETURN VARCHAR2;
+  RETURN pm_sql_id.sql_text%TYPE;
 
   PRAGMA RESTRICT_REFERENCES( get_statement, WNDS );
   --
@@ -439,11 +441,11 @@ Returns a unique statement id for use in explain plan.
 =item get_statement
 
 Returns the SQL text of a SQL statement.
-
+/* GJP 25-07-2012 sql_text is now a CLOB
 =item build_statement_line
 
 Builds a statement from various pieces of text. The parameter I<io_sql_text> is set to input parameter I<i_sql_text> when I<i_piece> equals 0. The parameter I<io_sql_text> is concatenated with input parameter I<i_sql_text> when I<i_piece> not equals 0. 
-
+*/
 =item done
 
 Clean up tasks.
@@ -809,7 +811,7 @@ CREATE OR REPLACE PACKAGE BODY pm IS
       WHERE   pm_sql.db = i_db
       AND     pm_sql.hash_value = i_sql_hash_value
       AND     pm_sql_id.sql_id = pm_sql.sql_id
-      AND     pm_sql_id.sql_text = i_sql_text;
+      AND     dbms_lob.compare(pm_sql_id.sql_text, i_sql_text) = 0;
   BEGIN
     OPEN c_pm_sql( i_db, i_sql_hash_value, i_sql_text );
     FETCH c_pm_sql
@@ -857,7 +859,7 @@ CREATE OR REPLACE PACKAGE BODY pm IS
     i_db IN pm_sql.db%TYPE ,
     i_sql_hash_value IN pm_sql.hash_value%TYPE ,
     i_sql_address IN pm_sql.address%TYPE )
-  RETURN VARCHAR2
+  RETURN pm_sql_id.sql_text%TYPE
   IS
   BEGIN
     RETURN get_statement(
@@ -1523,58 +1525,114 @@ CREATE OR REPLACE PACKAGE BODY pm IS
     i_run_id IN pm_run.run_id%TYPE ,
     i_db_startup_run_id IN pm_run.run_id%TYPE )
   IS
-    c_command command_t := '
-      INSERT INTO pm_sqlarea_tmp
-      (
-              db
-      ,       first_load_time
-      ,       hash_value
-      ,       address
-      ,       parsing_user_name
-      ,       parsing_schema_name
-      ,       run_id
-      ,       executions
-      ,       buffer_gets
-      ,       disk_reads
-      ,       parse_calls
-      ,       sorts
-      ,       kept_versions
-      ,       loads
-      ,       rows_processed
-      ,       invalidations
-      ,       module
-      ,       action
-      ,       sql_text
-      ,       command_type
+    c_command command_t := q'[
+declare
+  l_clob clob;
+begin
+  dbms_lob.createtemporary
+  ( lob_loc => l_clob
+  , cache => true
+  );
+  for r_sqlarea in
+  ( select  :db as db
+    ,       to_date
+            ( s.first_load_time
+            , 'YYYY-MM-DD/HH24:MI:SS'
+            ) as first_load_time
+    ,       s.hash_value
+    ,       rawtohex(s.address) as address
+    ,       usr.username as parsing_user_name
+    ,       sch.username as parsing_schema_name
+    ,       :run_id as run_id
+    ,       s.executions
+    ,       s.buffer_gets
+    ,       s.disk_reads
+    ,       s.parse_calls
+    ,       s.sorts
+    ,       s.kept_versions
+    ,       s.loads
+    ,       s.rows_processed
+    ,       s.invalidations
+    ,       s.module
+    ,       s.action
+    ,       case 
+              when t.piece is not null
+              then t.sql_text
+              else s.sql_text /* no v$sqltext_with_newlines so only one row with seq is 1 */
+            end as sql_text
+    ,       s.command_type
+    ,       row_number() over (partition by t.address, t.hash_value order by t.piece desc) as seq
+    from    v$sqlarea<db_link> s
+            inner join all_users usr 
+            on usr.user_id = s.parsing_user_id
+            inner join all_users sch
+            on sch.user_id = s.parsing_schema_id
+            left outer join v$sqltext_with_newlines<db_link> t 
+            on t.address = s.address and t.hash_value = s.hash_value
+    order by
+            s.address
+    ,       s.hash_value
+    ,       t.piece  
+  )
+  loop
+    dbms_lob.writeappend 
+    ( lob_loc => l_clob
+    , amount => length(r_sqlarea.sql_text)
+    , buffer => r_sqlarea.sql_text
+    );
+
+    if r_sqlarea.seq = 1
+    then
+      insert into pm_sqlarea_tmp
+      ( db
+      , first_load_time
+      , hash_value
+      , address
+      , parsing_user_name
+      , parsing_schema_name
+      , run_id
+      , executions
+      , buffer_gets
+      , disk_reads
+      , parse_calls
+      , sorts
+      , kept_versions
+      , loads
+      , rows_processed
+      , invalidations
+      , module
+      , action
+      , sql_text
+      , command_type
       )
-        SELECT  :db
-        ,       to_date
-                ( s.first_load_time
-                , ''YYYY-MM-DD/HH24:MI:SS''
-                ) as first_load_time
-        ,       s.hash_value
-        ,       rawtohex(s.address) as address
-        ,       usr.username as parsing_user_name
-        ,       sch.username as parsing_schema_name
-        ,       :run_id
-        ,       s.executions
-        ,       s.buffer_gets
-        ,       s.disk_reads
-        ,       s.parse_calls
-        ,       s.sorts
-        ,       s.kept_versions
-        ,       s.loads
-        ,       s.rows_processed
-        ,       s.invalidations
-        ,       s.module
-        ,       s.action
-        ,       s.sql_text
-        ,       s.command_type
-        FROM    v$sqlarea<db_link> s
-        ,       all_users usr
-        ,       all_users sch
-        where   usr.user_id = s.parsing_user_id
-        and     sch.user_id = s.parsing_schema_id';
+      values
+      ( r_sqlarea.db
+      , r_sqlarea.first_load_time
+      , r_sqlarea.hash_value
+      , r_sqlarea.address
+      , r_sqlarea.parsing_user_name
+      , r_sqlarea.parsing_schema_name
+      , r_sqlarea.run_id
+      , r_sqlarea.executions
+      , r_sqlarea.buffer_gets
+      , r_sqlarea.disk_reads
+      , r_sqlarea.parse_calls
+      , r_sqlarea.sorts
+      , r_sqlarea.kept_versions
+      , r_sqlarea.loads
+      , r_sqlarea.rows_processed
+      , r_sqlarea.invalidations
+      , r_sqlarea.module
+      , r_sqlarea.action
+      , l_clob
+      , r_sqlarea.command_type
+      );
+      dbms_lob.trim(l_clob, 0);
+    end if;
+  end loop;
+  dbms_lob.freetemporary(l_clob);
+end;
+]';
  
     c_module_name CONSTANT module_name_t := 'PM.COLLECT_SQLAREA';
   BEGIN
@@ -1657,10 +1715,6 @@ CREATE OR REPLACE PACKAGE BODY pm IS
     c_module_name CONSTANT module_name_t := 'PM.PROCESS_SQLAREA';
 
             /* Get all new (db, hash value, address) combinations.
-               The sql_text is limited to about 1000 characters 
-               (see Oracle documentation). Since sql_text is able 
-               to store 2000 characters I will retrieve them from 
-               pm_sqltext_tmp
             */
     cursor  c_new_sql
     IS
@@ -2545,7 +2599,7 @@ CREATE OR REPLACE PACKAGE BODY pm IS
     i_db IN pm_sql.db%TYPE ,
     i_sql_hash_value IN pm_sql.hash_value%TYPE ,
     i_sql_address IN pm_sql.address%TYPE )
-  RETURN VARCHAR2
+  RETURN pm_sql_id.sql_text%TYPE
   IS
   BEGIN
     RETURN get_statement_l(
@@ -2553,6 +2607,7 @@ CREATE OR REPLACE PACKAGE BODY pm IS
            , i_sql_hash_value
            , i_sql_address );
   END get_statement;
+/* GJP 25-07-2012 sql_text is now a CLOB
   --
   -- Build a statement line
   PROCEDURE build_statement_line(
@@ -2568,30 +2623,20 @@ CREATE OR REPLACE PACKAGE BODY pm IS
       io_sql_text := io_sql_text || i_sql_text;
     END IF;
   END build_statement_line;
+*/
   --
   -- Get the statement by text lookup
   FUNCTION get_statement(
     i_sql_id IN pm_sql_id.sql_id%TYPE )
-  RETURN VARCHAR2
+  RETURN pm_sql_id.sql_text%TYPE
   IS
-    v_statement VARCHAR2(32767) := NULL;
+    v_statement pm_sql_id.sql_text%TYPE := NULL;
   BEGIN
-     /* build statement */
-    FOR r_sqltext IN
-    (
-      SELECT  0 piece
-      ,       sql_text
-      FROM    pm_sql_id
-      WHERE   sql_id = i_sql_id
-    )
-    LOOP
-      build_statement_line
-      (
-        r_sqltext.piece
-      , r_sqltext.sql_text
-      , v_statement
-      );
-    END LOOP;
+    SELECT  sql_text
+    INTO    v_statement
+    FROM    pm_sql_id
+    WHERE   sql_id = i_sql_id;
+
     RETURN v_statement;
   EXCEPTION
     WHEN OTHERS
