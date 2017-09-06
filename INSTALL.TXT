@@ -33,7 +33,7 @@ are between "<" and ">".
 
    The preferred application owner name is PM_OWNER. When Oracle
    Application Express (Apex) is used for reporting, one must use the
-   Apex database as the Performance Monoitor repository database.
+   Apex database as the Performance Monitor repository database.
 
    a) Change to the admin directory below pm home:
 
