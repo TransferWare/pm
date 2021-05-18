@@ -47,8 +47,8 @@ CREATE TABLE pm_sqlarea(
  loads                           INTEGER                    NOT NULL,
  rows_processed                  INTEGER                    NOT NULL,
  invalidations                   INTEGER                    NOT NULL,
- module                          VARCHAR2(48)               NULL,
- action                          VARCHAR2(32)               NULL
+ module                          VARCHAR2(64)               NULL,
+ action                          VARCHAR2(64)               NULL
 )
 PCTFREE  10
 PCTUSED  40

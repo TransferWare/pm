@@ -48,8 +48,8 @@ CREATE GLOBAL TEMPORARY TABLE pm_sqlarea_tmp
  loads                           NUMBER                     NULL,
  rows_processed                  NUMBER                     NULL,
  invalidations                   NUMBER                     NULL,
- module                          VARCHAR2(48)               NULL,
- action                          VARCHAR2(32)               NULL,
+ module                          VARCHAR2(64)               NULL,
+ action                          VARCHAR2(64)               NULL,
  sql_text                        CLOB                       NULL,
  command_type                    NUMBER                     NULL
 )
