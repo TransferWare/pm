@@ -15,7 +15,40 @@
 
   <properties>
     <db.schema>PM_OWNER</db.schema> <!-- parsing schema -->
-    <apex.applications>750</apex.applications>
+    <apex.application>750</apex.application>
+    <oracle_build.version>${project.parent.version}</oracle_build.version>
   </properties>
+
+    <dependencies>
+    <dependency>
+      <groupId>com.oracle.build</groupId>
+      <artifactId>apex</artifactId>
+      <version>${project.parent.version}</version>
+      <classifier>project</classifier>
+      <type>zip</type>
+      <!-- Make sure this isn't included on any classpath-->
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.oracle.build</groupId>
+      <artifactId>db</artifactId>
+      <version>${project.parent.version}</version>
+      <classifier>project</classifier>
+      <type>zip</type>
+      <!-- Make sure this isn't included on any classpath-->
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <resources/>
+    <plugins>
+      <plugin>
+        <artifactId>maven-dependency-plugin</artifactId>
+        <!-- Configuration won't be propagated to children -->
+        <inherited>false</inherited>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>
