@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="windows-1252" ?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  <parent>
+    <groupId>com.oracle.tools</groupId>
+    <artifactId>db</artifactId>
+    <version>0.9.1</version>
+    <relativePath></relativePath>
+  </parent>
+
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>com.transfer-solutions.performance-monitor</groupId>
+  <artifactId>sql</artifactId>
+  <packaging>pom</packaging>
+  <description>The Performance Monitor utility database objects</description>
+
+  <properties>
+    <!-- do not generate alter scripts -->
+    <db.skip.generate.schema.incr />
+    <db.schema>PM_OWNER</db.schema>
+    <db.full.skip.install.sql>no</db.full.skip.install.sql> <!-- generate (un)install.sql -->
+    <db.object.names>
+,PM
+,PM_CFG
+,PM_CONFIG
+,PM_DPI
+,PM_MPI
+,PM_RUN
+,PM_RUN_SEQ
+,PM_SESSION
+,PM_SESSION_TMP
+,PM_SQL
+,PM_SQLAREA
+,PM_SQLAREA_TMP
+,PM_SQL_CURRENT
+,PM_SQL_ID
+,PM_SQL_SEQ
+,PM_SYSSTAT
+,PM_SYSSTAT_TMP
+,PM_SYSTEM_EVENT
+,PM_SYSTEM_EVENT_TMP
+,PM_VW_SQLAREA
+    </db.object.names>
+    <db.object.names.include>1</db.object.names.include>
+  </properties>
+  
+</project>
+
