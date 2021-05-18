@@ -1,0 +1,30 @@
+prompt --application/pages/page_00100
+begin
+wwv_flow_api.create_page(
+ p_id=>100
+,p_user_interface_id=>wwv_flow_api.id(29137816761808495)
+,p_name=>'Home'
+,p_step_title=>'Home'
+,p_reload_on_submit=>'A'
+,p_warn_on_unsaved_changes=>'N'
+,p_autocomplete_on_off=>'ON'
+,p_page_template_options=>'#DEFAULT#'
+,p_nav_list_template_options=>'#DEFAULT#'
+,p_help_text=>'No help is available for this page.'
+,p_last_updated_by=>'PM'
+,p_last_upd_yyyymmddhh24miss=>'20161228112320'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(29860604480216442)
+,p_plug_name=>'Breadcrumbs'
+,p_region_template_options=>'#DEFAULT#'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(29129413492808442)
+,p_plug_display_sequence=>10
+,p_plug_display_point=>'REGION_POSITION_01'
+,p_menu_id=>wwv_flow_api.id(29139130601808510)
+,p_plug_source_type=>'NATIVE_BREADCRUMB'
+,p_menu_template_id=>wwv_flow_api.id(29137124563808473)
+);
+end;
+/

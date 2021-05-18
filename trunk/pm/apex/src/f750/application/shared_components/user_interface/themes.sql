@@ -1,0 +1,41 @@
+prompt --application/shared_components/user_interface/themes
+begin
+wwv_flow_api.create_theme(
+ p_id=>wwv_flow_api.id(29137723354808488)
+,p_theme_id=>26
+,p_theme_name=>'Productivity Applications'
+,p_theme_internal_name=>'PRODUCTIVITY_APPLICATIONS'
+,p_ui_type_name=>'DESKTOP'
+,p_navigation_type=>'T'
+,p_nav_bar_type=>'NAVBAR'
+,p_is_locked=>false
+,p_default_page_template=>wwv_flow_api.id(29127925234808431)
+,p_error_template=>wwv_flow_api.id(29127414735808428)
+,p_printer_friendly_template=>wwv_flow_api.id(29128417539808432)
+,p_breadcrumb_display_point=>'REGION_POSITION_01'
+,p_sidebar_display_point=>'REGION_POSITION_02'
+,p_login_template=>wwv_flow_api.id(29127026214808421)
+,p_default_button_template=>wwv_flow_api.id(29136110274808470)
+,p_default_region_template=>wwv_flow_api.id(29131407652808446)
+,p_default_chart_template=>wwv_flow_api.id(29129814807808443)
+,p_default_form_template=>wwv_flow_api.id(29130126378808443)
+,p_default_reportr_template=>wwv_flow_api.id(29131407652808446)
+,p_default_tabform_template=>wwv_flow_api.id(29131407652808446)
+,p_default_wizard_template=>wwv_flow_api.id(29132224341808448)
+,p_default_menur_template=>wwv_flow_api.id(29129413492808442)
+,p_default_listr_template=>wwv_flow_api.id(29129711829808442)
+,p_default_irr_template=>wwv_flow_api.id(29130511710808445)
+,p_default_report_template=>wwv_flow_api.id(29133112367808456)
+,p_default_label_template=>wwv_flow_api.id(29135704601808468)
+,p_default_menu_template=>wwv_flow_api.id(29137124563808473)
+,p_default_calendar_template=>wwv_flow_api.id(29137325103808476)
+,p_default_list_template=>wwv_flow_api.id(29135230332808465)
+,p_default_option_label=>wwv_flow_api.id(29135802139808468)
+,p_default_required_label=>wwv_flow_api.id(29136007321808468)
+,p_default_page_transition=>'NONE'
+,p_default_popup_transition=>'NONE'
+,p_file_prefix => nvl(wwv_flow_application_install.get_static_theme_file_prefix(26),'')
+,p_css_file_urls=>'#IMAGE_PREFIX#legacy_ui/css/5.0#MIN#.css?v=#APEX_VERSION#'
+);
+end;
+/
