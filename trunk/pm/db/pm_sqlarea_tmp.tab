@@ -51,7 +51,21 @@ CREATE GLOBAL TEMPORARY TABLE pm_sqlarea_tmp
  module                          VARCHAR2(64)               NULL,
  action                          VARCHAR2(64)               NULL,
  sql_text                        CLOB                       NULL,
- command_type                    NUMBER                     NULL
+ command_type                    NUMBER                     NULL,
+ -- GPA 2016-12-14
+ sql_id                          VARCHAR2(13)               NOT NULL, -- SQL identifier of the parent cursor in the library cache
+ direct_writes                   NUMBER                     NULL,     -- Sum of the number of direct writes over all child cursors
+ application_wait_time           NUMBER                     NULL,     -- Application wait time (in microseconds)
+ concurrency_wait_time           NUMBER                     NULL,     -- Concurrency wait time (in microseconds)
+ cluster_wait_time               NUMBER                     NULL,     -- Cluster wait time (in microseconds)
+ user_io_wait_time               NUMBER                     NULL,     -- User I/O Wait Time (in microseconds)
+ plsql_exec_time                 NUMBER                     NULL,     -- PL/SQL execution time (in microseconds)
+ java_exec_time                  NUMBER                     NULL,     -- Java execution time (in microseconds)
+ cpu_time                        NUMBER                     NULL,     -- CPU time (in microseconds) used by this cursor for parsing, executing, and fetching
+ elapsed_time                    NUMBER                     NULL,     -- Elapsed time (in microseconds) used by this cursor for parsing, executing, and fetching
+ sql_profile                     VARCHAR2(64)               NULL,     -- SQL profile
+ program_name                    VARCHAR2(128)              NULL,     -- Program (object)
+ program_line#                   NUMBER                     NULL      -- Program line number
 )
 ON COMMIT PRESERVE ROWS 
 ;

@@ -1,0 +1,127 @@
+prompt --application/pages/page_00101
+begin
+wwv_flow_api.create_page(
+ p_id=>101
+,p_user_interface_id=>wwv_flow_api.id(29137816761808495)
+,p_name=>'Login'
+,p_alias=>'LOGIN_DESKTOP'
+,p_step_title=>'Login'
+,p_reload_on_submit=>'A'
+,p_warn_on_unsaved_changes=>'N'
+,p_first_item=>'AUTO_FIRST_ITEM'
+,p_autocomplete_on_off=>'OFF'
+,p_step_template=>wwv_flow_api.id(1634392400658520)
+,p_page_template_options=>'#DEFAULT#'
+,p_nav_list_template_options=>'#DEFAULT#'
+,p_page_is_public_y_n=>'Y'
+,p_protection_level=>'C'
+,p_last_updated_by=>'ADMIN'
+,p_last_upd_yyyymmddhh24miss=>'20210519043430'
+);
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(29138329226808503)
+,p_plug_name=>'Login'
+,p_region_template_options=>'#DEFAULT#:t-Region--scrollBody'
+,p_component_template_options=>'#DEFAULT#'
+,p_plug_template=>wwv_flow_api.id(1682947491658550)
+,p_plug_display_sequence=>10
+,p_plug_display_point=>'BODY_3'
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+,p_attribute_03=>'N'
+);
+wwv_flow_api.create_page_button(
+ p_id=>wwv_flow_api.id(29138627637808509)
+,p_button_sequence=>30
+,p_button_plug_id=>wwv_flow_api.id(29138329226808503)
+,p_button_name=>'P101_LOGIN'
+,p_button_static_id=>'P101_LOGIN'
+,p_button_action=>'SUBMIT'
+,p_button_template_options=>'#DEFAULT#'
+,p_button_template_id=>wwv_flow_api.id(1743685395658589)
+,p_button_is_hot=>'Y'
+,p_button_image_alt=>'Login'
+,p_button_position=>'BODY'
+,p_button_alignment=>'LEFT'
+,p_request_source=>'LOGIN'
+,p_request_source_type=>'STATIC'
+,p_grid_new_row=>'N'
+,p_grid_new_column=>'Y'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(29138422876808507)
+,p_name=>'P101_USERNAME'
+,p_item_sequence=>10
+,p_item_plug_id=>wwv_flow_api.id(29138329226808503)
+,p_prompt=>'Username'
+,p_display_as=>'NATIVE_TEXT_FIELD'
+,p_cSize=>40
+,p_cMaxlength=>100
+,p_label_alignment=>'RIGHT'
+,p_field_template=>wwv_flow_api.id(1742571556658587)
+,p_item_template_options=>'#DEFAULT#'
+,p_protection_level=>'S'
+,p_attribute_01=>'N'
+,p_attribute_02=>'N'
+,p_attribute_03=>'N'
+,p_attribute_04=>'TEXT'
+,p_attribute_05=>'NONE'
+);
+wwv_flow_api.create_page_item(
+ p_id=>wwv_flow_api.id(29138506746808509)
+,p_name=>'P101_PASSWORD'
+,p_item_sequence=>20
+,p_item_plug_id=>wwv_flow_api.id(29138329226808503)
+,p_prompt=>'Password'
+,p_display_as=>'NATIVE_PASSWORD'
+,p_cSize=>40
+,p_cMaxlength=>100
+,p_label_alignment=>'RIGHT'
+,p_field_template=>wwv_flow_api.id(1742571556658587)
+,p_item_template_options=>'#DEFAULT#'
+,p_protection_level=>'S'
+,p_attribute_01=>'Y'
+,p_attribute_02=>'Y'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(29138803964808510)
+,p_process_sequence=>10
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'Set Username Cookie'
+,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'apex_authentication.send_login_username_cookie (',
+'    p_username => lower(:P101_USERNAME) );'))
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(29138728034808509)
+,p_process_sequence=>20
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'Login'
+,p_process_sql_clob=>wwv_flow_string.join(wwv_flow_t_varchar2(
+'apex_authentication.login(',
+'    p_username => :P101_USERNAME,',
+'    p_password => :P101_PASSWORD );'))
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(29139002191808510)
+,p_process_sequence=>30
+,p_process_point=>'AFTER_SUBMIT'
+,p_process_type=>'NATIVE_SESSION_STATE'
+,p_process_name=>'Clear Page(s) Cache'
+,p_attribute_01=>'CLEAR_CACHE_CURRENT_PAGE'
+,p_error_display_location=>'INLINE_IN_NOTIFICATION'
+);
+wwv_flow_api.create_page_process(
+ p_id=>wwv_flow_api.id(29138921174808510)
+,p_process_sequence=>10
+,p_process_point=>'BEFORE_HEADER'
+,p_process_type=>'NATIVE_PLSQL'
+,p_process_name=>'Get Username Cookie'
+,p_process_sql_clob=>':P101_USERNAME := apex_authentication.get_login_username_cookie;'
+);
+end;
+/

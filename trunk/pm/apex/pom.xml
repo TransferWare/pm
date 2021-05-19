@@ -15,7 +15,7 @@
 
   <properties>
     <db.schema>PM_OWNER</db.schema> <!-- parsing schema -->
-    <apex.application>750</apex.application>
+    <apex.application>113</apex.application>
     <oracle_build.version>${project.parent.version}</oracle_build.version>
   </properties>
 

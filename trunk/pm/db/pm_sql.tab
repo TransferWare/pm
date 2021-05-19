@@ -34,7 +34,7 @@ CREATE TABLE pm_sql(
  db                              VARCHAR2(40)               NOT NULL,
  hash_value                      NUMBER                     NOT NULL,
  address                         VARCHAR2(32)               NOT NULL,
- sql_id                          INTEGER                    NOT NULL
+ sql_id                          VARCHAR2(13)               NOT NULL
 )
 PCTFREE  10
 PCTUSED  40

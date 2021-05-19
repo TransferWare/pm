@@ -73,7 +73,8 @@ ALTER TABLE PM_SYSTEM_EVENT ADD (
       total_waits >= 0 and
       total_timeouts >= 0 and
       time_waited >= 0 and
-      average_wait >= 0
+      average_wait >= 0 and
+      time_waited_micro >= 0
       )
 )
 /

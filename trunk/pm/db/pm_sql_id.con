@@ -39,13 +39,3 @@ STORAGE  (
   )
 )
 /
-
-PROMPT Adding CHECK Constraint To PM_SQL_ID Table
-
-ALTER TABLE PM_SQL_ID ADD (
-      CONSTRAINT PM_SID_CK1
-      CHECK ( 
-      sql_id >= 1
-      )
-)
-/

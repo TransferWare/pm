@@ -37,7 +37,12 @@ CREATE TABLE pm_system_event(
  total_waits                     INTEGER                    NOT NULL,
  total_timeouts                  INTEGER                    NOT NULL,
  time_waited                     NUMBER                     NOT NULL,
- average_wait                    NUMBER                     NOT NULL
+ average_wait                    NUMBER                     NOT NULL,
+ time_waited_micro               NUMBER                     NULL, -- Total amount of time waited for the event (in microseconds)
+ event_id                        NUMBER                     NULL, -- Identifier of the wait event
+ wait_class_id                   NUMBER                     NULL, -- Identifier of the class of the wait event
+ wait_class#                     NUMBER                     NULL, -- Number of the class of the wait event
+ wait_class                      VARCHAR2(64)               NULL  -- Name of the class of the wait event
 )
 PCTFREE  10
 PCTUSED  40

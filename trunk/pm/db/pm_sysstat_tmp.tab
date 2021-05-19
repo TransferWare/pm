@@ -34,8 +34,10 @@ CREATE GLOBAL TEMPORARY TABLE pm_sysstat_tmp
 (
  db                              VARCHAR2(40)               NOT NULL,
  run_id                          NUMBER                     NOT NULL,
- statistic#                      NUMBER                     NOT NULL,
- value                           NUMBER                     NULL
+ name                            VARCHAR2(64)               NOT NULL,
+ class                           NUMBER                     NOT NULL,
+ value                           NUMBER                     NOT NULL,
+ stat_id                         NUMBER                     NULL
 )
 ON COMMIT PRESERVE ROWS 
 ;

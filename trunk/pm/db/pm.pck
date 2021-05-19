@@ -159,9 +159,7 @@ REM
 PROMPT 
 PROMPT Creating Package Specification pm
 
-SET DOCUMENT OFF
-
-DOCUMENT
+/*
 
 The following documentation uses the Perl pod format. A html file
 can be constructed by: 
@@ -178,7 +176,7 @@ pm - Performance Monitor tasks
 
 =cut
 
-#
+*/
 
 -- =pod
 
@@ -208,7 +206,7 @@ CREATE OR REPLACE PACKAGE pm AUTHID CURRENT_USER IS
     i_db IN pm_sql.db%TYPE ,
     i_sql_hash_value IN pm_sql.hash_value%TYPE ,
     i_sql_address IN pm_sql.address%TYPE )
-  RETURN NUMBER;
+  RETURN pm_sql.sql_id%type;
 
   PRAGMA RESTRICT_REFERENCES( get_sql_id, WNDS, RNPS, WNPS );
   --
@@ -217,7 +215,7 @@ CREATE OR REPLACE PACKAGE pm AUTHID CURRENT_USER IS
     i_db IN pm_sql.db%TYPE ,
     i_sql_hash_value IN pm_sql.hash_value%TYPE ,
     i_sql_text IN pm_sql_id.sql_text%TYPE )
-  RETURN NUMBER;
+  RETURN pm_sql.sql_id%type;
 
   PRAGMA RESTRICT_REFERENCES( get_sql_id_by_text, WNDS, RNPS, WNPS );
   --
@@ -245,16 +243,6 @@ CREATE OR REPLACE PACKAGE pm AUTHID CURRENT_USER IS
   RETURN pm_sql_id.sql_text%TYPE;
 
   PRAGMA RESTRICT_REFERENCES( get_statement, WNDS );
-/* GJP 25-07-2012 sql_text is now a CLOB
-  --
-  -- Build a statement line
-  PROCEDURE build_statement_line(
-    i_piece IN INTEGER ,
-    i_sql_text IN pm_sql_id.sql_text%TYPE ,
-    io_sql_text IN OUT pm_sql_id.sql_text%TYPE );
-
-  PRAGMA RESTRICT_REFERENCES( build_statement_line, RNDS, WNDS, RNPS, WNPS );
-*/
   --
   -- Get the statement by text lookup
   FUNCTION get_statement(
@@ -266,13 +254,14 @@ CREATE OR REPLACE PACKAGE pm AUTHID CURRENT_USER IS
   -- Done with this package
   PROCEDURE done;
   --
-  -- Insert a combination (db, hash value, address, command type, sql text)
+  -- Insert a combination (db, hash value, address, command type, sql text, sql id)
   PROCEDURE ins_pm_sql(
     i_db IN pm_sql.db%TYPE ,
     i_hash_value IN pm_sql.hash_value%TYPE ,
     i_address IN pm_sql.address%TYPE ,
     i_command_type IN pm_sql_id.command_type%TYPE ,
-    i_sql_text IN pm_sql_id.sql_text%TYPE );
+    i_sql_text IN pm_sql_id.sql_text%TYPE ,
+    i_sql_id IN pm_sql.sql_id%TYPE );
   --
   -- Get a range of run ids between start and end time
   PROCEDURE get_run_range(
@@ -397,7 +386,7 @@ END pm;
 
 /
 
-DOCUMENT
+/*
 
 =head1 DESCRIPTION
 
@@ -441,11 +430,7 @@ Returns a unique statement id for use in explain plan.
 =item get_statement
 
 Returns the SQL text of a SQL statement.
-/* GJP 25-07-2012 sql_text is now a CLOB
-=item build_statement_line
 
-Builds a statement from various pieces of text. The parameter I<io_sql_text> is set to input parameter I<i_sql_text> when I<i_piece> equals 0. The parameter I<io_sql_text> is concatenated with input parameter I<i_sql_text> when I<i_piece> not equals 0. 
-*/
 =item done
 
 Clean up tasks.
@@ -548,7 +533,7 @@ All rights reserved by Transfer Solutions b.v.
 
 =cut
 
-#
+*/
 
 REM
 PROMPT 
@@ -556,9 +541,9 @@ PROMPT Creating Package Body pm
 CREATE OR REPLACE PACKAGE BODY pm IS
   --
   --
-/*DBUG
+$if $$Debugging $then
   v_count INTEGER DEFAULT 0;
-/*DBUG*/
+$end
   --
   -- Maximum number of record to delete before a commit
   c_max_count CONSTANT INTEGER DEFAULT 10000;
@@ -583,10 +568,12 @@ CREATE OR REPLACE PACKAGE BODY pm IS
     ELSE
       RETURN NULL;
     END IF;
+$if $$Testing $then    
   EXCEPTION
     WHEN OTHERS
     THEN
       RETURN NULL;
+$end      
   END get_db_link;
   --
   -- Get database startup time (local variant)
@@ -606,12 +593,12 @@ CREATE OR REPLACE PACKAGE BODY pm IS
 
     c_module_name CONSTANT module_name_t := 'PM.GET_DB_STARTUP_TIME';
   BEGIN
-/*DBUG
+$if $$Debugging $then
     dbug.enter( c_module_name );
-    dbug.add_arg( 'input', 'i_cursor: %s', i_cursor );
+    dbug.print( 'input', 'i_cursor: %s', i_cursor );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_db_link: %s', i_db_link );
-/*DBUG*/
+$end
 
     /*
       Retrieve the startup time of the remote database.
@@ -631,11 +618,12 @@ CREATE OR REPLACE PACKAGE BODY pm IS
         RAISE no_data_found;
     END IF;
 
-/*DBUG
+$if $$Debugging $then
     dbug.print( 'info', 'Last database startup: %s', 
       to_char( o_db_startup_time, 'DD-MM-YYYY HH24:MI:SS' ) 
     );
     dbug.leave;
+$if $$Testing $then    
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -647,7 +635,8 @@ CREATE OR REPLACE PACKAGE BODY pm IS
       dbug.print( 'error', 'SQL function code: %s', v_sql_function_code );
 
       RAISE;
-/*DBUG*/
+$end
+$end
   END get_db_startup_time_l;
   --
   -- Start a new run (local variant)
@@ -680,12 +669,12 @@ CREATE OR REPLACE PACKAGE BODY pm IS
       AND     db_startup_time = i_db_startup_time;
 
   BEGIN
-/*DBUG
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_cursor: %s', i_cursor );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_db_link: %s', i_db_link );
-/*DBUG*/
+$end
 
     get_db_startup_time_l( i_cursor, i_db, i_db_link, v_db_startup_time );
 
@@ -723,21 +712,22 @@ CREATE OR REPLACE PACKAGE BODY pm IS
     INTO o_db_startup_run_id;
     CLOSE c_db_startup_run_id;
 
-/*DBUG
+$if $$Debugging $then
     dbug.print( 'info', 'new run id: %s', v_run_id );
-/*DBUG*/
+$end
 
     COMMIT; /* pm_run modified */
 
-/*DBUG
+$if $$Debugging $then
     dbug.leave;
-/*DBUG*/
+$end
+$if $$Testing $then
   EXCEPTION
     WHEN OTHERS
     THEN
-/*DBUG
+$if $$Debugging $then
       dbug.leave_on_error;
-/*DBUG*/
+$end
       IF c_next_run_id%ISOPEN
       THEN
         CLOSE c_next_run_id;
@@ -746,6 +736,7 @@ CREATE OR REPLACE PACKAGE BODY pm IS
       o_db_startup_run_id := NULL;
       -- raise again
       RAISE;
+$end        
   END new_run_l;
   --
   -- Get the internal SQL text identifier by key (local variant)
@@ -753,7 +744,7 @@ CREATE OR REPLACE PACKAGE BODY pm IS
     i_db IN pm_sql.db%TYPE ,
     i_sql_hash_value IN pm_sql.hash_value%TYPE ,
     i_sql_address IN pm_sql.address%TYPE )
-  RETURN NUMBER
+  RETURN pm_sql.sql_id%type
   IS
     v_sql_id pm_sql.sql_id%TYPE;
 
@@ -779,6 +770,7 @@ CREATE OR REPLACE PACKAGE BODY pm IS
     END IF;
     CLOSE c_get_sql_id;
     RETURN v_sql_id;
+$if $$Testing $then    
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -787,6 +779,7 @@ CREATE OR REPLACE PACKAGE BODY pm IS
         CLOSE c_get_sql_id;
       END IF;
       RETURN NULL;
+$end        
   END get_sql_id_l;
   --
   --  Get the internal SQL text identifier by text lookup
@@ -794,7 +787,7 @@ CREATE OR REPLACE PACKAGE BODY pm IS
     i_db IN pm_sql.db%TYPE ,
     i_sql_hash_value IN pm_sql.hash_value%TYPE ,
     i_sql_text IN pm_sql_id.sql_text%TYPE )
-  RETURN NUMBER
+  RETURN pm_sql.sql_id%type
   IS
     v_sql_id pm_sql.sql_id%TYPE;
 
@@ -823,6 +816,7 @@ CREATE OR REPLACE PACKAGE BODY pm IS
     CLOSE c_pm_sql;
 
     RETURN v_sql_id;
+$if $$Testing $then    
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -831,6 +825,7 @@ CREATE OR REPLACE PACKAGE BODY pm IS
         CLOSE c_pm_sql;
       END IF;
       RETURN NULL;
+$end        
   END get_sql_id_by_text_l;
   --
   -- Get the statement id by text lookup
@@ -881,168 +876,71 @@ CREATE OR REPLACE PACKAGE BODY pm IS
     i_hash_value IN pm_sql.hash_value%TYPE ,
     i_address IN pm_sql.address%TYPE ,
     i_command_type IN pm_sql_id.command_type%TYPE ,
-    i_sql_text IN pm_sql_id.sql_text%TYPE )
+    i_sql_text IN pm_sql_id.sql_text%TYPE ,
+    i_sql_id IN pm_sql.sql_id%TYPE )
   IS
-    v_sql_id pm_sql_id.sql_id%TYPE;
     c_module_name CONSTANT module_name_t := 'PM.PM_INS_SQL';
-
-    PROCEDURE ins_pm_sql(
-      i_db IN pm_sql.db%TYPE
-    , i_hash_value pm_sql.hash_value%TYPE
-    , i_address pm_sql.address%TYPE
-    , i_sql_id pm_sql.sql_id%TYPE
-    )
-    IS
-    BEGIN
-      INSERT INTO pm_sql
-      (
-        db
-      , hash_value
-      , address
-      , sql_id
-      )
-      VALUES
-      (
-        i_db
-      , i_hash_value
-      , i_address
-      , i_sql_id
-      );
-    EXCEPTION
-      WHEN OTHERS
-      THEN
-          /* GJP 02-JUN-1999 
-          || Strange bug/feature in Oracle: a insert statement
-          || is sometimes treated as command type 2 (INSERT)
-          || and sometimes as 4 (CREATE CLUSTER). Hence I
-          || will ignore a violation of the primary key constraint
-          || here.
-          */
-/*DBUG
-        dbug.print( 'info', 'db: ' || i_db );
-        dbug.print( 'info', 'hash_value: ' || to_char(i_hash_value) );
-        dbug.print( 'info', 'address: ' || i_address );
-        dbug.print( 'info', 'sql_id: ' || to_char(i_sql_id) );
-/*DBUG*/
-        NULL;
-    END ins_pm_sql;
-
-    PROCEDURE ins_pm_sql_id(
-      io_sql_id IN OUT pm_sql_id.sql_id%TYPE
-    , i_command_type IN pm_sql_id.command_type%TYPE
-    , i_sql_text IN pm_sql_id.sql_text%TYPE
-    )
-    IS
-      CURSOR c_get_seq IS
-        SELECT  pm_sql_seq.nextval
-        FROM    dual;
-    BEGIN
-      LOOP
-      BEGIN
-        OPEN c_get_seq;
-        FETCH c_get_seq
-        INTO io_sql_id;
-        CLOSE c_get_seq;
-
-        INSERT INTO pm_sql_id
-        (
-          sql_id
-        , command_type
-        , created_by
-        , creation_date
-        , sql_text
-        )
-        VALUES
-        (
-          io_sql_id
-        , i_command_type
-        , user
-        , sysdate
-        , i_sql_text
-        );
-      
-        EXIT;
-      EXCEPTION
-        WHEN dup_val_on_index
-        THEN    
-          NULL;
-      END;
-      END LOOP;
-    EXCEPTION
-      WHEN OTHERS
-      THEN
-        IF c_get_seq%ISOPEN
-        THEN
-          CLOSE c_get_seq;
-        END IF;
-        RAISE;
-    END ins_pm_sql_id;
   BEGIN
-/*DBUG
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_hash_value: %s', i_hash_value );
     dbug.print( 'input', 'i_address: %s', i_address );
     dbug.print( 'input', 'i_command_type: %s', i_command_type );
-/*DBUG*/
+$end
 
     SAVEPOINT spt_sql;
-            /*
-            || Situation A: pm_sqltext found.
-            || Only pm_sql needs updating
-            || Situation B: pm_sqltext not found.
-            || pm_sql_id, pm_sqltext and pm_sql need updating
-            */
-    v_sql_id :=
-      pm.get_sql_id_by_text_l
+
+    BEGIN
+      INSERT INTO pm_sql_id
       (
-        i_db
-      , i_hash_value
+        sql_id
+      , command_type
+      , created_by
+      , creation_date
+      , sql_text
+      )
+      VALUES
+      (
+        i_sql_id
+      , i_command_type
+      , user
+      , sysdate
       , i_sql_text
       );
+    EXCEPTION
+      WHEN dup_val_on_index
+      THEN    
+        NULL;
+    END;
 
-/*DBUG
-    dbug.print( 'info', 'sql id found: ' || v_sql_id );
-/*DBUG*/
-
-    IF v_sql_id IS NOT NULL
-    THEN
-      /* Situation A */
-      ins_pm_sql
-      (
-        i_db
-      , i_hash_value
-      , i_address
-      , v_sql_id
-      );
-    ELSE
-      /* Situation B */
-      ins_pm_sql_id( v_sql_id, i_command_type,  i_sql_text );
-      ins_pm_sql
-      (
-        i_db
-      , i_hash_value
-      , i_address
-      , v_sql_id
-      );
-    END IF;
-
-/*DBUG
-    dbug.print( 'info', 'sql id: ' || v_sql_id );
-/*DBUG*/
+    INSERT INTO pm_sql
+    (
+      db
+    , hash_value
+    , address
+    , sql_id
+    )
+    VALUES
+    (
+      i_db
+    , i_hash_value
+    , i_address
+    , i_sql_id
+    );
         
     COMMIT;
 
-/*DBUG
+$if $$Debugging $then
     dbug.leave;
-/*DBUG*/
+$end
   EXCEPTION
     WHEN OTHERS
     THEN
-/*DBUG
+$if $$Debugging $then
       dbug.leave_on_error;
-      dbug.print( 'error', 'error; sql id: ' || v_sql_id );
-/*DBUG*/
+      dbug.print( 'error', 'error; sql id: ' || i_sql_id );
+$end
       ROLLBACK TO spt_sql;
       RAISE;
   END ins_pm_sql_l;
@@ -1102,7 +1000,7 @@ CREATE OR REPLACE PACKAGE BODY pm IS
     v_sql_function_code INTEGER;
     c_module_name CONSTANT module_name_t := 'PM.PARSE_AND_EXECUTE';
 
-/*DBUG
+$if $$Debugging $then
     -- print a command with embedded new lines.
     PROCEDURE print( i_command IN command_t )
     IS
@@ -1130,16 +1028,20 @@ CREATE OR REPLACE PACKAGE BODY pm IS
         v_old_pos := v_pos;
       END LOOP;
     END print;
-/*DBUG*/
+$end
   BEGIN
-/*DBUG
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_command: %s', i_command );
     dbug.print( 'input', 'i_action: %s', i_action );
-/*DBUG*/
+$end
 
     /* i_db_link may be NULL bit still needs to be replaced */
     v_command := replace( v_command, '<db_link>', i_db_link );
+
+$if $$Debugging $then
+    dbug.print( 'debug', 'v_command: %s', v_command );
+$end
 
     v_last_command := v_command;
     dbms_sql.parse( i_cursor, v_command, dbms_sql.native );
@@ -1156,7 +1058,7 @@ CREATE OR REPLACE PACKAGE BODY pm IS
    
     v_nr_rows := dbms_sql.execute( i_cursor );
 
-/*DBUG
+$if $$Debugging $then
     IF i_action = 'I'
     THEN
       dbug.print( 'info', 'Number of rows inserted: %s', v_nr_rows );
@@ -1171,6 +1073,7 @@ CREATE OR REPLACE PACKAGE BODY pm IS
     END IF;
 
     dbug.leave;
+$if $$Testing $then
   EXCEPTION
     WHEN    OTHERS
     THEN
@@ -1182,7 +1085,8 @@ CREATE OR REPLACE PACKAGE BODY pm IS
       dbug.print( 'error', 'SQL function code: ' || to_char(v_sql_function_code) );
 
       RAISE;
-/*DBUG*/
+$end      
+$end
   END parse_and_execute;
   --
   -- Cleanup pm_session info
@@ -1193,27 +1097,27 @@ CREATE OR REPLACE PACKAGE BODY pm IS
   IS
     c_module_name CONSTANT module_name_t := 'PM.CLEANUP_SESSION';
   BEGIN
-/*DBUG
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_lwb_run_id: %s', i_lwb_run_id );
     dbug.print( 'input', 'i_upb_run_id: %s', i_upb_run_id );
-/*DBUG*/
+$end
 
     DELETE
     FROM    pm_session
     WHERE   db = i_db
     AND     run_id BETWEEN i_lwb_run_id AND i_upb_run_id;
 
-/*DBUG
+$if $$Debugging $then
     dbug.print( 'info', 'Rows deleted from pm_session: %s', sql%ROWCOUNT );
-/*DBUG*/
+$end
 
     COMMIT;
 
-/*DBUG
+$if $$Debugging $then
     dbug.leave;
-/*DBUG*/
+$end
   END cleanup_session_l;
   --
   -- Cleanup pm_sqlarea info
@@ -1224,16 +1128,16 @@ CREATE OR REPLACE PACKAGE BODY pm IS
   IS
     c_module_name CONSTANT module_name_t := 'PM.CLEANUP_SQLAREA';
   BEGIN
-/*DBUG
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_lwb_run_id: %s', i_lwb_run_id );
     dbug.print( 'input', 'i_upb_run_id: %s', i_upb_run_id );
-/*DBUG*/
+$end
 
-/*DBUG
+$if $$Debugging $then
     v_count := 0;
-/*DBUG*/
+$end
     LOOP
       DELETE
       FROM    pm_sqlarea are
@@ -1245,17 +1149,17 @@ CREATE OR REPLACE PACKAGE BODY pm IS
 
       EXIT WHEN sql%ROWCOUNT < c_max_count;
 
-/*DBUG
+$if $$Debugging $then
       v_count := v_count + sql%ROWCOUNT;
-/*DBUG*/
+$end
     END LOOP;
 
     COMMIT;
 
-/*DBUG
+$if $$Debugging $then
     dbug.print( 'info', 'Rows deleted from pm_sqlarea: %s', v_count );
     dbug.leave;
-/*DBUG*/
+$end
   END cleanup_sqlarea_l;
   --
   -- Cleanup pm_sql info (local variant)
@@ -1267,12 +1171,12 @@ CREATE OR REPLACE PACKAGE BODY pm IS
   IS
     c_module_name CONSTANT module_name_t := 'PM.CLEANUP_SQL';
   BEGIN
-/*DBUG
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_lwb_run_id: %s', i_lwb_run_id );
     dbug.print( 'input', 'i_upb_run_id: %s', i_upb_run_id );
-/*DBUG*/
+$end
 
     parse_and_execute( 'truncate table pm_sql_current', i_cursor );
 
@@ -1301,10 +1205,10 @@ CREATE OR REPLACE PACKAGE BODY pm IS
             );
     COMMIT;
 
-/*DBUG
+$if $$Debugging $then
     dbug.print( 'info', 'Rows deleted from pm_sql: %s', sql%ROWCOUNT );
     dbug.leave;
-/*DBUG*/
+$end
   END cleanup_sql_l;
   --
   -- Cleanup pm_system_event info
@@ -1315,12 +1219,12 @@ CREATE OR REPLACE PACKAGE BODY pm IS
   IS
     c_module_name CONSTANT module_name_t := 'PM.CLEANUP_SYSTEM_EVENT';
   BEGIN
-/*DBUG
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_lwb_run_id: %s', i_lwb_run_id );
     dbug.print( 'input', 'i_upb_run_id: %s', i_upb_run_id );
-/*DBUG*/
+$end
 
     DELETE
     FROM    pm_system_event
@@ -1329,10 +1233,10 @@ CREATE OR REPLACE PACKAGE BODY pm IS
 
     COMMIT;
 
-/*DBUG
+$if $$Debugging $then
     dbug.print( 'info', 'Rows deleted from pm_system_event: %s', sql%ROWCOUNT );
     dbug.leave;
-/*DBUG*/
+$end
   END cleanup_system_event_l;
   --
   -- Cleanup pm_sysstat info
@@ -1343,12 +1247,12 @@ CREATE OR REPLACE PACKAGE BODY pm IS
   IS
     c_module_name CONSTANT module_name_t := 'PM.CLEANUP_SYSSTAT';
   BEGIN
-/*DBUG
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_lwb_run_id: %s', i_lwb_run_id );
     dbug.print( 'input', 'i_upb_run_id: %s', i_upb_run_id );
-/*DBUG*/
+$end
 
     DELETE
     FROM    pm_sysstat
@@ -1357,10 +1261,10 @@ CREATE OR REPLACE PACKAGE BODY pm IS
 
     COMMIT;
 
-/*DBUG
+$if $$Debugging $then
     dbug.print( 'info', 'Rows deleted from pm_sysstat: %s', sql%ROWCOUNT );
     dbug.leave;
-/*DBUG*/
+$end
   END  cleanup_sysstat_l;
   --
   -- Cleanup pm_run info
@@ -1371,22 +1275,22 @@ CREATE OR REPLACE PACKAGE BODY pm IS
   IS
     c_module_name CONSTANT module_name_t := 'PM.CLEANUP_RUN';
   BEGIN
-/*DBUG
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_lwb_run_id: %s', i_lwb_run_id );
     dbug.print( 'input', 'i_upb_run_id: %s', i_upb_run_id );
-/*DBUG*/
+$end
 
     DELETE
     FROM    pm_run
     WHERE   db = i_db
     AND     run_id BETWEEN i_lwb_run_id AND i_upb_run_id;
 
-/*DBUG
+$if $$Debugging $then
     dbug.print( 'info', 'Rows deleted from pm_run: %s', sql%ROWCOUNT );
     dbug.leave;
-/*DBUG*/
+$end
   END cleanup_run_l;
   --
   -- Cleanup info for a database instance
@@ -1399,18 +1303,18 @@ CREATE OR REPLACE PACKAGE BODY pm IS
   IS
     c_module_name CONSTANT module_name_t := 'PM.CLEANUP';
   BEGIN
-/*DBUG
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_lwb_run_id: %s', i_lwb_run_id );
     dbug.print( 'input', 'i_upb_run_id: %s', i_upb_run_id );
     dbug.print( 'input', 'i_cleanup_run: %s', i_cleanup_run );
-/*DBUG*/
+$end
 
-/*DBUG
+$if $$Debugging $then
     dbug.print( 'info', 'Lower bound run id: %s', i_lwb_run_id );
     dbug.print( 'info', 'Upper bound run id: %s', i_upb_run_id );
-/*DBUG*/
+$end
 
     cleanup_session_l( i_db, i_lwb_run_id, i_upb_run_id );
     cleanup_sqlarea_l( i_db, i_lwb_run_id, i_upb_run_id );
@@ -1423,9 +1327,9 @@ CREATE OR REPLACE PACKAGE BODY pm IS
     END IF;
 
     COMMIT;
-/*DBUG
+$if $$Debugging $then
     dbug.leave;
-/*DBUG*/
+$end
   END cleanup_l;
   --
   -- Collect v$system_event info from a remote database
@@ -1446,6 +1350,11 @@ CREATE OR REPLACE PACKAGE BODY pm IS
       , total_timeouts
       , time_waited
       , average_wait
+      , time_waited_micro
+      , event_id
+      , wait_class_id
+      , wait_class#
+      , wait_class
       )
         SELECT  :db
         ,       :run_id
@@ -1454,26 +1363,31 @@ CREATE OR REPLACE PACKAGE BODY pm IS
         ,       s.total_timeouts
         ,       s.time_waited
         ,       s.average_wait
+        ,       time_waited_micro
+        ,       event_id
+        ,       wait_class_id
+        ,       wait_class#
+        ,       wait_class
         FROM    v$system_event<db_link> s';
 
     c_module_name CONSTANT module_name_t := 'PM.COLLECT_SYSTEM_EVENT';
   BEGIN
-/*DBUG
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_run_id: %s', i_run_id );
     dbug.print( 'input', 'i_db_startup_run_id: %s', i_db_startup_run_id );
-/*DBUG*/
+$end
 
-/*DBUG
+$if $$Debugging $then
     dbug.print( 'info', 'Adding v$system_event info' );
-/*DBUG*/
+$end
     parse_and_execute( c_command, i_cursor, 'I', i_db, i_db_link, i_run_id );
     COMMIT;
 
-/*DBUG
+$if $$Debugging $then
     dbug.leave;
-/*DBUG*/
+$end
   END collect_system_event_l;
   --
   -- Collect v$sysstat info from a remote database
@@ -1489,32 +1403,36 @@ CREATE OR REPLACE PACKAGE BODY pm IS
       (
               db
       ,       run_id
-      ,       statistic#
+      ,       name
+      ,       class
       ,       value
+      ,       stat_id
       )
         SELECT  :db
         ,       :run_id
-        ,       sysstat.statistic#
+        ,       sysstat.name
+        ,       sysstat.class
         ,       sysstat.value
+        ,       sysstat.stat_id
         FROM    v$sysstat<db_link> sysstat';
 
     c_module_name CONSTANT module_name_t := 'PM.COLLECT_SYSSTAT';
   BEGIN
-/*DBUG
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_run_id: %s', i_run_id );
     dbug.print( 'input', 'i_db_startup_run_id: %s', i_db_startup_run_id );
 
     dbug.print( 'info', 'Adding v$sysstat info' );
-/*DBUG*/
+$end
     parse_and_execute( c_command, i_cursor, 'I', i_db, i_db_link, i_run_id );
 
     COMMIT;
 
-/*DBUG
+$if $$Debugging $then
     dbug.leave;
-/*DBUG*/
+$end
   END collect_sysstat_l;
   --
   -- Collect v$sqlarea info from a remote database
@@ -1541,8 +1459,8 @@ begin
             ) as first_load_time
     ,       s.hash_value
     ,       rawtohex(s.address) as address
-    ,       usr.username as parsing_user_name
-    ,       sch.username as parsing_schema_name
+    ,       ( select usr.username from all_users<db_link> usr where usr.user_id = s.parsing_user_id ) as parsing_user_name
+    ,       ( select sch.username from all_users<db_link> sch where sch.user_id = s.parsing_schema_id ) as parsing_schema_name
     ,       :run_id as run_id
     ,       s.executions
     ,       s.buffer_gets
@@ -1562,11 +1480,20 @@ begin
             end as sql_text
     ,       s.command_type
     ,       row_number() over (partition by t.address, t.hash_value order by t.piece desc) as seq
+    ,       s.sql_id
+    ,       s.direct_writes
+    ,       s.application_wait_time
+    ,       s.concurrency_wait_time
+    ,       s.cluster_wait_time
+    ,       s.user_io_wait_time
+    ,       s.plsql_exec_time
+    ,       s.java_exec_time
+    ,       s.cpu_time
+    ,       s.elapsed_time
+    ,       s.sql_profile
+    ,       (select o.object_name from dba_objects<db_link> o where o.object_id = s.program_id) as program_name
+    ,       s.program_line#
     from    v$sqlarea<db_link> s
-            inner join all_users usr 
-            on usr.user_id = s.parsing_user_id
-            inner join all_users sch
-            on sch.user_id = s.parsing_schema_id
             left outer join v$sqltext_with_newlines<db_link> t 
             on t.address = s.address and t.hash_value = s.hash_value
     order by
@@ -1604,6 +1531,19 @@ begin
       , action
       , sql_text
       , command_type
+      , sql_id
+      , direct_writes
+      , application_wait_time
+      , concurrency_wait_time
+      , cluster_wait_time
+      , user_io_wait_time
+      , plsql_exec_time
+      , java_exec_time
+      , cpu_time
+      , elapsed_time
+      , sql_profile
+      , program_name
+      , program_line#
       )
       values
       ( r_sqlarea.db
@@ -1626,6 +1566,19 @@ begin
       , r_sqlarea.action
       , l_clob
       , r_sqlarea.command_type
+      , r_sqlarea.sql_id
+      , r_sqlarea.direct_writes
+      , r_sqlarea.application_wait_time
+      , r_sqlarea.concurrency_wait_time
+      , r_sqlarea.cluster_wait_time
+      , r_sqlarea.user_io_wait_time
+      , r_sqlarea.plsql_exec_time
+      , r_sqlarea.java_exec_time
+      , r_sqlarea.cpu_time
+      , r_sqlarea.elapsed_time
+      , r_sqlarea.sql_profile
+      , r_sqlarea.program_name
+      , r_sqlarea.program_line#
       );
       dbms_lob.trim(l_clob, 0);
     end if;
@@ -1636,22 +1589,22 @@ end;
  
     c_module_name CONSTANT module_name_t := 'PM.COLLECT_SQLAREA';
   BEGIN
-/*DBUG
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_run_id: %s', i_run_id );
     dbug.print( 'input', 'i_db_startup_run_id: %s', i_db_startup_run_id );
 
     dbug.print( 'info', 'Adding v$sqlarea info' );
-/*DBUG*/
+$end
 
     parse_and_execute( c_command, i_cursor, 'I', i_db, i_db_link, i_run_id );
 
     COMMIT;
 
-/*DBUG
+$if $$Debugging $then
     dbug.leave;
-/*DBUG*/
+$end
   END collect_sqlarea_l;
   --
   -- Collect v$session info from a remote database
@@ -1671,6 +1624,10 @@ end;
       , program
       , sql_hash_value
       , sql_address
+      , sql_id
+      , prev_sql_id
+      , logon_time
+      , last_call_et
       )
         SELECT  :db
         ,       :run_id
@@ -1679,31 +1636,35 @@ end;
         ,       s.program
         ,       CASE WHEN s.sql_hash_value = 0 THEN NULL ELSE s.sql_hash_value END
         ,       CASE WHEN rawtohex(s.sql_address) = ''00'' THEN NULL ELSE rawtohex(s.sql_address) END
+        ,       s.sql_id
+        ,       s.prev_sql_id
+        ,       s.logon_time
+        ,       s.last_call_et
         FROM    v$session<db_link> s';
     c_module_name CONSTANT module_name_t := 'PM.COLLECT_SESSION';
   BEGIN
-/*DBUG
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_run_id: %s', i_run_id );
     dbug.print( 'input', 'i_db_startup_run_id: %s', i_db_startup_run_id );
-/*DBUG*/
+$end
 
     parse_and_execute
     (
             'alter table pm_session disable constraint pm_ses_sql_fk1'
     ,       i_cursor
     );
-/*DBUG
+$if $$Debugging $then
     dbug.print( 'info', 'Adding v$session info' );
-/*DBUG*/
+$end
     parse_and_execute( c_command, i_cursor, 'I', i_db, i_db_link, i_run_id );
 
     COMMIT;
 
-/*DBUG
+$if $$Debugging $then
     dbug.leave;
-/*DBUG*/
+$end
   END collect_session_l;
   --
   -- Process v$sqlarea info from a remote database
@@ -1723,6 +1684,19 @@ end;
             ,       art.address
             ,       art.sql_text
             ,       art.command_type
+            ,       art.sql_id
+            ,       art.direct_writes
+            ,       art.application_wait_time
+            ,       art.concurrency_wait_time
+            ,       art.cluster_wait_time
+            ,       art.user_io_wait_time
+            ,       art.plsql_exec_time
+            ,       art.java_exec_time
+            ,       art.cpu_time
+            ,       art.elapsed_time
+            ,       art.sql_profile
+            ,       art.program_name
+            ,       art.program_line#
             FROM    pm_sqlarea_tmp art
             WHERE   NOT EXISTS 
                     (       
@@ -1748,15 +1722,24 @@ end;
     ,       i_parsing_schema_name IN pm_sqlarea.parsing_schema_name%TYPE
     )
     IS
-            SELECT  NVL(sum(old.executions), 0)     executions
-            ,       NVL(sum(old.buffer_gets), 0)    buffer_gets
-            ,       NVL(sum(old.disk_reads), 0)     disk_reads
-            ,       NVL(sum(old.parse_calls), 0)    parse_calls
-            ,       NVL(sum(old.sorts), 0)          sorts
-            ,       NVL(sum(old.kept_versions), 0)  kept_versions
-            ,       NVL(sum(old.loads), 0)          loads
-            ,       NVL(sum(old.rows_processed), 0) rows_processed
-            ,       NVL(sum(old.invalidations), 0)  invalidations
+            SELECT  NVL(sum(old.executions), 0)            executions
+            ,       NVL(sum(old.buffer_gets), 0)           buffer_gets
+            ,       NVL(sum(old.disk_reads), 0)            disk_reads
+            ,       NVL(sum(old.parse_calls), 0)           parse_calls
+            ,       NVL(sum(old.sorts), 0)                 sorts
+            ,       NVL(sum(old.kept_versions), 0)         kept_versions
+            ,       NVL(sum(old.loads), 0)                 loads
+            ,       NVL(sum(old.rows_processed), 0)        rows_processed
+            ,       NVL(sum(old.invalidations), 0)         invalidations
+            ,       NVL(sum(old.direct_writes), 0)         direct_writes
+            ,       NVL(sum(old.application_wait_time), 0) application_wait_time
+            ,       NVL(sum(old.concurrency_wait_time), 0) concurrency_wait_time
+            ,       NVL(sum(old.cluster_wait_time), 0)     cluster_wait_time
+            ,       NVL(sum(old.user_io_wait_time), 0)     user_io_wait_time
+            ,       NVL(sum(old.plsql_exec_time), 0)       plsql_exec_time
+            ,       NVL(sum(old.java_exec_time), 0)        java_exec_time
+            ,       NVL(sum(old.cpu_time), 0)              cpu_time
+            ,       NVL(sum(old.elapsed_time), 0)          elapsed_time
             FROM    pm_sqlarea old
             WHERE   old.db = i_db
             AND     old.first_load_time = i_first_load_time
@@ -1768,12 +1751,12 @@ end;
 
     r_sqlarea_tot   c_sqlarea_tot%ROWTYPE;
   BEGIN
-/*DBUG
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_run_id: %s', i_run_id );
     dbug.print( 'input', 'i_db_startup_run_id: %s', i_db_startup_run_id );
-/*DBUG*/
+$end
 
     /*
     || Before inserting into pm_sqlarea we have to update pm_sql
@@ -1781,9 +1764,9 @@ end;
     || from pm_sqlarea to pm_sql valid.
     */
 
-/*DBUG
+$if $$Debugging $then
     dbug.print( 'info', 'Processing pm_sql' );
-/*DBUG*/
+$end
 
     FOR r_new_sql IN c_new_sql
     LOOP
@@ -1795,34 +1778,35 @@ end;
       , r_new_sql.address
       , r_new_sql.command_type
       , r_new_sql.sql_text
+      , r_new_sql.sql_id
       );
     EXCEPTION
       WHEN OTHERS
       THEN
-/*DBUG
+$if $$Debugging $then
         dbug.print( 'error', 'db: %s; hash_value: %s; address: %s; command_type: %s',
                     r_new_sql.db,
                     r_new_sql.hash_value,
                     r_new_sql.address,
                     r_new_sql.command_type );
         dbug.print( 'error', r_new_sql.sql_text );
-/*DBUG*/
+$end
         RAISE;
     END;
     END LOOP;
 
-/*DBUG
+$if $$Debugging $then
     dbug.print( 'info', 'Processing pm_sqlarea' );
-/*DBUG*/
+$end
 
     /* 
     || Calculate delta values for pm_sqlarea_tmp.
     || Do not insert records which do not contain any
     || info: executions, sorts, buffer_gets, etc. all 0.
     */
-/*DBUG
+$if $$Debugging $then
     v_count := 0;
-/*DBUG*/
+$end
 
     FOR r_sqlarea_tmp IN
     (
@@ -1844,6 +1828,19 @@ end;
       ,       art.invalidations
       ,       art.module
       ,       art.action
+      ,       art.sql_id
+      ,       art.direct_writes
+      ,       art.application_wait_time
+      ,       art.concurrency_wait_time
+      ,       art.cluster_wait_time
+      ,       art.user_io_wait_time
+      ,       art.plsql_exec_time
+      ,       art.java_exec_time
+      ,       art.cpu_time
+      ,       art.elapsed_time
+      ,       art.sql_profile
+      ,       art.program_name
+      ,       art.program_line#
       FROM    pm_sqlarea_tmp art
     )
     LOOP
@@ -1885,6 +1882,24 @@ end;
             r_sqlarea_tmp.rows_processed - r_sqlarea_tot.rows_processed;
           r_sqlarea_tmp.invalidations := 
             r_sqlarea_tmp.invalidations - r_sqlarea_tot.invalidations;
+          r_sqlarea_tmp.direct_writes :=
+            r_sqlarea_tmp.direct_writes - r_sqlarea_tot.direct_writes;
+          r_sqlarea_tmp.application_wait_time :=
+            r_sqlarea_tmp.application_wait_time - r_sqlarea_tot.application_wait_time;
+          r_sqlarea_tmp.concurrency_wait_time :=
+            r_sqlarea_tmp.concurrency_wait_time - r_sqlarea_tot.concurrency_wait_time;
+          r_sqlarea_tmp.cluster_wait_time :=
+            r_sqlarea_tmp.cluster_wait_time - r_sqlarea_tot.cluster_wait_time;
+          r_sqlarea_tmp.user_io_wait_time :=
+            r_sqlarea_tmp.user_io_wait_time - r_sqlarea_tot.user_io_wait_time;
+          r_sqlarea_tmp.plsql_exec_time :=
+            r_sqlarea_tmp.plsql_exec_time - r_sqlarea_tot.plsql_exec_time;
+          r_sqlarea_tmp.java_exec_time :=
+            r_sqlarea_tmp.java_exec_time - r_sqlarea_tot.java_exec_time;
+          r_sqlarea_tmp.cpu_time :=
+            r_sqlarea_tmp.cpu_time - r_sqlarea_tot.cpu_time;
+          r_sqlarea_tmp.elapsed_time :=
+            r_sqlarea_tmp.elapsed_time - r_sqlarea_tot.elapsed_time;
         END IF;
         CLOSE c_sqlarea_tot;
       END IF;
@@ -1899,7 +1914,16 @@ end;
         r_sqlarea_tmp.kept_versions >= 0 AND
         r_sqlarea_tmp.loads >= 0 AND
         r_sqlarea_tmp.rows_processed >= 0 AND
-        r_sqlarea_tmp.invalidations >= 0
+        r_sqlarea_tmp.invalidations >= 0 AND
+        r_sqlarea_tmp.direct_writes >= 0 AND
+        r_sqlarea_tmp.application_wait_time >= 0 AND
+        r_sqlarea_tmp.concurrency_wait_time >= 0 AND
+        r_sqlarea_tmp.cluster_wait_time >= 0 AND
+        r_sqlarea_tmp.user_io_wait_time >= 0 AND
+        r_sqlarea_tmp.plsql_exec_time >= 0 AND
+        r_sqlarea_tmp.java_exec_time >= 0 AND
+        r_sqlarea_tmp.cpu_time >= 0 AND
+        r_sqlarea_tmp.elapsed_time >= 0
       )
       AND
       ( /* check constraint PM_ARE_CK3 */
@@ -1911,7 +1935,16 @@ end;
         r_sqlarea_tmp.kept_versions +
         r_sqlarea_tmp.loads +
         r_sqlarea_tmp.rows_processed +
-        r_sqlarea_tmp.invalidations > 0
+        r_sqlarea_tmp.invalidations +
+        r_sqlarea_tmp.direct_writes +
+        r_sqlarea_tmp.application_wait_time +
+        r_sqlarea_tmp.concurrency_wait_time + 
+        r_sqlarea_tmp.cluster_wait_time +
+        r_sqlarea_tmp.user_io_wait_time +
+        r_sqlarea_tmp.plsql_exec_time +
+        r_sqlarea_tmp.java_exec_time +
+        r_sqlarea_tmp.cpu_time +
+        r_sqlarea_tmp.elapsed_time > 0
       )
       THEN
       BEGIN
@@ -1935,6 +1968,19 @@ end;
         , invalidations
         , module
         , action
+        , sql_id
+        , direct_writes
+        , application_wait_time
+        , concurrency_wait_time
+        , cluster_wait_time
+        , user_io_wait_time
+        , plsql_exec_time
+        , java_exec_time
+        , cpu_time
+        , elapsed_time
+        , sql_profile
+        , program_name
+        , program_line#
         )
         values
         (
@@ -1956,34 +2002,47 @@ end;
         , r_sqlarea_tmp.invalidations
         , r_sqlarea_tmp.module
         , r_sqlarea_tmp.action
+        , r_sqlarea_tmp.sql_id
+        , r_sqlarea_tmp.direct_writes
+        , r_sqlarea_tmp.application_wait_time
+        , r_sqlarea_tmp.concurrency_wait_time
+        , r_sqlarea_tmp.cluster_wait_time
+        , r_sqlarea_tmp.user_io_wait_time
+        , r_sqlarea_tmp.plsql_exec_time
+        , r_sqlarea_tmp.java_exec_time
+        , r_sqlarea_tmp.cpu_time
+        , r_sqlarea_tmp.elapsed_time
+        , r_sqlarea_tmp.sql_profile
+        , r_sqlarea_tmp.program_name
+        , r_sqlarea_tmp.program_line#
         );
-/*DBUG
+$if $$Debugging $then
         v_count := v_count + 1;
-/*DBUG*/
+$end
       EXCEPTION
         WHEN    OTHERS
         THEN
-/*DBUG
+$if $$Debugging $then
           dbug.print( 'error', 'hash_value: ' || r_sqlarea_tmp.hash_value );
           dbug.print( 'error', 'address: ' || r_sqlarea_tmp.address );
           dbug.print( 'error', 'first_load_time: ' || r_sqlarea_tmp.first_load_time );
           dbug.print( 'error', 'parsing_user_name: ' || r_sqlarea_tmp.parsing_user_name );
           dbug.print( 'error', 'parsing_schema_name: ' || r_sqlarea_tmp.parsing_schema_name );
-/*DBUG*/
+$end
           NULL;
       END;
       END IF;       
     END LOOP;
 
-/*DBUG
+$if $$Debugging $then
     dbug.print( 'info', 'Rows added to pm_sqlarea: %s', v_count );
-/*DBUG*/
+$end
 
     COMMIT;
 
-/*DBUG
+$if $$Debugging $then
     dbug.leave;
-/*DBUG*/
+$end
   END process_sqlarea_l;
   --
   -- Process v$sysstat info from a remote database
@@ -1995,24 +2054,24 @@ end;
     /*
     ||
     || Update the system statistics table.
-    || If the combination (db, run_id, db_startup_time, statistic#) already
+    || If the combination (db, run_id, db_startup_time, name) already
     || exists, the value must be adjusted to reflect changes since the last 
     || snapshot.
     ||
     */
     c_module_name CONSTANT module_name_t := 'PM.PROCESS_SYSSTAT';
 
-    cursor  c_sysstat_tot( i_statistic# IN pm_sysstat.statistic#%TYPE )
+    cursor  c_sysstat_tot( i_name IN pm_sysstat.name%TYPE )
     IS
             SELECT  NVL(sum(value), 0)      value
             FROM    pm_sysstat old
             WHERE   old.db = i_db
             AND     old.run_id BETWEEN i_db_startup_run_id AND i_run_id - 1
-            AND     old.statistic# = i_statistic#;
+            AND     old.name = i_name;
 
     r_sysstat_tot c_sysstat_tot%ROWTYPE;
   BEGIN
-/*DBUG
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_run_id: %s', i_run_id );
@@ -2020,21 +2079,23 @@ end;
 
     dbug.print( 'info', 'Processing pm_sysstat' );
     v_count := 0;
-/*DBUG*/
+$end
 
     /* subtract old values */
     FOR r_sysstat_tmp IN
     (
       SELECT  db
       ,       run_id
-      ,       statistic#
+      ,       name
+      ,       class
       ,       value
+      ,       stat_id
       FROM    pm_sysstat_tmp
     )
     LOOP
       IF i_db_startup_run_id IS NOT NULL
       THEN
-        OPEN c_sysstat_tot( r_sysstat_tmp.statistic# );
+        OPEN c_sysstat_tot( r_sysstat_tmp.name );
         FETCH c_sysstat_tot
         INTO r_sysstat_tot;
 
@@ -2053,39 +2114,44 @@ end;
         (
           db
         , run_id
-        , statistic#
+        , name
+        , class
         , value
+        , stat_id
         )
         values
         (
           r_sysstat_tmp.db
         , r_sysstat_tmp.run_id
-        , r_sysstat_tmp.statistic#
+        , r_sysstat_tmp.name
+        , r_sysstat_tmp.class
         , r_sysstat_tmp.value
+        , r_sysstat_tmp.stat_id
         );
-/*DBUG
+$if $$Debugging $then
         v_count := v_count + 1;
-/*DBUG*/
+$end
       EXCEPTION
         WHEN OTHERS
         THEN
-/*DBUG
-          dbug.print( 'error', 'db: %s; run_id: %s; statistic#: %s; value: %s',
+$if $$Debugging $then
+          dbug.print( 'error', 'db: %s; run_id: %s; name: %s; class: %s; value: %s',
                       r_sysstat_tmp.db,
                       r_sysstat_tmp.run_id,
-                      r_sysstat_tmp.statistic#,
+                      r_sysstat_tmp.name,
+                      r_sysstat_tmp.class,
                       r_sysstat_tmp.value );
-/*DBUG*/
+$end
           NULL;
       END;
       END IF;
     END LOOP;
     COMMIT;
 
-/*DBUG
+$if $$Debugging $then
     dbug.print( 'info', 'Rows added to pm_sysstat: %s', v_count );
     dbug.leave;
-/*DBUG*/
+$end
   END process_sysstat_l;
   --
   -- Process v$session info for a run
@@ -2118,14 +2184,14 @@ end;
       ,       sql_address;
 
     BEGIN
-/*DBUG
+$if $$Debugging $then
       dbug.enter( c_module_name );
       dbug.print( 'input', 'i_db: %s', i_db );
       dbug.print( 'input', 'i_run_id: %s', i_run_id );
       dbug.print( 'input', 'i_db_startup_run_id: %s', i_db_startup_run_id );
 
       dbug.print( 'info', 'Processing pm_session' );
-/*DBUG*/
+$end
 
       FOR r_session_tmp IN
       ( 
@@ -2136,6 +2202,10 @@ end;
         ,       program
         ,       sql_hash_value
         ,       sql_address
+        ,       sql_id
+        ,       prev_sql_id
+        ,       logon_time
+        ,       last_call_et
         FROM    pm_session_tmp
       )
       LOOP
@@ -2149,6 +2219,10 @@ end;
         , program
         , sql_hash_value
         , sql_address
+        , sql_id
+        , prev_sql_id
+        , logon_time
+        , last_call_et
         )
         values
         (
@@ -2159,11 +2233,15 @@ end;
         , r_session_tmp.program
         , r_session_tmp.sql_hash_value
         , r_session_tmp.sql_address
+        , r_session_tmp.sql_id
+        , r_session_tmp.prev_sql_id
+        , r_session_tmp.logon_time
+        , r_session_tmp.last_call_et
         );
       EXCEPTION
         WHEN OTHERS
         THEN
-/*DBUG
+$if $$Debugging $then
           dbug.print( 'error', 'db: ' || r_session_tmp.db );
           dbug.print( 'error', 'run_id: ' || r_session_tmp.run_id );
           dbug.print( 'error', 'sid: ' || r_session_tmp.sid );
@@ -2171,7 +2249,11 @@ end;
           dbug.print( 'error', 'program: ' || r_session_tmp.program );
           dbug.print( 'error', 'sql_hash_value: ' || r_session_tmp.sql_hash_value );
           dbug.print( 'error', 'sql_address: ' || r_session_tmp.sql_address );
-/*DBUG*/
+          dbug.print( 'error', 'sql_id: ' || r_session_tmp.sql_id );
+          dbug.print( 'error', 'prev_sql_id: ' || r_session_tmp.prev_sql_id );
+          dbug.print( 'error', 'logon_time: ' || r_session_tmp.logon_time );
+          dbug.print( 'error', 'last_call_et: ' || r_session_tmp.last_call_et );
+$end
           NULL;
       END;
       END LOOP;
@@ -2181,23 +2263,23 @@ end;
         || Keep the foreign key constraint PM_SESSION - PM_SQL valid.
         ||
         */
-/*DBUG
+$if $$Debugging $then
       v_count := 0;
-/*DBUG*/
+$end
       FOR r_session IN c_session
       LOOP
         UPDATE  pm_session
         SET     sql_hash_value = NULL
         ,       sql_address = NULL
         WHERE current OF c_session;
-/*DBUG
+$if $$Debugging $then
         v_count := v_count + 1;
-/*DBUG*/
+$end
       END LOOP;
 
-/*DBUG
+$if $$Debugging $then
       dbug.print( 'info', 'Rows updated of pm_session: %s', v_count );
-/*DBUG*/
+$end
 
       parse_and_execute
       (
@@ -2205,9 +2287,9 @@ end;
       , i_cursor
       );
 
-/*DBUG
+$if $$Debugging $then
       dbug.leave;
-/*DBUG*/
+$end
   END process_session_l;
   --
   -- Process v$system_event info from a remote database
@@ -2231,6 +2313,7 @@ end;
       SELECT  NVL(sum(total_waits), 0)        total_waits
       ,       NVL(sum(total_timeouts), 0)     total_timeouts
       ,       NVL(sum(time_waited), 0)        time_waited
+      ,       NVL(sum(time_waited_micro), 0)  time_waited_micro
       FROM    pm_system_event old
       WHERE   old.db = i_db
       AND     old.run_id BETWEEN i_db_startup_run_id AND i_run_id - 1
@@ -2238,7 +2321,7 @@ end;
 
     r_system_event_tot c_system_event_tot%ROWTYPE;
   BEGIN
-/*DBUG
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_run_id: %s', i_run_id );
@@ -2249,7 +2332,7 @@ end;
     dbug.print( 'info', 'inserting into pm_system_event' );
 
     v_count := 0;
-/*DBUG*/
+$end
 
     FOR r_system_event_tmp IN
     (
@@ -2259,6 +2342,11 @@ end;
       ,       total_waits
       ,       total_timeouts
       ,       time_waited
+      ,       time_waited_micro
+      ,       event_id
+      ,       wait_class_id
+      ,       wait_class#
+      ,       wait_class      
       FROM    pm_system_event_tmp
     )
     LOOP
@@ -2278,6 +2366,8 @@ end;
             r_system_event_tmp.total_timeouts - r_system_event_tot.total_timeouts;
           r_system_event_tmp.time_waited := 
             r_system_event_tmp.time_waited - r_system_event_tot.time_waited;
+          r_system_event_tmp.time_waited_micro := 
+            r_system_event_tmp.time_waited_micro - r_system_event_tot.time_waited_micro;
         END IF;
         CLOSE   c_system_event_tot;
       END IF;
@@ -2286,6 +2376,7 @@ end;
       IF r_system_event_tmp.total_waits >= 0 
       AND r_system_event_tmp.total_timeouts >= 0 
       AND r_system_event_tmp.time_waited >= 0 
+      AND r_system_event_tmp.time_waited_micro >= 0 
       THEN
       BEGIN
         INSERT  INTO pm_system_event
@@ -2297,6 +2388,11 @@ end;
         , total_timeouts
         , time_waited
         , average_wait
+        , time_waited_micro
+        , event_id
+        , wait_class_id
+        , wait_class#
+        , wait_class      
         )
         values
         (
@@ -2313,20 +2409,25 @@ end;
           , 0
           , r_system_event_tmp.time_waited / r_system_event_tmp.total_waits
           )
+        , r_system_event_tmp.time_waited_micro
+        , r_system_event_tmp.event_id
+        , r_system_event_tmp.wait_class_id
+        , r_system_event_tmp.wait_class#
+        , r_system_event_tmp.wait_class      
         );
 
-/*DBUG
+$if $$Debugging $then
         v_count := v_count + 1;
-/*DBUG*/
+$end
       EXCEPTION
         WHEN OTHERS
         THEN
-/*DBUG
+$if $$Debugging $then
           dbug.print( 'error', 'db: %s; run_id: %s; event: %s',
                       r_system_event_tmp.db,
                       r_system_event_tmp.run_id,
                       r_system_event_tmp.event );
-/*DBUG*/
+$end
           NULL;
       END;
       END IF;
@@ -2334,10 +2435,10 @@ end;
 
     COMMIT;
 
-/*DBUG
+$if $$Debugging $then
     dbug.print( 'info', 'Rows added to pm_system_event: %s', v_count );
     dbug.leave;
-/*DBUG*/
+$end
   END process_system_event_l;
   --
   -- Collect info for a specific database instance. (local variant)
@@ -2364,10 +2465,10 @@ end;
       END LOOP;
     END truncate_temp_tables;
   BEGIN
-/*DBUG
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
-/*DBUG*/
+$end
 
       /*
       || prevent errors with database links
@@ -2395,20 +2496,21 @@ end;
 
     COMMIT;
 
-/*DBUG
+$if $$Debugging $then
     dbug.leave;
-/*DBUG*/
+$end
+$if $$Testing $then
   EXCEPTION
     WHEN OTHERS
     THEN
-/*DBUG
+$if $$Debugging $then
       dbug.leave_on_error;
-/*DBUG*/
+$end
               /* remove all children of this run but not the run and error itself */
       pm.cleanup_l( i_cursor, i_db, v_run_id, v_run_id, false ); 
 
       DECLARE
-        v_error_msg CONSTANT pm_run.error_msg%type := SUBSTR(sqlerrm, 1, 2000);
+        v_error_msg CONSTANT pm_run.error_msg%type := SUBSTR(sqlerrm, 1, 4000);
       BEGIN
         UPDATE  pm_run
         SET     error_msg = v_error_msg
@@ -2416,6 +2518,7 @@ end;
       END;
 
       RAISE;
+$end      
   END collect_l;
   --
   -- Process info from temporary tables; do not use remote database
@@ -2433,10 +2536,10 @@ end;
       FROM    pm_run run
       WHERE   run.db = i_db;
   BEGIN
-/*DBUG
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
-/*DBUG*/
+$end
 
     OPEN c_last_run( i_db );
     FETCH c_last_run
@@ -2459,14 +2562,14 @@ end;
     /*truncate_temp_tables;*/
     COMMIT;
 
-/*DBUG
+$if $$Debugging $then
     dbug.leave;
   EXCEPTION
     WHEN OTHERS
     THEN
       dbug.leave_on_error;
       RAISE; 
-/*DBUG*/
+$end
   END process_l;
 
   /* GLOBAL MODULES */
@@ -2549,8 +2652,7 @@ end;
     i_db IN pm_sql.db%TYPE ,
     i_sql_hash_value IN pm_sql.hash_value%TYPE ,
     i_sql_address IN pm_sql.address%TYPE )
-  RETURN 
-  NUMBER 
+  RETURN pm_sql.sql_id%type
   IS
   BEGIN
     RETURN pm.get_sql_id_l( pm.get_db(i_db), i_sql_hash_value, i_sql_address );
@@ -2561,7 +2663,7 @@ end;
     i_db IN pm_sql.db%TYPE ,
     i_sql_hash_value IN pm_sql.hash_value%TYPE ,
     i_sql_text IN pm_sql_id.sql_text%TYPE )
-  RETURN NUMBER 
+  RETURN pm_sql.sql_id%type
   IS
   BEGIN
     RETURN pm.get_sql_id_by_text_l( pm.get_db(i_db), i_sql_hash_value, i_sql_text );
@@ -2607,23 +2709,6 @@ end;
            , i_sql_hash_value
            , i_sql_address );
   END get_statement;
-/* GJP 25-07-2012 sql_text is now a CLOB
-  --
-  -- Build a statement line
-  PROCEDURE build_statement_line(
-    i_piece IN INTEGER ,
-    i_sql_text IN pm_sql_id.sql_text%TYPE ,
-    io_sql_text IN OUT pm_sql_id.sql_text%TYPE )
-  IS
-  BEGIN
-    IF i_piece = 0
-    THEN
-      io_sql_text := i_sql_text;
-    ELSE
-      io_sql_text := io_sql_text || i_sql_text;
-    END IF;
-  END build_statement_line;
-*/
   --
   -- Get the statement by text lookup
   FUNCTION get_statement(
@@ -2657,7 +2742,8 @@ end;
     i_hash_value IN pm_sql.hash_value%TYPE ,
     i_address IN pm_sql.address%TYPE ,
     i_command_type IN pm_sql_id.command_type%TYPE ,
-    i_sql_text IN pm_sql_id.sql_text%TYPE )
+    i_sql_text IN pm_sql_id.sql_text%TYPE ,
+    i_sql_id IN pm_sql.sql_id%TYPE )
   IS
   BEGIN
     ins_pm_sql_l(
@@ -2666,7 +2752,8 @@ end;
     , i_address
     , i_command_type
     , i_sql_text
-     );
+    , i_sql_id
+    );
   END ins_pm_sql;
   --
   -- Get a range of run id between start and end time
@@ -2848,7 +2935,8 @@ end;
   BEGIN
     v_cursor := dbms_sql.open_cursor;
     collect_l( v_cursor, pm.get_db(i_db), pm.get_db_link(i_db) );
-    dbms_sql.close_cursor(v_cursor);      
+    dbms_sql.close_cursor(v_cursor);
+$if $$Testing $then    
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -2857,6 +2945,7 @@ end;
         dbms_sql.close_cursor(v_cursor);
       END IF;
       RAISE;
+$end        
   END collect;
   --
   -- Process info from temporary tables; do not use remote database
@@ -2867,7 +2956,8 @@ end;
   BEGIN
     v_cursor := dbms_sql.open_cursor;
     pm.process_l( v_cursor, pm.get_db(i_db) );
-    dbms_sql.close_cursor(v_cursor);      
+    dbms_sql.close_cursor(v_cursor);
+$if $$Testing $then    
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -2876,6 +2966,7 @@ end;
         dbms_sql.close_cursor(v_cursor);
       END IF;
       RAISE;
+$end        
   END process;
   --
   -- Collect v$session info from a remote database
@@ -2894,7 +2985,8 @@ end;
     , i_run_id
     , i_db_startup_run_id 
     );
-    dbms_sql.close_cursor(v_cursor);      
+    dbms_sql.close_cursor(v_cursor);
+$if $$Testing $then    
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -2903,6 +2995,7 @@ end;
         dbms_sql.close_cursor(v_cursor);
       END IF;
       RAISE;
+$end        
   END collect_session;
   --
   -- Collect v$sqlarea info from a remote database
@@ -2921,7 +3014,8 @@ end;
     , i_run_id
     , i_db_startup_run_id
     );
-    dbms_sql.close_cursor(v_cursor);      
+    dbms_sql.close_cursor(v_cursor);
+$if $$Testing $then    
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -2930,6 +3024,7 @@ end;
         dbms_sql.close_cursor(v_cursor);
       END IF;
       RAISE;
+$end        
   END collect_sqlarea;
   --
   -- Collect v$sysstat info from a remote database
@@ -2948,7 +3043,8 @@ end;
     , i_run_id
     , i_db_startup_run_id
     );
-    dbms_sql.close_cursor(v_cursor);      
+    dbms_sql.close_cursor(v_cursor);
+$if $$Testing $then    
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -2957,6 +3053,7 @@ end;
         dbms_sql.close_cursor(v_cursor);
       END IF;
       RAISE;
+$end        
   END collect_sysstat;
   --
   -- Collect v$system_event info from a remote database
@@ -2975,7 +3072,8 @@ end;
     , i_run_id
     , i_db_startup_run_id
     );
-    dbms_sql.close_cursor(v_cursor);      
+    dbms_sql.close_cursor(v_cursor);
+$if $$Testing $then    
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -2984,6 +3082,7 @@ end;
         dbms_sql.close_cursor(v_cursor);
       END IF;
       RAISE;
+$end        
   END collect_system_event;
   --
   -- Process v$session info for a run
@@ -2996,7 +3095,8 @@ end;
   BEGIN
     v_cursor := dbms_sql.open_cursor;
     pm.process_session_l( v_cursor, pm.get_db(i_db), i_run_id, i_db_startup_run_id );
-    dbms_sql.close_cursor(v_cursor);      
+    dbms_sql.close_cursor(v_cursor);
+$if $$Testing $then    
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -3005,6 +3105,7 @@ end;
         dbms_sql.close_cursor(v_cursor);
       END IF;
       RAISE;
+$end        
   END process_session;
   --
   -- Process v$sqlarea info from a remote database
@@ -3067,12 +3168,13 @@ end;
     END LOOP;
 
     RETURN  v_result;
+$if $$Testing $then    
   EXCEPTION
     WHEN OTHERS
     THEN
       RETURN NULL;
+$end      
   END version;
 
 END pm;
 /
-

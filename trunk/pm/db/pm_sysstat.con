@@ -30,7 +30,7 @@ ALTER TABLE PM_SYSSTAT ADD (
       CONSTRAINT PM_SYS_PK
       PRIMARY KEY (DB,
                    RUN_ID,
-                   STATISTIC#)
+                   NAME)
 USING INDEX 
 STORAGE  (
   INITIAL   262144
