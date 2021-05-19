@@ -37,7 +37,14 @@ CREATE TABLE pm_session(
  username                        VARCHAR2(30)               NOT NULL,
  program                         VARCHAR2(64)               NULL,
  sql_hash_value                  NUMBER                     NULL,
- sql_address                     VARCHAR2(32)               NULL
+ sql_address                     VARCHAR2(32)               NULL,
+ sql_id                          VARCHAR2(13)               NULL, -- SQL identifier of the SQL statement that is currently being executed
+ prev_sql_id                     VARCHAR2(13)               NULL, -- SQL identifier of the last SQL statement executed
+ logon_time                      DATE                       NOT NULL, -- Time of logon
+ last_call_et                    NUMBER                     NULL /* If the session STATUS is currently ACTIVE, then the value 
+                                                                    represents the elapsed time in seconds since the session has become active.
+                                                                    If the session STATUS is currently INACTIVE, then the value
+                                                                    represents the elapsed time in seconds since the session has become inactive. */
 )
 PCTFREE  10
 PCTUSED  40

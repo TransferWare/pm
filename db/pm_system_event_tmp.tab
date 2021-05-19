@@ -38,7 +38,12 @@ CREATE GLOBAL TEMPORARY TABLE pm_system_event_tmp
  total_waits                     NUMBER                     NULL,
  total_timeouts                  NUMBER                     NULL,
  time_waited                     NUMBER                     NULL,
- average_wait                    NUMBER                     NULL
+ average_wait                    NUMBER                     NULL,
+ time_waited_micro               NUMBER                     NULL, -- Total amount of time waited for the event (in microseconds)
+ event_id                        NUMBER                     NULL, -- Identifier of the wait event
+ wait_class_id                   NUMBER                     NULL, -- Identifier of the class of the wait event
+ wait_class#                     NUMBER                     NULL, -- Number of the class of the wait event
+ wait_class                      VARCHAR2(64)               NULL  -- Name of the class of the wait event
 )
 ON COMMIT PRESERVE ROWS 
 ;

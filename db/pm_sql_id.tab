@@ -31,7 +31,7 @@ REM
 PROMPT 
 PROMPT Creating Table PM_SQL_ID 
 CREATE TABLE pm_sql_id(
- sql_id                          INTEGER                    NOT NULL,
+ sql_id                          VARCHAR2(13)               NOT NULL,
  command_type                    NUMBER                     NOT NULL,
  created_by                      VARCHAR2(30)               NOT NULL,
  creation_date                   DATE                       NOT NULL,

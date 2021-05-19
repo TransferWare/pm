@@ -17,15 +17,15 @@
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 */
 PROMPT
-PROMPT	$Id$
+PROMPT  $Id$
 REMARK 
-REMARK	$Date$
+REMARK  $Date$
 REMARK
-REMARK	$Author$
+REMARK  $Author$
 REMARK
 REMARK  $Revision$
 REMARK
-REMARK  Description:	Calculate Memory Performance Index.
+REMARK  Description:  Calculate Memory Performance Index.
 REMARK
 REMARK  $Log$
 REMARK  Revision 1.1  2003/08/28 14:44:48  gpaulissen
@@ -55,9 +55,7 @@ REMARK
 
 PROMPT Creating Package Specification pm_mpi
 
-SET DOCUMENT OFF
-
-DOCUMENT
+/*
 
 The following documentation uses the Perl pod format. A html file
 can be constructed by: 
@@ -74,7 +72,7 @@ pm_mpi - Calculate Memory Performance Index.
 
 =cut
 
-#
+*/
 
 -- =pod
 
@@ -114,7 +112,7 @@ END pm_mpi;
 
 /
 
-DOCUMENT
+/*
 
 =head1 DESCRIPTION
 
@@ -214,6 +212,6 @@ All rights reserved by Transfer Solutions b.v.
 
 =cut
 
-#
+*/
 
 

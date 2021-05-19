@@ -33,8 +33,10 @@ PROMPT Creating Table PM_SYSSTAT
 CREATE TABLE pm_sysstat(
  db                              VARCHAR2(40)               NOT NULL,
  run_id                          INTEGER                    NOT NULL,
- statistic#                      INTEGER                    NOT NULL,
- value                           NUMBER                     NOT NULL
+ name                            VARCHAR2(64)               NOT NULL,
+ class                           NUMBER                     NOT NULL,
+ value                           NUMBER                     NOT NULL,
+ stat_id                         NUMBER                     NULL
 )
 PCTFREE  10
 PCTUSED  40
