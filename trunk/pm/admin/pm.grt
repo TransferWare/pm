@@ -77,6 +77,8 @@ grant create database link to &&account
 /
 grant select on v_$statname to &&account
 /
+grant alter session to &&account
+/
 
 undefine account
 undefine 1

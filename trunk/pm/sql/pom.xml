@@ -14,14 +14,12 @@
   <description>The Performance Monitor utility database objects</description>
 
   <properties>
+    <db.skip.generate.schema.full>false</db.skip.generate.schema.full>
     <!-- do not generate alter scripts -->
-    <db.skip.generate.schema.incr />
+    <db.skip.generate.schema.incr>true</db.skip.generate.schema.incr>
     <db.schema>PM_OWNER</db.schema>
     <db.full.skip.install.sql>no</db.full.skip.install.sql> <!-- generate (un)install.sql -->
-    <db.object.names>
-,PM
-,PM_CFG
-,PM_CONFIG
+    <db.object.names>PM
 ,PM_DPI
 ,PM_MPI
 ,PM_RUN
