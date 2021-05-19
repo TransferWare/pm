@@ -18,6 +18,7 @@
 @application/shared_components/navigation/tabs/parent.sql
 @application/shared_components/user_interface/lovs/access_roles.sql
 @application/shared_components/user_interface/lovs/email_username_format.sql
+@application/shared_components/user_interface/lovs/login_remember_username.sql
 @application/shared_components/user_interface/lovs/lov_sql_id.sql
 @application/shared_components/user_interface/lovs/lov_db.sql
 @application/shared_components/user_interface/lovs/lov_time.sql
