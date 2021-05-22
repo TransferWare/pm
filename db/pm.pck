@@ -2450,6 +2450,11 @@ $end
     v_run_id                pm_run.run_id%TYPE;
     v_db_startup_run_id     pm_run.run_id%TYPE;
     c_module_name           CONSTANT module_name_t := 'PM.COLLECT';
+    -- ORA-01031: insufficient privileges
+    -- *Cause:    An attempt was made to perform a database operation without
+    --            the necessary privileges.
+    e_insufficient_privileges exception;
+    pragma exception_init(e_insufficient_privileges, -01031);
 
     PROCEDURE truncate_temp_tables
     IS
@@ -2473,7 +2478,12 @@ $end
       /*
       || prevent errors with database links
       */
-    parse_and_execute( 'alter session set global_names = false', i_cursor );
+    begin
+      parse_and_execute( 'alter session set global_names = false', i_cursor );
+    exception
+      when e_insufficient_privileges
+      then null;
+    end;
     truncate_temp_tables;
     new_run_l( i_cursor, i_db, i_db_link, v_run_id, v_db_startup_run_id );
     collect_system_event_l( i_cursor, i_db, i_db_link, v_run_id, v_db_startup_run_id );
