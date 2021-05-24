@@ -1,4 +1,4 @@
-CREATE OR REPLACE PACKAGE "XXYSS_ADMIN"."PM_MPI" IS
+CREATE OR REPLACE PACKAGE "PM_MPI" IS
 
   pragma restrict_references( pm_mpi, rnps, wnps, rnds, wnds );
 

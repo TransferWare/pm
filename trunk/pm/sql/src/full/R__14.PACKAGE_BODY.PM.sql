@@ -1,7 +1,7 @@
-CREATE OR REPLACE PACKAGE BODY "XXYSS_ADMIN"."PM" IS
+CREATE OR REPLACE PACKAGE BODY "PM" IS
   --
   --
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
   v_count INTEGER DEFAULT 0;
 $end
   --
@@ -53,7 +53,7 @@ $end
 
     c_module_name CONSTANT module_name_t := 'PM.GET_DB_STARTUP_TIME';
   BEGIN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_cursor: %s', i_cursor );
     dbug.print( 'input', 'i_db: %s', i_db );
@@ -78,7 +78,7 @@ $end
         RAISE no_data_found;
     END IF;
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.print( 'info', 'Last database startup: %s',
       to_char( o_db_startup_time, 'DD-MM-YYYY HH24:MI:SS' )
     );
@@ -129,7 +129,7 @@ $end
       AND     db_startup_time = i_db_startup_time;
 
   BEGIN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_cursor: %s', i_cursor );
     dbug.print( 'input', 'i_db: %s', i_db );
@@ -172,20 +172,20 @@ $end
     INTO o_db_startup_run_id;
     CLOSE c_db_startup_run_id;
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.print( 'info', 'new run id: %s', v_run_id );
 $end
 
     COMMIT; /* pm_run modified */
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.leave;
 $end
 $if $$Testing $then
   EXCEPTION
     WHEN OTHERS
     THEN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
       dbug.leave_on_error;
 $end
       IF c_next_run_id%ISOPEN
@@ -341,7 +341,7 @@ $end
   IS
     c_module_name CONSTANT module_name_t := 'PM.PM_INS_SQL';
   BEGIN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_hash_value: %s', i_hash_value );
@@ -391,13 +391,13 @@ $end
 
     COMMIT;
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.leave;
 $end
   EXCEPTION
     WHEN OTHERS
     THEN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
       dbug.leave_on_error;
       dbug.print( 'error', 'error; sql id: ' || i_sql_id );
 $end
@@ -460,7 +460,7 @@ $end
     v_sql_function_code INTEGER;
     c_module_name CONSTANT module_name_t := 'PM.PARSE_AND_EXECUTE';
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     -- print a command with embedded new lines.
     PROCEDURE print( i_command IN command_t )
     IS
@@ -490,7 +490,7 @@ $if $$Debugging >= 1 $then
     END print;
 $end
   BEGIN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_command: %s', i_command );
     dbug.print( 'input', 'i_action: %s', i_action );
@@ -499,7 +499,7 @@ $end
     /* i_db_link may be NULL bit still needs to be replaced */
     v_command := replace( v_command, '<db_link>', i_db_link );
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.print( 'debug', 'v_command: %s', v_command );
 $end
 
@@ -518,7 +518,7 @@ $end
 
     v_nr_rows := dbms_sql.execute( i_cursor );
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     IF i_action = 'I'
     THEN
       dbug.print( 'info', 'Number of rows inserted: %s', v_nr_rows );
@@ -557,7 +557,7 @@ $end
   IS
     c_module_name CONSTANT module_name_t := 'PM.CLEANUP_SESSION';
   BEGIN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_lwb_run_id: %s', i_lwb_run_id );
@@ -569,13 +569,13 @@ $end
     WHERE   db = i_db
     AND     run_id BETWEEN i_lwb_run_id AND i_upb_run_id;
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.print( 'info', 'Rows deleted from pm_session: %s', sql%ROWCOUNT );
 $end
 
     COMMIT;
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.leave;
 $end
   END cleanup_session_l;
@@ -588,14 +588,14 @@ $end
   IS
     c_module_name CONSTANT module_name_t := 'PM.CLEANUP_SQLAREA';
   BEGIN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_lwb_run_id: %s', i_lwb_run_id );
     dbug.print( 'input', 'i_upb_run_id: %s', i_upb_run_id );
 $end
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     v_count := 0;
 $end
     LOOP
@@ -609,14 +609,14 @@ $end
 
       EXIT WHEN sql%ROWCOUNT < c_max_count;
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
       v_count := v_count + sql%ROWCOUNT;
 $end
     END LOOP;
 
     COMMIT;
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.print( 'info', 'Rows deleted from pm_sqlarea: %s', v_count );
     dbug.leave;
 $end
@@ -631,7 +631,7 @@ $end
   IS
     c_module_name CONSTANT module_name_t := 'PM.CLEANUP_SQL';
   BEGIN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_lwb_run_id: %s', i_lwb_run_id );
@@ -665,7 +665,7 @@ $end
             );
     COMMIT;
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.print( 'info', 'Rows deleted from pm_sql: %s', sql%ROWCOUNT );
     dbug.leave;
 $end
@@ -679,7 +679,7 @@ $end
   IS
     c_module_name CONSTANT module_name_t := 'PM.CLEANUP_SYSTEM_EVENT';
   BEGIN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_lwb_run_id: %s', i_lwb_run_id );
@@ -693,7 +693,7 @@ $end
 
     COMMIT;
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.print( 'info', 'Rows deleted from pm_system_event: %s', sql%ROWCOUNT );
     dbug.leave;
 $end
@@ -707,7 +707,7 @@ $end
   IS
     c_module_name CONSTANT module_name_t := 'PM.CLEANUP_SYSSTAT';
   BEGIN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_lwb_run_id: %s', i_lwb_run_id );
@@ -721,7 +721,7 @@ $end
 
     COMMIT;
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.print( 'info', 'Rows deleted from pm_sysstat: %s', sql%ROWCOUNT );
     dbug.leave;
 $end
@@ -735,7 +735,7 @@ $end
   IS
     c_module_name CONSTANT module_name_t := 'PM.CLEANUP_RUN';
   BEGIN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_lwb_run_id: %s', i_lwb_run_id );
@@ -747,7 +747,7 @@ $end
     WHERE   db = i_db
     AND     run_id BETWEEN i_lwb_run_id AND i_upb_run_id;
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.print( 'info', 'Rows deleted from pm_run: %s', sql%ROWCOUNT );
     dbug.leave;
 $end
@@ -763,7 +763,7 @@ $end
   IS
     c_module_name CONSTANT module_name_t := 'PM.CLEANUP';
   BEGIN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_lwb_run_id: %s', i_lwb_run_id );
@@ -771,7 +771,7 @@ $if $$Debugging >= 1 $then
     dbug.print( 'input', 'i_cleanup_run: %s', i_cleanup_run );
 $end
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.print( 'info', 'Lower bound run id: %s', i_lwb_run_id );
     dbug.print( 'info', 'Upper bound run id: %s', i_upb_run_id );
 $end
@@ -787,7 +787,7 @@ $end
     END IF;
 
     COMMIT;
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.leave;
 $end
   END cleanup_l;
@@ -832,20 +832,20 @@ $end
 
     c_module_name CONSTANT module_name_t := 'PM.COLLECT_SYSTEM_EVENT';
   BEGIN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_run_id: %s', i_run_id );
     dbug.print( 'input', 'i_db_startup_run_id: %s', i_db_startup_run_id );
 $end
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.print( 'info', 'Adding v$system_event info' );
 $end
     parse_and_execute( c_command, i_cursor, 'I', i_db, i_db_link, i_run_id );
     COMMIT;
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.leave;
 $end
   END collect_system_event_l;
@@ -878,7 +878,7 @@ $end
 
     c_module_name CONSTANT module_name_t := 'PM.COLLECT_SYSSTAT';
   BEGIN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_run_id: %s', i_run_id );
@@ -890,7 +890,7 @@ $end
 
     COMMIT;
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.leave;
 $end
   END collect_sysstat_l;
@@ -1049,7 +1049,7 @@ end;
 
     c_module_name CONSTANT module_name_t := 'PM.COLLECT_SQLAREA';
   BEGIN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_run_id: %s', i_run_id );
@@ -1062,7 +1062,7 @@ $end
 
     COMMIT;
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.leave;
 $end
   END collect_sqlarea_l;
@@ -1103,7 +1103,7 @@ $end
         FROM    v$session<db_link> s';
     c_module_name CONSTANT module_name_t := 'PM.COLLECT_SESSION';
   BEGIN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_run_id: %s', i_run_id );
@@ -1115,14 +1115,14 @@ $end
             'alter table pm_session disable constraint pm_ses_sql_fk1'
     ,       i_cursor
     );
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.print( 'info', 'Adding v$session info' );
 $end
     parse_and_execute( c_command, i_cursor, 'I', i_db, i_db_link, i_run_id );
 
     COMMIT;
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.leave;
 $end
   END collect_session_l;
@@ -1211,7 +1211,7 @@ $end
 
     r_sqlarea_tot   c_sqlarea_tot%ROWTYPE;
   BEGIN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_run_id: %s', i_run_id );
@@ -1224,7 +1224,7 @@ $end
     || from pm_sqlarea to pm_sql valid.
     */
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.print( 'info', 'Processing pm_sql' );
 $end
 
@@ -1243,7 +1243,7 @@ $end
     EXCEPTION
       WHEN OTHERS
       THEN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
         dbug.print( 'error', 'db: %s; hash_value: %s; address: %s; command_type: %s',
                     r_new_sql.db,
                     r_new_sql.hash_value,
@@ -1255,7 +1255,7 @@ $end
     END;
     END LOOP;
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.print( 'info', 'Processing pm_sqlarea' );
 $end
 
@@ -1264,7 +1264,7 @@ $end
     || Do not insert records which do not contain any
     || info: executions, sorts, buffer_gets, etc. all 0.
     */
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     v_count := 0;
 $end
 
@@ -1476,13 +1476,13 @@ $end
         , r_sqlarea_tmp.program_name
         , r_sqlarea_tmp.program_line#
         );
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
         v_count := v_count + 1;
 $end
       EXCEPTION
         WHEN    OTHERS
         THEN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
           dbug.print( 'error', 'hash_value: ' || r_sqlarea_tmp.hash_value );
           dbug.print( 'error', 'address: ' || r_sqlarea_tmp.address );
           dbug.print( 'error', 'first_load_time: ' || r_sqlarea_tmp.first_load_time );
@@ -1494,13 +1494,13 @@ $end
       END IF;
     END LOOP;
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.print( 'info', 'Rows added to pm_sqlarea: %s', v_count );
 $end
 
     COMMIT;
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.leave;
 $end
   END process_sqlarea_l;
@@ -1531,7 +1531,7 @@ $end
 
     r_sysstat_tot c_sysstat_tot%ROWTYPE;
   BEGIN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_run_id: %s', i_run_id );
@@ -1588,13 +1588,13 @@ $end
         , r_sysstat_tmp.value
         , r_sysstat_tmp.stat_id
         );
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
         v_count := v_count + 1;
 $end
       EXCEPTION
         WHEN OTHERS
         THEN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
           dbug.print( 'error', 'db: %s; run_id: %s; name: %s; class: %s; value: %s',
                       r_sysstat_tmp.db,
                       r_sysstat_tmp.run_id,
@@ -1608,7 +1608,7 @@ $end
     END LOOP;
     COMMIT;
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.print( 'info', 'Rows added to pm_sysstat: %s', v_count );
     dbug.leave;
 $end
@@ -1644,7 +1644,7 @@ $end
       ,       sql_address;
 
     BEGIN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
       dbug.enter( c_module_name );
       dbug.print( 'input', 'i_db: %s', i_db );
       dbug.print( 'input', 'i_run_id: %s', i_run_id );
@@ -1701,7 +1701,7 @@ $end
       EXCEPTION
         WHEN OTHERS
         THEN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
           dbug.print( 'error', 'db: ' || r_session_tmp.db );
           dbug.print( 'error', 'run_id: ' || r_session_tmp.run_id );
           dbug.print( 'error', 'sid: ' || r_session_tmp.sid );
@@ -1723,7 +1723,7 @@ $end
         || Keep the foreign key constraint PM_SESSION - PM_SQL valid.
         ||
         */
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
       v_count := 0;
 $end
       FOR r_session IN c_session
@@ -1732,12 +1732,12 @@ $end
         SET     sql_hash_value = NULL
         ,       sql_address = NULL
         WHERE current OF c_session;
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
         v_count := v_count + 1;
 $end
       END LOOP;
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
       dbug.print( 'info', 'Rows updated of pm_session: %s', v_count );
 $end
 
@@ -1747,7 +1747,7 @@ $end
       , i_cursor
       );
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
       dbug.leave;
 $end
   END process_session_l;
@@ -1781,7 +1781,7 @@ $end
 
     r_system_event_tot c_system_event_tot%ROWTYPE;
   BEGIN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
     dbug.print( 'input', 'i_run_id: %s', i_run_id );
@@ -1876,13 +1876,13 @@ $end
         , r_system_event_tmp.wait_class
         );
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
         v_count := v_count + 1;
 $end
       EXCEPTION
         WHEN OTHERS
         THEN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
           dbug.print( 'error', 'db: %s; run_id: %s; event: %s',
                       r_system_event_tmp.db,
                       r_system_event_tmp.run_id,
@@ -1895,7 +1895,7 @@ $end
 
     COMMIT;
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.print( 'info', 'Rows added to pm_system_event: %s', v_count );
     dbug.leave;
 $end
@@ -1925,7 +1925,7 @@ $end
       END LOOP;
     END truncate_temp_tables;
   BEGIN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
 $end
@@ -1956,14 +1956,14 @@ $end
 
     COMMIT;
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.leave;
 $end
 $if $$Testing $then
   EXCEPTION
     WHEN OTHERS
     THEN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
       dbug.leave_on_error;
 $end
               /* remove all children of this run but not the run and error itself */
@@ -1996,7 +1996,7 @@ $end
       FROM    pm_run run
       WHERE   run.db = i_db;
   BEGIN
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.enter( c_module_name );
     dbug.print( 'input', 'i_db: %s', i_db );
 $end
@@ -2022,7 +2022,7 @@ $end
     /*truncate_temp_tables;*/
     COMMIT;
 
-$if $$Debugging >= 1 $then
+$if $$Debugging $then
     dbug.leave;
   EXCEPTION
     WHEN OTHERS
