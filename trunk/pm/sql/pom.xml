@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="windows-1252" ?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
-    <groupId>com.paulissoft.tools</groupId>
+    <groupId>com.paulissoft.oracle-tools</groupId>
     <artifactId>db</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <relativePath></relativePath>
   </parent>
 
@@ -14,8 +14,7 @@
   <description>The Performance Monitor utility database objects</description>
 
   <properties>
-    <oracle_tools.version>${project.parent.version}</oracle_tools.version>
-    <oracle_tools.db.dir>${project.build.directory}/dependency/db-${oracle_tools.version}</oracle_tools.db.dir>
+    <!--oracle_tools.db.version>${project.parent.version}</oracle_tools.db.version-->
     <db.skip.generate.schema.full>false</db.skip.generate.schema.full>
     <!-- do not generate alter scripts -->
     <db.skip.generate.schema.incr>true</db.skip.generate.schema.incr>
@@ -45,13 +44,10 @@
   
   <dependencies>
     <dependency>
-      <groupId>com.paulissoft.tools</groupId>
+      <groupId>com.paulissoft.oracle-tools</groupId>
       <artifactId>db</artifactId>
-      <version>${project.parent.version}</version>
-      <classifier>project</classifier>
+      <classifier>src</classifier>
       <type>zip</type>
-      <!-- Make sure this isn't included on any classpath-->
-      <scope>provided</scope>
     </dependency>
   </dependencies>
 
