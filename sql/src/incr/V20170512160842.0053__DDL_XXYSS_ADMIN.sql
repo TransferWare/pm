@@ -1,6 +1,0 @@
-/* SQL statement 53 (ALTER;XXYSS_ADMIN;CONSTRAINT;PM_CFG_CK1;XXYSS_ADMIN;TABLE;PM_CONFIG;;;;;2) */
-ALTER TABLE "XXYSS_ADMIN"."PM_CONFIG" ADD CONSTRAINT "PM_CFG_CK1" CHECK (
-      db = upper(db) and
-      cfg_nr >= 1
-      ) ENABLE;
-
