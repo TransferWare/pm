@@ -1,4 +1,4 @@
-CREATE OR REPLACE PACKAGE "XXYSS_ADMIN"."PM_DPI" IS
+CREATE OR REPLACE PACKAGE "PM_DPI" IS
 
   pragma restrict_references( pm_dpi, rnps, wnps, rnds, wnds );
 
