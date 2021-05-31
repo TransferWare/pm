@@ -3,46 +3,21 @@
   <parent>
     <groupId>com.paulissoft.oracle-tools</groupId>
     <artifactId>db</artifactId>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.2-SNAPSHOT</version>
     <relativePath></relativePath>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.transfer-solutions.performance-monitor</groupId>
   <artifactId>sql</artifactId>
+  <version>${revision}</version>
   <packaging>pom</packaging>
   <description>The Performance Monitor utility database objects</description>
 
   <properties>
-    <!--oracle_tools.db.version>${project.parent.version}</oracle_tools.db.version-->
-    <db.skip.generate.schema.full>false</db.skip.generate.schema.full>
-    <!-- do not generate alter scripts -->
-    <db.skip.generate.schema.incr>true</db.skip.generate.schema.incr>
-    <db.generate.full.strip.source.schema>1</db.generate.full.strip.source.schema>
-    <db.schema>PM_OWNER</db.schema>
-    <db.full.skip.install.sql>no</db.full.skip.install.sql> <!-- generate (un)install.sql -->
-    <db.object.names>PM
-,PM_DPI
-,PM_MPI
-,PM_RUN
-,PM_RUN_SEQ
-,PM_SESSION
-,PM_SESSION_TMP
-,PM_SQL
-,PM_SQLAREA
-,PM_SQLAREA_TMP
-,PM_SQL_CURRENT
-,PM_SQL_ID
-,PM_SQL_SEQ
-,PM_SYSSTAT
-,PM_SYSSTAT_TMP
-,PM_SYSTEM_EVENT
-,PM_SYSTEM_EVENT_TMP
-,PM_VW_SQLAREA
-    </db.object.names>
-    <db.object.names.include>1</db.object.names.include>
+    <oracle-tools.db.version>1.0.2-SNAPSHOT</oracle-tools.db.version>
   </properties>
-  
+
   <dependencies>
     <dependency>
       <groupId>com.paulissoft.oracle-tools</groupId>
@@ -57,11 +32,14 @@
     <plugins>
       <plugin>
         <artifactId>maven-dependency-plugin</artifactId>
-        <!-- Configuration won't be propagated to children -->
-        <inherited>false</inherited>
       </plugin>
     </plugins>
   </build>
 
+  <modules>
+    <module>ORACLE_TOOLS</module>
+    <module>PM_OWNER</module>
+  </modules>
+  
 </project>
 

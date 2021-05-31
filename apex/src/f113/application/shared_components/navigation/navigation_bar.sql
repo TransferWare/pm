@@ -1,7 +1,7 @@
 prompt --application/shared_components/navigation/navigation_bar
 begin
 wwv_flow_api.create_icon_bar_item(
- p_id=>wwv_flow_api.id(29137931354808496)
+ p_id=>wwv_flow_api.id(57939861973073170)
 ,p_icon_sequence=>200
 ,p_icon_subtext=>'Logout'
 ,p_icon_target=>'&LOGOUT_URL.'

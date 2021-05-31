@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/calendar/calendar_alternative
 begin
 wwv_flow_api.create_calendar_template(
- p_id=>wwv_flow_api.id(29137409857808478)
+ p_id=>wwv_flow_api.id(57939340476073152)
 ,p_cal_template_name=>'Calendar - Alternative'
 ,p_internal_name=>'CALENDAR_ALTERNATIVE'
 ,p_day_of_week_format=>'<th class="DayOfWeek">#IDAY#</th>'

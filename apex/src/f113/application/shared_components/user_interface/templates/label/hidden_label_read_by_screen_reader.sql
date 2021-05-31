@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/label/hidden_label_read_by_screen_reader
 begin
 wwv_flow_api.create_field_template(
- p_id=>wwv_flow_api.id(29135527400808465)
+ p_id=>wwv_flow_api.id(57937458019073139)
 ,p_template_name=>'Hidden label, read by screen reader'
 ,p_internal_name=>'HIDDEN_LABEL,_READ_BY_SCREEN_READER'
 ,p_template_body1=>'<label for="#CURRENT_ITEM_NAME#" id="#LABEL_ID#" tabindex="999" class="hideMeButHearMe">'

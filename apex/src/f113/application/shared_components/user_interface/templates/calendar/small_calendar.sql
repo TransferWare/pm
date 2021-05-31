@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/calendar/small_calendar
 begin
 wwv_flow_api.create_calendar_template(
- p_id=>wwv_flow_api.id(29137507434808478)
+ p_id=>wwv_flow_api.id(57939438053073152)
 ,p_cal_template_name=>'Small Calendar'
 ,p_internal_name=>'SMALL_CALENDAR'
 ,p_day_of_week_format=>'<th scope="col">#DY#</th>'

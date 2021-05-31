@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/list/vertical_ordered_list
 begin
 wwv_flow_api.create_list_template(
- p_id=>wwv_flow_api.id(29135009161808464)
+ p_id=>wwv_flow_api.id(57936939780073138)
 ,p_list_template_current=>'<li class="active"><a href="#LINK#">#TEXT#</a></li>'
 ,p_list_template_noncurrent=>'<li><a href="#LINK#">#TEXT#</a></li>'
 ,p_list_template_name=>'Vertical Ordered List'

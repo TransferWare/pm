@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/region/navigation_region_heading_inside
 begin
 wwv_flow_api.create_plug_template(
- p_id=>wwv_flow_api.id(29130931592808445)
+ p_id=>wwv_flow_api.id(57932862211073119)
 ,p_layout=>'TABLE'
 ,p_template=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<section class="uRegion uWhiteRegion #REGION_CSS_CLASSES# clearfix" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES#>',

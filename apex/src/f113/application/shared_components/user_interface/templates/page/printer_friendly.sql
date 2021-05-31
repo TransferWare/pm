@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/page/printer_friendly
 begin
 wwv_flow_api.create_template(
- p_id=>wwv_flow_api.id(29128417539808432)
+ p_id=>wwv_flow_api.id(57930348158073106)
 ,p_theme_id=>26
 ,p_name=>'Printer Friendly'
 ,p_internal_name=>'PRINTER_FRIENDLY'

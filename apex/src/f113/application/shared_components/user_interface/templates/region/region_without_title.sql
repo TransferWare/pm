@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/region/region_without_title
 begin
 wwv_flow_api.create_plug_template(
- p_id=>wwv_flow_api.id(29131103081808446)
+ p_id=>wwv_flow_api.id(57933033700073120)
 ,p_layout=>'TABLE'
 ,p_template=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<section class="uRegion uNoHeading #REGION_CSS_CLASSES# clearfix" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES#>',

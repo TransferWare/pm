@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/report/comments
 begin
 wwv_flow_api.create_row_template(
- p_id=>wwv_flow_api.id(1711892179658569)
+ p_id=>wwv_flow_api.id(30513822797923243)
 ,p_row_template_name=>'Comments'
 ,p_internal_name=>'COMMENTS'
 ,p_row_template1=>wwv_flow_string.join(wwv_flow_t_varchar2(

@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/list/page_level_tabs_list
 begin
 wwv_flow_api.create_list_template(
- p_id=>wwv_flow_api.id(29134311550808464)
+ p_id=>wwv_flow_api.id(57936242169073138)
 ,p_list_template_current=>'<li><a href="#LINK#" class="active">#TEXT#</a></li>'
 ,p_list_template_noncurrent=>'<li><a href="#LINK#">#TEXT#</a></li>'
 ,p_list_template_name=>'Page Level Tabs List'

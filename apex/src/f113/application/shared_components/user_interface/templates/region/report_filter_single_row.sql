@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/region/report_filter_single_row
 begin
 wwv_flow_api.create_plug_template(
- p_id=>wwv_flow_api.id(29131215033808446)
+ p_id=>wwv_flow_api.id(57933145652073120)
 ,p_layout=>'TABLE'
 ,p_template=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<section class="uButtonRegion uNoHeading uReportFilter #REGION_CSS_CLASSES# clearfix" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES#>',

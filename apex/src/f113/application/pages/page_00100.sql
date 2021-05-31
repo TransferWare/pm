@@ -2,7 +2,7 @@ prompt --application/pages/page_00100
 begin
 wwv_flow_api.create_page(
  p_id=>100
-,p_user_interface_id=>wwv_flow_api.id(29137816761808495)
+,p_user_interface_id=>wwv_flow_api.id(57939747380073169)
 ,p_name=>'Home'
 ,p_step_title=>'Home'
 ,p_reload_on_submit=>'A'
@@ -16,16 +16,16 @@ wwv_flow_api.create_page(
 ,p_last_upd_yyyymmddhh24miss=>'20210519043430'
 );
 wwv_flow_api.create_page_plug(
- p_id=>wwv_flow_api.id(29860604480216442)
+ p_id=>wwv_flow_api.id(58662535098481116)
 ,p_plug_name=>'Breadcrumbs'
 ,p_region_template_options=>'#DEFAULT#:t-BreadcrumbRegion--useBreadcrumbTitle'
 ,p_component_template_options=>'#DEFAULT#'
-,p_plug_template=>wwv_flow_api.id(1692394089658555)
+,p_plug_template=>wwv_flow_api.id(30494324707923229)
 ,p_plug_display_sequence=>10
 ,p_plug_display_point=>'REGION_POSITION_01'
-,p_menu_id=>wwv_flow_api.id(29139130601808510)
+,p_menu_id=>wwv_flow_api.id(57941061220073184)
 ,p_plug_source_type=>'NATIVE_BREADCRUMB'
-,p_menu_template_id=>wwv_flow_api.id(1745065333658590)
+,p_menu_template_id=>wwv_flow_api.id(30546995951923264)
 );
 end;
 /

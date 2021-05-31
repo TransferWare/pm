@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/report/badge_list
 begin
 wwv_flow_api.create_row_template(
- p_id=>wwv_flow_api.id(1705669372658565)
+ p_id=>wwv_flow_api.id(30507599990923239)
 ,p_row_template_name=>'Badge List'
 ,p_internal_name=>'BADGE_LIST'
 ,p_row_template1=>wwv_flow_string.join(wwv_flow_t_varchar2(

@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/region/search_filter_region
 begin
 wwv_flow_api.create_plug_template(
- p_id=>wwv_flow_api.id(29131810823808448)
+ p_id=>wwv_flow_api.id(57933741442073122)
 ,p_layout=>'TABLE'
 ,p_template=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<section class="uRegion uFilterRegion #REGION_CSS_CLASSES# clearfix" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES#>',

@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/page/two_level_tabs_left_and_right_sidebar
 begin
 wwv_flow_api.create_template(
- p_id=>wwv_flow_api.id(29128617642808434)
+ p_id=>wwv_flow_api.id(57930548261073108)
 ,p_theme_id=>26
 ,p_name=>'Two Level Tabs - Left and Right Sidebar'
 ,p_internal_name=>'TWO_LEVEL_TABS_LEFT_AND_RIGHT_SIDEBAR'

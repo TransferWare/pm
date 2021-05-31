@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/report/fixed_headers
 begin
 wwv_flow_api.create_row_template(
- p_id=>wwv_flow_api.id(29132731972808454)
+ p_id=>wwv_flow_api.id(57934662591073128)
 ,p_row_template_name=>'Fixed Headers'
 ,p_internal_name=>'FIXED_HEADERS'
 ,p_row_template1=>'<td #ALIGNMENT# headers="#COLUMN_HEADER_NAME#" #COLUMN_WIDTH#>#COLUMN_VALUE#</td>'
@@ -52,7 +52,7 @@ wwv_flow_api.create_row_template(
 );
 begin
 wwv_flow_api.create_row_template_patch(
- p_id=>wwv_flow_api.id(29132731972808454)
+ p_id=>wwv_flow_api.id(57934662591073128)
 ,p_row_template_before_first=>'<tr>'
 ,p_row_template_after_last=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '</tr>',

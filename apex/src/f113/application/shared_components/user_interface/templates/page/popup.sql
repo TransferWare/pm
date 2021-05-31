@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/page/popup
 begin
 wwv_flow_api.create_template(
- p_id=>wwv_flow_api.id(29128323080808432)
+ p_id=>wwv_flow_api.id(57930253699073106)
 ,p_theme_id=>26
 ,p_name=>'Popup'
 ,p_internal_name=>'POPUP'

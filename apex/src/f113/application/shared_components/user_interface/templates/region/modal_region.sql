@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/region/modal_region
 begin
 wwv_flow_api.create_plug_template(
- p_id=>wwv_flow_api.id(29130710553808445)
+ p_id=>wwv_flow_api.id(57932641172073119)
 ,p_layout=>'TABLE'
 ,p_template=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<section class="uRegion uWhiteRegion uModalRegion uAlertRegion #REGION_CSS_CLASSES# clearfix" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES#>',

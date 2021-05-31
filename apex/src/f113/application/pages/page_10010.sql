@@ -2,13 +2,13 @@ prompt --application/pages/page_10010
 begin
 wwv_flow_api.create_page(
  p_id=>10010
-,p_user_interface_id=>wwv_flow_api.id(29137816761808495)
+,p_user_interface_id=>wwv_flow_api.id(57939747380073169)
 ,p_name=>'Configure Access Control'
 ,p_page_mode=>'MODAL'
 ,p_step_title=>'Configure Access Control'
 ,p_autocomplete_on_off=>'OFF'
-,p_required_role=>wwv_flow_api.id(1940454829117895)
-,p_required_patch=>wwv_flow_api.id(1939606640117838)
+,p_required_role=>wwv_flow_api.id(30742385447382569)
+,p_required_patch=>wwv_flow_api.id(30741537258382512)
 ,p_help_text=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<p>Select the appropriate choice for any authenticated users.<br> ',
 'Selecting <strong>No</strong> makes the application more secure as only specified users can access the application. ',
@@ -27,25 +27,11 @@ wwv_flow_api.create_page(
 ,p_last_upd_yyyymmddhh24miss=>'20210519053342'
 );
 wwv_flow_api.create_page_plug(
- p_id=>wwv_flow_api.id(1941439959117916)
-,p_plug_name=>'Access Control Configuration'
-,p_region_template_options=>'#DEFAULT#'
-,p_escape_on_http_output=>'Y'
-,p_plug_template=>wwv_flow_api.id(1655532047658538)
-,p_plug_display_sequence=>10
-,p_plug_display_point=>'BODY'
-,p_query_type=>'SQL'
-,p_plug_query_num_rows=>15
-,p_attribute_01=>'N'
-,p_attribute_02=>'HTML'
-,p_attribute_03=>'Y'
-);
-wwv_flow_api.create_page_plug(
- p_id=>wwv_flow_api.id(1941628898117916)
+ p_id=>wwv_flow_api.id(30743559516382590)
 ,p_plug_name=>'Dialog Buttons'
 ,p_region_template_options=>'#DEFAULT#'
 ,p_escape_on_http_output=>'Y'
-,p_plug_template=>wwv_flow_api.id(1666127035658544)
+,p_plug_template=>wwv_flow_api.id(30468057653923218)
 ,p_plug_display_sequence=>10
 ,p_plug_display_point=>'REGION_POSITION_03'
 ,p_query_type=>'SQL'
@@ -54,32 +40,46 @@ wwv_flow_api.create_page_plug(
 ,p_attribute_02=>'HTML'
 ,p_attribute_03=>'Y'
 );
+wwv_flow_api.create_page_plug(
+ p_id=>wwv_flow_api.id(30743370577382590)
+,p_plug_name=>'Access Control Configuration'
+,p_region_template_options=>'#DEFAULT#'
+,p_escape_on_http_output=>'Y'
+,p_plug_template=>wwv_flow_api.id(30457462665923212)
+,p_plug_display_sequence=>10
+,p_plug_display_point=>'BODY'
+,p_query_type=>'SQL'
+,p_plug_query_num_rows=>15
+,p_attribute_01=>'N'
+,p_attribute_02=>'HTML'
+,p_attribute_03=>'Y'
+);
 wwv_flow_api.create_page_button(
- p_id=>wwv_flow_api.id(1943009644117931)
+ p_id=>wwv_flow_api.id(30744940262382605)
 ,p_button_sequence=>20
-,p_button_plug_id=>wwv_flow_api.id(1941628898117916)
+,p_button_plug_id=>wwv_flow_api.id(30743559516382590)
 ,p_button_name=>'APPLY_CHANGES'
 ,p_button_action=>'SUBMIT'
 ,p_button_template_options=>'#DEFAULT#'
-,p_button_template_id=>wwv_flow_api.id(1743685395658589)
+,p_button_template_id=>wwv_flow_api.id(30545616013923263)
 ,p_button_is_hot=>'Y'
 ,p_button_image_alt=>'Apply Changes'
 ,p_button_position=>'REGION_TEMPLATE_CREATE'
 );
 wwv_flow_api.create_page_button(
- p_id=>wwv_flow_api.id(1941644026117916)
+ p_id=>wwv_flow_api.id(30743574644382590)
 ,p_button_sequence=>10
-,p_button_plug_id=>wwv_flow_api.id(1941628898117916)
+,p_button_plug_id=>wwv_flow_api.id(30743559516382590)
 ,p_button_name=>'CANCEL'
 ,p_button_action=>'DEFINED_BY_DA'
 ,p_button_template_options=>'#DEFAULT#'
-,p_button_template_id=>wwv_flow_api.id(1743685395658589)
+,p_button_template_id=>wwv_flow_api.id(30545616013923263)
 ,p_button_image_alt=>'Cancel'
 ,p_button_position=>'REGION_TEMPLATE_PREVIOUS'
 ,p_button_execute_validations=>'N'
 );
 wwv_flow_api.create_page_branch(
- p_id=>wwv_flow_api.id(1943639968117932)
+ p_id=>wwv_flow_api.id(30745570586382606)
 ,p_branch_name=>'Go To Admin Page'
 ,p_branch_action=>'f?p=&APP_ID.:10000:&SESSION.::&DEBUG.:::&success_msg=#SUCCESS_MSG#'
 ,p_branch_point=>'AFTER_PROCESSING'
@@ -87,11 +87,11 @@ wwv_flow_api.create_page_branch(
 ,p_branch_sequence=>10
 );
 wwv_flow_api.create_page_item(
- p_id=>wwv_flow_api.id(1943978482117933)
+ p_id=>wwv_flow_api.id(30745909100382607)
 ,p_name=>'P10010_ALLOW_OTHER_USERS'
 ,p_is_required=>true
 ,p_item_sequence=>30
-,p_item_plug_id=>wwv_flow_api.id(1941439959117916)
+,p_item_plug_id=>wwv_flow_api.id(30743370577382590)
 ,p_prompt=>'Any authenticated user may access this application'
 ,p_source=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'if apex_app_setting.get_value( p_name => ''ACCESS_CONTROL_SCOPE'' ) = ''ACL_ONLY'' then',
@@ -100,36 +100,37 @@ wwv_flow_api.create_page_item(
 '    return ''Y'';',
 'end if;'))
 ,p_source_type=>'FUNCTION_BODY'
+,p_source_language=>'PLSQL'
 ,p_display_as=>'NATIVE_YES_NO'
 ,p_cSize=>64
 ,p_cMaxlength=>4000
 ,p_cHeight=>4
 ,p_grid_label_column_span=>3
-,p_field_template=>wwv_flow_api.id(1742427355658587)
+,p_field_template=>wwv_flow_api.id(30544357973923261)
 ,p_item_template_options=>'#DEFAULT#'
 ,p_lov_display_extra=>'NO'
 ,p_inline_help_text=>'Choose <strong>No</strong> if all users are defined in the access control list. Choose <strong>Yes</strong> if authenticated users not in the access control list may also use this application.'
 ,p_attribute_01=>'APPLICATION'
 );
 wwv_flow_api.create_page_da_event(
- p_id=>wwv_flow_api.id(1941752137117916)
+ p_id=>wwv_flow_api.id(30743682755382590)
 ,p_name=>'Cancel Modal'
 ,p_event_sequence=>50
 ,p_triggering_element_type=>'BUTTON'
-,p_triggering_button_id=>wwv_flow_api.id(1941644026117916)
+,p_triggering_button_id=>wwv_flow_api.id(30743574644382590)
 ,p_bind_type=>'bind'
 ,p_bind_event_type=>'click'
 );
 wwv_flow_api.create_page_da_action(
- p_id=>wwv_flow_api.id(1944635518117940)
-,p_event_id=>wwv_flow_api.id(1941752137117916)
+ p_id=>wwv_flow_api.id(30746566136382614)
+,p_event_id=>wwv_flow_api.id(30743682755382590)
 ,p_event_result=>'TRUE'
 ,p_action_sequence=>10
 ,p_execute_on_page_init=>'N'
 ,p_action=>'NATIVE_DIALOG_CANCEL'
 );
 wwv_flow_api.create_page_process(
- p_id=>wwv_flow_api.id(1945204974117941)
+ p_id=>wwv_flow_api.id(30747135592382615)
 ,p_process_sequence=>10
 ,p_process_point=>'AFTER_SUBMIT'
 ,p_process_type=>'NATIVE_PLSQL'
@@ -146,6 +147,7 @@ wwv_flow_api.create_page_process(
 '            p_value => ''ACL_ONLY'');',
 '    end if;',
 'end;'))
+,p_process_clob_language=>'PLSQL'
 ,p_error_display_location=>'INLINE_IN_NOTIFICATION'
 ,p_process_success_message=>'Access Control settings saved.'
 );

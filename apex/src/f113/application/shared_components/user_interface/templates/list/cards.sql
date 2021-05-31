@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/list/cards
 begin
 wwv_flow_api.create_list_template(
- p_id=>wwv_flow_api.id(1733056539658580)
+ p_id=>wwv_flow_api.id(30534987157923254)
 ,p_list_template_current=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<li class="t-Cards-item is-active #A04#">',
 '  <div class="t-Card">',

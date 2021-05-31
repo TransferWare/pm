@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/region/interactive_report_region
 begin
 wwv_flow_api.create_plug_template(
- p_id=>wwv_flow_api.id(29130511710808445)
+ p_id=>wwv_flow_api.id(57932442329073119)
 ,p_layout=>'TABLE'
 ,p_template=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<section class="uIRRegion" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES# class="#REGION_CSS_CLASSES#">',

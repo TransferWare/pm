@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/label/optional_floating
 begin
 wwv_flow_api.create_field_template(
- p_id=>wwv_flow_api.id(1742571556658587)
+ p_id=>wwv_flow_api.id(30544502174923261)
 ,p_template_name=>'Optional - Floating'
 ,p_internal_name=>'OPTIONAL_FLOATING'
 ,p_template_body1=>wwv_flow_string.join(wwv_flow_t_varchar2(

@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/list/tabbed_navigation_list
 begin
 wwv_flow_api.create_list_template(
- p_id=>wwv_flow_api.id(29134718231808464)
+ p_id=>wwv_flow_api.id(57936648850073138)
 ,p_list_template_current=>'<li class="active"><a href="#LINK#">#TEXT#</a></li>'
 ,p_list_template_noncurrent=>'<li><a href="#LINK#">#TEXT#</a></li>'
 ,p_list_template_name=>'Tabbed Navigation List'

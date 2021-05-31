@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/region/borderless_region_no_heading
 begin
 wwv_flow_api.create_plug_template(
- p_id=>wwv_flow_api.id(29129222068808442)
+ p_id=>wwv_flow_api.id(57931152687073116)
 ,p_layout=>'TABLE'
 ,p_template=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<section class="uRegion uBorderlessRegion clearfix" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES#>',

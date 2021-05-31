@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/label/required_floating
 begin
 wwv_flow_api.create_field_template(
- p_id=>wwv_flow_api.id(1742846354658587)
+ p_id=>wwv_flow_api.id(30544776972923261)
 ,p_template_name=>'Required - Floating'
 ,p_internal_name=>'REQUIRED_FLOATING'
 ,p_template_body1=>wwv_flow_string.join(wwv_flow_t_varchar2(

@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/page/one_level_tabs_right_sidebar
 begin
 wwv_flow_api.create_template(
- p_id=>wwv_flow_api.id(29128015342808431)
+ p_id=>wwv_flow_api.id(57929945961073105)
 ,p_theme_id=>26
 ,p_name=>'One Level Tabs - Right Sidebar'
 ,p_internal_name=>'ONE_LEVEL_TABS_RIGHT_SIDEBAR'

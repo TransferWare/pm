@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/region/login_region
 begin
 wwv_flow_api.create_plug_template(
- p_id=>wwv_flow_api.id(29130600884808445)
+ p_id=>wwv_flow_api.id(57932531503073119)
 ,p_layout=>'TABLE'
 ,p_template=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<section class="uRegion uRegionNoPadding uLoginRegion #REGION_CSS_CLASSES# clearfix" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES#>',

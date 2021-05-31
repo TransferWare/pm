@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/report/horizontal_border
 begin
 wwv_flow_api.create_row_template(
- p_id=>wwv_flow_api.id(29132820060808454)
+ p_id=>wwv_flow_api.id(57934750679073128)
 ,p_row_template_name=>'Horizontal Border'
 ,p_internal_name=>'HORIZONTAL_BORDER'
 ,p_row_template1=>'<td #ALIGNMENT# headers="#COLUMN_HEADER_NAME#">#COLUMN_VALUE#</td>'
@@ -46,7 +46,7 @@ wwv_flow_api.create_row_template(
 );
 begin
 wwv_flow_api.create_row_template_patch(
- p_id=>wwv_flow_api.id(29132820060808454)
+ p_id=>wwv_flow_api.id(57934750679073128)
 ,p_row_template_before_first=>'<tr>'
 ,p_row_template_after_last=>'</tr>'
 );
