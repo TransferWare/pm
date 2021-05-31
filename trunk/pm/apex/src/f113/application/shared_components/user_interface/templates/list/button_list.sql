@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/list/button_list
 begin
 wwv_flow_api.create_list_template(
- p_id=>wwv_flow_api.id(29133609024808459)
+ p_id=>wwv_flow_api.id(57935539643073133)
 ,p_list_template_current=>'<a href="#LINK#" class="uButtonSmall uHotButton" #A01# role="button"><span>#TEXT#</span></a> '
 ,p_list_template_noncurrent=>'<a href="#LINK#" class="uButtonSmall" #A01# role="button"><span>#TEXT#</span></a> '
 ,p_list_template_name=>'Button List'

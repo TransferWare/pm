@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/region/wizard_buttons
 begin
 wwv_flow_api.create_plug_template(
- p_id=>wwv_flow_api.id(29132107269808448)
+ p_id=>wwv_flow_api.id(57934037888073122)
 ,p_layout=>'TABLE'
 ,p_template=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<div class="cWizardButtons cWizardButtonsLeft">',

@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/button/text
 begin
 wwv_flow_api.create_button_templates(
- p_id=>wwv_flow_api.id(1743685395658589)
+ p_id=>wwv_flow_api.id(30545616013923263)
 ,p_template_name=>'Text'
 ,p_internal_name=>'TEXT'
 ,p_template=>'<button onclick="#JAVASCRIPT#" class="t-Button #BUTTON_CSS_CLASSES#" type="button" #BUTTON_ATTRIBUTES# id="#BUTTON_ID#"><span class="t-Button-label">#LABEL#</span></button>'

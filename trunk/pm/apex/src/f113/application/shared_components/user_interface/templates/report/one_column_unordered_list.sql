@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/report/one_column_unordered_list
 begin
 wwv_flow_api.create_row_template(
- p_id=>wwv_flow_api.id(29132906944808456)
+ p_id=>wwv_flow_api.id(57934837563073130)
 ,p_row_template_name=>'One Column Unordered List'
 ,p_internal_name=>'ONE_COLUMN_UNORDERED_LIST'
 ,p_row_template1=>'<li>#COLUMN_VALUE#</li>'
@@ -39,7 +39,7 @@ wwv_flow_api.create_row_template(
 );
 begin
 wwv_flow_api.create_row_template_patch(
- p_id=>wwv_flow_api.id(29132906944808456)
+ p_id=>wwv_flow_api.id(57934837563073130)
 ,p_row_template_before_first=>'OMIT'
 ,p_row_template_after_last=>'OMIT'
 );

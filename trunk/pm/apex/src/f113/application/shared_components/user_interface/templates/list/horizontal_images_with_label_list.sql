@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/list/horizontal_images_with_label_list
 begin
 wwv_flow_api.create_list_template(
- p_id=>wwv_flow_api.id(29134009638808462)
+ p_id=>wwv_flow_api.id(57935940257073136)
 ,p_list_template_current=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '    <li class="active">',
 '      <a href="#LINK#">',

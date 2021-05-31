@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/page/one_level_tabs_wizard_page
 begin
 wwv_flow_api.create_template(
- p_id=>wwv_flow_api.id(29128219416808432)
+ p_id=>wwv_flow_api.id(57930150035073106)
 ,p_theme_id=>26
 ,p_name=>'One Level Tabs - Wizard Page'
 ,p_internal_name=>'ONE_LEVEL_TABS_WIZARD_PAGE'

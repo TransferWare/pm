@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/report/search_results_report_select_link_text_link_target_detail1_detail2_last_modified
 begin
 wwv_flow_api.create_row_template(
- p_id=>wwv_flow_api.id(29133008409808456)
+ p_id=>wwv_flow_api.id(57934939028073130)
 ,p_row_template_name=>'Search Results Report (SELECT link_text, link_target, detail1, detail2, last_modified)'
 ,p_internal_name=>'SEARCH_RESULTS_REPORT_SELECT_LINK_TEXT,_LINK_TARGET,_DETAIL1,_DETAIL2,_LAST_MODIFIED'
 ,p_row_template1=>wwv_flow_string.join(wwv_flow_t_varchar2(

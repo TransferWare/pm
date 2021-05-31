@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/label/optional_with_help
 begin
 wwv_flow_api.create_field_template(
- p_id=>wwv_flow_api.id(29135802139808468)
+ p_id=>wwv_flow_api.id(57937732758073142)
 ,p_template_name=>'Optional with help'
 ,p_internal_name=>'OPTIONAL_WITH_HELP'
 ,p_template_body1=>'<label for="#CURRENT_ITEM_NAME#" id="#LABEL_ID#" class="uOptional"><a class="uHelpLink" href="javascript:popupFieldHelp(''#CURRENT_ITEM_ID#'',''&SESSION.'')" tabindex="999">'

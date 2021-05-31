@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/page/two_level_tabs_no_sidebar
 begin
 wwv_flow_api.create_template(
- p_id=>wwv_flow_api.id(29128729681808434)
+ p_id=>wwv_flow_api.id(57930660300073108)
 ,p_theme_id=>26
 ,p_name=>'Two Level Tabs - No Sidebar'
 ,p_internal_name=>'TWO_LEVEL_TABS_NO_SIDEBAR'

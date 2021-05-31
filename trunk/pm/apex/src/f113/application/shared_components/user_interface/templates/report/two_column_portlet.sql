@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/report/two_column_portlet
 begin
 wwv_flow_api.create_row_template(
- p_id=>wwv_flow_api.id(29133303858808456)
+ p_id=>wwv_flow_api.id(57935234477073130)
 ,p_row_template_name=>'Two Column Portlet'
 ,p_internal_name=>'TWO_COLUMN_PORTLET'
 ,p_row_template1=>wwv_flow_string.join(wwv_flow_t_varchar2(

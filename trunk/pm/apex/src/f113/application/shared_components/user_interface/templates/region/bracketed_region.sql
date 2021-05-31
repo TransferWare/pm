@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/region/bracketed_region
 begin
 wwv_flow_api.create_plug_template(
- p_id=>wwv_flow_api.id(29129310785808442)
+ p_id=>wwv_flow_api.id(57931241404073116)
 ,p_layout=>'TABLE'
 ,p_template=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<section class="uRegion uBracketedRegion #REGION_CSS_CLASSES# clearfix" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES#>',

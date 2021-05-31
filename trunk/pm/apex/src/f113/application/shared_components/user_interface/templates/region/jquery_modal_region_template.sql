@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/region/jquery_modal_region_template
 begin
 wwv_flow_api.create_plug_template(
- p_id=>wwv_flow_api.id(29132427293808449)
+ p_id=>wwv_flow_api.id(57934357912073123)
 ,p_layout=>'TABLE'
 ,p_template=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<div id="#REGION_STATIC_ID#" style="display:none" #REGION_ATTRIBUTES# class="#REGION_CSS_CLASSES#">',

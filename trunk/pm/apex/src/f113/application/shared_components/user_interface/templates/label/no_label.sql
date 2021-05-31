@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/label/no_label
 begin
 wwv_flow_api.create_field_template(
- p_id=>wwv_flow_api.id(29135614765808467)
+ p_id=>wwv_flow_api.id(57937545384073141)
 ,p_template_name=>'No Label'
 ,p_internal_name=>'NO_LABEL'
 ,p_template_body1=>'<span class="uNoLabel">'

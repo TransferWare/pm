@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="windows-1252" ?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <parent>
-    <groupId>com.paulissoft.tools</groupId>
+    <groupId>com.paulissoft.oracle-tools</groupId>
     <artifactId>apex</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.2-SNAPSHOT</version>
     <relativePath></relativePath>
   </parent>
 
@@ -20,7 +20,7 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.paulissoft.tools</groupId>
+      <groupId>com.paulissoft.oracle-tools</groupId>
       <artifactId>apex</artifactId>
       <type>zip</type>
       <classifier>src</classifier>
@@ -32,8 +32,6 @@
     <plugins>
       <plugin>
         <artifactId>maven-dependency-plugin</artifactId>
-        <!-- Configuration won't be propagated to children -->
-        <inherited>false</inherited>
       </plugin>
     </plugins>
   </build>

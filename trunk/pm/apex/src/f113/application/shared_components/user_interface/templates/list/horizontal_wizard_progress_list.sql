@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/list/horizontal_wizard_progress_list
 begin
 wwv_flow_api.create_list_template(
- p_id=>wwv_flow_api.id(29134227730808464)
+ p_id=>wwv_flow_api.id(57936158349073138)
 ,p_list_template_current=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '    <li class="#LIST_STATUS#">',
 '      <span>#TEXT#</span>',

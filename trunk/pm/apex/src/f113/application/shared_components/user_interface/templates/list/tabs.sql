@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/list/tabs
 begin
 wwv_flow_api.create_list_template(
- p_id=>wwv_flow_api.id(1738512818658583)
+ p_id=>wwv_flow_api.id(30540443436923257)
 ,p_list_template_current=>'<li class="t-Tabs-item is-active"><a href="#LINK#" class="t-Tabs-link"><span class="t-Icon #ICON_CSS_CLASSES#"></span><span class="t-Tabs-label">#TEXT#</span></a></li>'
 ,p_list_template_noncurrent=>'<li class="t-Tabs-item"><a href="#LINK#" class="t-Tabs-link"><span class="t-Icon #ICON_CSS_CLASSES#"></span><span class="t-Tabs-label">#TEXT#</span></a></li>'
 ,p_list_template_name=>'Tabs'

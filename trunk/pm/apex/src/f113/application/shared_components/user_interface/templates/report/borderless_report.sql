@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/report/borderless_report
 begin
 wwv_flow_api.create_row_template(
- p_id=>wwv_flow_api.id(29132513509808453)
+ p_id=>wwv_flow_api.id(57934444128073127)
 ,p_row_template_name=>'Borderless Report'
 ,p_internal_name=>'BORDERLESS_REPORT'
 ,p_row_template1=>'<td #ALIGNMENT# headers="#COLUMN_HEADER_NAME#">#COLUMN_VALUE#</td>'
@@ -46,7 +46,7 @@ wwv_flow_api.create_row_template(
 );
 begin
 wwv_flow_api.create_row_template_patch(
- p_id=>wwv_flow_api.id(29132513509808453)
+ p_id=>wwv_flow_api.id(57934444128073127)
 ,p_row_template_before_first=>'<tr>'
 ,p_row_template_after_last=>'</tr>'
 );

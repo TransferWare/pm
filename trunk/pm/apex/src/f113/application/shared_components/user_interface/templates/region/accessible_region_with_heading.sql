@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/region/accessible_region_with_heading
 begin
 wwv_flow_api.create_plug_template(
- p_id=>wwv_flow_api.id(29128915533808437)
+ p_id=>wwv_flow_api.id(57930846152073111)
 ,p_layout=>'TABLE'
 ,p_template=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<section id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES# class="#BUTTON_CSS_CLASSES#">',

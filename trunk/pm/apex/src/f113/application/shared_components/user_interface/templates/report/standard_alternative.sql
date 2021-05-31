@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/report/standard_alternative
 begin
 wwv_flow_api.create_row_template(
- p_id=>wwv_flow_api.id(29133214497808456)
+ p_id=>wwv_flow_api.id(57935145116073130)
 ,p_row_template_name=>'Standard - Alternative'
 ,p_internal_name=>'STANDARD_ALTERNATIVE'
 ,p_row_template1=>'<td #ALIGNMENT# headers="#COLUMN_HEADER_NAME#">#COLUMN_VALUE#</td>'
@@ -46,7 +46,7 @@ wwv_flow_api.create_row_template(
 );
 begin
 wwv_flow_api.create_row_template_patch(
- p_id=>wwv_flow_api.id(29133214497808456)
+ p_id=>wwv_flow_api.id(57935145116073130)
 ,p_row_template_before_first=>'<tr>'
 ,p_row_template_after_last=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '</tr>',

@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/region/wizard_container
 begin
 wwv_flow_api.create_plug_template(
- p_id=>wwv_flow_api.id(1693347820658555)
+ p_id=>wwv_flow_api.id(30495278438923229)
 ,p_layout=>'TABLE'
 ,p_template=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<div class="t-Wizard #REGION_CSS_CLASSES#" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES#>',
@@ -30,8 +30,8 @@ wwv_flow_api.create_plug_template(
 ,p_translate_this_template=>'N'
 );
 wwv_flow_api.create_plug_tmpl_display_point(
- p_id=>wwv_flow_api.id(1693681965658556)
-,p_plug_template_id=>wwv_flow_api.id(1693347820658555)
+ p_id=>wwv_flow_api.id(30495612583923230)
+,p_plug_template_id=>wwv_flow_api.id(30495278438923229)
 ,p_name=>'Wizard Sub Regions'
 ,p_placeholder=>'SUB_REGIONS'
 ,p_has_grid_support=>true

@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/report/value_attribute_pairs_row
 begin
 wwv_flow_api.create_row_template(
- p_id=>wwv_flow_api.id(1701898339658564)
+ p_id=>wwv_flow_api.id(30503828957923238)
 ,p_row_template_name=>'Value Attribute Pairs - Row'
 ,p_internal_name=>'VALUE_ATTRIBUTE_PAIRS_ROW'
 ,p_row_template1=>wwv_flow_string.join(wwv_flow_t_varchar2(

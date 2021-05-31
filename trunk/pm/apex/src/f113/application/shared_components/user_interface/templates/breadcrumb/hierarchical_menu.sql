@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/breadcrumb/hierarchical_menu
 begin
 wwv_flow_api.create_menu_template(
- p_id=>wwv_flow_api.id(29137224147808474)
+ p_id=>wwv_flow_api.id(57939154766073148)
 ,p_name=>'Hierarchical Menu'
 ,p_internal_name=>'HIERARCHICAL_MENU'
 ,p_before_first=>'<ul class="t1HierarchicalMenu">'

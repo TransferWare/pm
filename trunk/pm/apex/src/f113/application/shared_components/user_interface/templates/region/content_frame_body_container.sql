@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/region/content_frame_body_container
 begin
 wwv_flow_api.create_plug_template(
- p_id=>wwv_flow_api.id(29129906846808443)
+ p_id=>wwv_flow_api.id(57931837465073117)
 ,p_layout=>'TABLE'
 ,p_template=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '#SUB_REGION_HEADERS#',

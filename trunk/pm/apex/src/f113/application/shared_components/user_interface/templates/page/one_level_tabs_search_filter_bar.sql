@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/page/one_level_tabs_search_filter_bar
 begin
 wwv_flow_api.create_template(
- p_id=>wwv_flow_api.id(29128106379808432)
+ p_id=>wwv_flow_api.id(57930036998073106)
 ,p_theme_id=>26
 ,p_name=>'One Level Tabs - Search Filter Bar'
 ,p_internal_name=>'ONE_LEVEL_TABS_SEARCH_FILTER_BAR'

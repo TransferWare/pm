@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/region/blank_with_attributes
 begin
 wwv_flow_api.create_plug_template(
- p_id=>wwv_flow_api.id(1655532047658538)
+ p_id=>wwv_flow_api.id(30457462665923212)
 ,p_layout=>'TABLE'
 ,p_template=>'<div id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES# class="#REGION_CSS_CLASSES#">#PREVIOUS##BODY##SUB_REGIONS##NEXT#</div>'
 ,p_page_plug_template_name=>'Blank with Attributes'

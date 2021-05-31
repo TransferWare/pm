@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/page/no_tabs_right_sidebar
 begin
 wwv_flow_api.create_template(
- p_id=>wwv_flow_api.id(29127506343808428)
+ p_id=>wwv_flow_api.id(57929436962073102)
 ,p_theme_id=>26
 ,p_name=>'No Tabs - Right Sidebar'
 ,p_internal_name=>'NO_TABS_RIGHT_SIDEBAR'

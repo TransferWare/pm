@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/list/wizard_progress_list_vertical
 begin
 wwv_flow_api.create_list_template(
- p_id=>wwv_flow_api.id(29135415773808465)
+ p_id=>wwv_flow_api.id(57937346392073139)
 ,p_list_template_current=>'<li class="#LIST_STATUS#"><img src="#IMAGE_PREFIX#f_spacer.gif" alt="" /><span>#TEXT#</span></li>'
 ,p_list_template_noncurrent=>'<li class="#LIST_STATUS#"><img src="#IMAGE_PREFIX#f_spacer.gif" alt="" /><span>#TEXT#</span></li>'
 ,p_list_template_name=>'Wizard Progress List - Vertical'

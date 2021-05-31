@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/page/minimal_page
 begin
 wwv_flow_api.create_template(
- p_id=>wwv_flow_api.id(29127131080808425)
+ p_id=>wwv_flow_api.id(57929061699073099)
 ,p_theme_id=>26
 ,p_name=>'Minimal Page'
 ,p_internal_name=>'MINIMAL_PAGE'

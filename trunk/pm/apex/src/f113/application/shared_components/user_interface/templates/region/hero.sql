@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/region/hero
 begin
 wwv_flow_api.create_plug_template(
- p_id=>wwv_flow_api.id(1663947905658542)
+ p_id=>wwv_flow_api.id(30465878523923216)
 ,p_layout=>'TABLE'
 ,p_template=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<div class="t-HeroRegion #REGION_CSS_CLASSES#" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES#>',
@@ -24,8 +24,8 @@ wwv_flow_api.create_plug_template(
 ,p_translate_this_template=>'N'
 );
 wwv_flow_api.create_plug_tmpl_display_point(
- p_id=>wwv_flow_api.id(1664314125658542)
-,p_plug_template_id=>wwv_flow_api.id(1663947905658542)
+ p_id=>wwv_flow_api.id(30466244743923216)
+,p_plug_template_id=>wwv_flow_api.id(30465878523923216)
 ,p_name=>'Region Body'
 ,p_placeholder=>'#BODY#'
 ,p_has_grid_support=>false

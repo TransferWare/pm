@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/lovs/lov_sql_id
 begin
 wwv_flow_api.create_list_of_values(
- p_id=>wwv_flow_api.id(39081008449313321)
+ p_id=>wwv_flow_api.id(56122661962928363)
 ,p_lov_name=>'LOV SQL ID'
 ,p_lov_query=>wwv_flow_string.join(wwv_flow_t_varchar2(
 'select dbms_lob.substr(t.sql_text, 197, 1) || ',
@@ -23,14 +23,14 @@ wwv_flow_api.create_list_of_values(
 ,p_default_sort_direction=>'ASC'
 );
 wwv_flow_api.create_list_of_values_cols(
- p_id=>wwv_flow_api.id(1934114071055776)
+ p_id=>wwv_flow_api.id(30736044689320450)
 ,p_query_column_name=>'R'
 ,p_heading=>'Sql Id'
 ,p_display_sequence=>10
 ,p_data_type=>'VARCHAR2'
 );
 wwv_flow_api.create_list_of_values_cols(
- p_id=>wwv_flow_api.id(1934483127055787)
+ p_id=>wwv_flow_api.id(30736413745320461)
 ,p_query_column_name=>'D'
 ,p_heading=>'Statement'
 ,p_display_sequence=>20

@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/region/hide_and_show_region_hidden_first_borderless
 begin
 wwv_flow_api.create_plug_template(
- p_id=>wwv_flow_api.id(29130324640808443)
+ p_id=>wwv_flow_api.id(57932255259073117)
 ,p_layout=>'TABLE'
 ,p_template=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<section class="uRegion uBorderlessRegion uHideShowRegion #REGION_CSS_CLASSES# clearfix" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES#>',

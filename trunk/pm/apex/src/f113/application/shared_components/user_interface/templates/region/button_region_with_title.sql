@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/region/button_region_with_title
 begin
 wwv_flow_api.create_plug_template(
- p_id=>wwv_flow_api.id(29129505957808442)
+ p_id=>wwv_flow_api.id(57931436576073116)
 ,p_layout=>'TABLE'
 ,p_template=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<section class="uButtonRegion #REGION_CSS_CLASSES# clearfix" id="#REGION_STATIC_ID#" #REGION_ATTRIBUTES#>',

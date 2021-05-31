@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/region/breadcrumb_region
 begin
 wwv_flow_api.create_plug_template(
- p_id=>wwv_flow_api.id(29129413492808442)
+ p_id=>wwv_flow_api.id(57931344111073116)
 ,p_layout=>'TABLE'
 ,p_template=>wwv_flow_string.join(wwv_flow_t_varchar2(
 '<div id="uBreadcrumbs" #REGION_ATTRIBUTES# class="#REGION_CSS_CLASSES#">',

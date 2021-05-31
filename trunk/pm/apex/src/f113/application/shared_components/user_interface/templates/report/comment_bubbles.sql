@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/report/comment_bubbles
 begin
 wwv_flow_api.create_row_template(
- p_id=>wwv_flow_api.id(29132629402808454)
+ p_id=>wwv_flow_api.id(57934560021073128)
 ,p_row_template_name=>'Comment Bubbles'
 ,p_internal_name=>'COMMENT_BUBBLES'
 ,p_row_template1=>wwv_flow_string.join(wwv_flow_t_varchar2(

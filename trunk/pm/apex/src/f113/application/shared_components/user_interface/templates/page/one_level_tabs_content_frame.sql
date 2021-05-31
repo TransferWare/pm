@@ -1,7 +1,7 @@
 prompt --application/shared_components/user_interface/templates/page/one_level_tabs_content_frame
 begin
 wwv_flow_api.create_template(
- p_id=>wwv_flow_api.id(29127613007808428)
+ p_id=>wwv_flow_api.id(57929543626073102)
 ,p_theme_id=>26
 ,p_name=>'One Level Tabs - Content Frame'
 ,p_internal_name=>'ONE_LEVEL_TABS_CONTENT_FRAME'
