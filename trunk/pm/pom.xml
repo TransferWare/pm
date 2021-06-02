@@ -4,8 +4,8 @@
   <parent>
     <groupId>com.paulissoft</groupId>
     <artifactId>oracle-tools</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
-    <relativePath></relativePath>
+    <version>${revision}</version>
+    <relativePath>../oracle-tools</relativePath>
   </parent>
 
   <modelVersion>4.0.0</modelVersion>

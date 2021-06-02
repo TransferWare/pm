@@ -3,7 +3,7 @@
   <parent>
     <groupId>com.paulissoft.oracle-tools</groupId>
     <artifactId>db</artifactId>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.1.0-SNAPSHOT</version>
     <relativePath></relativePath>
   </parent>
 
@@ -15,27 +15,10 @@
   <description>The Performance Monitor utility database objects</description>
 
   <properties>
-    <oracle-tools.db.version>1.0.2-SNAPSHOT</oracle-tools.db.version>
+    <conf.dependency>true</conf.dependency>
+    <db.dependency>true</db.dependency>
   </properties>
-
-  <dependencies>
-    <dependency>
-      <groupId>com.paulissoft.oracle-tools</groupId>
-      <artifactId>db</artifactId>
-      <classifier>src</classifier>
-      <type>zip</type>
-    </dependency>
-  </dependencies>
-
-  <build>
-    <resources/>
-    <plugins>
-      <plugin>
-        <artifactId>maven-dependency-plugin</artifactId>
-      </plugin>
-    </plugins>
-  </build>
-
+  
   <modules>
     <module>ORACLE_TOOLS</module>
     <module>PM_OWNER</module>
