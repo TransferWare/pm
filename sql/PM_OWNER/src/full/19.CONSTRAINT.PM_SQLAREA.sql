@@ -1,9 +1,9 @@
-ALTER TABLE "PM_SQLAREA" ADD CONSTRAINT "PM_ARE_CK1" CHECK (
+ALTER TABLE "PM_SQLAREA" ADD CONSTRAINT "PM_ARE_CK1" CHECK ( 
       db = upper(db) and
       run_id >= 1
       ) ENABLE;
 
-ALTER TABLE "PM_SQLAREA" ADD CONSTRAINT "PM_ARE_CK2" CHECK (
+ALTER TABLE "PM_SQLAREA" ADD CONSTRAINT "PM_ARE_CK2" CHECK ( 
       executions >= 0 and
       buffer_gets >= 0 and
       disk_reads >= 0 and
@@ -24,7 +24,7 @@ ALTER TABLE "PM_SQLAREA" ADD CONSTRAINT "PM_ARE_CK2" CHECK (
       elapsed_time >= 0
       ) ENABLE;
 
-ALTER TABLE "PM_SQLAREA" ADD CONSTRAINT "PM_ARE_CK3" CHECK (
+ALTER TABLE "PM_SQLAREA" ADD CONSTRAINT "PM_ARE_CK3" CHECK ( 
       /* at least one must be > 0 */
       executions +
       buffer_gets +
@@ -37,7 +37,7 @@ ALTER TABLE "PM_SQLAREA" ADD CONSTRAINT "PM_ARE_CK3" CHECK (
       invalidations +
       direct_writes +
       application_wait_time +
-      concurrency_wait_time +
+      concurrency_wait_time + 
       cluster_wait_time +
       user_io_wait_time +
       plsql_exec_time +

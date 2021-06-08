@@ -17,7 +17,7 @@ $end
 
   /* LOCAL MODULES */
   -- Return the database link for a database
-  FUNCTION get_db_link(
+  FUNCTION get_db_link( 
     i_db IN pm_run.db%TYPE )
   RETURN VARCHAR2
   IS
@@ -28,12 +28,12 @@ $end
     ELSE
       RETURN NULL;
     END IF;
-$if $$Testing $then
+$if $$Testing $then    
   EXCEPTION
     WHEN OTHERS
     THEN
       RETURN NULL;
-$end
+$end      
   END get_db_link;
   --
   -- Get database startup time (local variant)
@@ -79,11 +79,11 @@ $end
     END IF;
 
 $if $$Debugging $then
-    dbug.print( 'info', 'Last database startup: %s',
-      to_char( o_db_startup_time, 'DD-MM-YYYY HH24:MI:SS' )
+    dbug.print( 'info', 'Last database startup: %s', 
+      to_char( o_db_startup_time, 'DD-MM-YYYY HH24:MI:SS' ) 
     );
     dbug.leave;
-$if $$Testing $then
+$if $$Testing $then    
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -196,7 +196,7 @@ $end
       o_db_startup_run_id := NULL;
       -- raise again
       RAISE;
-$end
+$end        
   END new_run_l;
   --
   -- Get the internal SQL text identifier by key (local variant)
@@ -230,7 +230,7 @@ $end
     END IF;
     CLOSE c_get_sql_id;
     RETURN v_sql_id;
-$if $$Testing $then
+$if $$Testing $then    
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -239,7 +239,7 @@ $if $$Testing $then
         CLOSE c_get_sql_id;
       END IF;
       RETURN NULL;
-$end
+$end        
   END get_sql_id_l;
   --
   --  Get the internal SQL text identifier by text lookup
@@ -276,7 +276,7 @@ $end
     CLOSE c_pm_sql;
 
     RETURN v_sql_id;
-$if $$Testing $then
+$if $$Testing $then    
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -285,7 +285,7 @@ $if $$Testing $then
         CLOSE c_pm_sql;
       END IF;
       RETURN NULL;
-$end
+$end        
   END get_sql_id_by_text_l;
   --
   -- Get the statement id by text lookup
@@ -370,7 +370,7 @@ $end
       );
     EXCEPTION
       WHEN dup_val_on_index
-      THEN
+      THEN    
         NULL;
     END;
 
@@ -469,20 +469,20 @@ $if $$Debugging $then
       v_pos INTEGER := 1;
       v_old_pos INTEGER := 0;
     BEGIN
-      WHILE v_pos <> 0
+      WHILE v_pos <> 0 
       LOOP
         v_pos := instr( i_command, c_nl, v_old_pos + 1 );
         IF ( v_pos = 0 ) -- unsuccessful search
         THEN
-          dbug.print( 'info',
+          dbug.print( 'info', 
                       to_char( v_old_pos + 1, '0000' ) || ': ' ||
-                      substr( i_command, v_old_pos + 1 )
+                      substr( i_command, v_old_pos + 1 ) 
           );
         ELSE
-          dbug.print(
-                      'info',
+          dbug.print( 
+                      'info', 
                       to_char( v_old_pos + 1, '0000' ) || ': ' ||
-                      substr( i_command, v_old_pos + 1, v_pos - v_old_pos - 1 )
+                      substr( i_command, v_old_pos + 1, v_pos - v_old_pos - 1 ) 
           );
         END IF;
         v_old_pos := v_pos;
@@ -545,7 +545,7 @@ $if $$Testing $then
       dbug.print( 'error', 'SQL function code: ' || to_char(v_sql_function_code) );
 
       RAISE;
-$end
+$end      
 $end
   END parse_and_execute;
   --
@@ -933,7 +933,7 @@ begin
     ,       s.invalidations
     ,       s.module
     ,       s.action
-    ,       case
+    ,       case 
               when t.piece is not null
               then t.sql_text
               else s.sql_text /* no v$sqltext_with_newlines so only one row with seq is 1 */
@@ -954,15 +954,15 @@ begin
     ,       (select o.object_name from dba_objects<db_link> o where o.object_id = s.program_id) as program_name
     ,       s.program_line#
     from    v$sqlarea<db_link> s
-            left outer join v$sqltext_with_newlines<db_link> t
+            left outer join v$sqltext_with_newlines<db_link> t 
             on t.address = s.address and t.hash_value = s.hash_value
     order by
             s.address
     ,       s.hash_value
-    ,       t.piece
+    ,       t.piece  
   )
   loop
-    dbms_lob.writeappend
+    dbms_lob.writeappend 
     ( lob_loc => l_clob
     , amount => length(r_sqlarea.sql_text)
     , buffer => r_sqlarea.sql_text
@@ -1158,8 +1158,8 @@ $end
             ,       art.program_name
             ,       art.program_line#
             FROM    pm_sqlarea_tmp art
-            WHERE   NOT EXISTS
-                    (
+            WHERE   NOT EXISTS 
+                    (       
                             SELECT  1
                             FROM    pm_sql
                             WHERE   pm_sql.db = art.db
@@ -1220,7 +1220,7 @@ $end
 
     /*
     || Before inserting into pm_sqlarea we have to update pm_sql
-    || in order to keep the foreign key constraint
+    || in order to keep the foreign key constraint 
     || from pm_sqlarea to pm_sql valid.
     */
 
@@ -1259,7 +1259,7 @@ $if $$Debugging $then
     dbug.print( 'info', 'Processing pm_sqlarea' );
 $end
 
-    /*
+    /* 
     || Calculate delta values for pm_sqlarea_tmp.
     || Do not insert records which do not contain any
     || info: executions, sorts, buffer_gets, etc. all 0.
@@ -1306,9 +1306,9 @@ $end
     LOOP
       IF i_db_startup_run_id IS NOT NULL
       THEN
-        /*
-        || Now the statistics may have been stored in previous run's:
-        || calculate delta's
+        /* 
+        || Now the statistics may have been stored in previous run's: 
+        || calculate delta's    
         */
         OPEN c_sqlarea_tot
         (
@@ -1324,23 +1324,23 @@ $end
 
         IF c_sqlarea_tot%FOUND
         THEN
-          r_sqlarea_tmp.executions :=
+          r_sqlarea_tmp.executions := 
             r_sqlarea_tmp.executions - r_sqlarea_tot.executions;
-          r_sqlarea_tmp.buffer_gets :=
+          r_sqlarea_tmp.buffer_gets := 
             r_sqlarea_tmp.buffer_gets - r_sqlarea_tot.buffer_gets;
-          r_sqlarea_tmp.disk_reads :=
+          r_sqlarea_tmp.disk_reads := 
             r_sqlarea_tmp.disk_reads - r_sqlarea_tot.disk_reads;
-          r_sqlarea_tmp.parse_calls :=
+          r_sqlarea_tmp.parse_calls := 
             r_sqlarea_tmp.parse_calls - r_sqlarea_tot.parse_calls;
-          r_sqlarea_tmp.sorts :=
+          r_sqlarea_tmp.sorts := 
             r_sqlarea_tmp.sorts - r_sqlarea_tot.sorts;
-          r_sqlarea_tmp.kept_versions :=
+          r_sqlarea_tmp.kept_versions := 
             r_sqlarea_tmp.kept_versions - r_sqlarea_tot.kept_versions;
-          r_sqlarea_tmp.loads :=
+          r_sqlarea_tmp.loads := 
             r_sqlarea_tmp.loads - r_sqlarea_tot.loads;
-          r_sqlarea_tmp.rows_processed :=
+          r_sqlarea_tmp.rows_processed := 
             r_sqlarea_tmp.rows_processed - r_sqlarea_tot.rows_processed;
-          r_sqlarea_tmp.invalidations :=
+          r_sqlarea_tmp.invalidations := 
             r_sqlarea_tmp.invalidations - r_sqlarea_tot.invalidations;
           r_sqlarea_tmp.direct_writes :=
             r_sqlarea_tmp.direct_writes - r_sqlarea_tot.direct_writes;
@@ -1398,7 +1398,7 @@ $end
         r_sqlarea_tmp.invalidations +
         r_sqlarea_tmp.direct_writes +
         r_sqlarea_tmp.application_wait_time +
-        r_sqlarea_tmp.concurrency_wait_time +
+        r_sqlarea_tmp.concurrency_wait_time + 
         r_sqlarea_tmp.cluster_wait_time +
         r_sqlarea_tmp.user_io_wait_time +
         r_sqlarea_tmp.plsql_exec_time +
@@ -1491,7 +1491,7 @@ $if $$Debugging $then
 $end
           NULL;
       END;
-      END IF;
+      END IF;       
     END LOOP;
 
 $if $$Debugging $then
@@ -1515,7 +1515,7 @@ $end
     ||
     || Update the system statistics table.
     || If the combination (db, run_id, db_startup_time, name) already
-    || exists, the value must be adjusted to reflect changes since the last
+    || exists, the value must be adjusted to reflect changes since the last 
     || snapshot.
     ||
     */
@@ -1567,7 +1567,7 @@ $end
       END IF;
 
         /* Check constraint PM_SYS_CK2 */
-      IF ( r_sysstat_tmp.value >= 0 )
+      IF ( r_sysstat_tmp.value >= 0 ) 
       THEN
       BEGIN
         INSERT INTO pm_sysstat
@@ -1654,7 +1654,7 @@ $if $$Debugging $then
 $end
 
       FOR r_session_tmp IN
-      (
+      ( 
         SELECT  db
         ,       run_id
         ,       sid
@@ -1806,7 +1806,7 @@ $end
       ,       event_id
       ,       wait_class_id
       ,       wait_class#
-      ,       wait_class
+      ,       wait_class      
       FROM    pm_system_event_tmp
     )
     LOOP
@@ -1820,23 +1820,23 @@ $end
 
         IF c_system_event_tot%FOUND
         THEN
-          r_system_event_tmp.total_waits :=
+          r_system_event_tmp.total_waits := 
             r_system_event_tmp.total_waits - r_system_event_tot.total_waits;
-          r_system_event_tmp.total_timeouts :=
+          r_system_event_tmp.total_timeouts := 
             r_system_event_tmp.total_timeouts - r_system_event_tot.total_timeouts;
-          r_system_event_tmp.time_waited :=
+          r_system_event_tmp.time_waited := 
             r_system_event_tmp.time_waited - r_system_event_tot.time_waited;
-          r_system_event_tmp.time_waited_micro :=
+          r_system_event_tmp.time_waited_micro := 
             r_system_event_tmp.time_waited_micro - r_system_event_tot.time_waited_micro;
         END IF;
         CLOSE   c_system_event_tot;
       END IF;
 
       /* Check constraint PM_SEV_CK2 */
-      IF r_system_event_tmp.total_waits >= 0
-      AND r_system_event_tmp.total_timeouts >= 0
-      AND r_system_event_tmp.time_waited >= 0
-      AND r_system_event_tmp.time_waited_micro >= 0
+      IF r_system_event_tmp.total_waits >= 0 
+      AND r_system_event_tmp.total_timeouts >= 0 
+      AND r_system_event_tmp.time_waited >= 0 
+      AND r_system_event_tmp.time_waited_micro >= 0 
       THEN
       BEGIN
         INSERT  INTO pm_system_event
@@ -1852,7 +1852,7 @@ $end
         , event_id
         , wait_class_id
         , wait_class#
-        , wait_class
+        , wait_class      
         )
         values
         (
@@ -1873,7 +1873,7 @@ $end
         , r_system_event_tmp.event_id
         , r_system_event_tmp.wait_class_id
         , r_system_event_tmp.wait_class#
-        , r_system_event_tmp.wait_class
+        , r_system_event_tmp.wait_class      
         );
 
 $if $$Debugging $then
@@ -1910,6 +1910,11 @@ $end
     v_run_id                pm_run.run_id%TYPE;
     v_db_startup_run_id     pm_run.run_id%TYPE;
     c_module_name           CONSTANT module_name_t := 'PM.COLLECT';
+    -- ORA-01031: insufficient privileges
+    -- *Cause:    An attempt was made to perform a database operation without
+    --            the necessary privileges.
+    e_insufficient_privileges exception;
+    pragma exception_init(e_insufficient_privileges, -01031);
 
     PROCEDURE truncate_temp_tables
     IS
@@ -1933,7 +1938,12 @@ $end
       /*
       || prevent errors with database links
       */
-    parse_and_execute( 'alter session set global_names = false', i_cursor );
+    begin
+      parse_and_execute( 'alter session set global_names = false', i_cursor );
+    exception
+      when e_insufficient_privileges
+      then null;
+    end;
     truncate_temp_tables;
     new_run_l( i_cursor, i_db, i_db_link, v_run_id, v_db_startup_run_id );
     collect_system_event_l( i_cursor, i_db, i_db_link, v_run_id, v_db_startup_run_id );
@@ -1945,8 +1955,8 @@ $end
     process_sqlarea_l( i_db, v_run_id, v_db_startup_run_id );
     process_session_l( i_cursor, i_db, v_run_id, v_db_startup_run_id );
 
-    /*
-       GJP 30-JUN-1999
+    /* 
+       GJP 30-JUN-1999 
        do not truncate in order to record and playback
     */
 
@@ -1967,7 +1977,7 @@ $if $$Debugging $then
       dbug.leave_on_error;
 $end
               /* remove all children of this run but not the run and error itself */
-      pm.cleanup_l( i_cursor, i_db, v_run_id, v_run_id, false );
+      pm.cleanup_l( i_cursor, i_db, v_run_id, v_run_id, false ); 
 
       DECLARE
         v_error_msg CONSTANT pm_run.error_msg%type := SUBSTR(sqlerrm, 1, 4000);
@@ -1978,7 +1988,7 @@ $end
       END;
 
       RAISE;
-$end
+$end      
   END collect_l;
   --
   -- Process info from temporary tables; do not use remote database
@@ -2015,8 +2025,8 @@ $end
     process_sysstat_l( i_db, v_run_id, v_db_startup_run_id );
     process_sqlarea_l( i_db, v_run_id, v_db_startup_run_id );
     process_session_l( i_cursor, i_db, v_run_id, v_db_startup_run_id );
-      /*
-         GJP 30-JUN-1999
+      /* 
+         GJP 30-JUN-1999 
          do not truncate in order to record and playback
       */
     /*truncate_temp_tables;*/
@@ -2028,7 +2038,7 @@ $if $$Debugging $then
     WHEN OTHERS
     THEN
       dbug.leave_on_error;
-      RAISE;
+      RAISE; 
 $end
   END process_l;
 
@@ -2070,7 +2080,7 @@ $end
     , pm.get_db(i_db)
     , pm.get_db_link(i_db)
     , o_db_startup_time );
-    dbms_sql.close_cursor(v_cursor);
+    dbms_sql.close_cursor(v_cursor);      
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -2096,7 +2106,7 @@ $end
     , pm.get_db_link(i_db)
     , o_run_id
     , o_db_startup_run_id );
-    dbms_sql.close_cursor(v_cursor);
+    dbms_sql.close_cursor(v_cursor);      
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -2243,7 +2253,7 @@ $end
     v_cursor INTEGER := NULL;
     v_last_run_to_keep pm_run.run_id%TYPE;
 
-    CURSOR c_last_run_to_keep(
+    CURSOR c_last_run_to_keep( 
       b_db IN pm_run.db%TYPE
     , b_last_day_to_keep IN DATE )
     IS
@@ -2279,7 +2289,7 @@ $end
 
     pm.cleanup_l( v_cursor, c_db, 1, v_last_run_to_keep-1 );
 
-    dbms_sql.close_cursor(v_cursor);
+    dbms_sql.close_cursor(v_cursor);      
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -2301,7 +2311,7 @@ $end
   BEGIN
     v_cursor := dbms_sql.open_cursor;
     pm.cleanup_l( v_cursor, pm.get_db(i_db), i_lwb_run_id, i_upb_run_id, i_cleanup_run );
-    dbms_sql.close_cursor(v_cursor);
+    dbms_sql.close_cursor(v_cursor);      
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -2346,7 +2356,7 @@ $end
     , pm.get_db(i_db)
     , i_lwb_run_id
     , i_upb_run_id );
-    dbms_sql.close_cursor(v_cursor);
+    dbms_sql.close_cursor(v_cursor);      
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -2396,7 +2406,7 @@ $end
     v_cursor := dbms_sql.open_cursor;
     collect_l( v_cursor, pm.get_db(i_db), pm.get_db_link(i_db) );
     dbms_sql.close_cursor(v_cursor);
-$if $$Testing $then
+$if $$Testing $then    
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -2405,7 +2415,7 @@ $if $$Testing $then
         dbms_sql.close_cursor(v_cursor);
       END IF;
       RAISE;
-$end
+$end        
   END collect;
   --
   -- Process info from temporary tables; do not use remote database
@@ -2417,7 +2427,7 @@ $end
     v_cursor := dbms_sql.open_cursor;
     pm.process_l( v_cursor, pm.get_db(i_db) );
     dbms_sql.close_cursor(v_cursor);
-$if $$Testing $then
+$if $$Testing $then    
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -2426,7 +2436,7 @@ $if $$Testing $then
         dbms_sql.close_cursor(v_cursor);
       END IF;
       RAISE;
-$end
+$end        
   END process;
   --
   -- Collect v$session info from a remote database
@@ -2443,10 +2453,10 @@ $end
     , pm.get_db(i_db)
     , pm.get_db_link(i_db)
     , i_run_id
-    , i_db_startup_run_id
+    , i_db_startup_run_id 
     );
     dbms_sql.close_cursor(v_cursor);
-$if $$Testing $then
+$if $$Testing $then    
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -2455,7 +2465,7 @@ $if $$Testing $then
         dbms_sql.close_cursor(v_cursor);
       END IF;
       RAISE;
-$end
+$end        
   END collect_session;
   --
   -- Collect v$sqlarea info from a remote database
@@ -2467,7 +2477,7 @@ $end
     v_cursor INTEGER := NULL;
   BEGIN
     v_cursor := dbms_sql.open_cursor;
-    pm.collect_sqlarea_l(
+    pm.collect_sqlarea_l( 
       v_cursor
     , pm.get_db(i_db)
     , pm.get_db_link(i_db)
@@ -2475,7 +2485,7 @@ $end
     , i_db_startup_run_id
     );
     dbms_sql.close_cursor(v_cursor);
-$if $$Testing $then
+$if $$Testing $then    
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -2484,7 +2494,7 @@ $if $$Testing $then
         dbms_sql.close_cursor(v_cursor);
       END IF;
       RAISE;
-$end
+$end        
   END collect_sqlarea;
   --
   -- Collect v$sysstat info from a remote database
@@ -2496,7 +2506,7 @@ $end
     v_cursor INTEGER := NULL;
   BEGIN
     v_cursor := dbms_sql.open_cursor;
-    pm.collect_sysstat_l(
+    pm.collect_sysstat_l( 
       v_cursor
     , pm.get_db(i_db)
     , pm.get_db_link(i_db)
@@ -2504,7 +2514,7 @@ $end
     , i_db_startup_run_id
     );
     dbms_sql.close_cursor(v_cursor);
-$if $$Testing $then
+$if $$Testing $then    
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -2513,7 +2523,7 @@ $if $$Testing $then
         dbms_sql.close_cursor(v_cursor);
       END IF;
       RAISE;
-$end
+$end        
   END collect_sysstat;
   --
   -- Collect v$system_event info from a remote database
@@ -2533,7 +2543,7 @@ $end
     , i_db_startup_run_id
     );
     dbms_sql.close_cursor(v_cursor);
-$if $$Testing $then
+$if $$Testing $then    
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -2542,7 +2552,7 @@ $if $$Testing $then
         dbms_sql.close_cursor(v_cursor);
       END IF;
       RAISE;
-$end
+$end        
   END collect_system_event;
   --
   -- Process v$session info for a run
@@ -2556,7 +2566,7 @@ $end
     v_cursor := dbms_sql.open_cursor;
     pm.process_session_l( v_cursor, pm.get_db(i_db), i_run_id, i_db_startup_run_id );
     dbms_sql.close_cursor(v_cursor);
-$if $$Testing $then
+$if $$Testing $then    
   EXCEPTION
     WHEN OTHERS
     THEN
@@ -2565,7 +2575,7 @@ $if $$Testing $then
         dbms_sql.close_cursor(v_cursor);
       END IF;
       RAISE;
-$end
+$end        
   END process_session;
   --
   -- Process v$sqlarea info from a remote database
@@ -2599,7 +2609,7 @@ $end
   END process_system_event;
 
   /* return either the (value of) keyword Name or Revision */
-  FUNCTION version
+  FUNCTION version 
   RETURN VARCHAR2
   IS
     v_keyword VARCHAR2(100) := NULL;
@@ -2614,7 +2624,7 @@ $end
         v_keyword := '$Name$';
         v_length := 9; /* length with a ':  ' after Name */
       ELSE
-        v_keyword := '$Revision: 1512 $';
+        v_keyword := '$Revision: 1610 $';
         v_length := 13; /* length with a ':  ' after Revision */
       END IF;
 
@@ -2628,12 +2638,12 @@ $end
     END LOOP;
 
     RETURN  v_result;
-$if $$Testing $then
+$if $$Testing $then    
   EXCEPTION
     WHEN OTHERS
     THEN
       RETURN NULL;
-$end
+$end      
   END version;
 
 END pm;

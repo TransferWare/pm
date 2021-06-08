@@ -1,7 +1,7 @@
 CREATE OR REPLACE PACKAGE "PM" AUTHID CURRENT_USER IS
 
   --
-  -- Return global_name if i_db is null
+  -- Return global_name if i_db is null 
   FUNCTION get_db(
     i_db IN pm_run.db%TYPE )
   RETURN VARCHAR2;
@@ -193,7 +193,7 @@ CREATE OR REPLACE PACKAGE "PM" AUTHID CURRENT_USER IS
     i_run_id IN pm_run.run_id%TYPE ,
     i_db_startup_run_id IN pm_run.run_id%TYPE );
 
-  FUNCTION version
+  FUNCTION version 
   RETURN VARCHAR2;
 
   PRAGMA RESTRICT_REFERENCES( version, rnds, wnds, rnps, wnps );

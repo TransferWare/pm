@@ -1,9 +1,9 @@
-ALTER TABLE "PM_SYSTEM_EVENT" ADD CONSTRAINT "PM_SEV_CK1" CHECK (
+ALTER TABLE "PM_SYSTEM_EVENT" ADD CONSTRAINT "PM_SEV_CK1" CHECK ( 
       db = upper(db) and
       run_id >= 1
       ) ENABLE;
 
-ALTER TABLE "PM_SYSTEM_EVENT" ADD CONSTRAINT "PM_SEV_CK2" CHECK (
+ALTER TABLE "PM_SYSTEM_EVENT" ADD CONSTRAINT "PM_SEV_CK2" CHECK ( 
       total_waits >= 0 and
       total_timeouts >= 0 and
       time_waited >= 0 and

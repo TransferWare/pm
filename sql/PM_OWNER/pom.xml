@@ -13,10 +13,9 @@
   <description>The Performance Monitor utility database objects for PM_OWNER</description>
 
   <properties>
-    <!--oracle_tools.db.version>${project.parent.version}</oracle_tools.db.version-->
-    <db.skip.generate.schema.full>false</db.skip.generate.schema.full>
+    <db.generate.ddl.full.skip>false</db.generate.ddl.full.skip>
     <!-- do not generate alter scripts -->
-    <db.skip.generate.schema.incr>true</db.skip.generate.schema.incr>
+    <db.generate.ddl.incr.skip>true</db.generate.ddl.incr.skip>
     <db.generate.full.strip.source.schema>1</db.generate.full.strip.source.schema>
     <db.full.skip.install.sql>no</db.full.skip.install.sql> <!-- generate (un)install.sql -->
     <db.object.names>PM
