@@ -10,6 +10,10 @@ This application monitors the performance of Oracle databases.
 
 RELEASES
 
+7.0.0)
+
+* Using Oracle Tools now.
+
 6.7.0)
 
 * Installation instructions enhanced.
@@ -64,9 +68,5 @@ BUGS
   default (not NULL).
 
 SUPPORT
-
-Contact Transfer Solutions via e-mail: L<support@transfer-solutions.com>
-Supply the version number, the platform, the versions of Oracle tools used and
-a description of the problem.
 
 End of the README.
