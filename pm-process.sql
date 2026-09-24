@@ -12,6 +12,12 @@
 -- Remark: Verify by https://github.com/&1/&2
 */
 
+whenever sqlerror exit failure
+whenever oserror exit failure
+
+alter session set current_schema = admin
+/
+
 define repo_owner = 'TransferWare'
 define repo_name = 'pm'
 define branch_name = 'development'
@@ -22,7 +28,7 @@ define operation = 'install'
 -- necessary to install PATO itself (null = ignore compilation errors only, 0 = always ignore errors, 1 = never ignore errors)
 define stop_on_error = null
 define dry_run = 0
-define verbose = 0
+define verbose = 1
 define skip_unchanged_repeatables = 1
 
 set serveroutput on size unlimited format trunc
