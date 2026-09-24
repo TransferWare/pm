@@ -56,5 +56,10 @@ begin
   admin.pato_install_pkg.process_project_root
   ( p_path => '&path'
   );
+exception
+  when others
+  then null;
 end;
 /
+
+@@pom.sql
