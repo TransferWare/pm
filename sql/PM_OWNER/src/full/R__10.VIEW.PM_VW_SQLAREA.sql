@@ -18,4 +18,5 @@ from    pm_sql sql
 group by
         are.db
 ,       are.run_id
-,       sql.sql_id;
+,       sql.sql_id
+/
