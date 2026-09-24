@@ -75,7 +75,7 @@ grant create sequence to &&account
 /
 grant create database link to &&account
 /
-grant select on v_$statname to &&account
+grant select on sys.v_$statname to &&account
 /
 grant alter session to &&account
 /

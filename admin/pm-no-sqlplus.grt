@@ -72,7 +72,7 @@ begin
   execute immediate 'grant create view to ' || c_pm_owner_username;
   execute immediate 'grant create sequence to ' || c_pm_owner_username;
   execute immediate 'grant create database link to ' || c_pm_owner_username;
-  execute immediate 'grant select on v_$statname to ' || c_pm_owner_username;
+  execute immediate 'grant select on sys.v_$statname to ' || c_pm_owner_username;
   execute immediate 'grant alter session to ' || c_pm_owner_username;
 end;
 /
