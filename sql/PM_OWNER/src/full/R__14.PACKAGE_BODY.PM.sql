@@ -1010,8 +1010,8 @@ begin
       , r_sqlarea.first_load_time
       , r_sqlarea.hash_value
       , r_sqlarea.address
-      , r_sqlarea.parsing_user_name
-      , r_sqlarea.parsing_schema_name
+      , nvl(r_sqlarea.parsing_user_name, '-')
+      , nvl(r_sqlarea.parsing_schema_name, '-')
       , r_sqlarea.run_id
       , r_sqlarea.executions
       , r_sqlarea.buffer_gets
