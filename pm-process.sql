@@ -23,12 +23,12 @@ define repo_name = 'pm'
 define branch_name = 'development'
 define tag_name = ''
 define commit_id = ''
-define path = ''
+define path = 'sql'
 define operation = 'install'
 -- necessary to install PATO itself (null = ignore compilation errors only, 0 = always ignore errors, 1 = never ignore errors)
 define stop_on_error = null
 define dry_run = 0
-define verbose = 1
+define verbose = 0
 define skip_unchanged_repeatables = 1
 
 set serveroutput on size unlimited format trunc
@@ -52,6 +52,9 @@ begin
   , p_verbose => nvl(to_number('&verbose'), 0)
   , p_skip_unchanged_repeatables => nvl(to_number('&skip_unchanged_repeatables'), 1) != 0
   , p_owner_schema => 'PM_OWNER'
+  , p_placeholders => json_object_t.parse
+                      ( '{ "oracle_tools_schema": "ORACLE_TOOLS", "compile_all": "false", "reuse_settings": "false", "oracle_tools_schema_msg": "ORACLE_TOOLS" }'
+                      )
   );
   admin.pato_install_pkg.process_project_root
   ( p_path => '&path'
